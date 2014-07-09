@@ -5,7 +5,7 @@
 	<key>cocos2dUpdateIgnoredVersions</key>
 	<array/>
 	<key>defaultOrientation</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>designTarget</key>
 	<integer>0</integer>
 	<key>deviceOrientationLandscapeLeft</key>
@@ -29,7 +29,7 @@
 	<key>flattenPaths</key>
 	<false/>
 	<key>needRepublish</key>
-	<true/>
+	<false/>
 	<key>onlyPublishCCBs</key>
 	<false/>
 	<key>publishAudioQuality_android</key>
@@ -65,7 +65,7 @@
 	<key>publishToZipFile</key>
 	<false/>
 	<key>resourceAutoScaleFactor</key>
-	<integer>4</integer>
+	<integer>2</integer>
 	<key>resourcePaths</key>
 	<array>
 		<dict>
@@ -163,6 +163,20 @@
 			<integer>2</integer>
 			<key>tabletScale</key>
 			<integer>1</integer>
+		</dict>
+		<key>workingAssets/Backgrounds/Tarantula_Nebula.png</key>
+		<dict>
+			<key>isDirty</key>
+			<true/>
+			<key>scaleFrom</key>
+			<integer>2</integer>
+		</dict>
+		<key>workingassets/ColorfulBackground.png</key>
+		<dict>
+			<key>isDirty</key>
+			<true/>
+			<key>scaleFrom</key>
+			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>versionStr</key>
