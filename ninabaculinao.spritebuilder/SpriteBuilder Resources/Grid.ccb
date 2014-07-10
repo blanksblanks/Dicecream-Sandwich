@@ -40,7 +40,7 @@
 		<key>children</key>
 		<array/>
 		<key>customClass</key>
-		<string></string>
+		<string>Grid</string>
 		<key>displayName</key>
 		<string>CCSprite</string>
 		<key>memberVarAssignmentName</key>
@@ -78,8 +78,8 @@
 				<string>Point</string>
 				<key>value</key>
 				<array>
-					<real>0.5</real>
 					<real>0.0</real>
+					<real>0.5</real>
 				</array>
 			</dict>
 			<dict>
@@ -103,8 +103,16 @@
 				<key>value</key>
 				<array>
 					<string></string>
-					<string>workingAssets/Grid/8x12-Grid.png</string>
+					<string>workingAssets/Grid/6x12-Grid2.png</string>
 				</array>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>opacity</string>
+				<key>type</key>
+				<string>Float</string>
+				<key>value</key>
+				<real>0.20000000298023224</real>
 			</dict>
 			<dict>
 				<key>name</key>
@@ -116,7 +124,7 @@
 					<real>1</real>
 					<real>1</real>
 					<real>1</real>
-					<real>1</real>
+					<real>0.20000000298023224</real>
 				</array>
 			</dict>
 		</array>
