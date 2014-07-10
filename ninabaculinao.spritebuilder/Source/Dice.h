@@ -11,5 +11,6 @@
 @interface Dice : CCSprite
 
 - (id)initDice;
++ (Dice*)makeNewDice;
 
 @end

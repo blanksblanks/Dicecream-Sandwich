@@ -12,7 +12,6 @@
 
 @implementation Gameplay {
     CCPhysicsNode *_physicsNode;
-    Dice *_dice;
     Grid *_grid;
     CCTimer *_timer;
     CCLabelTTF *_scoreLabel;
@@ -20,9 +19,17 @@
 
 - (void)didLoadFromCCB{
     self.userInteractionEnabled = TRUE;
-    _dice = (Dice *) [CCBReader load:@"Dice/Five"];
+    Dice *_dice;
+    _dice = [Dice makeNewDice];
     _dice.position = ccp(2,5);
     [_physicsNode addChild:_dice];
+}
+
+- (void)update:(CCTime)delta{
+ 
+}
+
+- (void)makeNewDice{
 }
 
 //

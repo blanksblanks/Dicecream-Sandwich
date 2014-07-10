@@ -44,7 +44,7 @@
 		<key>displayName</key>
 		<string>CCSprite</string>
 		<key>memberVarAssignmentName</key>
-		<string>_dice</string>
+		<string>_five</string>
 		<key>memberVarAssignmentType</key>
 		<integer>1</integer>
 		<key>physicsBody</key>
@@ -52,7 +52,7 @@
 			<key>affectedByGravity</key>
 			<true/>
 			<key>allowsRotation</key>
-			<false/>
+			<true/>
 			<key>bodyShape</key>
 			<integer>0</integer>
 			<key>collisionCategories</key>

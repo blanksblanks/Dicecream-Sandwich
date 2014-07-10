@@ -42,7 +42,7 @@ static const int GRID_COLUMNS = 6;
     // initialize the array as a blank NSMutableArray
     _gridArray = [NSMutableArray array];
     
-    // initialize Creatures
+    // initialize Dice
     for (int i = 0; i < GRID_ROWS; i++) {
         // this is how you create two dimensional arrays in Objective-C. You put arrays into arrays.
         _gridArray[i] = [NSMutableArray array];
