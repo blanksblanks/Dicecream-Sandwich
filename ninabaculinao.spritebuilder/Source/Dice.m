@@ -15,7 +15,7 @@
     return self;
 }
 
-+ (Dice*) makeNewDice {
++ (Dice*) makeNewDie {
     int block = arc4random_uniform(6);
     Dice *die;
     switch(block)

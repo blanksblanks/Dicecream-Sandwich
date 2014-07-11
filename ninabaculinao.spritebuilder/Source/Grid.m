@@ -23,7 +23,7 @@ static const int GRID_COLUMNS = 6;
 {
     [super onEnter];
     [self setupGrid];
-    self.userInteractionEnabled = YES;
+    self.userInteractionEnabled = false;
 }
 
 - (void)setupGrid
@@ -59,8 +59,6 @@ static const int GRID_COLUMNS = 6;
         y += _cellHeight; // after completing row we increase y variable
     }
 }
-
-
 
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {

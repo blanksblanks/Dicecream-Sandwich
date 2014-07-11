@@ -10,36 +10,77 @@
 #import "Grid.h"
 #import "Dice.h"
 
+// two constants to describe the amount of rows and columns
+static const int GRID_ROWS = 12;
+static const int GRID_COLUMNS = 6;
+
 @implementation Gameplay {
     CCPhysicsNode *_physicsNode;
     Grid *_grid;
     CCTimer *_timer;
     CCLabelTTF *_scoreLabel;
+    Dice *_dice;
+    Dice *_seconddice;
+    
+    NSMutableArray *_gridArray; // a 2d array
+    float _cellWidth; // two vars used to place dice correctly
+    float _cellHeight;
+}
+
+- (id)init
+{
+    if (self = [super init]) {
+        self.userInteractionEnabled = TRUE;
+    }
+    return self;
 }
 
 - (void)didLoadFromCCB{
-    self.userInteractionEnabled = TRUE;
     [self makeNewDicePair];
     _physicsNode.debugDraw = TRUE;
 }
 
 - (void)makeNewDicePair{
- //   for (int i = 0; i > 2; i++) {
-        Dice *_dice;
-        _dice = [Dice makeNewDice];
-        _dice.position = ccp(-18,200);
-        [_physicsNode addChild:_dice];
-        Dice *_seconddice;
-        _seconddice = [Dice makeNewDice];
-        _seconddice.position = ccp(18,200);
-        [_physicsNode addChild:_seconddice];
+    _dice = [Dice makeNewDie];
+    _dice.position = ccp(-20,200);
+    [_physicsNode addChild:_dice];
     
-   // }
+    _seconddice = [Dice makeNewDie];
+    _seconddice.position = ccp(20,200);
+    [_physicsNode addChild:_seconddice];
 }
 
-- (void)update:(CCTime)delta{
- 
+- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    CCLOG(@"Received a touch");
+    CGPoint touchLocation = [touch locationInNode:self];
+    Dice *dice = [self diceForTouchPosition:touchLocation];
 }
+
+- (void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    CGPoint touchLocation = [touch locationInNode:self];
+    _dice.position = touchLocation;
+}
+
+- (Dice *)diceForTouchPosition:(CGPoint)touchPosition
+{
+    //get the row and column that was touched, return the Dice inside the corresponding cell
+    int row = touchPosition.y/_cellHeight;
+    int column = touchPosition.x/_cellWidth;
+    return _gridArray[row][column];
+}
+
+
+
+- (void)update:(CCTime)delta{
+    
+}
+
+
+
+
+
 
 
 //
