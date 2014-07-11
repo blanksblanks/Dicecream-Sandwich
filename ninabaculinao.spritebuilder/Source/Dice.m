@@ -16,35 +16,34 @@
 }
 
 + (Dice*) makeNewDice {
-    int firstDice = arc4random_uniform(6);
-    Dice *diceOne;
-    switch(firstDice)
+    int block = arc4random_uniform(6);
+    Dice *die;
+    switch(block)
     {
         case 0:
-            diceOne = (Dice*) [CCBReader load:@"Dice/One"];
+            die = (Dice*) [CCBReader load:@"Dice/One"];
             break;
         case 1:
-            diceOne = (Dice*) [CCBReader load:@"Dice/Two"];
+            die = (Dice*) [CCBReader load:@"Dice/Two"];
             break;
         case 2:
-            diceOne = (Dice*) [CCBReader load:@"Dice/Three"];
+            die = (Dice*) [CCBReader load:@"Dice/Three"];
             break;
         case 3:
-            diceOne = (Dice*) [CCBReader load:@"Dice/Four"];
+            die = (Dice*) [CCBReader load:@"Dice/Four"];
             break;
         case 4:
-            diceOne = (Dice*) [CCBReader load:@"Dice/Five"];
+            die = (Dice*) [CCBReader load:@"Dice/Five"];
             break;
         case 5:
-            diceOne = (Dice*) [CCBReader load:@"Dice/Six"];
+            die = (Dice*) [CCBReader load:@"Dice/Six"];
             break;
         default:
             CCLOG(@"WHY IS IT AT DEFAULT");
             break;
 
     }
-    return diceOne;
-    
+    return die;
 }
 
 //int main (int argc, const char * argv[])

@@ -9,24 +9,20 @@
 #import "Grid.h"
 #import "Dice.h"
 
-// these are variables that cannot be changed
-// we define these two constants to describe the amount of rows and columns
+// two constants to describe the amount of rows and columns
 static const int GRID_ROWS = 12;
 static const int GRID_COLUMNS = 6;
 
 @implementation Grid {
     NSMutableArray *_gridArray; // a 2d array
-    float _cellWidth; // these two varsused to place creatures on grid correctly
+    float _cellWidth; // two vars used to place dice correctly
     float _cellHeight;
 }
 
 - (void)onEnter // method to activate touch handling on the grid
 {
     [super onEnter];
-    
-    [self setupGrid]; // create method next
-    
-    // accept touches on the grid
+    [self setupGrid];
     self.userInteractionEnabled = YES;
 }
 
@@ -64,19 +60,22 @@ static const int GRID_COLUMNS = 6;
     }
 }
 
-//- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
-//{
-//    CGPoint touchLocation = [touch locationInNode:self];
-//    
-//}
-//
-//- (Dice *)diceForTouchPosition:(CGPoint)touchPosition
-//{
-//    //get the row and column that was touched, return the Creature inside the corresponding cell
-//    int row = touchPosition.y/_cellHeight;
-//    int column = touchPosition.x/_cellWidth;
-//    return _gridArray[row][column];
-//}
+
+
+- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    //get the x,y coordinates of the touch
+    CGPoint touchLocation = [touch locationInNode:self];
+    Dice *dice = [self diceForTouchPosition:touchLocation];
+}
+
+- (Dice *)diceForTouchPosition:(CGPoint)touchPosition
+{
+    //get the row and column that was touched, return the Dice inside the corresponding cell
+    int row = touchPosition.y/_cellHeight;
+    int column = touchPosition.x/_cellWidth;
+    return _gridArray[row][column];
+}
 
 
 @end

@@ -444,7 +444,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = ninabaculinao;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "6E1998EB-320D-4966-B4C9-853B315A4F94";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -476,7 +476,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = ninabaculinao;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "6E1998EB-320D-4966-B4C9-853B315A4F94";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
