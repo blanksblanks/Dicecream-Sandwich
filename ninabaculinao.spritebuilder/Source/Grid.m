@@ -8,6 +8,7 @@
 
 #import "Grid.h"
 #import "Dice.h"
+//#import "CCDragSprite.h"
 
 // two constants to describe the amount of rows and columns
 static const int GRID_ROWS = 12;
@@ -17,13 +18,22 @@ static const int GRID_COLUMNS = 6;
     NSMutableArray *_gridArray; // a 2d array
     float _cellWidth; // two vars used to place dice correctly
     float _cellHeight;
+    
+    CCPhysicsNode *_physicsNode;
+    Grid *_grid;
+    Dice *_dice;
+    Dice *_seconddice;
+}
+
+- (void)didLoadFromCCB{
+    _physicsNode.debugDraw = TRUE;
 }
 
 - (void)onEnter // method to activate touch handling on the grid
 {
     [super onEnter];
     [self setupGrid];
-    self.userInteractionEnabled = false;
+    self.userInteractionEnabled = true;
 }
 
 - (void)setupGrid
@@ -62,9 +72,13 @@ static const int GRID_COLUMNS = 6;
 
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    //get the x,y coordinates of the touch
+    CCLOG(@"Received a touch");
     CGPoint touchLocation = [touch locationInNode:self];
     Dice *dice = [self diceForTouchPosition:touchLocation];
+    //get the x,y coordinates of the touch
+//    CGPoint touchLocation = [touch locationInNode:self.parent];
+//    self.position = touchLocation;
+    //CCLOG(@"Self position is %d", self.position);
 }
 
 - (Dice *)diceForTouchPosition:(CGPoint)touchPosition
@@ -73,6 +87,21 @@ static const int GRID_COLUMNS = 6;
     int row = touchPosition.y/_cellHeight;
     int column = touchPosition.x/_cellWidth;
     return _gridArray[row][column];
+}
+
+- (void)makeNewDicePair{
+    _dice = [Dice makeNewDie];
+    _dice.position = ccp(96,448);
+    [_physicsNode addChild:_dice];
+    _seconddice = [Dice makeNewDie]; //CCDragSprite
+    _seconddice.position = ccp(134,448);
+    [_physicsNode addChild:_seconddice];
+}
+
+- (void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    CGPoint touchLocation = [touch locationInNode:self];
+    _dice.position = touchLocation;
 }
 
 

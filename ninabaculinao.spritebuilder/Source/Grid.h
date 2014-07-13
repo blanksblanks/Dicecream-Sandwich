@@ -10,6 +10,10 @@
 
 @interface Grid : CCSprite
 
+- (void)makeNewDicePair;
+
 @property (nonatomic, assign) int score;
+
+
 
 @end
