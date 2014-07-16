@@ -10,9 +10,16 @@
 
 @interface Dice : CCSprite
 
+@property (nonatomic, assign) int faceValue;
+@property (nonatomic, assign) int column;
+@property (nonatomic, assign) int row;
+@property (nonatomic, assign) CGPoint velocity;
+@property (nonatomic, assign) CGPoint desiredPosition;
+@property (nonatomic, assign) CGPoint deltaPosition;
+@property (nonatomic, assign) BOOL falling;
+
 - (id)initDice;
 + (Dice*)makeNewDie;
-
-@property (nonatomic, assign) int faceValue;
+-(CGRect) collisionBox;
 
 @end

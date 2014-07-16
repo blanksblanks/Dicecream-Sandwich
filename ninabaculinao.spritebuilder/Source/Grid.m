@@ -76,10 +76,10 @@ static const int GRID_COLUMNS = 6;
     for (int i = 3; i < 4; i++) {
         _firstdie = [Dice makeNewDie];
         _firstdie.position = ccp(96,448);
-        [_physicsNode addChild:_firstdie];
+        [self addChild:_firstdie];
         _seconddie = [Dice makeNewDie]; //CCDragSprite
         _seconddie.position = ccp(134,448);
-        [_physicsNode addChild:_seconddie];
+        [self addChild:_seconddie];
     }
 }
 
@@ -88,21 +88,19 @@ static const int GRID_COLUMNS = 6;
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
     CCLOG(@"Received a touch");
-    CGPoint touchLocation = [touch locationInNode:self];
-    Dice *dice = [self diceForTouchPosition:touchLocation];
-    //get the x,y coordinates of the touch
+//get the x,y coordinates of the touch
 //    CGPoint touchLocation = [touch locationInNode:self.parent];
 //    self.position = touchLocation;
     //CCLOG(@"Self position is %d", self.position);
 }
 
-- (Dice *)diceForTouchPosition:(CGPoint)touchPosition
-{
-    //get the row and column that was touched, return the Dice inside the corresponding cell
-    int row = touchPosition.y/_cellHeight;
-    int column = touchPosition.x/_cellWidth;
-    return _gridArray[row][column];
-}
+//- (Dice *)diceForTouchPosition:(CGPoint)touchPosition
+//{
+//    //get the row and column that was touched, return the Dice inside the corresponding cell
+//    int row = touchPosition.y/_cellHeight;
+//    int column = touchPosition.x/_cellWidth;
+//    return _gridArray[row][column];
+//}
 
 - (void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event
 {
