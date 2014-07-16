@@ -22,6 +22,7 @@
     {
         case 0:
             die = (Dice*) [CCBReader load:@"Dice/One"];
+            die.faceValue = 1;
             break;
         case 1:
             die = (Dice*) [CCBReader load:@"Dice/Two"];

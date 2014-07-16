@@ -13,4 +13,6 @@
 - (id)initDice;
 + (Dice*)makeNewDie;
 
+@property (nonatomic, assign) int faceValue;
+
 @end

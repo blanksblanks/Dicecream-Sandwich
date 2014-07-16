@@ -21,8 +21,8 @@ static const int GRID_COLUMNS = 6;
     
     CCPhysicsNode *_physicsNode;
     Grid *_grid;
-    Dice *_dice;
-    Dice *_seconddice;
+    Dice *_firstdie;
+    Dice *_seconddie;
 }
 
 - (void)didLoadFromCCB{
@@ -70,6 +70,21 @@ static const int GRID_COLUMNS = 6;
     }
 }
 
+# pragma mark - Create new dice
+
+- (void)makeNewDicePair{
+    for (int i = 3; i < 4; i++) {
+        _firstdie = [Dice makeNewDie];
+        _firstdie.position = ccp(96,448);
+        [_physicsNode addChild:_firstdie];
+        _seconddie = [Dice makeNewDie]; //CCDragSprite
+        _seconddie.position = ccp(134,448);
+        [_physicsNode addChild:_seconddie];
+    }
+}
+
+# pragma mark - Touch handling
+
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {
     CCLOG(@"Received a touch");
@@ -89,19 +104,11 @@ static const int GRID_COLUMNS = 6;
     return _gridArray[row][column];
 }
 
-- (void)makeNewDicePair{
-    _dice = [Dice makeNewDie];
-    _dice.position = ccp(96,448);
-    [_physicsNode addChild:_dice];
-    _seconddice = [Dice makeNewDie]; //CCDragSprite
-    _seconddice.position = ccp(134,448);
-    [_physicsNode addChild:_seconddice];
-}
-
 - (void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event
 {
     CGPoint touchLocation = [touch locationInNode:self];
-    _dice.position = touchLocation;
+    _firstdie.position = touchLocation;
+    _seconddie.position = ccpAdd(touchLocation, ccp(_seconddie.boundingBox.size.width, 0));
 }
 
 
