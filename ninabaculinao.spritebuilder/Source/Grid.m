@@ -19,6 +19,7 @@ static const int GRID_COLUMNS = 6;
     float _cellWidth; // two vars used to place dice correctly
     float _cellHeight;
     
+    CCPhysicsNode *_physicsNode;
     CCNode *_invisibleFloor;
     Grid *_grid;
     Dice *_firstdie;
@@ -84,21 +85,18 @@ static const int GRID_COLUMNS = 6;
         _firstdie.position = ccp(96,448);
         [_physicsNode addChild:_firstdie];
         _seconddie = [Dice makeNewDie]; //CCDragSprite
-        _seconddie.position = ccp(134,448);
-        [_physicsNode addChild:_seconddie];
+        _seconddie.position = ccp(37,18.5);
+        [_firstdie addChild:_seconddie];
     }
 }
 
 # pragma mark - Touch handling
 
-- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
-{
-    CCLOG(@"Received a touch");
 //get the x,y coordinates of the touch
 //    CGPoint touchLocation = [touch locationInNode:self.parent];
 //    self.position = touchLocation;
     //CCLOG(@"Self position is %d", self.position);
-}
+
 
 //- (Dice *)diceForTouchPosition:(CGPoint)touchPosition
 //{
@@ -112,8 +110,28 @@ static const int GRID_COLUMNS = 6;
 {
     CGPoint touchLocation = [touch locationInNode:self];
     _firstdie.position = touchLocation;
-    _seconddie.position = ccpAdd(touchLocation, ccp(_seconddie.boundingBox.size.width, 0));
+    //_seconddie.position = ccpAdd(touchLocation, ccp(_seconddie.boundingBox.size.width, 0));
 }
+
+- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    CCLOG(@"Received a touch");
+    
+    BOOL canTouch = YES;
+    if (canTouch) {
+        canTouch = NO;
+        CCActionRotateBy *rotateDice = [CCActionRotateBy actionWithDuration:.4 angle:90];
+        CCActionCallBlock *resetTouch = [CCActionCallBlock actionWithBlock:^{
+            BOOL canTouch = YES;
+            ;  }];
+        [_firstdie runAction:[CCActionSequence actionOne:rotateDice two:resetTouch]];
+        
+//        CGPoint touchLocation = [touch locationInNode:self];
+//        _firstdie.position = touchLocation;
+//        _seconddie.position = ccpAdd(touchLocation, ccp(_seconddie.boundingBox.size.width, 0));
+    }
+}
+
 
 
 @end

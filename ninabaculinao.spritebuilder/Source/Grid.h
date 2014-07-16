@@ -9,9 +9,7 @@
 #import "CCSprite.h"
 
 @interface Grid : CCSprite
-{
-    CCPhysicsNode *_physicsNode;
-}
+
 - (void)makeNewDicePair;
 
 @property (nonatomic, assign) int score;
