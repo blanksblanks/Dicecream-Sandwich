@@ -19,7 +19,7 @@ static const int GRID_COLUMNS = 6;
     float _cellWidth; // two vars used to place dice correctly
     float _cellHeight;
     
-    CCPhysicsNode *_physicsNode;
+    CCNode *_invisibleFloor;
     Grid *_grid;
     Dice *_firstdie;
     Dice *_seconddie;
@@ -27,6 +27,7 @@ static const int GRID_COLUMNS = 6;
 
 - (void)didLoadFromCCB{
     _physicsNode.debugDraw = TRUE;
+    _invisibleFloor.physicsBody.sensor=TRUE;
 }
 
 - (void)onEnter // method to activate touch handling on the grid
@@ -35,6 +36,11 @@ static const int GRID_COLUMNS = 6;
     [self setupGrid];
     self.userInteractionEnabled = true;
 }
+
+//-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair*)pair dice:(Dice*) invisibleFloor:(CCNode*)Floor
+//{
+//    
+//}
 
 - (void)setupGrid
 {
@@ -76,10 +82,10 @@ static const int GRID_COLUMNS = 6;
     for (int i = 3; i < 4; i++) {
         _firstdie = [Dice makeNewDie];
         _firstdie.position = ccp(96,448);
-        [self addChild:_firstdie];
+        [_physicsNode addChild:_firstdie];
         _seconddie = [Dice makeNewDie]; //CCDragSprite
         _seconddie.position = ccp(134,448);
-        [self addChild:_seconddie];
+        [_physicsNode addChild:_seconddie];
     }
 }
 

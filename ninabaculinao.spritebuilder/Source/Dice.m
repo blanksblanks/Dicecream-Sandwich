@@ -17,7 +17,7 @@
 
 + (Dice*) makeNewDie {
     Dice *die;
-    int random = arc4random_uniform(6)+1;
+    int random = arc4random_uniform(5)+1;
     switch(random)
     {
         case 1:
@@ -54,7 +54,6 @@
 
 -(void) stepGravity:(CCTime)dt
 {
-    //    CGSize screenSize = [[CCDirector sharedDirector] screenSize];
     CGSize screenSize = [[CCDirector sharedDirector] viewSize];
     
     if (self.position.y > (screenSize.height - [self contentSize].height/2)) {
@@ -64,7 +63,7 @@
             self.velocity = ccp(0, -50.f);
         } else {
             // magic number allows for smooth acceleration dependent on dt
-            self.velocity = ccp(0, self.velocity.y * 63.42f * dt);
+            self.velocity = ccp(0, self.velocity.y - 63.42f * dt);
         }
     }
 }
@@ -84,6 +83,7 @@
 {
     [self stepGravity:delta];
     [self desiredPositionFromVelocity:delta];
+    self.position = ccp(self.position.x, self.position.y - delta*50.f);
 }
 
 -(CGRect) collisionBox
