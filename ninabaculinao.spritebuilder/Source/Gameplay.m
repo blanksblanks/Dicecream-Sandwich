@@ -9,6 +9,8 @@
 #import "Gameplay.h"
 #import "Grid.h"
 #import "Dice.h"
+#import <OALSimpleAudio.h>
+
 
 @implementation Gameplay {
     Grid *_grid;
@@ -20,6 +22,11 @@
 {
     if (self = [super init]) {
         self.userInteractionEnabled = TRUE;
+        
+        // access audio object
+        OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+        // play background sound
+        [audio playBg:@"CATchy.wav" loop:TRUE];
     }
     return self;
 }
