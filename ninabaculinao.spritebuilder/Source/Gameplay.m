@@ -52,7 +52,7 @@
 {
     // this tells the game to call a method called 'step' every half sec
     // [self schedule:@selector(step) interval:0.5f];
-    [_grid makeNewDicePair];
+  //  [_grid makeNewDicePair];
 }
 
 - (void)pause

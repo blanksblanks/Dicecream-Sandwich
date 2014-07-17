@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Apportable. All rights reserved.
 //
 
-#import "CCSprite.h"
+#import "CCNode.h"
 
-@interface Tile : CCSprite
+@interface Tile : CCNode
 
 @property (nonatomic, assign) BOOL isOccupied;
 
