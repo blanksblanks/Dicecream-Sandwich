@@ -7,17 +7,18 @@
 //
 
 #import "Grid.h"
+#import "Tile.h"
 #import "Dice.h"
-//#import "CCDragSprite.h"
-
-// two constants to describe the amount of rows and columns
-static const int GRID_ROWS = 12;
-static const int GRID_COLUMNS = 6;
 
 @implementation Grid {
+    
+    CGFloat _tileWidth;
+	CGFloat _tileHeight;
+	CGFloat _tileMarginVertical;
+	CGFloat _tileMarginHorizontal;
+    
     NSMutableArray *_gridArray; // a 2d array
-    float _cellWidth; // two vars used to place dice correctly
-    float _cellHeight;
+    NSNull *_noTile;
     
     CCPhysicsNode *_physicsNode;
     CCNode *_invisibleFloor;
@@ -25,6 +26,11 @@ static const int GRID_COLUMNS = 6;
     Dice *_firstdie;
     Dice *_seconddie;
 }
+
+// two constants to describe the amount of rows and columns
+static const int GRID_ROWS = 12;
+static const int GRID_COLUMNS = 6;
+
 
 - (void)didLoadFromCCB{
     _physicsNode.debugDraw = TRUE;
@@ -38,43 +44,50 @@ static const int GRID_COLUMNS = 6;
     self.userInteractionEnabled = true;
 }
 
-//-(BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair*)pair dice:(Dice*) invisibleFloor:(CCNode*)Floor
-//{
-//    
-//}
-
 - (void)setupGrid
 {
-    // divide the grid's size by the number of columns/rows to figure out the right width and height of each cell
-    _cellWidth = self.contentSize.width / GRID_COLUMNS;
-    _cellHeight = self.contentSize.height / GRID_ROWS;
+	// load one tile to read the dimensions
+	CCNode *tile = [CCBReader load:@"Tile"];
+	_tileWidth = tile.contentSize.width;;
+	_tileHeight = tile.contentSize.width;;
+    // this hotfix is needed because of issue #638 in Cocos2D 3.1 / SB 1.1 (https://github.com/spritebuilder/SpriteBuilder/issues/638)
+    //[tile performSelector:@selector(cleanup)];
     
-    float x = 0;
-    float y = 0;
+	// calculate the margin by subtracting the block sizes from the grid size
+	_tileMarginHorizontal = (self.contentSize.width - (GRID_COLUMNS * _tileWidth)) / (GRID_COLUMNS+1);
+	_tileMarginVertical = (self.contentSize.height - (GRID_ROWS * _tileWidth)) / (GRID_ROWS+1);
+	// set up initial x and y positions
+	float x = _tileMarginHorizontal;
+	float y = _tileMarginVertical;
     
     // initialize the array as a blank NSMutableArray
     _gridArray = [NSMutableArray array];
     
-    // initialize Dice
-    for (int i = 0; i < GRID_ROWS; i++) {
-        // this is how you create two dimensional arrays in Objective-C. You put arrays into arrays.
+	for (int i = 0; i < GRID_ROWS; i++) {
+        // iterate through each row
+        // create 2d array by putting array into array
         _gridArray[i] = [NSMutableArray array];
-        x = 0;
+		x = _tileMarginHorizontal;
         
-        for (int j = 0; j < GRID_COLUMNS; j++) {
-            Dice *dice = [[Dice alloc] initDice];
-            dice.anchorPoint = ccp(0, 0);
-            dice.position = ccp(x, y);
-            [self addChild:dice];
+		for (int j = 0; j < GRID_COLUMNS; j++) {
+			//  iterate through each column in the current row
+
+//            Tile *tile = [[Tile alloc] initTile];
+//            tile.position = ccp(x, y);
+//            [self addChild:tile]; // problem here without initialization
+//            // this is shorthand to access an array inside an array
+//            _gridArray[i][j] = tile;
+//            tile.isOccupied = TRUE; // debugging to see placement
             
-            // this is shorthand to access an array inside an array
-            _gridArray[i][j] = dice;
+            CCNodeColor *backgroundTile = [CCNodeColor nodeWithColor:[CCColor blackColor]];
+			backgroundTile.contentSize = CGSizeMake(_tileWidth, _tileHeight);
+			backgroundTile.position = ccp(x, y);
+			[self addChild:backgroundTile];
             
-            x+=_cellWidth; // after positinioning a Creature we increase x variable
-        }
-        
-        y += _cellHeight; // after completing row we increase y variable
-    }
+			x+= _tileWidth + _tileMarginHorizontal; // after positioning a block increase x variable
+		}
+		y += _tileHeight + _tileMarginVertical; // after completing row increase y variable
+	}
 }
 
 # pragma mark - Create new dice

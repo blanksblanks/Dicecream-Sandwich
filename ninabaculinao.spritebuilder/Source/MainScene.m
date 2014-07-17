@@ -8,7 +8,8 @@
 
 #import "MainScene.h"
 
-@implementation MainScene
+@implementation MainScene {
+}
 
 - (void)play {
     CCLOG(@"play button pressed");

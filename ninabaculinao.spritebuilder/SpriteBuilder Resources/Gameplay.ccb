@@ -14,7 +14,7 @@
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
-	<integer>2</integer>
+	<integer>1</integer>
 	<key>currentSequenceId</key>
 	<integer>0</integer>
 	<key>docDimensionsType</key>
@@ -160,7 +160,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>235</real>
+							<real>8</real>
 							<real>0.5</real>
 							<integer>3</integer>
 							<integer>0</integer>
@@ -189,8 +189,6 @@
 						<string>Grid.ccb</string>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -238,7 +236,7 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>70</real>
+											<real>70.5</real>
 											<real>20</real>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -952,7 +950,7 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>70</real>
+											<real>70.5</real>
 											<real>284</real>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -1245,7 +1243,7 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>410</real>
+							<real>236</real>
 							<real>1</real>
 							<integer>3</integer>
 							<integer>2</integer>
@@ -1258,7 +1256,7 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
+							<real>0.0</real>
 							<real>0.0</real>
 						</array>
 					</dict>
