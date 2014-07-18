@@ -7,6 +7,7 @@
 //
 
 #import "Dice.h"
+#import "CCAnimationManager.h"
 
 @implementation Dice
 
@@ -14,34 +15,40 @@
     self = [super init];
     if (self) {
         CCLOG(@"Die created");
-        [self performSelector:@selector(randomizeValues)];
-        //[self randomizeValues];
+        [self performSelector:@selector(randomizeNumbers)];
+        //[self randomizeNumbers];
     }
     return self;
 }
 
--(void) randomizeValues {
-    CCAnimationManager* animationManager = self.animationManager;
+-(void) randomizeNumbers {
+//    CCAnimationManager* animationManager = self.userObject;
     int random = arc4random_uniform(5)+1;
     switch(random)
     {
         case 1:
-            [animationManager runAnimationsForSequenceNamed:@"One"];
+            [[self animationManager] runAnimationsForSequenceNamed:@"One"];
+            CCLOG(@"Face: 1");
             break;
         case 2:
-            [animationManager runAnimationsForSequenceNamed:@"Two"];
+            [[self animationManager]runAnimationsForSequenceNamed:@"Two"];
+            CCLOG(@"Face: 2");
             break;
         case 3:
-            [animationManager runAnimationsForSequenceNamed:@"Three"];
+            [[self animationManager]runAnimationsForSequenceNamed:@"Three"];
+            CCLOG(@"Face: 3");
             break;
         case 4:
-            [animationManager runAnimationsForSequenceNamed:@"Four"];
+            [[self animationManager] runAnimationsForSequenceNamed:@"Four"];
+            CCLOG(@"Face: 4");
             break;
         case 5:
-            [animationManager runAnimationsForSequenceNamed:@"Five"];
+            [[self animationManager] runAnimationsForSequenceNamed:@"Five"];
+            CCLOG(@"Face: 5");
             break;
         case 6:
-            [animationManager runAnimationsForSequenceNamed:@"Six"];
+            [[self animationManager] runAnimationsForSequenceNamed:@"Six"];
+            CCLOG(@"Face: 6");
             break;
         default:
             CCLOG(@"WHY IS IT AT DEFAULT");

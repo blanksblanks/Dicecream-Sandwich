@@ -125,9 +125,9 @@ static const int GRID_COLUMNS = 6;
 	for (int i = 0; i < 2; i++) {
 		[self spawnRandomDice];
 	}
-    for (int i = 3; i < 5; i++) {
-        [self addDieAtColumn:i row:9];
-    }
+//    for (int i = 3; i < 5; i++) {
+//        [self addDieAtColumn:i row:9];
+//    }
 }
 
 
