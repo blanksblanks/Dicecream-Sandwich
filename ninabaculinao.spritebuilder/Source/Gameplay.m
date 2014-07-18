@@ -47,6 +47,7 @@
 - (void)step
 {
     _scoreLabel.string = [NSString stringWithFormat:@"%d", _grid.score];
+    [_grid spawnDice];
 }
 
 

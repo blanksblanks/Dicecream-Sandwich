@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Apportable. All rights reserved.
 //
 
-#import "CCSprite.h"
+#import "CCNode.h"
 
-@interface Dice : CCSprite
+@interface Dice : CCNode
 
-@property (nonatomic, assign) int faceValue;
-@property (nonatomic, assign) int column;
-@property (nonatomic, assign) int row;
+@property (nonatomic, assign) NSInteger faceValue;
+@property (nonatomic, assign) NSInteger column;
+@property (nonatomic, assign) NSInteger row;
 
 - (id)initDice;
 

@@ -28,6 +28,7 @@ static const int GRID_COLUMNS = 6;
 - (void)didLoadFromCCB{
     
     [self setupGrid];
+    
     _noTile = [NSNull null];
 	_gridArray = [NSMutableArray array];
     
@@ -36,9 +37,9 @@ static const int GRID_COLUMNS = 6;
 		for (int j = 0; j < GRID_COLUMNS; j++) {
 			_gridArray[i][j] = _noTile;
 		}
-        
 	}
-    [self spawnStartDice];
+    
+    [self spawnDice];
 }
 
 # pragma mark - Create grid
@@ -76,59 +77,96 @@ static const int GRID_COLUMNS = 6;
 //            _gridArray[i][j] = tile;
 //            tile.isOccupied = TRUE; // debugging to see placement
             
-            CCNodeColor *backgroundTile = [CCNodeColor nodeWithColor:[CCColor clearColor]];
-			backgroundTile.contentSize = CGSizeMake(_tileWidth, _tileHeight);
-			backgroundTile.position = ccp(x, y);
-			[self addChild:backgroundTile];
+//            CCNodeColor *backgroundTile = [CCNodeColor nodeWithColor:[CCColor clearColor]];
+//			backgroundTile.contentSize = CGSizeMake(_tileWidth, _tileHeight);
+//			backgroundTile.position = ccp(x, y);
+//			[self addChild:backgroundTile];
             
 			x+= _tileWidth + _tileMarginHorizontal; // after positioning a block increase x variable
 		}
-		y += _tileHeight + _tileMarginVertical; // after completing row increase y variable
+		y+= _tileHeight + _tileMarginVertical; // after completing row increase y variable
 	}
 }
 
 # pragma mark - spawn random tiles
 
-- (CGPoint)positionForColumn:(NSInteger)column row:(NSInteger)row {
+- (CGPoint)positionForTile:(NSInteger)column row:(NSInteger)row {
 	NSInteger x = _tileMarginHorizontal + column * (_tileMarginHorizontal + _tileWidth);
 	NSInteger y = _tileMarginVertical + row * (_tileMarginVertical + _tileHeight);
 	return CGPointMake(x,y);
 }
 
-- (void)addDieAtColumn:(NSInteger)column row:(NSInteger)row {
-    Dice *die = [[Dice alloc] initDice];
-	_gridArray[column][row] = die;
+- (void)addDieAtTile:(NSInteger)column row:(NSInteger)row {
+    Dice* die = [self randomizeNumbers];
+	_gridArray[row][column] = die;
 	die.scale = 0.f;
 	[self addChild:die];
-	die.position = [self positionForColumn:column row:row];
+	die.position = [self positionForTile:column row:row];
 	CCActionDelay *delay = [CCActionDelay actionWithDuration:0.3f];
 	CCActionScaleTo *scaleUp = [CCActionScaleTo actionWithDuration:0.2f scale:1.f];
 	CCActionSequence *sequence = [CCActionSequence actionWithArray:@[delay, scaleUp]];
 	[die runAction:sequence];
 }
 
-- (void)spawnRandomDice {
+-(Dice*) randomizeNumbers {
+    int random = arc4random_uniform(5)+1;
+    Dice *die;
+    switch(random)
+    {
+        case 1:
+            die = (Dice*) [CCBReader load:@"Dice/One"];
+            CCLOG(@"Face: 1");
+            break;
+        case 2:
+            die = (Dice*) [CCBReader load:@"Dice/Two"];
+            CCLOG(@"Face: 2");
+            break;
+        case 3:
+            die = (Dice*) [CCBReader load:@"Dice/Three"];
+            CCLOG(@"Face: 3");
+            break;
+        case 4:
+            die = (Dice*) [CCBReader load:@"Dice/Four"];
+            CCLOG(@"Face: 4");
+            break;
+        case 5:
+            die = (Dice*) [CCBReader load:@"Dice/Five"];
+            CCLOG(@"Face: 5");
+            break;
+        case 6:
+            die = (Dice*) [CCBReader load:@"Dice/Six"];
+            CCLOG(@"Face: 6");
+            break;
+        default:
+            die = (Dice*) [CCBReader load:@"Dice/Dice"];
+            CCLOG(@"WHY IS IT AT DEFAULT");
+            break;
+    }
+    return die;
+}
+
+- (void)spawnRandomTiles {
 	BOOL spawned = FALSE;
 	while (!spawned) {
 		NSInteger randomRow = arc4random_uniform(11);
 		NSInteger randomColumn = arc4random_uniform(5);
-        CCLOG(@"row, column: %ld,%ld", randomRow, randomColumn);
-		BOOL positionFree = (_gridArray[randomColumn][randomRow] == _noTile);
+        CCLOG(@"Column %d, Row %d", (int)randomColumn, (int)randomRow);
+		BOOL positionFree = (_gridArray[randomRow][randomColumn] == _noTile);
 		if (positionFree) {
-			[self addDieAtColumn:randomColumn row:randomRow];
+			[self addDieAtTile:randomColumn row:randomRow];
 			spawned = TRUE;
 		}
 	}
 }
 
-- (void)spawnStartDice {
+- (void)spawnDice {
 	for (int i = 0; i < 2; i++) {
-		[self spawnRandomDice];
+		[self spawnRandomTiles];
 	}
+}
 //    for (int i = 3; i < 5; i++) {
 //        [self addDieAtColumn:i row:9];
 //    }
-}
 
 
 @end

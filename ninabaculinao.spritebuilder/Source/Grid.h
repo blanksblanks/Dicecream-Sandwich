@@ -10,6 +10,8 @@
 
 @interface Grid : CCSprite
 
-@property (nonatomic, assign) int score;
+- (void)spawnDice;
+
+@property (nonatomic, assign) NSInteger score;
 
 @end
