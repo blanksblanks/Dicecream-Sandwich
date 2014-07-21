@@ -148,8 +148,8 @@ static const int GRID_COLUMNS = 6;
 - (void)spawnRandomTiles {
 	BOOL spawned = FALSE;
 	while (!spawned) {
-		NSInteger randomRow = arc4random_uniform(11);
-		NSInteger randomColumn = arc4random_uniform(5);
+		NSInteger randomRow = arc4random_uniform(12);
+		NSInteger randomColumn = arc4random_uniform(6);
         CCLOG(@"Column %d, Row %d", (int)randomColumn, (int)randomRow);
 		BOOL positionFree = (_gridArray[randomRow][randomColumn] == _noTile);
 		if (positionFree) {
