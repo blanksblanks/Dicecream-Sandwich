@@ -29,6 +29,7 @@ static const int GRID_COLUMNS = 6;
     
     [self setupGrid];
     
+    // Fill array with null tiles
     _noTile = [NSNull null];
 	_gridArray = [NSMutableArray array];
     
@@ -145,28 +146,31 @@ static const int GRID_COLUMNS = 6;
     return die;
 }
 
-- (void)spawnRandomTiles {
+- (void)spawnDice {
 	BOOL spawned = FALSE;
 	while (!spawned) {
-		NSInteger randomRow = arc4random_uniform(12);
-		NSInteger randomColumn = arc4random_uniform(6);
-        CCLOG(@"Column %d, Row %d", (int)randomColumn, (int)randomRow);
-		BOOL positionFree = (_gridArray[randomRow][randomColumn] == _noTile);
-		if (positionFree) {
+		NSInteger randomRow = arc4random_uniform(2)+10; // int bt 11 and 12
+		NSInteger randomColumn = arc4random_uniform(5);
+        CCLOG(@"Column %ld, Row %ld", (long)randomColumn, (long)randomRow);
+        NSInteger nextRow = arc4random_uniform(2)+randomRow;
+        NSInteger nextColumn;
+        if (nextRow != randomRow) {
+            nextColumn = randomColumn;
+        } else {
+            nextColumn = randomColumn+1;
+        }
+        CCLOG(@"Next column %ld, next row %ld", (long)nextColumn, (long)nextRow);
+        
+        BOOL positionFree = (_gridArray[randomRow][randomColumn] == _noTile);
+        BOOL nextPositionFree = (_gridArray[nextRow][nextColumn] == _noTile);
+		if (positionFree && nextPositionFree) {
 			[self addDieAtTile:randomColumn row:randomRow];
-			spawned = TRUE;
-		}
+            [self addDieAtTile:nextColumn row:nextRow];
+            spawned = TRUE;
+        } else {
+            CCLOG(@"Game Over");
+        }
 	}
 }
-
-- (void)spawnDice {
-	for (int i = 0; i < 2; i++) {
-		[self spawnRandomTiles];
-	}
-}
-//    for (int i = 3; i < 5; i++) {
-//        [self addDieAtColumn:i row:9];
-//    }
-
 
 @end
