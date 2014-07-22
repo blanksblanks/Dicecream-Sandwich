@@ -7,7 +7,6 @@
 //
 
 #import "Dice.h"
-#import "CCAnimationManager.h"
 
 @implementation Dice
 

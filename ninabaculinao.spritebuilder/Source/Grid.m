@@ -32,31 +32,39 @@ static const NSInteger GRID_COLUMNS = 6;
     _noTile = [NSNull null];
 	_gridArray = [NSMutableArray array];
     
-	for (int i = 0; i < GRID_ROWS; i++) {
+	for (NSInteger i = 0; i < GRID_ROWS; i++) {
 		_gridArray[i] = [NSMutableArray array];
-		for (int j = 0; j < GRID_COLUMNS; j++) {
+		for (NSInteger j = 0; j < GRID_COLUMNS; j++) {
 			_gridArray[i][j] = _noTile;
 		}
 	}
     
     [self spawnDice];
     
-//    // listen for swipes to the left
-//    UISwipeGestureRecognizer * swipeLeft= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeLeft)];
-//    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-//    [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeLeft];
-//    // listen for swipes to the right
-//    UISwipeGestureRecognizer * swipeRight= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeRight)];
-//    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
-//    [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeRight];
-//    // listen for swipes down
-//    UISwipeGestureRecognizer * swipeDown= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeDown)];
-//    swipeDown.direction = UISwipeGestureRecognizerDirectionDown;
-//    [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeDown];
-//    // listen for swipes up
-//    UISwipeGestureRecognizer * swipeUp= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeUp)];
-//    swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
-//    [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeUp];
+    // debugging indexvalidandunoccupied method
+ 	for (NSInteger i = 0; i <= GRID_ROWS; i++) {
+		for (NSInteger j = 0; j <= GRID_COLUMNS; j++) {
+            BOOL free = [self indexValidAndUnoccupied:i y:j];
+            CCLOG(@"Row %d and column %d free? %d", i, j, free);
+        }
+}
+    
+    // listen for swipes to the left
+    UISwipeGestureRecognizer * swipeLeft= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeLeft)];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeLeft];
+    // listen for swipes to the right
+    UISwipeGestureRecognizer * swipeRight= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeRight)];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeRight];
+    // listen for swipes down
+    UISwipeGestureRecognizer * swipeDown= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeDown)];
+    swipeDown.direction = UISwipeGestureRecognizerDirectionDown;
+    [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeDown];
+    // listen for swipes up
+    UISwipeGestureRecognizer * swipeUp= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeUp)];
+    swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
+    [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeUp];
 	
 }
 
@@ -85,13 +93,13 @@ static const NSInteger GRID_COLUMNS = 6;
     // initialize the array as a blank NSMutableArray
     _gridArray = [NSMutableArray array];
     
-	for (int i = 0; i < GRID_ROWS; i++) {
+	for (NSInteger i = 0; i < GRID_ROWS; i++) {
         // iterate through each row
         // create 2d array by putting array into array
         _gridArray[i] = [NSMutableArray array];
 		x = _tileMarginHorizontal;
         
-		for (int j = 0; j < GRID_COLUMNS; j++) {
+		for (NSInteger j = 0; j < GRID_COLUMNS; j++) {
 			//  iterate through each column in the current row
 			x+= _tileWidth + _tileMarginHorizontal; // after positioning a block increase x variable
 		}
@@ -102,7 +110,7 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Create random Dice
 
 -(Dice*) randomizeNumbers {
-    int random = arc4random_uniform(5)+1;
+    NSInteger random = arc4random_uniform(5)+1;
     Dice *die;
     switch(random)
     {
@@ -194,6 +202,8 @@ static const NSInteger GRID_COLUMNS = 6;
             CCLOG(@"Game Over");
             break;
         }
+        
+        
 	}
 }
 
