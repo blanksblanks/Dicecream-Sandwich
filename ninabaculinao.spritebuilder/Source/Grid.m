@@ -106,25 +106,26 @@ static const NSInteger GRID_COLUMNS = 6;
     while (isRotating == true) {
         if (_currentDie2.column > _currentDie1.column) {
             // [1][2] --> [1]
-            //            [2] means die2 moves
+            //            [2]
             _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
             _currentDie2.row--; _currentDie2.column--;
             _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
             _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
         } else if (_currentDie1.row > _currentDie2.row) {
             // [1]
-            // [2] --> [2][1] means die1 movies
-            _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
-            _currentDie1.row--; _currentDie1.column++;
-            _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
-            _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
+            // [2] --> [2][1]
+            _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+            _currentDie2.row++; _currentDie2.column--;
+            _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+            _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
         } else if (_currentDie1.column > _currentDie2.column) {
             // [2][1] --> [2]
-            //            [1] means die1 moves
-            _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
-            _currentDie1.row--; _currentDie1.column--;
-            _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
-            _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
+            //            [1]
+            _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+            _currentDie2.row++; _currentDie2.column++;
+            _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+            _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+
         } else {
             // [2]
             // [1]  --> [1][2] means die2 moves

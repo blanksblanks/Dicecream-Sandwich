@@ -22,7 +22,6 @@
     if (self = [super init]) {
         
         self.userInteractionEnabled = TRUE;
-        
         // access audio object
         OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
         // play background sound
