@@ -14,7 +14,7 @@
     CGFloat _tileWidth; //37
 	CGFloat _tileHeight; //37
 	CGFloat _tileMarginVertical; //0.9285714285714286
-	CGFloat _tileMarginHorizontal; //0.61538461538461542
+	CGFloat _tileMarginHorizontal; //0.6153846153846154 2
     
     NSMutableArray *_gridArray; // a 2d array
     NSNull *_noTile;
@@ -107,20 +107,30 @@ static const NSInteger GRID_COLUMNS = 6;
         _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
         _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
     }
+    
+//    for (Dice *die in _dicePair) {
+//        if (bottomCanMove) {
+//            _gridArray[die.row][die.column] = _noTile;
+//            die.row--;
+//            _gridArray[die.row][die.column] = die;
+//            die.position = [self positionForTile:die.column row:die.row];
+//        }
+//        
+//    }
 }
 
 - (BOOL) canBottomMove {
     if (_currentDie1.row != _currentDie2.row) {
         if (_currentDie1.row > _currentDie2.row) {
-
             return [self indexValidAndUnoccupiedForRow:_currentDie2.row-1 andColumn:_currentDie2.column];
         } else {
 
             return [self indexValidAndUnoccupiedForRow:_currentDie1.row-1 andColumn:_currentDie1.column];
         }
-    } else {
-        return [self indexValidAndUnoccupiedForRow:_currentDie2.row-1 andColumn:_currentDie2.column] && [self indexValidAndUnoccupiedForRow:_currentDie1.row-1 andColumn:_currentDie2.column];
     }
+    else {
+        return [self indexValidAndUnoccupiedForRow:_currentDie2.row-1 andColumn:_currentDie2.column] && [self indexValidAndUnoccupiedForRow:_currentDie1.row-1 andColumn:_currentDie1.column];
+        }
 }
 
 //- (void) dieFalling: Dice*(die) fromColumn:(NSInteger)column andRow: (NSInteger)row {
@@ -241,9 +251,9 @@ static const NSInteger GRID_COLUMNS = 6;
         CCLOG(@"First Column %ld, Row %ld", (long)firstColumn, (long)firstRow);
         NSInteger nextRow = firstRow - arc4random_uniform(2);
         NSInteger nextColumn;
-        if (firstRow != nextRow) {
+        if (firstRow != nextRow) { // has to be vertical
             nextColumn = firstColumn;
-        } else {
+        } else { // has to be horizontal
             nextColumn = firstColumn+1;
         }
         CCLOG(@"Next Column %ld, Row %ld", (long)nextColumn, (long)nextRow);
