@@ -294,12 +294,9 @@ static const NSInteger GRID_COLUMNS = 6;
 //    }
 //}
 
-
-
 # pragma mark - Touch and swipe handling
 
-- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
-{
+- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     oldTouchPosition = [touch locationInNode:self];
 }
 
@@ -307,105 +304,64 @@ static const NSInteger GRID_COLUMNS = 6;
     CGPoint newTouchPosition = [touch locationInNode:self];
     float xdifference = oldTouchPosition.x - newTouchPosition.x;
     float ydifference = oldTouchPosition.y - newTouchPosition.y;
-    NSInteger column;
-    
-    if (xdifference > 0.2*(self.contentSize.width)) {
-        column = (newTouchPosition.x - _tileMarginHorizontal) / (_tileWidth + _tileMarginHorizontal);
-        [self swipeLeft];
+    NSInteger column = ((newTouchPosition.x - _tileMarginHorizontal) / (_tileWidth + _tileMarginHorizontal));
+    if (column > 5) {
+        column = 5;
+    } else if (column < 0) {
+        column = 0;
     }
-    else if (xdifference < -0.2*(self.contentSize.width)) {
+    
+    if (ydifference > 0.2*(self.contentSize.height) || ydifference < -0.2*(self.contentSize.height)) {
+        [self dropDown];
+    } else if (xdifference > 0.3*(self.contentSize.width)) {
+        [self swipeLeftTo:column];
+    } else if (xdifference > 0.1*(self.contentSize.width) && xdifference < 0.3*(self.contentSize.width)) {
+        [self swipeLeft];
+    } else if (xdifference < -0.3*(self.contentSize.width)) {
+        [self swipeRightTo:column];
+    } else if (xdifference < -0.1*(self.contentSize.width) && xdifference > -0.3*(self.contentSize.width)){
         [self swipeRight];
-    } else if (ydifference > 0.2*(self.contentSize.height)) {
-        [self swipeDown];
     } else {
-        BOOL bottomCanMove = [self canBottomMove];
-        
-        BOOL isRotating = true;
-        if (isRotating) {
-            [self unschedule:@selector(dieFallDown)];
-        } else {
-            [self schedule:@selector(dieFallDown) interval:0.5f];
-        }
-        if (isRotating && bottomCanMove) {
-            if (_currentDie2.column > _currentDie1.column) {
-                // [1][2] --> [1]
-                //            [2]
-                _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
-                _currentDie2.row--; _currentDie2.column--;
-                _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
-                _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
-            } else if (_currentDie1.row > _currentDie2.row) {
-                // [1]
-                // [2] --> [2][1]
-                if (_currentDie2.column == 0) {
-                    _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
-                    _currentDie1.row--; _currentDie1.column++;
-                    _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
-                    _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
-                } else if (_currentDie1.row == 11) {
-                    _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
-                    _currentDie1.row--; _currentDie1.column--;
-                    _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
-                    _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
-                }
-                else {
-                    _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
-                    _currentDie2.row++; _currentDie2.column--;
-                    _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
-                    _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
-                }
-            } else if (_currentDie1.column > _currentDie2.column) {
-                // [2][1] --> [2]
-                //            [1]
-                _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
-                _currentDie2.row++; _currentDie2.column++;
-                _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
-                _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
-            } else {
-                // [2]
-                // [1]  --> [1][2] means die2 moves
-                if (_currentDie2.column == 5) {
-                    _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
-                    _currentDie1.row++; _currentDie1.column--;
-                    _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
-                    _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
-                } else {
-                    _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
-                    _currentDie2.row--; _currentDie2.column++;
-                    _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
-                    _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
-                }
-            }
-            isRotating = false;
-        }
+        [self rotate];
     }
 }
+
+- (void)swipeLeftTo:(NSInteger)column {
+    while (_currentDie1.column > column && _currentDie2.column > column) {
+        [self swipeLeft];
+    }
+}
+
 
 - (void)swipeLeft {
 //    [self move:ccp(-1, 0)];
     BOOL bottomCanMove = [self canBottomMove];
     BOOL canMoveLeft = [self indexValidAndUnoccupiedForRow:_currentDie2.row andColumn:_currentDie2.column-1] && [self indexValidAndUnoccupiedForRow:_currentDie1.row andColumn:_currentDie1.column-1];
-//    while (_currentDie1.column > column && _currentDie2.column > column) {
-        if (bottomCanMove && canMoveLeft) {
-            _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
-            _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
-            
-            _currentDie1.column--;
-            _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
-            _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
-            
-            _currentDie2.column--;
-            _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
-            _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
-        }
-//    }
+    if (bottomCanMove && canMoveLeft) {
+        _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
+        _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+        
+        _currentDie1.column--;
+        _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
+        _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
+        
+        _currentDie2.column--;
+        _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+        _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+    }
 }
+
+- (void)swipeRightTo:(NSInteger)column {
+    while (_currentDie1.column < column && _currentDie2.column < column) {
+        [self swipeRight];
+    }
+}
+
 
 - (void)swipeRight {
 //    [self move:ccp(1, 0)];
     BOOL bottomCanMove = [self canBottomMove];
     BOOL canMoveRight = [self indexValidAndUnoccupiedForRow:_currentDie2.row andColumn:_currentDie2.column+1] && [self indexValidAndUnoccupiedForRow:_currentDie1.row andColumn:_currentDie1.column+1];
-    
     if (bottomCanMove && canMoveRight) {
         _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
         _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
@@ -420,7 +376,7 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-- (void)swipeDown {
+- (void)dropDown {
 //    [self move:ccp(0, -1)];
     dropInterval= 0.001;
 }
@@ -429,6 +385,69 @@ static const NSInteger GRID_COLUMNS = 6;
 //- (void)swipeUp {
 //    [self move:ccp(1,0)];
 //}
+
+- (void)rotate {
+    BOOL bottomCanMove = [self canBottomMove];
+    BOOL isRotating = true;
+    if (isRotating) {
+        [self unschedule:@selector(dieFallDown)];
+    } else {
+        [self schedule:@selector(dieFallDown) interval:0.5f];
+    }
+    
+    if (isRotating && bottomCanMove) {
+        if (_currentDie2.column > _currentDie1.column) {
+            // [1][2] --> [1]
+            //            [2]
+            _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+            _currentDie2.row--; _currentDie2.column--;
+            _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+            _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+        } else if (_currentDie1.row > _currentDie2.row) {
+            // [1]
+            // [2] --> [2][1]
+            if (_currentDie2.column == 0) {
+                _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
+                _currentDie1.row--; _currentDie1.column++;
+                _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
+                _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
+            } else if (_currentDie1.row == 11) {
+                _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
+                _currentDie1.row--; _currentDie1.column--;
+                _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
+                _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
+            }
+            else {
+                _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+                _currentDie2.row++; _currentDie2.column--;
+                _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+                _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+            }
+        } else if (_currentDie1.column > _currentDie2.column) {
+            // [2][1] --> [2]
+            //            [1]
+            _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+            _currentDie2.row++; _currentDie2.column++;
+            _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+            _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+        } else {
+            // [2]
+            // [1]  --> [1][2] means die2 moves
+            if (_currentDie2.column == 5) {
+                _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
+                _currentDie1.row++; _currentDie1.column--;
+                _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
+                _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
+            } else {
+                _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+                _currentDie2.row--; _currentDie2.column++;
+                _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+                _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+            }
+        }
+        isRotating = false;
+    }
+}
 
 
 # pragma mark - Move dice
@@ -501,6 +520,13 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Check indexes
 
 - (BOOL)indexValidForRow:(NSInteger)row AndColumn:(NSInteger)column {
+    BOOL indexValid = YES;
+    if(row < 0 || column < 0 || row >= GRID_ROWS || column >= GRID_COLUMNS)
+    {
+        indexValid = NO;
+    }
+    return indexValid;
+}
 //    BOOL indexValid = TRUE;
 //    indexValid &= x >= 0;
 //    indexValid &= y >= 0;
@@ -510,13 +536,7 @@ static const NSInteger GRID_COLUMNS = 6;
 //            indexValid &= y < GRID_COLUMNS;
 //        }
 //    }
-    BOOL indexValid = YES;
-    if(row < 0 || column < 0 || row >= GRID_ROWS || column >= GRID_COLUMNS)
-    {
-        indexValid = NO;
-    }
-    return indexValid;
-}
+
 
 - (BOOL)indexValidAndUnoccupiedForRow:(NSInteger)row andColumn:(NSInteger)column {
     BOOL indexValid = [self indexValidForRow:row AndColumn:column];
