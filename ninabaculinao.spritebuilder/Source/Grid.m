@@ -21,6 +21,7 @@
     
     float timer;
     float timeSinceDrop;
+    float fallingSpeed;
     
     Dice *_currentDie1;
     Dice *_currentDie2;
@@ -35,6 +36,8 @@ static const NSInteger GRID_COLUMNS = 6;
     
     timer = 0;
     timeSinceDrop = 0;
+    fallingSpeed = 0.5;
+    
     _dicePair = [NSMutableArray array];
     
     self.userInteractionEnabled = TRUE;
@@ -62,18 +65,18 @@ static const NSInteger GRID_COLUMNS = 6;
 //        }
 //}
     
-//    // listen for swipes to the left
-//    UISwipeGestureRecognizer * swipeLeft= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeLeft)];
-//    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-//    [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeLeft];
-//    // listen for swipes to the right
-//    UISwipeGestureRecognizer * swipeRight= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeRight)];
-//    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
-//    [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeRight];
-//    // listen for swipes down
-//    UISwipeGestureRecognizer * swipeDown= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeDown)];
-//    swipeDown.direction = UISwipeGestureRecognizerDirectionDown;
-//    [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeDown];
+    // listen for swipes to the left
+    UISwipeGestureRecognizer * swipeLeft= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeLeft)];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeLeft];
+    // listen for swipes to the right
+    UISwipeGestureRecognizer * swipeRight= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeRight)];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+    [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeRight];
+    // listen for swipes down
+    UISwipeGestureRecognizer * swipeDown= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeDown)];
+    swipeDown.direction = UISwipeGestureRecognizerDirectionDown;
+    [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeDown];
 //    // listen for swipes up
 //    UISwipeGestureRecognizer * swipeUp= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeUp)];
 //    swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
@@ -81,129 +84,22 @@ static const NSInteger GRID_COLUMNS = 6;
 	
 }
 
+# pragma mark - Update method
+
 - (void) update:(CCTime) delta {
     timer += delta;
     timeSinceDrop += delta;
-    if (timeSinceDrop > 1.0) {
+
+    if (timeSinceDrop > fallingSpeed) {
         [self dieFallDown];
         timeSinceDrop = 0;
         if (![self canBottomMove]) {
             [self spawnDice];
+            fallingSpeed = 1.0;
         }
 
     }
 }
-
-- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
-{
-    BOOL bottomCanMove = [self canBottomMove];
-    
-    BOOL isRotating = true;
-    if (isRotating) {
-        [self unschedule:@selector(dieFallDown)];
-    } else {
-        [self schedule:@selector(dieFallDown) interval:0.5f];
-    }
-    
-    if (isRotating && bottomCanMove) {
-        if (_currentDie2.column > _currentDie1.column) {
-            // [1][2] --> [1]
-            //            [2]
-            _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
-            _currentDie2.row--; _currentDie2.column--;
-            _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
-            _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
-        } else if (_currentDie1.row > _currentDie2.row) {
-            // [1]
-            // [2] --> [2][1]
-            if (_currentDie2.column == 0) {
-                _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
-                _currentDie1.row--; _currentDie1.column++;
-                _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
-                _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
-            } else {
-                _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
-                _currentDie2.row++; _currentDie2.column--;
-                _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
-                _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
-            }
-        } else if (_currentDie1.column > _currentDie2.column) {
-            // [2][1] --> [2]
-            //            [1]
-            _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
-            _currentDie2.row++; _currentDie2.column++;
-            _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
-            _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
-
-        } else {
-            // [2]
-            // [1]  --> [1][2] means die2 moves
-            if (_currentDie2.column == 5) {
-                _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
-                _currentDie1.row++; _currentDie1.column--;
-                _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
-                _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
-            } else {
-                _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
-                _currentDie2.row--; _currentDie2.column++;
-                _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
-                _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
-            }
-        }
-    isRotating = false;
-    }
-    
-}
-
-- (void) dieFallDown {
-    BOOL bottomCanMove = [self canBottomMove];
-    if (bottomCanMove) {
-        _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
-        _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
-
-        _currentDie1.row--;
-        _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
-        _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
-
-        _currentDie2.row--;
-        _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
-        _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
-    }
-    
-//    for (Dice *die in _dicePair) {
-//        if (bottomCanMove) {
-//            _gridArray[die.row][die.column] = _noTile;
-//            die.row--;
-//            _gridArray[die.row][die.column] = die;
-//            die.position = [self positionForTile:die.column row:die.row];
-//        }
-//        
-//    }
-}
-
-- (BOOL) canBottomMove {
-    if (_currentDie1.row != _currentDie2.row) {
-        if (_currentDie1.row > _currentDie2.row) {
-            return [self indexValidAndUnoccupiedForRow:_currentDie2.row-1 andColumn:_currentDie2.column];
-        } else {
-
-            return [self indexValidAndUnoccupiedForRow:_currentDie1.row-1 andColumn:_currentDie1.column];
-        }
-    }
-    else {
-        return [self indexValidAndUnoccupiedForRow:_currentDie2.row-1 andColumn:_currentDie2.column] && [self indexValidAndUnoccupiedForRow:_currentDie1.row-1 andColumn:_currentDie1.column];
-        }
-}
-
-//- (void) dieFalling: Dice*(die) fromColumn:(NSInteger)column andRow: (NSInteger)row {
-//    for (NSInteger i = row; i >= 0; i++) {
-//        _gridArray[column][row-i] = _gridArray[column][row];
-//        _gridArray[column][row] = _noTile;
-//        CGPoint newPosition = [self positionForTile:column row:row];
-//        CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.2f position:newPosition];
-//        [die runAction:moveTo];
-//    }
-//}
 
 # pragma mark - Create grid
 
@@ -343,23 +239,189 @@ static const NSInteger GRID_COLUMNS = 6;
 	return CGPointMake(x,y);
 }
 
-# pragma mark - Swipe recognition
-//
-//- (void)swipeLeft {
+# pragma mark - Falling dice
+
+- (void) dieFallDown {
+    BOOL bottomCanMove = [self canBottomMove];
+    if (bottomCanMove) {
+        _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
+        _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+        
+        _currentDie1.row--;
+        _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
+        _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
+        
+        _currentDie2.row--;
+        _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+        _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+    }
+    
+    //    for (Dice *die in _dicePair) {
+    //        if (bottomCanMove) {
+    //            _gridArray[die.row][die.column] = _noTile;
+    //            die.row--;
+    //            _gridArray[die.row][die.column] = die;
+    //            die.position = [self positionForTile:die.column row:die.row];
+    //        }
+    //
+    //    }
+}
+
+- (BOOL) canBottomMove {
+    if (_currentDie1.row != _currentDie2.row) {
+        if (_currentDie1.row > _currentDie2.row) {
+            return [self indexValidAndUnoccupiedForRow:_currentDie2.row-1 andColumn:_currentDie2.column];
+        } else {
+            
+            return [self indexValidAndUnoccupiedForRow:_currentDie1.row-1 andColumn:_currentDie1.column];
+        }
+    }
+    else {
+        return [self indexValidAndUnoccupiedForRow:_currentDie2.row-1 andColumn:_currentDie2.column] && [self indexValidAndUnoccupiedForRow:_currentDie1.row-1 andColumn:_currentDie1.column];
+    }
+}
+
+//- (void) dieFalling: Dice*(die) fromColumn:(NSInteger)column andRow: (NSInteger)row {
+//    for (NSInteger i = row; i >= 0; i++) {
+//        _gridArray[column][row-i] = _gridArray[column][row];
+//        _gridArray[column][row] = _noTile;
+//        CGPoint newPosition = [self positionForTile:column row:row];
+//        CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.2f position:newPosition];
+//        [die runAction:moveTo];
+//    }
+//}
+
+
+
+# pragma mark - Touch and swipe
+
+- (void)swipeLeft {
 //    [self move:ccp(-1, 0)];
-//}
-//
-//- (void)swipeRight {
+    BOOL bottomCanMove = [self canBottomMove];
+    if (bottomCanMove) {
+        _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
+        _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+        
+        _currentDie1.column--;
+        _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
+        _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
+        
+        _currentDie2.column--;
+        _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+        _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+    }
+}
+
+- (void)swipeRight {
 //    [self move:ccp(1, 0)];
-//}
-//
-//- (void)swipeDown {
+    BOOL bottomCanMove = [self canBottomMove];
+    if (bottomCanMove) {
+        _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
+        _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+        
+        _currentDie1.column++;
+        _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
+        _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
+        
+        _currentDie2.column++;
+        _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+        _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+    }
+}
+
+- (void)swipeDown {
 //    [self move:ccp(0, -1)];
-//}
-//
+    fallingSpeed = 0.01;
+    BOOL bottomCanMove = [self canBottomMove];
+    if (bottomCanMove) {
+        _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
+        _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+        
+        _currentDie1.column++;
+        _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
+        _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
+        
+        _currentDie2.column++;
+        _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+        _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+    }
+    
+}
+
+
 //- (void)swipeUp {
 //    [self move:ccp(1,0)];
 //}
+
+- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    if(touch.tapCount==2) {
+    
+        BOOL bottomCanMove = [self canBottomMove];
+        
+        BOOL isRotating = true;
+        if (isRotating) {
+            [self unschedule:@selector(dieFallDown)];
+        } else {
+            [self schedule:@selector(dieFallDown) interval:0.5f];
+        }
+        
+        if (isRotating && bottomCanMove) {
+            if (_currentDie2.column > _currentDie1.column) {
+                // [1][2] --> [1]
+                //            [2]
+                _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+                _currentDie2.row--; _currentDie2.column--;
+                _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+                _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+            } else if (_currentDie1.row > _currentDie2.row) {
+                // [1]
+                // [2] --> [2][1]
+                if (_currentDie2.column == 0) {
+                    _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
+                    _currentDie1.row--; _currentDie1.column++;
+                    _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
+                    _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
+                } else if (_currentDie1.row == 11) {
+                    _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
+                    _currentDie1.row--; _currentDie1.column--;
+                    _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
+                    _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
+                }
+                else {
+                    _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+                    _currentDie2.row++; _currentDie2.column--;
+                    _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+                    _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+                }
+            } else if (_currentDie1.column > _currentDie2.column) {
+                // [2][1] --> [2]
+                //            [1]
+                _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+                _currentDie2.row++; _currentDie2.column++;
+                _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+                _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+                
+            } else {
+                // [2]
+                // [1]  --> [1][2] means die2 moves
+                if (_currentDie2.column == 5) {
+                    _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
+                    _currentDie1.row++; _currentDie1.column--;
+                    _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
+                    _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
+                } else {
+                    _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+                    _currentDie2.row--; _currentDie2.column++;
+                    _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+                    _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+                }
+            }
+            isRotating = false;
+        }
+        
+    }
+}
 
 # pragma mark - Move dice
 
