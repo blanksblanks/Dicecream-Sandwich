@@ -37,6 +37,8 @@ static const NSInteger GRID_COLUMNS = 6;
     timeSinceDrop = 0;
     _dicePair = [NSMutableArray array];
     
+    self.userInteractionEnabled = TRUE;
+    
     [self setupGrid];
     
     // Fill array with null tiles
@@ -82,13 +84,56 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void) update:(CCTime) delta {
     timer += delta;
     timeSinceDrop += delta;
-    if (timeSinceDrop > 0.5) {
+    if (timeSinceDrop > 1.0) {
         [self dieFallDown];
         timeSinceDrop = 0;
         if (![self canBottomMove]) {
             [self spawnDice];
         }
 
+    }
+}
+
+- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    BOOL isRotating = true;
+    if (isRotating) {
+        [self unschedule:@selector(dieFallDown)];
+    } else {
+        [self schedule:@selector(dieFallDown) interval:0.5f];
+    }
+    
+    while (isRotating == true) {
+        if (_currentDie2.column > _currentDie1.column) {
+            // [1][2] --> [1]
+            //            [2] means die2 moves
+            _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+            _currentDie2.row--; _currentDie2.column--;
+            _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+            _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+        } else if (_currentDie1.row > _currentDie2.row) {
+            // [1]
+            // [2] --> [2][1] means die1 movies
+            _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
+            _currentDie1.row--; _currentDie1.column++;
+            _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
+            _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
+        } else if (_currentDie1.column > _currentDie2.column) {
+            // [2][1] --> [2]
+            //            [1] means die1 moves
+            _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
+            _currentDie1.row--; _currentDie1.column--;
+            _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
+            _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
+        } else {
+            // [2]
+            // [1]  --> [1][2] means die2 moves
+            _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+            _currentDie2.row--; _currentDie2.column++;
+            _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+            _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+        }
+    isRotating = false;
     }
     
 }
@@ -272,7 +317,6 @@ static const NSInteger GRID_COLUMNS = 6;
         
 	}
 }
-
 
 # pragma mark - Position for tile from (column, row) to ccp(x,y)
 
