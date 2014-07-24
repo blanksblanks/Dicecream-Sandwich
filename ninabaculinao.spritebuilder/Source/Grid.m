@@ -479,10 +479,6 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void)scanForMatches {
     [self findMatchesForRow:_currentDie1.row andColumn:_currentDie1.column withFace:_currentDie1.faceValue];
     [self findMatchesForRow:_currentDie2.row andColumn:_currentDie2.column withFace:_currentDie2.faceValue];
-//    for (NSInteger i = 0; i < GRID_ROWS; i++) {
-//        for (NSInteger j = 0; j < GRID_COLUMNS; j++) {
-//        
-//        }
 }
 //    for (NSInteger i = 0; i < GRID_ROWS; i++) {
 //		for (NSInteger j = 0; j < GRID_COLUMNS; j++) {
@@ -492,71 +488,81 @@ static const NSInteger GRID_COLUMNS = 6;
 //                _checkDie = _gridArray[i][j];
 
 - (void)findMatchesForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
-                if ([self indexValidAndOccupiedForRow:(i+face+1) andColumn:j]) {
-                    _northDie = _gridArray[i+face+1][j];
-                    if (face == _eastDie.faceValue) {
-                        for (NSInteger k = i; k < (k+face+2); k++) {
-                            [(Dice*)_gridArray[k][j] removeFromParent];
-                            _gridArray[k][j] = _noTile;
-                            CCLOG(@"Dice removed!");
-                        }
-                    } else {
-                        nil;
-                    }
-                } else if ([self indexValidAndOccupiedForRow:(i-face-1) andColumn:j]) {
-                    _southDie = _gridArray[i-face-1][j];
-                    if (face == _westDie.faceValue) {
-                        for (NSInteger k = i; k < (k-face-2); k--) {
-                            [(Dice*)_gridArray[k][j] removeFromParent];
-                            _gridArray[k][j] = _noTile;
-                            CCLOG(@"Dice removed!");
-                        }
-                    }  else {
-                        nil;
-                    }
-                }
-                else if ([self indexValidAndOccupiedForRow:(i) andColumn:(j+face+1)]) {
-                    _eastDie = _gridArray[i][j+face+1];
-                    if (face == _northDie.faceValue) {
-                        for (NSInteger k = j; k < (k+face+2); k--) {
-                            [(Dice*)_gridArray[i][k] removeFromParent];
-                            _gridArray[i][k] = _noTile;
-                            CCLOG(@"Dice removed!");
-                        }
-                    } else {
-                        nil;
-                    }
-                } else if ([self indexValidAndOccupiedForRow:(i) andColumn:j-face-1]) {
-                    _westDie = _gridArray[i][j-face-1];
-                    if (face == _southDie.faceValue) {
-                        for (NSInteger k = j; k < (k-face-2); k--) {
-                            [(Dice*)_gridArray[i][k] removeFromParent];
-                            _gridArray[i][k] = _noTile;
-                            CCLOG(@"Dice removed!");
-                        }
-                    } else {
-                        nil;
-                    }
-                }
-//            } else {
-//                break;
-//            }
-//		}
-//	}
-    
+    [self checkNorthForRow:i andColumn:j withFace:face];
+    [self checkSouthForRow:i andColumn:j withFace:face];
+    [self checkEastForRow:i andColumn:j withFace:face];
+    [self checkWestForRow:i andColumn:j withFace:face];
 }
-
-//- (BOOL) isMatching {
-//    BOOL isMatching;
-//    BOOL indexValid = [self indexValidForRow:x AndColumn:y];
-//    if (indexValid) {
-//        if face == currentDice.number = _gridArray[x][y];
-//        if (*compare == currentDice) {
-//            return TRUE;
+//
+//- (void)detectHorizontalMatches {
+//    for (NSInteger row = 0; row < GRID_ROWS; row++) {
+//        for (NSInteger column = 0; column < GRID_COLUMNS;) {
+//            if (_gridArray[row][column] != _noTile) {
+//                NSInteger matchType = _gridArray[row][column].faceValue;
+//                
+//            }
 //        }
 //    }
+//}
 
+- (void)checkNorthForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
+    if ([self indexValidAndOccupiedForRow:(i+face+1) andColumn:j]) {
+        _northDie = _gridArray[i+face+1][j];
+        if (face == _northDie.faceValue) {
+            for (NSInteger k = i; k < (i+face+2); k++) {
+                [self removeDieAtRow:k andColumn:j];
+                _gridArray[k][j] = _noTile;
+                CCLOG(@"Dice removed!");
+            }
+        }
+    }
+}
+        
+- (void)checkSouthForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
+    if ([self indexValidAndOccupiedForRow:(i-face-1) andColumn:j]) {
+        _southDie = _gridArray[i-face-1][j];
+        if (face == _southDie.faceValue) {
+            for (NSInteger k = i; k >= (i-face-1); k--) {
+                [self removeDieAtRow:k andColumn:j];
+                _gridArray[k][j] = _noTile;
+                CCLOG(@"Dice removed!");
+            }
+        }
+    }
+}
 
+- (void)checkEastForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
+    if ([self indexValidAndOccupiedForRow:(i) andColumn:(j+face+1)]) {
+        _eastDie = _gridArray[i][j+face+1];
+        if (face == _eastDie.faceValue) {
+            for (NSInteger k = j; k < (j+face+2); k++) {
+                [self removeDieAtRow:k andColumn:j];
+                _gridArray[i][k] = _noTile;
+                CCLOG(@"Dice removed!");
+            }
+        }
+    }
+}
+
+- (void)checkWestForRow: (NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
+    if ([self indexValidAndOccupiedForRow:(i) andColumn:j-face-1]) {
+        _westDie = _gridArray[i][j-face-1];
+        if (face == _westDie.faceValue) {
+            for (NSInteger k = j; k > (j-face-2); k--) {
+                [self removeDieAtRow:k andColumn:j];
+                _gridArray[i][k] = _noTile;
+                CCLOG(@"Dice removed!");
+            }
+        }
+    }
+}
+
+- (void) removeDieAtRow:(NSInteger)row andColumn:(NSInteger)column {
+    Dice* die = _gridArray[row][column];
+    die.row = row;
+    die.column = column;
+	[self removeChild:die];
+}
 
 # pragma mark - Check indexes
 
