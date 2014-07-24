@@ -13,5 +13,6 @@
 - (void)spawnDice;
 
 @property (nonatomic, assign) NSInteger score;
+@property (nonatomic, assign) float timer;
 
 @end

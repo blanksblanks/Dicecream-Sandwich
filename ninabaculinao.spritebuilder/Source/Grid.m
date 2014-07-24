@@ -19,12 +19,20 @@
     NSMutableArray *_gridArray; // a 2d array
     NSNull *_noTile;
     
-    float timer;
-    float timeSinceDrop;
-    float dropInterval;
+    float _timer;
+    float _timeSinceDrop;
+    float _dropInterval;
     
     Dice *_currentDie1;
     Dice *_currentDie2;
+    
+    NSMutableArray *_matchPoints;
+    Dice *_checkDie;
+    Dice *_eastDie;
+    Dice *_westDie;
+    Dice *_northDie;
+    Dice *_southDie;
+    NSInteger _face;
     
     CGPoint oldTouchPosition;
 }
@@ -35,9 +43,9 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)didLoadFromCCB{
     
-    timer = 0;
-    timeSinceDrop = -0.2;
-    dropInterval = 0.5;
+    _timer = 0;
+    _timeSinceDrop = -0.2;
+    _dropInterval = 0.5;
     
     self.userInteractionEnabled = TRUE;
     
@@ -61,16 +69,17 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Update method
 
 - (void) update:(CCTime) delta {
-    timer += delta;
-    timeSinceDrop += delta;
+    _timer += delta;
+    _timeSinceDrop += delta;
 
-    if (timeSinceDrop > dropInterval) {
+    if (_timeSinceDrop > _dropInterval) {
         [self dieFallDown];
-        timeSinceDrop = 0;
+        _timeSinceDrop = 0;
         if (![self canBottomMove]) {
+            [self scanForMatches];
             [self spawnDice];
-            timeSinceDrop = -0.2;
-            dropInterval = 1.0;
+            _timeSinceDrop = -0.2;
+            _dropInterval = 1.0;
         }
 
     }
@@ -331,17 +340,17 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void)dropDown {
-    dropInterval= 0.001;
+    _dropInterval= 0.001;
 }
 
 - (void)rotate {
     BOOL bottomCanMove = [self canBottomMove];
     BOOL isRotating = true;
-    if (isRotating) {
-        [self unschedule:@selector(dieFallDown)];
-    } else {
-        [self schedule:@selector(dieFallDown) interval:0.5f];
-    }
+//    if (isRotating) {
+//        [self unschedule:@selector(dieFallDown)];
+//    } else {
+//        [self schedule:@selector(dieFallDown) interval:0.5f];
+//    }
     
     if (isRotating && bottomCanMove) {
         if (_currentDie2.column > _currentDie1.column) {
@@ -465,9 +474,93 @@ static const NSInteger GRID_COLUMNS = 6;
 //    [die runAction:moveTo];
 //}
 
+# pragma mark - Find matches
+
+- (void)scanForMatches {
+    [self findMatchesForRow:_currentDie1.row andColumn:_currentDie1.column withFace:_currentDie1.faceValue];
+    [self findMatchesForRow:_currentDie2.row andColumn:_currentDie2.column withFace:_currentDie2.faceValue];
+//    for (NSInteger i = 0; i < GRID_ROWS; i++) {
+//        for (NSInteger j = 0; j < GRID_COLUMNS; j++) {
+//        
+//        }
+}
+//    for (NSInteger i = 0; i < GRID_ROWS; i++) {
+//		for (NSInteger j = 0; j < GRID_COLUMNS; j++) {
+
+//            BOOL positionFree = (_gridArray[i][j] == _noTile);
+//            if (! positionFree) {
+//                _checkDie = _gridArray[i][j];
+
+- (void)findMatchesForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
+                if ([self indexValidAndOccupiedForRow:(i+face+1) andColumn:j]) {
+                    _northDie = _gridArray[i+face+1][j];
+                    if (face == _eastDie.faceValue) {
+                        for (NSInteger k = i; k < (k+face+2); k++) {
+                            [(Dice*)_gridArray[k][j] removeFromParent];
+                            _gridArray[k][j] = _noTile;
+                            CCLOG(@"Dice removed!");
+                        }
+                    } else {
+                        nil;
+                    }
+                } else if ([self indexValidAndOccupiedForRow:(i-face-1) andColumn:j]) {
+                    _southDie = _gridArray[i-face-1][j];
+                    if (face == _westDie.faceValue) {
+                        for (NSInteger k = i; k < (k-face-2); k--) {
+                            [(Dice*)_gridArray[k][j] removeFromParent];
+                            _gridArray[k][j] = _noTile;
+                            CCLOG(@"Dice removed!");
+                        }
+                    }  else {
+                        nil;
+                    }
+                }
+                else if ([self indexValidAndOccupiedForRow:(i) andColumn:(j+face+1)]) {
+                    _eastDie = _gridArray[i][j+face+1];
+                    if (face == _northDie.faceValue) {
+                        for (NSInteger k = j; k < (k+face+2); k--) {
+                            [(Dice*)_gridArray[i][k] removeFromParent];
+                            _gridArray[i][k] = _noTile;
+                            CCLOG(@"Dice removed!");
+                        }
+                    } else {
+                        nil;
+                    }
+                } else if ([self indexValidAndOccupiedForRow:(i) andColumn:j-face-1]) {
+                    _westDie = _gridArray[i][j-face-1];
+                    if (face == _southDie.faceValue) {
+                        for (NSInteger k = j; k < (k-face-2); k--) {
+                            [(Dice*)_gridArray[i][k] removeFromParent];
+                            _gridArray[i][k] = _noTile;
+                            CCLOG(@"Dice removed!");
+                        }
+                    } else {
+                        nil;
+                    }
+                }
+//            } else {
+//                break;
+//            }
+//		}
+//	}
+    
+}
+
+//- (BOOL) isMatching {
+//    BOOL isMatching;
+//    BOOL indexValid = [self indexValidForRow:x AndColumn:y];
+//    if (indexValid) {
+//        if face == currentDice.number = _gridArray[x][y];
+//        if (*compare == currentDice) {
+//            return TRUE;
+//        }
+//    }
+
+
+
 # pragma mark - Check indexes
 
-- (BOOL)indexValidForRow:(NSInteger)row AndColumn:(NSInteger)column {
+- (BOOL)indexValidForRow:(NSInteger)row andColumn:(NSInteger)column {
     BOOL indexValid = YES;
     if(row < 0 || column < 0 || row >= GRID_ROWS || column >= GRID_COLUMNS)
     {
@@ -477,7 +570,7 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (BOOL)indexValidAndUnoccupiedForRow:(NSInteger)row andColumn:(NSInteger)column {
-    BOOL indexValid = [self indexValidForRow:row AndColumn:column];
+    BOOL indexValid = [self indexValidForRow:row andColumn:column];
     if (!indexValid) {
         return FALSE;
     }
@@ -486,6 +579,19 @@ static const NSInteger GRID_COLUMNS = 6;
         return unoccupied;
 
     }
+}
+
+- (BOOL)indexValidAndOccupiedForRow:(NSInteger)row andColumn:(NSInteger)column {
+    BOOL indexValid = [self indexValidForRow:row andColumn:column];
+    if (!indexValid) {
+        return FALSE;
+    }
+    else if (_gridArray[row][column] == _noTile) {
+        return FALSE;
+    } else {
+        return TRUE;
+    }
+    
 }
 
 @end

@@ -15,6 +15,7 @@
 @implementation Gameplay {
     Grid *_grid;
     CCLabelTTF *_scoreLabel;
+    CCLabelBMFont *_timeLabel;
 }
 
 - (id)init
@@ -26,10 +27,15 @@
         OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
         // play background sound
         [audio playBg:@"CATchy.wav" loop:TRUE];
+         _timeLabel.string = [NSString stringWithFormat:@"%ld", (long)_grid.timer];
   
     }
     
     return self;
+}
+
+- (void)update:(CCTime)delta {
+    _timeLabel.string = [NSString stringWithFormat:@"%ld", (long)_grid.timer];
 }
 
 - (void)play
@@ -46,7 +52,7 @@
 - (void)step
 {
     _scoreLabel.string = [NSString stringWithFormat:@"%ld", (long)_grid.score];
-    [_grid spawnDice];
+    
 }
 
 
