@@ -506,23 +506,39 @@ static const NSInteger GRID_COLUMNS = 6;
 //}
 
 - (void)checkNorthForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
-    if ([self indexValidAndOccupiedForRow:(i+face+1) andColumn:j]) {
-        _northDie = _gridArray[i+face+1][j];
-        if (face == _northDie.faceValue) {
-            for (NSInteger k = i; k < (i+face+2); k++) {
-                [self removeDieAtRow:k andColumn:j];
-                _gridArray[k][j] = _noTile;
-                CCLOG(@"Dice removed!");
-            }
+    NSInteger _north = i+face+1;
+    BOOL columnIsValid;
+    for (NSInteger k = i; k <= _north; k++) {
+        columnIsValid = [self indexValidAndOccupiedForRow:k andColumn:j];
+        if (columnIsValid == false) {
+            break;
         }
     }
+    if (columnIsValid == true) {
+            _northDie = _gridArray[_north][j];
+            if (face == _northDie.faceValue) {
+                for (NSInteger k = i; k <= _north; k++) {
+                    [self removeDieAtRow:k andColumn:j];
+                    _gridArray[k][j] = _noTile;
+                    CCLOG(@"Dice removed!");
+                }
+            }
+        }
 }
-        
+
 - (void)checkSouthForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
-    if ([self indexValidAndOccupiedForRow:(i-face-1) andColumn:j]) {
-        _southDie = _gridArray[i-face-1][j];
+    NSInteger _south = i-face-1;
+    BOOL columnIsValid;
+    for (NSInteger k = i; k >= _south; k--) {
+        columnIsValid = [self indexValidAndOccupiedForRow:k andColumn:j];
+        if (columnIsValid == false) {
+            break;
+        }
+    }
+    if (columnIsValid == TRUE) {
+        _southDie = _gridArray[_south][j];
         if (face == _southDie.faceValue) {
-            for (NSInteger k = i; k >= (i-face-1); k--) {
+            for (NSInteger k = i; k >= _south; k--) {
                 [self removeDieAtRow:k andColumn:j];
                 _gridArray[k][j] = _noTile;
                 CCLOG(@"Dice removed!");
@@ -532,11 +548,20 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void)checkEastForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
-    if ([self indexValidAndOccupiedForRow:(i) andColumn:(j+face+1)]) {
-        _eastDie = _gridArray[i][j+face+1];
+    NSInteger _east = j+face+1;
+    BOOL rowIsValid;
+    for (NSInteger k = j; k <= _east; k++) {
+        rowIsValid = [self indexValidAndOccupiedForRow:i andColumn:k];
+        if (rowIsValid == false) {
+            break;
+        }
+    }
+    
+    if (rowIsValid) {
+        _eastDie = _gridArray[i][_east];
         if (face == _eastDie.faceValue) {
-            for (NSInteger k = j; k < (j+face+2); k++) {
-                [self removeDieAtRow:k andColumn:j];
+            for (NSInteger k = j; k <= _east; k++) {
+                [self removeDieAtRow:i andColumn:k];
                 _gridArray[i][k] = _noTile;
                 CCLOG(@"Dice removed!");
             }
@@ -545,11 +570,20 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void)checkWestForRow: (NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
-    if ([self indexValidAndOccupiedForRow:(i) andColumn:j-face-1]) {
-        _westDie = _gridArray[i][j-face-1];
+    NSInteger _west = j-face-1;
+    BOOL rowIsValid;
+    for (NSInteger k = j; k >= _west; k--) {
+        rowIsValid = [self indexValidAndOccupiedForRow:i andColumn:k];
+        if (rowIsValid == false) {
+            break;
+        }
+    }
+    
+    if ([self indexValidAndOccupiedForRow:(i) andColumn:_west]) {
+        _westDie = _gridArray[i][_west];
         if (face == _westDie.faceValue) {
-            for (NSInteger k = j; k > (j-face-2); k--) {
-                [self removeDieAtRow:k andColumn:j];
+            for (NSInteger k = j; k >= _west; k--) {
+                [self removeDieAtRow:i andColumn:k];
                 _gridArray[i][k] = _noTile;
                 CCLOG(@"Dice removed!");
             }
@@ -561,6 +595,20 @@ static const NSInteger GRID_COLUMNS = 6;
     Dice* die = _gridArray[row][column];
     die.row = row;
     die.column = column;
+    
+    // load particle effect
+    CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
+    // make the particle effect clean itself up once it's completed
+    explosion.autoRemoveOnFinish = TRUE;
+    // place the particle effect on the seal's position
+    explosion.position = die.position;
+    // add the particle effect to the same node the seal is on
+    [die.parent addChild:explosion];
+    
+    CCActionDelay *delay = [CCActionDelay actionWithDuration:0.3f];
+	CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.2f scale:0.1f];
+	CCActionSequence *sequence = [CCActionSequence actionWithArray:@[delay, scaleDown]];
+	[die runAction:sequence];
 	[self removeChild:die];
 }
 
