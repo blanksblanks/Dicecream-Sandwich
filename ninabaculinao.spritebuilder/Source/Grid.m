@@ -25,7 +25,6 @@
     
     Dice *_currentDie1;
     Dice *_currentDie2;
-    NSMutableArray *_dicePair;
     
     CGPoint oldTouchPosition;
 }
@@ -39,8 +38,6 @@ static const NSInteger GRID_COLUMNS = 6;
     timer = 0;
     timeSinceDrop = -0.2;
     dropInterval = 0.5;
-    
-    _dicePair = [NSMutableArray array];
     
     self.userInteractionEnabled = TRUE;
     
@@ -59,31 +56,6 @@ static const NSInteger GRID_COLUMNS = 6;
     
     [self spawnDice];
     
-    // debugging indexvalidandunoccupied method
-// 	for (NSInteger i = 0; i <= GRID_ROWS; i++) {
-//		for (NSInteger j = 0; j <= GRID_COLUMNS; j++) {
-//            BOOL free = [self indexValidAndUnoccupiedForRow:i andColumn:j];
-//            CCLOG(@"Row %ld and column %ld free? %d", (long)i, (long)j, free);
-//        }
-//}
-    
-//    // listen for swipes to the left
-//    UISwipeGestureRecognizer * swipeLeft= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeLeft)];
-//    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
-//    [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeLeft];
-//    // listen for swipes to the right
-//    UISwipeGestureRecognizer * swipeRight= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeRight)];
-//    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
-//    [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeRight];
-//    // listen for swipes down
-//    UISwipeGestureRecognizer * swipeDown= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeDown)];
-//    swipeDown.direction = UISwipeGestureRecognizerDirectionDown;
-//    [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeDown];
-////    // listen for swipes up
-//    UISwipeGestureRecognizer * swipeUp= [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeUp)];
-//    swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
-//    [[[CCDirector sharedDirector] view] addGestureRecognizer:swipeUp];
-	
 }
 
 # pragma mark - Update method
@@ -138,7 +110,7 @@ static const NSInteger GRID_COLUMNS = 6;
 	}
 }
 
-# pragma mark - Create random Dice
+# pragma mark - Create random dice at random columns
 
 -(Dice*) randomizeNumbers {
     NSInteger random = arc4random_uniform(6)+1;
@@ -194,15 +166,8 @@ static const NSInteger GRID_COLUMNS = 6;
 //    CCActionMoveTo *fall = [CCActionMoveTo actionWithDuration:5.0f position:ccp(die.position.x, 0)];
 //    CCActionMoveTo *fallSequence = [CCActionSequence actionWithArray:@[delay, fall]];
 //    [die runAction:fallSequence];
+    
 }
-
-//
-//- (void)fallingDie {
-//    BOOL falling = FALSE;
-//    while (!falling) {
-//        
-//    }
-//}
 
 - (void)spawnDice {
 	BOOL spawned = FALSE;
@@ -217,17 +182,17 @@ static const NSInteger GRID_COLUMNS = 6;
         } else { // has to be horizontal
             nextColumn = firstColumn+1;
         }
-        CCLOG(@"Next Column %ld, Row %ld", (long)nextColumn, (long)nextRow);
         
         BOOL positionFree = (_gridArray[firstRow][firstColumn] == _noTile);
         BOOL nextPositionFree = (_gridArray[nextRow][nextColumn] == _noTile);
 		if (positionFree && nextPositionFree) {
 			_currentDie1 = [self addDieAtTile:firstColumn row:firstRow];
             _currentDie2 = [self addDieAtTile:nextColumn row:nextRow];
-            _dicePair = [NSMutableArray arrayWithObjects:_currentDie1, _currentDie2, nil];
             spawned = TRUE;
         } else {
             CCLOG(@"Game Over");
+            CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
+            [[CCDirector sharedDirector] replaceScene:mainScene];
             break;
         }
         
@@ -259,15 +224,6 @@ static const NSInteger GRID_COLUMNS = 6;
         _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
     }
     
-    //    for (Dice *die in _dicePair) {
-    //        if (bottomCanMove) {
-    //            _gridArray[die.row][die.column] = _noTile;
-    //            die.row--;
-    //            _gridArray[die.row][die.column] = die;
-    //            die.position = [self positionForTile:die.column row:die.row];
-    //        }
-    //
-    //    }
 }
 
 - (BOOL) canBottomMove {
@@ -332,9 +288,7 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-
 - (void)swipeLeft {
-//    [self move:ccp(-1, 0)];
     BOOL bottomCanMove = [self canBottomMove];
     BOOL canMoveLeft = [self indexValidAndUnoccupiedForRow:_currentDie2.row andColumn:_currentDie2.column-1] && [self indexValidAndUnoccupiedForRow:_currentDie1.row andColumn:_currentDie1.column-1];
     if (bottomCanMove && canMoveLeft) {
@@ -377,14 +331,8 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void)dropDown {
-//    [self move:ccp(0, -1)];
     dropInterval= 0.001;
 }
-
-
-//- (void)swipeUp {
-//    [self move:ccp(1,0)];
-//}
 
 - (void)rotate {
     BOOL bottomCanMove = [self canBottomMove];
@@ -527,16 +475,6 @@ static const NSInteger GRID_COLUMNS = 6;
     }
     return indexValid;
 }
-//    BOOL indexValid = TRUE;
-//    indexValid &= x >= 0;
-//    indexValid &= y >= 0;
-//    if (indexValid) {
-//        indexValid &= x < GRID_ROWS;
-//        if (indexValid) {
-//            indexValid &= y < GRID_COLUMNS;
-//        }
-//    }
-
 
 - (BOOL)indexValidAndUnoccupiedForRow:(NSInteger)row andColumn:(NSInteger)column {
     BOOL indexValid = [self indexValidForRow:row AndColumn:column];
