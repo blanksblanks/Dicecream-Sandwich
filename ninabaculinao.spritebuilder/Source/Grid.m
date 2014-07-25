@@ -182,8 +182,8 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void)spawnDice {
 	BOOL spawned = FALSE;
 	while (!spawned) {
-		NSInteger firstRow = 11;
-		NSInteger firstColumn = arc4random_uniform(5); // int bt 0 and 4
+		NSInteger firstRow = GRID_ROWS-1;
+		NSInteger firstColumn = arc4random_uniform(GRID_COLUMNS-2); // int bt 0 and 4
         CCLOG(@"First Column %ld, Row %ld", (long)firstColumn, (long)firstRow);
         NSInteger nextRow = firstRow - arc4random_uniform(2);
         NSInteger nextColumn;
@@ -271,14 +271,14 @@ static const NSInteger GRID_COLUMNS = 6;
     float xdifference = oldTouchPosition.x - newTouchPosition.x;
     float ydifference = oldTouchPosition.y - newTouchPosition.y;
     NSInteger column = ((newTouchPosition.x - _tileMarginHorizontal) / (_tileWidth + _tileMarginHorizontal));
-    if (column > 5) {
-        column = 5;
+    if (column > GRID_COLUMNS-1) {
+        column = GRID_COLUMNS-1;
     } else if (column < 0) {
         column = 0;
     }
     
     // consider adjusting speed of fall with swiping
-    if (ydifference > 0.2*(self.contentSize.height) || ydifference < -0.1*(self.contentSize.height)) {
+    if (ydifference > 0.1*(self.contentSize.height) || ydifference < -0.1*(self.contentSize.height)) {
         [self dropDown];
     } else if (xdifference > 0.3*(self.contentSize.width)) {
         [self swipeLeftTo:column];
@@ -370,7 +370,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 _currentDie1.row--; _currentDie1.column++;
                 _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
                 _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
-            } else if (_currentDie1.row == 11) {
+            } else if (_currentDie1.row == GRID_ROWS-1) {
                 _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
                 _currentDie1.row--; _currentDie1.column--;
                 _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
@@ -392,7 +392,7 @@ static const NSInteger GRID_COLUMNS = 6;
         } else {
             // [2]
             // [1]  --> [1][2] means die2 moves
-            if (_currentDie2.column == 5) {
+            if (_currentDie2.column == GRID_COLUMNS-1) {
                 _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
                 _currentDie1.row++; _currentDie1.column--;
                 _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
@@ -635,7 +635,7 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (BOOL)indexValidForRow:(NSInteger)row andColumn:(NSInteger)column {
     BOOL indexValid = YES;
-    if(row < 0 || column < 0 || row >= GRID_ROWS || column >= GRID_COLUMNS)
+    if(row < 0 || column < 0 || row > GRID_ROWS || column > GRID_COLUMNS)
     {
         indexValid = NO;
     }
