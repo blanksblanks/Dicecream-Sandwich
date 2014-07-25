@@ -77,7 +77,6 @@ static const NSInteger GRID_COLUMNS = 6;
         _timeSinceDrop = 0;
         if (![self canBottomMove]) {
             [self scanForMatches];
-//            [self fillUpHoles];
             [self spawnDice];
             _timeSinceDrop = -0.2;
             _dropInterval = 1.0;
@@ -322,7 +321,6 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-
 - (void)swipeRight {
 //    [self move:ccp(1, 0)];
     BOOL bottomCanMove = [self canBottomMove];
@@ -490,10 +488,15 @@ static const NSInteger GRID_COLUMNS = 6;
 //                _checkDie = _gridArray[i][j];
 
 - (void)findMatchesForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
+    BOOL foundMatch = [self checkSouthForRow:i andColumn:j withFace:face];
     [self checkNorthForRow:i andColumn:j withFace:face];
-    [self checkSouthForRow:i andColumn:j withFace:face];
     [self checkEastForRow:i andColumn:j withFace:face];
     [self checkWestForRow:i andColumn:j withFace:face];
+    
+    if (foundMatch) {
+        [self fillUpHoles];
+    }
+
 }
 //
 //- (void)detectHorizontalMatches {
@@ -528,8 +531,10 @@ static const NSInteger GRID_COLUMNS = 6;
         }
 }
 
-- (void)checkSouthForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
+- (BOOL)checkSouthForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
     NSInteger _south = i-face-1;
+    
+    BOOL foundMatch = false;
     BOOL columnIsValid;
     for (NSInteger k = i; k >= _south; k--) {
         columnIsValid = [self indexValidAndOccupiedForRow:k andColumn:j];
@@ -544,18 +549,24 @@ static const NSInteger GRID_COLUMNS = 6;
                 [self removeDieAtRow:k andColumn:j];
                 _gridArray[k][j] = _noTile;
                 CCLOG(@"Dice removed!");
+                foundMatch = true;
             }
         }
     }
+    return foundMatch;
 }
 
-- (void)checkEastForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
+- (BOOL)checkEastForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
     NSInteger _east = j+face+1;
-    BOOL rowIsValid;
-    for (NSInteger k = j; k <= _east; k++) {
-        rowIsValid = [self indexValidAndOccupiedForRow:i andColumn:k];
-        if (rowIsValid == false) {
-            break;
+    
+    BOOL foundMatch = false;
+    BOOL rowIsValid = false;
+    if (i < GRID_ROWS-1) {
+        for (NSInteger k = j; k <= _east; k++) {
+            rowIsValid = [self indexValidAndOccupiedForRow:i andColumn:k];
+            if (rowIsValid == false) {
+                break;
+            }
         }
     }
     
@@ -566,9 +577,11 @@ static const NSInteger GRID_COLUMNS = 6;
                 [self removeDieAtRow:i andColumn:k];
                 _gridArray[i][k] = _noTile;
                 CCLOG(@"Dice removed!");
+                foundMatch = true;
             }
         }
     }
+    return foundMatch;
 }
 
 - (void)checkWestForRow: (NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
@@ -615,29 +628,31 @@ static const NSInteger GRID_COLUMNS = 6;
 	[self removeChild:die];
     
     self.score += die.faceValue;
+    
 }
 
 // fix bug with incremental fall and nulls being loaded
-//- (void) fillUpHoles {
-//    for (NSInteger i = GRID_ROWS-1; i > 0; i--) {
-//		for (NSInteger j = 0; j < GRID_COLUMNS; j++) {
-//            BOOL positionFilled = (_gridArray[i][j] != _noTile);
-//            BOOL bottomEmpty = (_gridArray[i-1][j] == _noTile);
-//            while (positionFilled && bottomEmpty) {
-//                Dice* die = _gridArray[i][j];
-//                _gridArray[i][j] = _noTile;
-//                i--;
-//                die.position = [self positionForTile:j row:i];
-//            }
-//        }
-//    }
-//}
+- (void) fillUpHoles {
+    for (NSInteger i = 0; i < GRID_ROWS; i++) {
+		for (NSInteger j = 0; j < GRID_COLUMNS; j++) {
+            BOOL positionFilled = (_gridArray[i][j] != _noTile);
+            BOOL bottomEmpty = (_gridArray[i-1][j] == _noTile);
+            while (positionFilled && bottomEmpty) {
+                Dice* die = _gridArray[i][j]; // [4][1] -> [1][1]
+                die.row--;
+                _gridArray[die.row][die.column] = die;
+                die.position = [self positionForTile:die.column row:die.row];
+                _gridArray[i][j] = _noTile;
+            }
+        }
+    }
+}
 
 # pragma mark - Check indexes
 
 - (BOOL)indexValidForRow:(NSInteger)row andColumn:(NSInteger)column {
     BOOL indexValid = YES;
-    if(row < 0 || column < 0 || row > GRID_ROWS || column > GRID_COLUMNS)
+    if(row < 0 || column < 0 || row >= GRID_ROWS || column >= GRID_COLUMNS)
     {
         indexValid = NO;
     }
