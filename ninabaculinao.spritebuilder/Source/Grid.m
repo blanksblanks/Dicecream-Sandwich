@@ -77,7 +77,7 @@ static const NSInteger GRID_COLUMNS = 6;
         _timeSinceDrop = 0;
         if (![self canBottomMove]) {
             [self scanForMatches];
-            [self fillUpHoles];
+//            [self fillUpHoles];
             [self spawnDice];
             _timeSinceDrop = -0.2;
             _dropInterval = 1.0;
@@ -609,27 +609,29 @@ static const NSInteger GRID_COLUMNS = 6;
     [die.parent addChild:explosion];
     
     CCActionDelay *delay = [CCActionDelay actionWithDuration:0.3f];
-	CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.2f scale:0.1f];
+	CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.3f scale:0.1f];
 	CCActionSequence *sequence = [CCActionSequence actionWithArray:@[delay, scaleDown]];
 	[die runAction:sequence];
 	[self removeChild:die];
+    
+    self.score += die.faceValue;
 }
 
 // fix bug with incremental fall and nulls being loaded
-- (void) fillUpHoles {
-    for (NSInteger i = GRID_ROWS-1; i > 0; i--) {
-		for (NSInteger j = 0; j < GRID_COLUMNS; j++) {
-            BOOL positionFilled = (_gridArray[i][j] != _noTile);
-            BOOL bottomEmpty = (_gridArray[i-1][j] == _noTile);
-            while (positionFilled && bottomEmpty) {
-                Dice* die = _gridArray[i][j];
-                die.row--;
-                die.position = [self positionForTile:die.column row:die.row];
-                _gridArray[die.row+1][die.column] = _noTile;
-            }
-        }
-    }
-}
+//- (void) fillUpHoles {
+//    for (NSInteger i = GRID_ROWS-1; i > 0; i--) {
+//		for (NSInteger j = 0; j < GRID_COLUMNS; j++) {
+//            BOOL positionFilled = (_gridArray[i][j] != _noTile);
+//            BOOL bottomEmpty = (_gridArray[i-1][j] == _noTile);
+//            while (positionFilled && bottomEmpty) {
+//                Dice* die = _gridArray[i][j];
+//                _gridArray[i][j] = _noTile;
+//                i--;
+//                die.position = [self positionForTile:j row:i];
+//            }
+//        }
+//    }
+//}
 
 # pragma mark - Check indexes
 

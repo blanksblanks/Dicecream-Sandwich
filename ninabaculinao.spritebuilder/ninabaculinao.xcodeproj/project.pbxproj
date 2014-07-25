@@ -10,6 +10,7 @@
 		623F5D60196EDB0400DC3EA5 /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = 623F5D5F196EDB0400DC3EA5 /* Grid.m */; };
 		623F5D6C196F0C7000DC3EA5 /* Gameplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 623F5D6B196F0C7000DC3EA5 /* Gameplay.m */; };
 		623F5D71196F128100DC3EA5 /* Dice.m in Sources */ = {isa = PBXBuildFile; fileRef = 623F5D70196F128100DC3EA5 /* Dice.m */; };
+		6258B4031982A259009868D4 /* Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 6258B4021982A259009868D4 /* Chain.m */; };
 		629AA3671977017C003FA512 /* CATchy.wav in Resources */ = {isa = PBXBuildFile; fileRef = 629AA3661977017C003FA512 /* CATchy.wav */; };
 		8392007A18EE8E3300B6C429 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8392007918EE8E3300B6C429 /* GLKit.framework */; };
 		B71F5911188484E7003F4D28 /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
@@ -66,6 +67,8 @@
 		623F5D6B196F0C7000DC3EA5 /* Gameplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Gameplay.m; path = Source/Gameplay.m; sourceTree = "<group>"; };
 		623F5D6F196F128100DC3EA5 /* Dice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dice.h; path = Source/Dice.h; sourceTree = "<group>"; };
 		623F5D70196F128100DC3EA5 /* Dice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dice.m; path = Source/Dice.m; sourceTree = "<group>"; };
+		6258B4011982A258009868D4 /* Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chain.h; path = Source/Chain.h; sourceTree = "<group>"; };
+		6258B4021982A259009868D4 /* Chain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chain.m; path = Source/Chain.m; sourceTree = "<group>"; };
 		629AA3661977017C003FA512 /* CATchy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CATchy.wav; sourceTree = "<group>"; };
 		8392007918EE8E3300B6C429 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		B71F5907188484E7003F4D28 /* iPad-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old.png"; path = "Icons/iPad-old.png"; sourceTree = "<group>"; };
@@ -136,6 +139,8 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				6258B4011982A258009868D4 /* Chain.h */,
+				6258B4021982A259009868D4 /* Chain.m */,
 				B737893D1807617C0076A88C /* AppDelegate.h */,
 				B737893E1807617C0076A88C /* AppDelegate.m */,
 				B7378992180767190076A88C /* MainScene.h */,
@@ -362,6 +367,7 @@
 				623F5D71196F128100DC3EA5 /* Dice.m in Sources */,
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
 				623F5D6C196F0C7000DC3EA5 /* Gameplay.m in Sources */,
+				6258B4031982A259009868D4 /* Chain.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				623F5D60196EDB0400DC3EA5 /* Grid.m in Sources */,
