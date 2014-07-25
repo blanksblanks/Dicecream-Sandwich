@@ -77,6 +77,7 @@ static const NSInteger GRID_COLUMNS = 6;
         _timeSinceDrop = 0;
         if (![self canBottomMove]) {
             [self scanForMatches];
+            [self fillUpHoles];
             [self spawnDice];
             _timeSinceDrop = -0.2;
             _dropInterval = 1.0;
@@ -276,7 +277,8 @@ static const NSInteger GRID_COLUMNS = 6;
         column = 0;
     }
     
-    if (ydifference > 0.2*(self.contentSize.height) || ydifference < -0.2*(self.contentSize.height)) {
+    // consider adjusting speed of fall with swiping
+    if (ydifference > 0.2*(self.contentSize.height) || ydifference < -0.1*(self.contentSize.height)) {
         [self dropDown];
     } else if (xdifference > 0.3*(self.contentSize.width)) {
         [self swipeLeftTo:column];
@@ -591,6 +593,7 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
+// fix bug where it loads die as nsnull
 - (void) removeDieAtRow:(NSInteger)row andColumn:(NSInteger)column {
     Dice* die = _gridArray[row][column];
     die.row = row;
@@ -610,6 +613,22 @@ static const NSInteger GRID_COLUMNS = 6;
 	CCActionSequence *sequence = [CCActionSequence actionWithArray:@[delay, scaleDown]];
 	[die runAction:sequence];
 	[self removeChild:die];
+}
+
+// fix bug with incremental fall and nulls being loaded
+- (void) fillUpHoles {
+    for (NSInteger i = GRID_ROWS-1; i > 0; i--) {
+		for (NSInteger j = 0; j < GRID_COLUMNS; j++) {
+            BOOL positionFilled = (_gridArray[i][j] != _noTile);
+            BOOL bottomEmpty = (_gridArray[i-1][j] == _noTile);
+            while (positionFilled && bottomEmpty) {
+                Dice* die = _gridArray[i][j];
+                die.row--;
+                die.position = [self positionForTile:die.column row:die.row];
+                _gridArray[die.row+1][die.column] = _noTile;
+            }
+        }
+    }
 }
 
 # pragma mark - Check indexes
