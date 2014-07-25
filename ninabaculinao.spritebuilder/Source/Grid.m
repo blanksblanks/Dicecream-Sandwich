@@ -529,6 +529,7 @@ static const NSInteger GRID_COLUMNS = 6;
                     _gridArray[k][j] = _noTile;
                     CCLOG(@"Dice removed!");
                     foundMatch = true;
+                    self.match = face;
                 }
             }
         }
@@ -553,6 +554,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 _gridArray[k][j] = _noTile;
                 CCLOG(@"Dice removed!");
                 foundMatch = true;
+                self.match = face;
             }
         }
     }
@@ -580,6 +582,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 _gridArray[i][k] = _noTile;
                 CCLOG(@"Dice removed!");
                 foundMatch = true;
+                self.match = face;
             }
         }
     }
@@ -605,6 +608,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 _gridArray[i][k] = _noTile;
                 CCLOG(@"Dice removed!");
                 foundMatch = true;
+                self.match = face;
             }
         }
     }

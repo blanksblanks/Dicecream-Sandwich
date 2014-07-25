@@ -16,6 +16,7 @@
     Grid *_grid;
     CCLabelTTF *_scoreLabel;
     CCLabelBMFont *_timeLabel;
+    CCLabelTTF *_matchLabel;
 }
 
 - (id)init
@@ -36,6 +37,7 @@
 
 - (void)didLoadFromCCB {
     [_grid addObserver:self forKeyPath:@"score" options:0 context:NULL];
+    [_grid addObserver:self forKeyPath:@"match" options:0 context:NULL];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -46,10 +48,14 @@
     if ([keyPath isEqualToString:@"score"]) {
         _scoreLabel.string = [NSString stringWithFormat:@"%d", _grid.score];
     }
+    if ([keyPath isEqualToString:@"match"]) {
+        _matchLabel.string = [NSString stringWithFormat:@"%d", _grid.match];
+    }
 }
 
 - (void)dealloc {
     [_grid removeObserver:self forKeyPath:@"score"];
+    [_grid removeObserver:self forKeyPath:@"match"];
 }
 
 - (void)update:(CCTime)delta {
