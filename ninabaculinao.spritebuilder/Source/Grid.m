@@ -645,7 +645,7 @@ static const NSInteger GRID_COLUMNS = 6;
     for (NSInteger i = 1; i < GRID_ROWS; i++) {
 		for (NSInteger j = 0; j < GRID_COLUMNS; j++) {
             BOOL positionFilled = (_gridArray[i][j] != _noTile);
-            NSInteger depth = i-1;
+            NSInteger depth = i-1; // lowers row by 1 each time it decrements
             BOOL bottomEmpty = (_gridArray[depth][j] == _noTile);
             if (positionFilled && bottomEmpty) {
                 while (bottomEmpty && depth > 0) {
@@ -661,6 +661,16 @@ static const NSInteger GRID_COLUMNS = 6;
         }
     }
 }
+
+//for (NSInteger k = 1; k <= depth; k++) {
+//    Dice* die = _gridArray[i][j];
+//    die.position = [self positionForTile:j row:k];
+//}
+//
+//Dice* die = _gridArray[i][j];
+//die.row = depth;
+//_gridArray[die.row][die.column] = die;
+//_gridArray[i][j] = _noTile;
 
 //BOOL positionFilled = (_gridArray[i][j] != _noTile);
 //BOOL bottomEmpty = (_gridArray[i-1][j] == _noTile);
