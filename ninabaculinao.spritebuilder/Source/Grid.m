@@ -161,7 +161,7 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Create random dice at random columns
 
 -(Dice*) randomizeNumbers {
-    NSInteger random = arc4random_uniform(2)+1;
+    NSInteger random = arc4random_uniform(6)+1;
     Dice *die;
     switch(random)
     {
