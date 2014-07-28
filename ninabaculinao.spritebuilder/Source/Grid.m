@@ -168,7 +168,7 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Create random dice at random columns
 
 -(Dice*) randomizeNumbers {
-    NSInteger random = arc4random_uniform(6)+1;
+    NSInteger random = arc4random_uniform(4)+1;
     Dice *die;
     switch(random)
     {
@@ -662,12 +662,12 @@ static const NSInteger GRID_COLUMNS = 6;
             BOOL bottomCanMove = [self indexValidAndUnoccupiedForRow:row-1 andColumn:column];
             if (positionFilled) {
                 Dice *die = _gridArray[row][column];
-                if (bottomCanMove && (die.stable == false)) {
+                if (!die.stable && bottomCanMove) {
                     die.row--;
                     _gridArray[die.row][die.column] = die; // set die to new row and column
                     die.position = [self positionForTile:die.column row:die.row];
                     _gridArray[row][column] = _noTile; // set old row and column to null
-                } else {
+                } else if (!bottomCanMove) {
                     die.stable = true;
                 }
             }
