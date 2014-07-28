@@ -24,6 +24,7 @@
     float _timer;
     float _timeSinceDrop;
     float _dropInterval;
+    float _timeSinceBottom;
     
     Dice *_currentDie1;
     Dice *_currentDie2;
@@ -74,17 +75,22 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void) update:(CCTime) delta {
     _timer += delta;
     _timeSinceDrop += delta;
+    _timeSinceBottom += delta;
 
     if (_timeSinceDrop > _dropInterval) {
         // if not stabilizing
         if (!stabilizing) {
             [self dieFallDown];
             _timeSinceDrop = 0;
+//            if (_timeSinceBottom<0.2 && ![self canBottomMove]) {
+//                _timeSinceBottom += delta;
+//            }
             if (![self canBottomMove]) {
                 [self scanForMatches];
                 [self spawnDice];
                 _dropInterval = 1.0;
                 _timeSinceDrop = 0.2;
+                _timeSinceBottom = 0;
             }
         } else if (stabilizing) {
             [self dieFillHoles];
@@ -94,6 +100,7 @@ static const NSInteger GRID_COLUMNS = 6;
             if (!stabilizing) {
                 _dropInterval = 1.0;
                 _timeSinceDrop = 0;
+                [self scanForMatches];
             }
             // for each not stable die, move down
             // if cant move, set die.stable = true
@@ -415,19 +422,24 @@ static const NSInteger GRID_COLUMNS = 6;
         if (_currentDie2.column > _currentDie1.column) {
             // [1][2] --> [1]
             //            [2]
-            _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
-            _currentDie2.row--; _currentDie2.column--;
-            _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
-            _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+            // check if new placement is occupied
+           // if ([_gridArray[_currentDie2.row-1][_currentDie2.column-1] isEqualTo: _noTile]) {
+                _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+                _currentDie2.row--; _currentDie2.column--;
+                _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+                _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+           // }
         } else if (_currentDie1.row > _currentDie2.row) {
             // [1]
-            // [2] --> [2][1]
+            // [2] --> [2][1] means die1 moves when it's in rightmost column
             if (_currentDie2.column == 0) {
+            //    if ([_gridArray[_currentDie1.row-1][_currentDie1.column+1] isEqualTo: _noTile]) {
                 _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
                 _currentDie1.row--; _currentDie1.column++;
                 _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
                 _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
-            } else if (_currentDie1.row == GRID_ROWS-1) {
+             //   }
+            } else if (_currentDie1.row == GRID_ROWS-1) { // when die1 is on top row
                 _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
                 _currentDie1.row--; _currentDie1.column--;
                 _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
@@ -448,7 +460,7 @@ static const NSInteger GRID_COLUMNS = 6;
             _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
         } else {
             // [2]
-            // [1]  --> [1][2] means die2 moves
+            // [1]  --> [1][2] means die1 moves when it's in leftmost column
             if (_currentDie2.column == GRID_COLUMNS-1) {
                 _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
                 _currentDie1.row++; _currentDie1.column--;
