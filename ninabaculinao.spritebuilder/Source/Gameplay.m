@@ -46,10 +46,10 @@
                        context:(void *)context
 {
     if ([keyPath isEqualToString:@"score"]) {
-        _scoreLabel.string = [NSString stringWithFormat:@"%d", _grid.score];
+        _scoreLabel.string = [NSString stringWithFormat:@"%ld", (long) _grid.score];
     }
     if ([keyPath isEqualToString:@"match"]) {
-        _matchLabel.string = [NSString stringWithFormat:@"%d", _grid.match];
+        _matchLabel.string = [NSString stringWithFormat:@"%ld", (long) _grid.match];
     }
 }
 

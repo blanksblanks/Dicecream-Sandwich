@@ -13,6 +13,7 @@
 @property (nonatomic, assign) NSInteger faceValue;
 @property (nonatomic, assign) NSInteger column;
 @property (nonatomic, assign) NSInteger row;
+@property (nonatomic, assign) BOOL stable;
 
 - (id)initDice;
 

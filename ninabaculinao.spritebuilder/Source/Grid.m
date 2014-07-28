@@ -43,6 +43,8 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)didLoadFromCCB{
     
+    [self removeAllChildren];
+    
     _timer = 0;
     _timeSinceDrop = -0.2;
     _dropInterval = 0.5;
@@ -73,6 +75,7 @@ static const NSInteger GRID_COLUMNS = 6;
     _timeSinceDrop += delta;
 
     if (_timeSinceDrop > _dropInterval) {
+        // if not stabilizing
         [self dieFallDown];
         _timeSinceDrop = 0;
         if (![self canBottomMove]) {
@@ -81,6 +84,13 @@ static const NSInteger GRID_COLUMNS = 6;
             _timeSinceDrop = -0.2;
             _dropInterval = 1.0;
         }
+//        else {
+//            [self fillUpHoles];
+//        }
+        // else
+        // for each not stable die, move down
+        // if cant move, set die.stable = true
+        // once done, set stabilizing = false if all die are stable
 
     }
 }
@@ -155,6 +165,7 @@ static const NSInteger GRID_COLUMNS = 6;
             CCLOG(@"WHY IS IT AT DEFAULT");
             break;
     }
+    die.stable = true;
     return die;
 }
 
@@ -192,8 +203,8 @@ static const NSInteger GRID_COLUMNS = 6;
             nextColumn = firstColumn+1;
         }
         
-        BOOL positionFree = (_gridArray[firstRow][firstColumn] == _noTile);
-        BOOL nextPositionFree = (_gridArray[nextRow][nextColumn] == _noTile);
+        BOOL positionFree = ([_gridArray[firstRow][firstColumn] isEqual: _noTile]);
+        BOOL nextPositionFree = ([_gridArray[nextRow][nextColumn] isEqual: _noTile]);
 		if (positionFree && nextPositionFree) {
 			_currentDie1 = [self addDieAtTile:firstColumn row:firstRow];
             _currentDie2 = [self addDieAtTile:nextColumn row:nextRow];
@@ -429,12 +440,24 @@ static const NSInteger GRID_COLUMNS = 6;
     BOOL foundEastMatch = [self checkEastForRow:i andColumn:j withFace:face];
     BOOL foundWestMatch = [self checkWestForRow:i andColumn:j withFace:face];
     
-    BOOL foundMatch = foundSouthMatch || foundNorthMatch || foundEastMatch || foundWestMatch;
+    BOOL foundMatch = (foundSouthMatch || foundNorthMatch || foundEastMatch || foundWestMatch);
     if (foundMatch) {
-        [self fillUpHoles];
+//        [self fillUpHoles];
+//        set stabilizing = true
+//        iterate through die and set all to stable = false (unless row 0)
+//        for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
+//            for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
+//                BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
+//                if (positionFree == false) {
+//                    Dice *die = _gridArray[row][column];
+//                    die.stable = false;
+//                }
+//            }
+//        }
     }
 
 }
+
 //
 //- (void)detectHorizontalMatches {
 //    for (NSInteger row = 0; row < GRID_ROWS; row++) {
@@ -580,25 +603,44 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void) fillUpHoles {
     for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
 		for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
-            BOOL positionFilled = (_gridArray[row][column] != _noTile);
+            BOOL positionFilled = (![_gridArray[row][column] isEqual:_noTile]);
             NSInteger rowBelow = row-1;
             if (positionFilled) {
                 while (rowBelow > 0) {
-                    BOOL bottomEmpty = (_gridArray[rowBelow][column] == _noTile);
+                    BOOL bottomEmpty = ([_gridArray[rowBelow][column] isEqual:_noTile]);
                     if (bottomEmpty) {
                         rowBelow--; // lower row by 1 each time it decrements
-                    } else {
-                        Dice* die = _gridArray[row][column]; // call existing die
-                        die.row = rowBelow; // move it as far down as it can go
-                        _gridArray[die.row][die.column] = die; // refer to die in new index
-                        die.position = [self positionForTile:die.column row:die.row]; // moves object image to correct ccp point
-                        _gridArray[row][column] = _noTile; // replaces old grid array index with null object
-                    }
+                    } //else {
+//                        break;
+//                    }
+                Dice* die = _gridArray[row][column]; // call existing die
+                die.row = rowBelow; // move it as far down as it can go
+                _gridArray[die.row][die.column] = die; // refer to die in new index
+                die.position = [self positionForTile:die.column row:die.row]; // moves object image to correct ccp point
+                _gridArray[row][column] = _noTile; // replaces old grid array index with null object
                 }
             }
         }
     }
 }
+
+//- (void) dieFillHoles {
+//    BOOL bottomCanMove = [self indexValidAndUnoccupiedForRow:die.row-1 andColumn:die.column];
+//
+//    if (bottomCanMove) {
+//        _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
+//        _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+//        
+//        _currentDie1.row--;
+//        _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
+//        _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
+//        
+//        _currentDie2.row--;
+//        _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+//        _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+//    }
+//    
+//}
 
 //for (NSInteger k = 1; k <= depth; k++) {
 //    Dice* die = _gridArray[i][j];
@@ -637,7 +679,7 @@ static const NSInteger GRID_COLUMNS = 6;
         return FALSE;
     }
     else {
-        BOOL unoccupied = [_gridArray[row][column] isEqual:_noTile] || [_gridArray[row][column] isEqual:_currentDie2]  || [_gridArray[row][column] isEqual:_currentDie1] ;
+        BOOL unoccupied = [_gridArray[row][column] isEqual:_noTile] || [_gridArray[row][column] isEqual:_currentDie2]  || [_gridArray[row][column] isEqual:_currentDie1];
         return unoccupied;
 
     }
@@ -648,7 +690,7 @@ static const NSInteger GRID_COLUMNS = 6;
     if (!indexValid) {
         return FALSE;
     }
-    else if (_gridArray[row][column] == _noTile) {
+    else if ([_gridArray[row][column] isEqual: _noTile]) {
         return FALSE;
     } else {
         return TRUE;
