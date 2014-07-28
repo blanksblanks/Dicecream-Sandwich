@@ -122,7 +122,7 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Create random dice at random columns
 
 -(Dice*) randomizeNumbers {
-    NSInteger random = arc4random_uniform(6)+1;
+    NSInteger random = arc4random_uniform(2)+1;
     Dice *die;
     switch(random)
     {
@@ -312,6 +312,8 @@ static const NSInteger GRID_COLUMNS = 6;
         _currentDie2.column--;
         _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
         _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+        //CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:2.0f position:_currentDie2.position];
+        //[_currentDie2 runAction:moveTo];
     }
 }
 
@@ -407,72 +409,6 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 
-# pragma mark - Move dice
-
-//- (void)move:(CGPoint)direction {
-//    // apply negative vector until reaching boundary, this way we get the tile that is the furthest away
-//    // bottom left corner
-//    NSInteger currentX = 0;
-//    NSInteger currentY = 0;
-//    // Move to relevant edge by applying direction until reaching border
-//    while ([self indexValid:currentX y:currentY]) {
-//        CGFloat newX = currentX + direction.x;
-//        CGFloat newY = currentY + direction.y;
-//        if ([self indexValid:newX y:newY]) {
-//            currentX = newX;
-//            currentY = newY;
-//        } else {
-//            break;
-//        }
-//    }
-//    // store initial row value to reset after completing each column
-//    NSInteger initialY = currentY;
-//    // define changing of x and y value (moving left, up, down or right?)
-//    NSInteger xChange = -direction.x;
-//    NSInteger yChange = -direction.y;
-//    if (xChange == 0) {
-//        xChange = 1;
-//    }
-//    if (yChange == 0) {
-//        yChange = 1;
-//    }
-//    // visit column for column
-//    while ([self indexValid:currentX y:currentY]) {
-//        while ([self indexValid:currentX y:currentY]) {
-//            // get tile at current index
-//            Dice *die = _gridArray[currentX][currentY];
-//            if ([die isEqual:_noTile]) {
-//                // if there is no tile at this index -> skip
-//                currentY += yChange;
-//                continue;
-//            }
-//            // store index in temp variables to change them and store new location of this tile
-//            NSInteger newX = currentX;
-//            NSInteger newY = currentY;
-//            /* find the farthest position by iterating in direction of the vector until we reach border of grid or an occupied cell*/
-//            while ([self indexValidAndUnoccupied:newX+direction.x y:newY+direction.y]) {
-//                newX += direction.x;
-//                newY += direction.y;
-//            }
-//            if (newX != currentX || newY !=currentY) {
-//                [self moveDice:die fromIndex:currentX oldY:currentY newX:newX newY:newY];
-//            }
-//            // move further in this column
-//            currentY += yChange;
-//        }
-//        // move to the next column, start at the inital row
-//        currentX += xChange;
-//        currentY = initialY;
-//    }
-//}
-//
-//- (void)moveDice:(Dice *)die fromIndex:(NSInteger)oldX oldY:(NSInteger)oldY newX:(NSInteger)newX newY:(NSInteger)newY {
-//    _gridArray[newX][newY] = _gridArray[oldX][oldY];
-//    _gridArray[oldX][oldY] = _noTile;
-//    CGPoint newPosition = [self positionForTile:newX row:newY];
-//    CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:2.0f position:newPosition];
-//    [die runAction:moveTo];
-//}
 
 # pragma mark - Find matches
 
@@ -642,21 +578,23 @@ static const NSInteger GRID_COLUMNS = 6;
 
 // fix bug with incremental fall and nulls being loaded
 - (void) fillUpHoles {
-    for (NSInteger i = 1; i < GRID_ROWS; i++) {
-		for (NSInteger j = 0; j < GRID_COLUMNS; j++) {
-            BOOL positionFilled = (_gridArray[i][j] != _noTile);
-            NSInteger depth = i-1; // lowers row by 1 each time it decrements
-            BOOL bottomEmpty = (_gridArray[depth][j] == _noTile);
-            if (positionFilled && bottomEmpty) {
-                while (bottomEmpty && depth > 0) {
-                    depth--;
-                    bottomEmpty = (_gridArray[depth][j] == _noTile);
+    for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
+		for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
+            BOOL positionFilled = (_gridArray[row][column] != _noTile);
+            NSInteger rowBelow = row-1;
+            if (positionFilled) {
+                while (rowBelow > 0) {
+                    BOOL bottomEmpty = (_gridArray[rowBelow][column] == _noTile);
+                    if (bottomEmpty) {
+                        rowBelow--; // lower row by 1 each time it decrements
+                    } else {
+                        Dice* die = _gridArray[row][column]; // call existing die
+                        die.row = rowBelow; // move it as far down as it can go
+                        _gridArray[die.row][die.column] = die; // refer to die in new index
+                        die.position = [self positionForTile:die.column row:die.row]; // moves object image to correct ccp point
+                        _gridArray[row][column] = _noTile; // replaces old grid array index with null object
+                    }
                 }
-                Dice* die = _gridArray[i][j];
-                die.row = depth;
-                _gridArray[die.row][die.column] = die;
-                die.position = [self positionForTile:die.column row:die.row];
-                _gridArray[i][j] = _noTile;
             }
         }
     }
@@ -719,3 +657,78 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 @end
+
+
+
+
+
+
+
+
+
+# pragma mark - Move dice
+
+//- (void)move:(CGPoint)direction {
+//    // apply negative vector until reaching boundary, this way we get the tile that is the furthest away
+//    // bottom left corner
+//    NSInteger currentX = 0;
+//    NSInteger currentY = 0;
+//    // Move to relevant edge by applying direction until reaching border
+//    while ([self indexValid:currentX y:currentY]) {
+//        CGFloat newX = currentX + direction.x;
+//        CGFloat newY = currentY + direction.y;
+//        if ([self indexValid:newX y:newY]) {
+//            currentX = newX;
+//            currentY = newY;
+//        } else {
+//            break;
+//        }
+//    }
+//    // store initial row value to reset after completing each column
+//    NSInteger initialY = currentY;
+//    // define changing of x and y value (moving left, up, down or right?)
+//    NSInteger xChange = -direction.x;
+//    NSInteger yChange = -direction.y;
+//    if (xChange == 0) {
+//        xChange = 1;
+//    }
+//    if (yChange == 0) {
+//        yChange = 1;
+//    }
+//    // visit column for column
+//    while ([self indexValid:currentX y:currentY]) {
+//        while ([self indexValid:currentX y:currentY]) {
+//            // get tile at current index
+//            Dice *die = _gridArray[currentX][currentY];
+//            if ([die isEqual:_noTile]) {
+//                // if there is no tile at this index -> skip
+//                currentY += yChange;
+//                continue;
+//            }
+//            // store index in temp variables to change them and store new location of this tile
+//            NSInteger newX = currentX;
+//            NSInteger newY = currentY;
+//            /* find the farthest position by iterating in direction of the vector until we reach border of grid or an occupied cell*/
+//            while ([self indexValidAndUnoccupied:newX+direction.x y:newY+direction.y]) {
+//                newX += direction.x;
+//                newY += direction.y;
+//            }
+//            if (newX != currentX || newY !=currentY) {
+//                [self moveDice:die fromIndex:currentX oldY:currentY newX:newX newY:newY];
+//            }
+//            // move further in this column
+//            currentY += yChange;
+//        }
+//        // move to the next column, start at the inital row
+//        currentX += xChange;
+//        currentY = initialY;
+//    }
+//}
+//
+//- (void)moveDice:(Dice *)die fromIndex:(NSInteger)oldX oldY:(NSInteger)oldY newX:(NSInteger)newX newY:(NSInteger)newY {
+//    _gridArray[newX][newY] = _gridArray[oldX][oldY];
+//    _gridArray[oldX][oldY] = _noTile;
+//    CGPoint newPosition = [self positionForTile:newX row:newY];
+//    CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:2.0f position:newPosition];
+//    [die runAction:moveTo];
+//}
