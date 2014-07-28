@@ -11,6 +11,8 @@
 
 @implementation Grid {
     
+    BOOL stabilizing;
+    
     CGFloat _tileWidth; //37
 	CGFloat _tileHeight; //37
 	CGFloat _tileMarginVertical; //0.9285714285714286
@@ -48,6 +50,7 @@ static const NSInteger GRID_COLUMNS = 6;
     _timer = 0;
     _timeSinceDrop = -0.2;
     _dropInterval = 0.5;
+    stabilizing = false;
     
     self.userInteractionEnabled = TRUE;
     
@@ -76,23 +79,47 @@ static const NSInteger GRID_COLUMNS = 6;
 
     if (_timeSinceDrop > _dropInterval) {
         // if not stabilizing
-        [self dieFallDown];
-        _timeSinceDrop = 0;
-        if (![self canBottomMove]) {
-            [self scanForMatches];
-            [self spawnDice];
-            _timeSinceDrop = -0.2;
-            _dropInterval = 1.0;
+        if (!stabilizing) {
+            [self dieFallDown];
+            _timeSinceDrop = 0;
+            if (![self canBottomMove]) {
+                [self scanForMatches];
+                [self spawnDice];
+                _timeSinceDrop = -0.2;
+                _dropInterval = 1.0;
+            }
+        } else if (stabilizing) {
+            [self dieFillHoles];
+            _timeSinceDrop = 0;
+            _dropInterval = 0.1;
+            stabilizing = [self checkGrid];
+            // for each not stable die, move down
+            // if cant move, set die.stable = true
+            // once done, set stabilizing = false if all die are stable
+            
+//            if (!stabilizing) {
+//                [self spawnDice];
+//                _timeSinceDrop = -0.2;
+//                _dropInterval = 1.0;
+//            }
         }
-//        else {
-//            [self fillUpHoles];
-//        }
-        // else
-        // for each not stable die, move down
-        // if cant move, set die.stable = true
-        // once done, set stabilizing = false if all die are stable
-
     }
+}
+
+- (BOOL)checkGrid {
+    stabilizing = false;
+    for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
+        for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
+            BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
+            if (!positionFree) {
+                Dice *die = _gridArray[row][column];
+                if (!die.stable) {
+                    stabilizing = TRUE;
+                }
+            }
+        }
+    }
+    return stabilizing;
 }
 
 # pragma mark - Create grid
@@ -259,6 +286,23 @@ static const NSInteger GRID_COLUMNS = 6;
         return [self indexValidAndUnoccupiedForRow:_currentDie2.row-1 andColumn:_currentDie2.column] && [self indexValidAndUnoccupiedForRow:_currentDie1.row-1 andColumn:_currentDie1.column];
     }
 }
+
+//- (BOOL) isGridStabilizing {
+//    BOOL isStabilizing = false;
+//    for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
+//        for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
+//            BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
+//            if (! positionFree == false) {
+//                Dice *die = _gridArray[row][column];
+//                if (die.stable == false) {
+//                    isStabilizing = true;
+//                } else {
+//                    isStabilizing =
+//                }
+//            }
+//        }
+//    }
+//}
 
 //- (void) dieFalling: Dice*(die) fromColumn:(NSInteger)column andRow: (NSInteger)row {
 //    for (NSInteger i = row; i >= 0; i++) {
@@ -445,15 +489,16 @@ static const NSInteger GRID_COLUMNS = 6;
 //        [self fillUpHoles];
 //        set stabilizing = true
 //        iterate through die and set all to stable = false (unless row 0)
-//        for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
-//            for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
-//                BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
-//                if (positionFree == false) {
-//                    Dice *die = _gridArray[row][column];
-//                    die.stable = false;
-//                }
-//            }
-//        }
+        for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
+            for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
+                BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
+                if (positionFree == false) {
+                    Dice *die = _gridArray[row][column];
+                    die.stable = false;
+                }
+            }
+        }
+        stabilizing = true;
     }
 
 }
@@ -480,7 +525,7 @@ static const NSInteger GRID_COLUMNS = 6;
             break;
         }
     }
-    if (columnIsValid == true) {
+    if (columnIsValid) {
             _northDie = _gridArray[_north][j];
             if (face == _northDie.faceValue) {
                 for (NSInteger k = i; k <= _north; k++) {
@@ -505,7 +550,7 @@ static const NSInteger GRID_COLUMNS = 6;
             break;
         }
     }
-    if (columnIsValid == TRUE) {
+    if (columnIsValid) {
         _southDie = _gridArray[_south][j];
         if (face == _southDie.faceValue) {
             for (NSInteger k = i; k >= _south; k--) {
@@ -559,7 +604,7 @@ static const NSInteger GRID_COLUMNS = 6;
         }
     }
     
-    if ([self indexValidAndOccupiedForRow:(i) andColumn:_west]) {
+    if (rowIsValid) {
         _westDie = _gridArray[i][_west];
         if (face == _westDie.faceValue) {
             for (NSInteger k = j; k >= _west; k--) {
@@ -624,23 +669,25 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-//- (void) dieFillHoles {
-//    BOOL bottomCanMove = [self indexValidAndUnoccupiedForRow:die.row-1 andColumn:die.column];
-//
-//    if (bottomCanMove) {
-//        _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
-//        _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
-//        
-//        _currentDie1.row--;
-//        _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
-//        _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
-//        
-//        _currentDie2.row--;
-//        _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
-//        _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
-//    }
-//    
-//}
+- (void) dieFillHoles {
+    for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
+		for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
+            BOOL positionFilled = [self indexValidAndOccupiedForRow:row andColumn:column];
+            BOOL bottomCanMove = [self indexValidAndUnoccupiedForRow:row-1 andColumn:column];
+            if (positionFilled) {
+                Dice *die = _gridArray[row][column];
+                if (bottomCanMove && (die.stable == false)) {
+                    die.row--;
+                    _gridArray[die.row][die.column] = die; // set die to new row and column
+                    die.position = [self positionForTile:die.column row:die.row];
+                    _gridArray[row][column] = _noTile; // set old row and column to null
+                } else {
+                    die.stable = true;
+                }
+            }
+        }
+    }
+}
 
 //for (NSInteger k = 1; k <= depth; k++) {
 //    Dice* die = _gridArray[i][j];
