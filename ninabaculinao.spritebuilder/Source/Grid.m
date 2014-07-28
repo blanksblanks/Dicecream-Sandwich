@@ -44,9 +44,7 @@ static const NSInteger GRID_ROWS = 12;
 static const NSInteger GRID_COLUMNS = 6;
 
 - (void)didLoadFromCCB{
-    
-    [self removeAllChildren];
-    
+
     _timer = 0;
     _timeSinceDrop = -0.2;
     _dropInterval = 0.5;
@@ -93,10 +91,10 @@ static const NSInteger GRID_COLUMNS = 6;
             _timeSinceDrop = 0;
             _dropInterval = 0.1;
             stabilizing = [self checkGrid];
-            if (!stabilizing) {
-                _dropInterval = 1.0;
-                _timeSinceDrop = 0;
-            }
+//            if (!stabilizing) {
+//                _dropInterval = 1.0;
+//                _timeSinceDrop = 0;
+//            }
             // for each not stable die, move down
             // if cant move, set die.stable = true
             // once done, set stabilizing = false if all die are stable
@@ -474,7 +472,18 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void)scanForMatches {
     [self findMatchesForRow:_currentDie1.row andColumn:_currentDie1.column withFace:_currentDie1.faceValue];
     [self findMatchesForRow:_currentDie2.row andColumn:_currentDie2.column withFace:_currentDie2.faceValue];
+    for (NSInteger row = 0; row < GRID_ROWS; row++) { // start from second row
+        for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
+            BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
+            if (!positionFree) {
+                Dice *die = _gridArray[row][column];
+                [self findMatchesForRow:die.row andColumn:die.column withFace:die.faceValue];
+                }
+        }
+
+    }
 }
+
 //    for (NSInteger i = 0; i < GRID_ROWS; i++) {
 //		for (NSInteger j = 0; j < GRID_COLUMNS; j++) {
 
