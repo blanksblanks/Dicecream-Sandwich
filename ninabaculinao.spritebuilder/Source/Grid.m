@@ -174,31 +174,24 @@ static const NSInteger GRID_COLUMNS = 6;
     {
         case 1:
             die = (Dice*) [CCBReader load:@"Dice/One"];
-            CCLOG(@"Face: 1");
             break;
         case 2:
             die = (Dice*) [CCBReader load:@"Dice/Two"];
-            CCLOG(@"Face: 2");
             break;
         case 3:
             die = (Dice*) [CCBReader load:@"Dice/Three"];
-            CCLOG(@"Face: 3");
             break;
         case 4:
             die = (Dice*) [CCBReader load:@"Dice/Four"];
-            CCLOG(@"Face: 4");
             break;
         case 5:
             die = (Dice*) [CCBReader load:@"Dice/Five"];
-            CCLOG(@"Face: 5");
             break;
         case 6:
             die = (Dice*) [CCBReader load:@"Dice/Six"];
-            CCLOG(@"Face: 6");
             break;
         default:
             die = (Dice*) [CCBReader load:@"Dice/Dice"];
-            CCLOG(@"WHY IS IT AT DEFAULT");
             break;
     }
     die.stable = true;
@@ -230,7 +223,6 @@ static const NSInteger GRID_COLUMNS = 6;
 	while (!spawned) {
 		NSInteger firstRow = GRID_ROWS-1;
 		NSInteger firstColumn = arc4random_uniform(GRID_COLUMNS-2); // int bt 0 and 4
-        CCLOG(@"First Column %ld, Row %ld", (long)firstColumn, (long)firstRow);
         NSInteger nextRow = firstRow - arc4random_uniform(2);
         NSInteger nextColumn;
         if (firstRow != nextRow) { // has to be vertical
@@ -295,33 +287,6 @@ static const NSInteger GRID_COLUMNS = 6;
         return [self indexValidAndUnoccupiedForRow:_currentDie2.row-1 andColumn:_currentDie2.column] && [self indexValidAndUnoccupiedForRow:_currentDie1.row-1 andColumn:_currentDie1.column];
     }
 }
-
-//- (BOOL) isGridStabilizing {
-//    BOOL isStabilizing = false;
-//    for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
-//        for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
-//            BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
-//            if (! positionFree == false) {
-//                Dice *die = _gridArray[row][column];
-//                if (die.stable == false) {
-//                    isStabilizing = true;
-//                } else {
-//                    isStabilizing =
-//                }
-//            }
-//        }
-//    }
-//}
-
-//- (void) dieFalling: Dice*(die) fromColumn:(NSInteger)column andRow: (NSInteger)row {
-//    for (NSInteger i = row; i >= 0; i++) {
-//        _gridArray[column][row-i] = _gridArray[column][row];
-//        _gridArray[column][row] = _noTile;
-//        CGPoint newPosition = [self positionForTile:column row:row];
-//        CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.2f position:newPosition];
-//        [die runAction:moveTo];
-//    }
-//}
 
 # pragma mark - Touch and swipe handling
 
@@ -556,7 +521,6 @@ static const NSInteger GRID_COLUMNS = 6;
                 for (NSInteger k = i; k <= _north; k++) {
                     [self removeDieAtRow:k andColumn:j];
                     _gridArray[k][j] = _noTile;
-                    CCLOG(@"Dice removed!");
                     foundMatch = true;
                     self.match = face;
                 }
@@ -581,7 +545,6 @@ static const NSInteger GRID_COLUMNS = 6;
             for (NSInteger k = i; k >= _south; k--) {
                 [self removeDieAtRow:k andColumn:j];
                 _gridArray[k][j] = _noTile;
-                CCLOG(@"Dice removed!");
                 foundMatch = true;
                 self.match = face;
             }
@@ -609,7 +572,6 @@ static const NSInteger GRID_COLUMNS = 6;
             for (NSInteger k = j; k <= _east; k++) {
                 [self removeDieAtRow:i andColumn:k];
                 _gridArray[i][k] = _noTile;
-                CCLOG(@"Dice removed!");
                 foundMatch = true;
                 self.match = face;
             }
@@ -635,7 +597,6 @@ static const NSInteger GRID_COLUMNS = 6;
             for (NSInteger k = j; k >= _west; k--) {
                 [self removeDieAtRow:i andColumn:k];
                 _gridArray[i][k] = _noTile;
-                CCLOG(@"Dice removed!");
                 foundMatch = true;
                 self.match = face;
             }
