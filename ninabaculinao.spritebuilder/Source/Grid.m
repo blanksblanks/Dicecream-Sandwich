@@ -85,14 +85,18 @@ static const NSInteger GRID_COLUMNS = 6;
             if (![self canBottomMove]) {
                 [self scanForMatches];
                 [self spawnDice];
-                _timeSinceDrop = -0.2;
                 _dropInterval = 1.0;
+                _timeSinceDrop = 0.2;
             }
         } else if (stabilizing) {
             [self dieFillHoles];
             _timeSinceDrop = 0;
             _dropInterval = 0.1;
             stabilizing = [self checkGrid];
+            if (!stabilizing) {
+                _dropInterval = 1.0;
+                _timeSinceDrop = 0;
+            }
             // for each not stable die, move down
             // if cant move, set die.stable = true
             // once done, set stabilizing = false if all die are stable
