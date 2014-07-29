@@ -80,6 +80,7 @@ static const NSInteger GRID_COLUMNS = 6;
     if (_timeSinceDrop > _dropInterval) {
         // if not stabilizing
         if (!stabilizing) {
+            self.userInteractionEnabled = TRUE;
             [self dieFallDown];
             _timeSinceDrop = 0;
 //            if (_timeSinceBottom<0.2 && ![self canBottomMove]) {
@@ -93,6 +94,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 _timeSinceBottom = 0;
             }
         } else if (stabilizing) {
+            self.userInteractionEnabled = FALSE;
             [self dieFillHoles];
             _timeSinceDrop = 0;
             _dropInterval = 0.1;
@@ -115,23 +117,7 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-- (BOOL)checkGrid {
-    stabilizing = false;
-    for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
-        for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
-            BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
-            if (!positionFree) {
-                Dice *die = _gridArray[row][column];
-                if (!die.stable) {
-                    stabilizing = TRUE;
-                }
-            }
-        }
-    }
-    return stabilizing;
-}
-
-# pragma mark - Create grid
+# pragma mark - Create initial grid and check grid state
 
 - (void)setupGrid
 {
@@ -165,7 +151,72 @@ static const NSInteger GRID_COLUMNS = 6;
 	}
 }
 
-# pragma mark - Create random dice at random columns
+- (BOOL)checkGrid {
+    stabilizing = false;
+    for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
+        for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
+            BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
+            if (!positionFree) {
+                Dice *die = _gridArray[row][column];
+                if (!die.stable) {
+                    stabilizing = TRUE;
+                }
+            }
+        }
+    }
+    return stabilizing;
+}
+
+# pragma mark - Spawn random pair of dice
+
+- (void)spawnDice {
+	BOOL spawned = FALSE;
+	while (!spawned) {
+		NSInteger firstRow = GRID_ROWS-1;
+		NSInteger firstColumn = arc4random_uniform(GRID_COLUMNS-2); // int bt 0 and 4
+        NSInteger nextRow = firstRow - arc4random_uniform(2);
+        NSInteger nextColumn;
+        if (firstRow != nextRow) { // has to be vertical
+            nextColumn = firstColumn;
+        } else { // has to be horizontal
+            nextColumn = firstColumn+1;
+        }
+        
+        BOOL positionFree = ([_gridArray[firstRow][firstColumn] isEqual: _noTile]);
+        BOOL nextPositionFree = ([_gridArray[nextRow][nextColumn] isEqual: _noTile]);
+		if (positionFree && nextPositionFree) {
+			_currentDie1 = [self addDieAtTile:firstColumn row:firstRow];
+            _currentDie2 = [self addDieAtTile:nextColumn row:nextRow];
+            spawned = TRUE;
+        } else {
+            CCLOG(@"Game Over");
+            CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
+            [[CCDirector sharedDirector] replaceScene:mainScene];
+            break;
+        }
+        
+	}
+}
+
+- (Dice*) addDieAtTile:(NSInteger)column row:(NSInteger)row {
+    Dice* die = [self randomizeNumbers];
+	_gridArray[row][column] = die;
+    die.row = row;
+    die.column = column;
+	die.scale = 0.f;
+	[self addChild:die];
+	die.position = [self positionForTile:column row:row];
+	CCActionDelay *delay = [CCActionDelay actionWithDuration:0.3f];
+	CCActionScaleTo *scaleUp = [CCActionScaleTo actionWithDuration:0.2f scale:1.f];
+	CCActionSequence *sequence = [CCActionSequence actionWithArray:@[delay, scaleUp]];
+	[die runAction:sequence];
+    return die;
+    
+    //    CCActionMoveTo *fall = [CCActionMoveTo actionWithDuration:5.0f position:ccp(die.position.x, 0)];
+    //    CCActionMoveTo *fallSequence = [CCActionSequence actionWithArray:@[delay, fall]];
+    //    [die runAction:fallSequence];
+    
+}
 
 -(Dice*) randomizeNumbers {
     NSInteger random = arc4random_uniform(4)+1;
@@ -198,56 +249,7 @@ static const NSInteger GRID_COLUMNS = 6;
     return die;
 }
 
-- (Dice*) addDieAtTile:(NSInteger)column row:(NSInteger)row {
-    Dice* die = [self randomizeNumbers];
-	_gridArray[row][column] = die;
-    die.row = row;
-    die.column = column;
-	die.scale = 0.f;
-	[self addChild:die];
-	die.position = [self positionForTile:column row:row];
-	CCActionDelay *delay = [CCActionDelay actionWithDuration:0.3f];
-	CCActionScaleTo *scaleUp = [CCActionScaleTo actionWithDuration:0.2f scale:1.f];
-	CCActionSequence *sequence = [CCActionSequence actionWithArray:@[delay, scaleUp]];
-	[die runAction:sequence];
-    return die;
- 
-//    CCActionMoveTo *fall = [CCActionMoveTo actionWithDuration:5.0f position:ccp(die.position.x, 0)];
-//    CCActionMoveTo *fallSequence = [CCActionSequence actionWithArray:@[delay, fall]];
-//    [die runAction:fallSequence];
-    
-}
-
-- (void)spawnDice {
-	BOOL spawned = FALSE;
-	while (!spawned) {
-		NSInteger firstRow = GRID_ROWS-1;
-		NSInteger firstColumn = arc4random_uniform(GRID_COLUMNS-2); // int bt 0 and 4
-        NSInteger nextRow = firstRow - arc4random_uniform(2);
-        NSInteger nextColumn;
-        if (firstRow != nextRow) { // has to be vertical
-            nextColumn = firstColumn;
-        } else { // has to be horizontal
-            nextColumn = firstColumn+1;
-        }
-        
-        BOOL positionFree = ([_gridArray[firstRow][firstColumn] isEqual: _noTile]);
-        BOOL nextPositionFree = ([_gridArray[nextRow][nextColumn] isEqual: _noTile]);
-		if (positionFree && nextPositionFree) {
-			_currentDie1 = [self addDieAtTile:firstColumn row:firstRow];
-            _currentDie2 = [self addDieAtTile:nextColumn row:nextRow];
-            spawned = TRUE;
-        } else {
-            CCLOG(@"Game Over");
-            CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
-            [[CCDirector sharedDirector] replaceScene:mainScene];
-            break;
-        }
-        
-	}
-}
-
-# pragma mark - Position for tile from (column, row) to ccp(x,y)
+# pragma mark - Convert position for tile from (column, row) to ccp(x,y)
 
 - (CGPoint)positionForTile:(NSInteger)column row:(NSInteger)row {
 	float x = _tileMarginHorizontal + column * (_tileMarginHorizontal + _tileWidth);
@@ -255,7 +257,7 @@ static const NSInteger GRID_COLUMNS = 6;
 	return CGPointMake(x,y);
 }
 
-# pragma mark - Falling dice
+# pragma mark - Make pair of dice fall
 
 - (void) dieFallDown {
     BOOL bottomCanMove = [self canBottomMove];
@@ -288,7 +290,7 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-# pragma mark - Touch and swipe handling
+# pragma mark - Touch handling - let player swipe left/right/down/rotate
 
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     oldTouchPosition = [touch locationInNode:self];
@@ -377,11 +379,6 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void)rotate {
     BOOL bottomCanMove = [self canBottomMove];
     BOOL isRotating = true;
-//    if (isRotating) {
-//        [self unschedule:@selector(dieFallDown)];
-//    } else {
-//        [self schedule:@selector(dieFallDown) interval:0.5f];
-//    }
     
     if (isRotating && bottomCanMove) {
         if (_currentDie2.column > _currentDie1.column) {
@@ -453,8 +450,7 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 
-
-# pragma mark - Find matches
+# pragma mark - Detect chains to the north, east, south and west
 
 - (void)scanForMatches {
     [self findMatchesForRow:_currentDie1.row andColumn:_currentDie1.column withFace:_currentDie1.faceValue];
@@ -471,13 +467,6 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-//    for (NSInteger i = 0; i < GRID_ROWS; i++) {
-//		for (NSInteger j = 0; j < GRID_COLUMNS; j++) {
-
-//            BOOL positionFree = (_gridArray[i][j] == _noTile);
-//            if (! positionFree) {
-//                _checkDie = _gridArray[i][j];
-
 - (void)findMatchesForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
     BOOL foundSouthMatch = [self checkSouthForRow:i andColumn:j withFace:face];
     BOOL foundNorthMatch = [self checkNorthForRow:i andColumn:j withFace:face];
@@ -486,9 +475,8 @@ static const NSInteger GRID_COLUMNS = 6;
     
     BOOL foundMatch = (foundSouthMatch || foundNorthMatch || foundEastMatch || foundWestMatch);
     if (foundMatch) {
-//        [self fillUpHoles];
-//        set stabilizing = true
 //        iterate through die and set all to stable = false (unless row 0)
+//        set stabilizing = true
         for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
             for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
                 BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
@@ -502,18 +490,6 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 
 }
-
-//
-//- (void)detectHorizontalMatches {
-//    for (NSInteger row = 0; row < GRID_ROWS; row++) {
-//        for (NSInteger column = 0; column < GRID_COLUMNS;) {
-//            if (_gridArray[row][column] != _noTile) {
-//                NSInteger matchType = _gridArray[row][column].faceValue;
-//                
-//            }
-//        }
-//    }
-//}
 
 - (BOOL)checkNorthForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
     NSInteger _north = i+face+1;
@@ -615,7 +591,8 @@ static const NSInteger GRID_COLUMNS = 6;
     return foundMatch;
 }
 
-// fix bug where it loads die as nsnull
+# pragma mark - Remove chains and update score
+
 - (void) removeDieAtRow:(NSInteger)row andColumn:(NSInteger)column {
     Dice* die = _gridArray[row][column];
     die.row = row;
@@ -640,30 +617,7 @@ static const NSInteger GRID_COLUMNS = 6;
     
 }
 
-// fix bug with incremental fall and nulls being loaded
-- (void) fillUpHoles {
-    for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
-		for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
-            BOOL positionFilled = (![_gridArray[row][column] isEqual:_noTile]);
-            NSInteger rowBelow = row-1;
-            if (positionFilled) {
-                while (rowBelow > 0) {
-                    BOOL bottomEmpty = ([_gridArray[rowBelow][column] isEqual:_noTile]);
-                    if (bottomEmpty) {
-                        rowBelow--; // lower row by 1 each time it decrements
-                    } //else {
-//                        break;
-//                    }
-                Dice* die = _gridArray[row][column]; // call existing die
-                die.row = rowBelow; // move it as far down as it can go
-                _gridArray[die.row][die.column] = die; // refer to die in new index
-                die.position = [self positionForTile:die.column row:die.row]; // moves object image to correct ccp point
-                _gridArray[row][column] = _noTile; // replaces old grid array index with null object
-                }
-            }
-        }
-    }
-}
+# pragma mark - Fill in holes
 
 - (void) dieFillHoles {
     for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
@@ -684,25 +638,6 @@ static const NSInteger GRID_COLUMNS = 6;
         }
     }
 }
-
-//for (NSInteger k = 1; k <= depth; k++) {
-//    Dice* die = _gridArray[i][j];
-//    die.position = [self positionForTile:j row:k];
-//}
-//
-//Dice* die = _gridArray[i][j];
-//die.row = depth;
-//_gridArray[die.row][die.column] = die;
-//_gridArray[i][j] = _noTile;
-
-//BOOL positionFilled = (_gridArray[i][j] != _noTile);
-//BOOL bottomEmpty = (_gridArray[i-1][j] == _noTile);
-//while (positionFilled && bottomEmpty) {
-//    Dice* die = _gridArray[i][j]; // [4][1] -> [1][1]
-//    die.row--; // same as i--; same as i-1;
-//    _gridArray[die.row][die.column] = die;
-//    die.position = [self positionForTile:die.column row:die.row];
-//    _gridArray[i][j] = _noTile;
 
 
 # pragma mark - Check indexes
@@ -742,8 +677,6 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 @end
-
-
 
 
 
