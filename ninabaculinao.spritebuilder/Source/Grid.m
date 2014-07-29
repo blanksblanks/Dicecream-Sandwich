@@ -38,6 +38,7 @@
     NSInteger _face;
     
     CGPoint oldTouchPosition;
+    BOOL canSwipe;
 }
 
 // two constants to describe the amount of rows and columns
@@ -50,6 +51,7 @@ static const NSInteger GRID_COLUMNS = 6;
     _timeSinceDrop = -0.2;
     _dropInterval = 0.5;
     stabilizing = false;
+    canSwipe = true;
     
     self.userInteractionEnabled = TRUE;
     
@@ -80,9 +82,10 @@ static const NSInteger GRID_COLUMNS = 6;
     if (_timeSinceDrop > _dropInterval) {
         // if not stabilizing
         if (!stabilizing) {
-            self.userInteractionEnabled = TRUE;
             [self dieFallDown];
+            self.userInteractionEnabled = TRUE;
             _timeSinceDrop = 0;
+// general idea for a hard drop
 //            if (_timeSinceBottom<0.2 && ![self canBottomMove]) {
 //                _timeSinceBottom += delta;
 //            }
@@ -103,16 +106,13 @@ static const NSInteger GRID_COLUMNS = 6;
                 _dropInterval = 1.0;
                 _timeSinceDrop = 0;
                 [self scanForMatches];
+                // for each not stable die, move down
+                // if cant move, set die.stable = true
+                // once done, set stabilizing = false if all die are stable
+                // disable user interaction while stabilizing
+                
             }
-            // for each not stable die, move down
-            // if cant move, set die.stable = true
-            // once done, set stabilizing = false if all die are stable
             
-//            if (!stabilizing) {
-//                [self spawnDice];
-//                _timeSinceDrop = -0.2;
-//                _dropInterval = 1.0;
-//            }
         }
     }
 }
@@ -172,6 +172,7 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void)spawnDice {
 	BOOL spawned = FALSE;
 	while (!spawned) {
+        canSwipe = true;
 		NSInteger firstRow = GRID_ROWS-1;
 		NSInteger firstColumn = arc4random_uniform(GRID_COLUMNS-2); // int bt 0 and 4
         NSInteger nextRow = firstRow - arc4random_uniform(2);
@@ -298,8 +299,11 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint newTouchPosition = [touch locationInNode:self];
+    // calculate lengths of swipes
     float xdifference = oldTouchPosition.x - newTouchPosition.x;
     float ydifference = oldTouchPosition.y - newTouchPosition.y;
+    
+    // determine in which column touch ended, cannot go out of bounds
     NSInteger column = ((newTouchPosition.x - _tileMarginHorizontal) / (_tileWidth + _tileMarginHorizontal));
     if (column > GRID_COLUMNS-1) {
         column = GRID_COLUMNS-1;
@@ -308,8 +312,13 @@ static const NSInteger GRID_COLUMNS = 6;
     }
     
     // consider adjusting speed of fall with swiping
+    // define types of swipes: swipe up or down, long swipe left, short swipe left,
+    // long swipe right, short swipe right, tap to rotate
     if (ydifference > 0.1*(self.contentSize.height) || ydifference < -0.1*(self.contentSize.height)) {
-        [self dropDown];
+        if (canSwipe) {
+            [self dropDown];
+            canSwipe = false;
+        }
     } else if (xdifference > 0.3*(self.contentSize.width)) {
         [self swipeLeftTo:column];
     } else if (xdifference > 0.1*(self.contentSize.width) && xdifference < 0.3*(self.contentSize.width)) {
@@ -373,7 +382,7 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void)dropDown {
-    _dropInterval= 0.001;
+    _dropInterval = 0.001;
 }
 
 - (void)rotate {
@@ -449,7 +458,6 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-
 # pragma mark - Detect chains to the north, east, south and west
 
 - (void)scanForMatches {
@@ -510,6 +518,7 @@ static const NSInteger GRID_COLUMNS = 6;
                     foundMatch = true;
                     self.match = face;
                 }
+                self.score += (face * 10 * (face+2));
             }
         }
     return foundMatch;
@@ -534,6 +543,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 foundMatch = true;
                 self.match = face;
             }
+            self.score += (face * 10 * (face+2));
         }
     }
     return foundMatch;
@@ -561,6 +571,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 foundMatch = true;
                 self.match = face;
             }
+            self.score += (face * 10 * (face+2));
         }
     }
     return foundMatch;
@@ -586,6 +597,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 foundMatch = true;
                 self.match = face;
             }
+            self.score += (face * 10 * (face+2));
         }
     }
     return foundMatch;
@@ -613,7 +625,7 @@ static const NSInteger GRID_COLUMNS = 6;
 	[die runAction:sequence];
 	[self removeChild:die];
     
-    self.score += die.faceValue;
+//    self.score += die.faceValue;
     
 }
 
@@ -638,7 +650,6 @@ static const NSInteger GRID_COLUMNS = 6;
         }
     }
 }
-
 
 # pragma mark - Check indexes
 
