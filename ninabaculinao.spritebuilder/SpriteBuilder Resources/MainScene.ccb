@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>24</integer>
+	<integer>25</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -112,7 +112,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>workingAssets/Backgrounds/ColorfulBackground.png</string>
+							<string>workingAssets/Backgrounds/black-stars_midrange.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -129,6 +129,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -225,7 +227,7 @@
 						<key>value</key>
 						<array>
 							<real>162.98606872558594</real>
-							<real>186.25227355957031</real>
+							<real>120</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -551,7 +553,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.57999998331069946</real>
+							<real>0.5</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>
@@ -589,7 +591,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>workingAssets/Titles/DiceDrop.png</string>
+							<string>workingAssets/Titles/DiceSandwich.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -606,8 +608,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
