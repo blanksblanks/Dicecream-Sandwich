@@ -9,5 +9,7 @@
 #import "CCNode.h"
 
 @interface Pause : CCNode
+- (void) home;
+- (void) game;
 
 @end

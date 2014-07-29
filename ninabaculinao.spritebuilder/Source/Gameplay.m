@@ -62,22 +62,12 @@
     _timeLabel.string = [NSString stringWithFormat:@"%ld", (long)_grid.timer];
 }
 
-- (void)play
-{
-    // this tells the game to call a method called 'step' every half sec
-   // [self schedule:@selector(step) interval:0.5f];
-}
-
 - (void)pause
 {
     CCScene *pause = [CCBReader loadAsScene:@"Pause"];
     [[CCDirector sharedDirector] pushScene:pause];
 }
 
-- (void)step
-{
-    
-}
 
 
 

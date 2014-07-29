@@ -315,7 +315,7 @@ static const NSInteger GRID_COLUMNS = 6;
     if (ydifference > 0.2*(self.contentSize.height) || ydifference < -0.2*(self.contentSize.height)) {
         if (canSwipe) {
             [self dropDown];
-            canSwipe = false;
+//            canSwipe = false;
         }
     } else if (xdifference > 0.3*(self.contentSize.width)) {
         [self swipeLeftTo:column];
@@ -467,7 +467,7 @@ static const NSInteger GRID_COLUMNS = 6;
             if (!positionFree) {
                 Dice *die = _gridArray[row][column];
                 [self findMatchesForRow:die.row andColumn:die.column withFace:die.faceValue];
-                }
+            }
         }
 
     }

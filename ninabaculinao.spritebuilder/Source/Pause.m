@@ -8,14 +8,18 @@
 
 #import "Pause.h"
 
-@implementation Pause
+@implementation Pause {
+    
+}
 
 - (void) home {
+    CCLOG(@"home button pressed");
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];
 }
 
 - (void) game {
+    CCLOG(@"game button pressed");
     [[CCDirector sharedDirector] popScene];
 }
 

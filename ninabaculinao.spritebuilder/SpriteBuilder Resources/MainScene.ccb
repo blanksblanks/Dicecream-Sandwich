@@ -390,7 +390,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Helvetica</string>
+						<string>GillSans-Bold</string>
 					</dict>
 					<dict>
 						<key>name</key>
