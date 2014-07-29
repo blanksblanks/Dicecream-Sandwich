@@ -70,7 +70,8 @@
 
 - (void)pause
 {
-   // [self unschedule:@selector(step)];
+    CCScene *pause = [CCBReader loadAsScene:@"Pause"];
+    [[CCDirector sharedDirector] pushScene:pause];
 }
 
 - (void)step

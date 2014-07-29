@@ -7,10 +7,12 @@
 //
 
 #import "CCSprite.h"
+#import "Chain.h"
 
 @interface Grid : CCSprite
 
 - (void)spawnDice;
+//- (NSSet *)removeMatches;
 
 @property (nonatomic, assign) NSInteger match;
 @property (nonatomic, assign) NSInteger score;

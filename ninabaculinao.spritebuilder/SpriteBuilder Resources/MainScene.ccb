@@ -10,11 +10,11 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>25</integer>
+	<integer>27</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
-	<integer>2</integer>
+	<integer>0</integer>
 	<key>currentSequenceId</key>
 	<integer>0</integer>
 	<key>docDimensionsType</key>
@@ -129,8 +129,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -226,10 +224,10 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>162.98606872558594</real>
-							<real>120</real>
+							<real>0.5</real>
+							<real>100</real>
 							<integer>0</integer>
-							<integer>0</integer>
+							<integer>2</integer>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -519,6 +517,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -591,7 +591,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>workingAssets/Titles/DiceSandwich.png</string>
+							<string>workingAssets/Titles/DiceSandwichwithoutdiceoutline.png</string>
 						</array>
 					</dict>
 					<dict>

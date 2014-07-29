@@ -51,7 +51,6 @@ static const NSInteger GRID_COLUMNS = 6;
     _timeSinceDrop = -0.2;
     _dropInterval = 0.5;
     stabilizing = false;
-    canSwipe = true;
     
     self.userInteractionEnabled = TRUE;
     
@@ -83,7 +82,7 @@ static const NSInteger GRID_COLUMNS = 6;
         // if not stabilizing
         if (!stabilizing) {
             [self dieFallDown];
-            self.userInteractionEnabled = TRUE;
+//            self.userInteractionEnabled = TRUE;
             _timeSinceDrop = 0;
 // general idea for a hard drop
 //            if (_timeSinceBottom<0.2 && ![self canBottomMove]) {
@@ -97,7 +96,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 _timeSinceBottom = 0;
             }
         } else if (stabilizing) {
-            self.userInteractionEnabled = FALSE;
+//            self.userInteractionEnabled = FALSE;
             [self dieFillHoles];
             _timeSinceDrop = 0;
             _dropInterval = 0.1;
@@ -170,8 +169,8 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Spawn random pair of dice
 
 - (void)spawnDice {
-	BOOL spawned = FALSE;
-	while (!spawned) {
+//	BOOL spawned = FALSE;
+//	while (!spawned) {
         canSwipe = true;
 		NSInteger firstRow = GRID_ROWS-1;
 		NSInteger firstColumn = arc4random_uniform(GRID_COLUMNS-2); // int bt 0 and 4
@@ -188,15 +187,14 @@ static const NSInteger GRID_COLUMNS = 6;
 		if (positionFree && nextPositionFree) {
 			_currentDie1 = [self addDieAtTile:firstColumn row:firstRow];
             _currentDie2 = [self addDieAtTile:nextColumn row:nextRow];
-            spawned = TRUE;
+//            spawned = TRUE;
         } else {
             CCLOG(@"Game Over");
             CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
             [[CCDirector sharedDirector] replaceScene:mainScene];
-            break;
         }
         
-	}
+//	}
 }
 
 - (Dice*) addDieAtTile:(NSInteger)column row:(NSInteger)row {
@@ -314,7 +312,7 @@ static const NSInteger GRID_COLUMNS = 6;
     // consider adjusting speed of fall with swiping
     // define types of swipes: swipe up or down, long swipe left, short swipe left,
     // long swipe right, short swipe right, tap to rotate
-    if (ydifference > 0.1*(self.contentSize.height) || ydifference < -0.1*(self.contentSize.height)) {
+    if (ydifference > 0.2*(self.contentSize.height) || ydifference < -0.2*(self.contentSize.height)) {
         if (canSwipe) {
             [self dropDown];
             canSwipe = false;
@@ -518,7 +516,7 @@ static const NSInteger GRID_COLUMNS = 6;
                     foundMatch = true;
                     self.match = face;
                 }
-                self.score += (face * 10 * (face+2));
+                self.score += (face * (face+2));
             }
         }
     return foundMatch;
@@ -543,7 +541,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 foundMatch = true;
                 self.match = face;
             }
-            self.score += (face * 10 * (face+2));
+            self.score += (face * (face+2));
         }
     }
     return foundMatch;
@@ -571,7 +569,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 foundMatch = true;
                 self.match = face;
             }
-            self.score += (face * 10 * (face+2));
+            self.score += (face * (face+2));
         }
     }
     return foundMatch;
@@ -597,11 +595,131 @@ static const NSInteger GRID_COLUMNS = 6;
                 foundMatch = true;
                 self.match = face;
             }
-            self.score += (face * 10 * (face+2));
+            self.score += (face * (face+2));
         }
     }
     return foundMatch;
 }
+
+# pragma mark - New match finding methods
+
+
+//- (NSSet*)checktNorthMatchForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
+//    NSMutableSet *set = [NSMutableSet set];
+//    
+//    NSInteger _north = i+face+1;
+//    BOOL foundMatch = false;
+//    BOOL columnIsValid;
+//    for (NSInteger k = i; k <= _north; k++) {
+//        columnIsValid = [self indexValidAndOccupiedForRow:k andColumn:j];
+//        if (columnIsValid == false) {
+//            break;
+//        }
+//    }
+//    if (columnIsValid) {
+//        _northDie = _gridArray[_north][j];
+//        if (face == _northDie.faceValue) {
+//            Chain *chain = [[Chain alloc] init];
+//            chain.chainType = ChainTypeVertical;
+//            do [chain addDice:_gridArray[k][j]]
+//            for (NSInteger k = i; k <= _north; k++) {
+//                [self removeDieAtRow:k andColumn:j];
+//                _gridArray[k][j] = _noTile;
+//                foundMatch = true;
+//                self.match = face;
+//            }
+//            self.score += (face * 10 * (face+2));
+//        }
+//    }
+//    return foundMatch;
+//}
+//
+//- (BOOL)checkSoutMatchForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
+//    NSInteger _south = i-face-1;
+//    BOOL foundMatch = false;
+//    BOOL columnIsValid;
+//    for (NSInteger k = i; k >= _south; k--) {
+//        columnIsValid = [self indexValidAndOccupiedForRow:k andColumn:j];
+//        if (columnIsValid == false) {
+//            break;
+//        }
+//    }
+//    if (columnIsValid) {
+//        _southDie = _gridArray[_south][j];
+//        if (face == _southDie.faceValue) {
+//            for (NSInteger k = i; k >= _south; k--) {
+//                [self removeDieAtRow:k andColumn:j];
+//                _gridArray[k][j] = _noTile;
+//                foundMatch = true;
+//                self.match = face;
+//            }
+//            self.score += (face * 10 * (face+2));
+//        }
+//    }
+//    return foundMatch;
+//}
+//
+//- (NSSet *)checkEastMatchForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
+//    NSInteger _east = j+face+1;
+//    NSMutableSet *set = [NSMutableSet set];
+//    
+//    
+//    for (NSInteger row = 0; row < GRID_ROWS; row++) {
+//        for (NSInteger column = 0; column < GRID_COLUMNS - 2; ) {
+//            
+//    
+//    BOOL foundMatch = false;
+//    BOOL rowIsValid = false;
+//    if (i < GRID_ROWS-1) {
+//        for (NSInteger k = j; k <= _east; k++) {
+//            rowIsValid = [self indexValidAndOccupiedForRow:i andColumn:k];
+//            if (rowIsValid == false) {
+//                break;
+//            }
+//        }
+//    }
+//    
+//    if (rowIsValid) {
+//        _eastDie = _gridArray[i][_east];
+//        if (face == _eastDie.faceValue) {
+//            for (NSInteger k = j; k <= _east; k++) {
+//                [self removeDieAtRow:i andColumn:k];
+//                _gridArray[i][k] = _noTile;
+//                foundMatch = true;
+//                self.match = face;
+//            }
+//            self.score += (face * 10 * (face+2));
+//        }
+//    }
+//    return foundMatch;
+//}
+//
+//- (NSSet *)checkWestMatchForRow: (NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
+//    NSInteger _west = j-face-1;
+//    BOOL foundMatch = false;
+//    BOOL rowIsValid;
+//    for (NSInteger k = j; k >= _west; k--) {
+//        rowIsValid = [self indexValidAndOccupiedForRow:i andColumn:k];
+//        if (rowIsValid == false) {
+//            break;
+//        }
+//    }
+//    
+//    if (rowIsValid) {
+//        _westDie = _gridArray[i][_west];
+//        if (face == _westDie.faceValue) {
+//            for (NSInteger k = j; k >= _west; k--) {
+//                [self removeDieAtRow:i andColumn:k];
+//                _gridArray[i][k] = _noTile;
+//                foundMatch = true;
+//                self.match = face;
+//            }
+//            self.score += (face * 10 * (face+2));
+//        }
+//    }
+//    return foundMatch;
+//}
+//
 
 # pragma mark - Remove chains and update score
 
