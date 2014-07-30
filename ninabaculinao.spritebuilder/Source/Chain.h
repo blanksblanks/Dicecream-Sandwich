@@ -11,7 +11,7 @@
 
 @class Dice;
 
-typedef NS_ENUM(NSUInteger, ChainType) {
+typedef NS_ENUM(NSInteger, ChainType) {
     ChainTypeHorizontal,
     ChainTypeVertical,
 };
