@@ -94,7 +94,7 @@ static const NSInteger GRID_COLUMNS = 6;
 //                _timeSinceBottom += delta;
 //            }
             if (![self canBottomMove]) {
-                [self scanForMatches];
+                [self handleMatches];
                 [self spawnDice];
                 _dropInterval = 1.0;
                 _timeSinceDrop = 0.2;
@@ -109,7 +109,7 @@ static const NSInteger GRID_COLUMNS = 6;
             if (!stabilizing) {
                 _dropInterval = 1.0;
                 _timeSinceDrop = 0;
-                [self scanForMatches];
+                [self handleMatches];
                 // for each not stable die, move down
                 // if cant move, set die.stable = true
                 // once done, set stabilizing = false if all die are stable
@@ -496,11 +496,6 @@ static const NSInteger GRID_COLUMNS = 6;
 //    }
 }
 
-- (void) handleMatches {
-    NSSet *chains = [self removeMatches];
-    // TODO: something with the set
-}
-
 - (void)findMatchesForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
     BOOL foundSouthMatch = [self checkSouthForRow:i andColumn:j withFace:face];
     BOOL foundNorthMatch = [self checkNorthForRow:i andColumn:j withFace:face];
@@ -660,7 +655,7 @@ static const NSInteger GRID_COLUMNS = 6;
                             chain.chainType = ChainTypeHorizontal;
                             [chain addDice:die];
                             [set addObject:chain];
-                            [self removeDieAtRow:row andColumn:i];
+//                            [self removeDieAtRow:row andColumn:i];
                         }
                         matchFound = true;
                         self.match = _rightDie.faceValue;
@@ -686,7 +681,7 @@ static const NSInteger GRID_COLUMNS = 6;
                     if (!columnIsValid) {
                         break;
                     }
-                } if (columnIsValid){
+                } if (columnIsValid) {
                     _aboveDie = _gridArray[_aboveRow][column];
                     if (_belowDie.faceValue == _aboveDie.faceValue) {
                         for (NSInteger i = row; i <= _aboveRow; i++) {
@@ -695,7 +690,7 @@ static const NSInteger GRID_COLUMNS = 6;
                             chain.chainType = ChainTypeVertical;
                             [chain addDice:die];
                             [set addObject:chain];
-                            [self removeDieAtRow:i andColumn:column];
+//                            [self removeDieAtRow:i andColumn:column];
                         }
                         matchFound = true;
                         self.match = _belowDie.faceValue;
@@ -719,12 +714,50 @@ static const NSInteger GRID_COLUMNS = 6;
     [self removeDice:verticalChains];
     
     return [horizontalChains setByAddingObjectsFromSet:verticalChains];
+    
+    if (matchFound) {
+        //        iterate through die and set all to stable = false (unless row 0)
+        //        set stabilizing = true
+        for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
+            for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
+                BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
+                if (positionFree == false) {
+                    Dice *die = _gridArray[row][column];
+                    die.stable = false;
+                }
+            }
+        }
+        stabilizing = true;
+    }
+
+}
+
+- (void) handleMatches {
+    NSSet *chains = [self removeMatches];
+    [self animateMatchedDice:chains];
 }
 
 - (void)removeDice:(NSSet *)chains {
     for (Chain *chain in chains) {
-        for (Dice *dice in chain.dice) {
-            _gridArray[dice.row][dice.column] = _noTile;
+        for (Dice *die in chain.dice) {
+            _gridArray[die.row][die.column] = _noTile;
+        }
+    }
+}
+
+- (void)animateMatchedDice:(NSSet *)chains {
+    for (Chain *chain in chains) {
+        for (Dice *die in chain.dice) {
+                CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
+                explosion.autoRemoveOnFinish = TRUE;
+                explosion.position = die.position;
+                [die.parent addChild:explosion];
+                
+                CCActionDelay *delay = [CCActionDelay actionWithDuration:0.3f];
+                CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.3f scale:0.1f];
+                CCActionSequence *sequence = [CCActionSequence actionWithArray:@[delay, scaleDown]];
+                [die runAction:sequence];
+                [die removeFromParent];
         }
     }
 }
