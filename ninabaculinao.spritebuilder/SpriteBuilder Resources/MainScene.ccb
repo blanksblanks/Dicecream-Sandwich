@@ -163,10 +163,10 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>10</real>
+							<real>0.20000000298023224</real>
 							<integer>1</integer>
 							<integer>2</integer>
-							<integer>0</integer>
+							<integer>2</integer>
 						</array>
 					</dict>
 					<dict>
@@ -191,6 +191,8 @@
 						<string>Fortune.ccb</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -517,8 +519,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>

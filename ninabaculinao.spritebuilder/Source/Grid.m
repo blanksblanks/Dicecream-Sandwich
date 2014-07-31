@@ -757,10 +757,10 @@ static const NSInteger GRID_COLUMNS = 6;
     for (Chain *chain in chains) {
         for (Dice *die in chain.dice) {
 // TODO: Figure out the bug with the particle effect
-//                CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
-//                explosion.autoRemoveOnFinish = TRUE;
-//                explosion.position = die.position;
-//                [die.parent addChild:explosion];
+                CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
+                explosion.autoRemoveOnFinish = TRUE;
+                explosion.position = die.position;
+                [self addChild:explosion];
 // TODO: Figure out if it's possible to do a vert + horiz line at once without setting dice.sprite to nil
                 CCActionEaseOut *easeOut = [CCActionEaseOut actionWithDuration:0.75f];
                 CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.75f scale:0.1f];
