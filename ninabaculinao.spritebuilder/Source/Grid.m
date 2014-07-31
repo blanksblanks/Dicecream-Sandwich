@@ -81,32 +81,42 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void) update:(CCTime) delta {
     _timer += delta;
     _timeSinceDrop += delta;
-    _timeSinceBottom += delta;
 
     if (_timeSinceDrop > _dropInterval) {
-        // if not stabilizing
+        // if not stabilizing, let dice fall down
         if (!stabilizing) {
             [self dieFallDown];
-//            self.userInteractionEnabled = TRUE;
             _timeSinceDrop = 0;
-// general idea for a hard drop
-//            if (_timeSinceBottom<0.2 && ![self canBottomMove]) {
-//                _timeSinceBottom += delta;
-//            }
             if (![self canBottomMove]) {
+            
+//            {
+//                _timeSinceBottom = 0;
+//            } else if (_timeSinceBottom < 0.2) {
+//                _timeSinceBottom += delta;
+//            } else {
+//                
+//            }
+                [self trackGridState];
                 [self handleMatches];
                 [self spawnDice];
                 _dropInterval = 1.0;
                 _timeSinceDrop = 0.2;
-                _timeSinceBottom = 0;
-            }
+
+//            }
+//            if (![self canBottomMove]) {
+//                _timeSinceBottom = 0;
+//                _timeSinceBottom += delta;
+//            } if (_timeSinceBottom > 0.25) {
+                            }
         } else if (stabilizing) {
 //            self.userInteractionEnabled = FALSE;
+            [self trackGridState];
             [self dieFillHoles];
             _timeSinceDrop = 0;
             _dropInterval = 0.1;
             stabilizing = [self checkGrid];
             if (!stabilizing) {
+                [self trackGridState];
                 _dropInterval = 1.0;
                 _timeSinceDrop = 0;
                 [self handleMatches];
@@ -169,6 +179,26 @@ static const NSInteger GRID_COLUMNS = 6;
         }
     }
     return stabilizing;
+}
+
+- (void)trackGridState {
+    
+    NSMutableArray *_gridStateArray = [NSMutableArray array];
+    for (NSInteger row = 0; row < GRID_ROWS; row++) {
+        _gridStateArray[row] = [NSMutableArray array];
+        for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
+            BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
+            if (positionFree) {
+                _gridStateArray[row][column] = @0;
+            } else {
+                Dice *die = _gridArray[row][column];
+                NSNumber *face = [NSNumber numberWithInt:die.faceValue];
+                _gridStateArray[row][column] = face;
+            }
+        }
+    }
+    
+    CCLOG(@"%@", _gridStateArray);
 }
 
 # pragma mark - Spawn random pair of dice
@@ -343,9 +373,8 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void)swipeLeft {
-    BOOL bottomCanMove = [self canBottomMove];
     BOOL canMoveLeft = [self indexValidAndUnoccupiedForRow:_currentDie2.row andColumn:_currentDie2.column-1] && [self indexValidAndUnoccupiedForRow:_currentDie1.row andColumn:_currentDie1.column-1];
-    if (bottomCanMove && canMoveLeft) {
+    if (canMoveLeft) {
         _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
         _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
         
@@ -369,9 +398,8 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)swipeRight {
 //    [self move:ccp(1, 0)];
-    BOOL bottomCanMove = [self canBottomMove];
     BOOL canMoveRight = [self indexValidAndUnoccupiedForRow:_currentDie2.row andColumn:_currentDie2.column+1] && [self indexValidAndUnoccupiedForRow:_currentDie1.row andColumn:_currentDie1.column+1];
-    if (bottomCanMove && canMoveRight) {
+    if (canMoveRight) {
         _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
         _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
         
@@ -773,8 +801,21 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void)calculateScores:(NSArray *)chains {
     for (Chain *chain in chains) {
         NSInteger face = ((Dice*) chain.dice[0]).faceValue;
-        // ones = 30, twos = 80, threes = 150, fours = 240, fives = 350, sixes = 480
-        chain.score = face * 10 * ([chain.dice count]);
+        BOOL perfectMatch = false;
+        for (Dice *die in chain.dice) {
+            if (die.faceValue == face) {
+                perfectMatch = true;
+            } else {
+                perfectMatch = false;
+                break;
+            }
+        // Score system: ones = 30, twos = 80, threes = 150, fours = 240, fives = 350, sixes = 480
+        } if (!perfectMatch) {
+            chain.score = face * 10 * ([chain.dice count]);
+        // Perfect match score system: x10
+        } else if (perfectMatch) {
+            chain.score = face * 100 * ([chain.dice count]);
+        }
         
         // for debugging purposes
         NSInteger thing = ((Dice*) chain.dice[0]).faceValue;
