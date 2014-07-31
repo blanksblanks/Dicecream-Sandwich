@@ -655,9 +655,9 @@ static const NSInteger GRID_COLUMNS = 6;
                         for (NSInteger i = column; i <= _rightColumn; i++) {
                             Dice *die = _gridArray[row][i];
                             [chain addDice:die];
-                            [array addObject:chain];
 //                            [self removeDieAtRow:row andColumn:i];
                         }
+                        [array addObject:chain];
                         matchFound = true;
                         self.match = _rightDie.faceValue;
                     }
@@ -690,9 +690,9 @@ static const NSInteger GRID_COLUMNS = 6;
                         for (NSInteger i = row; i <= _aboveRow; i++) {
                             Dice *die = _gridArray[i][column];
                             [chain addDice:die];
-                            [array addObject:chain];
 //                            [self removeDieAtRow:i andColumn:column];
                         }
+                        [array addObject:chain];
                         matchFound = true;
                         self.match = _belowDie.faceValue;
                     }
@@ -756,7 +756,6 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void)animateMatchedDice:(NSArray *)chains {
     for (Chain *chain in chains) {
         for (Dice *die in chain.dice) {
-// TODO: Figure out the bug with the particle effect
                 CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
                 explosion.autoRemoveOnFinish = TRUE;
                 explosion.position = die.position;
@@ -774,7 +773,8 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void)calculateScores:(NSArray *)chains {
     for (Chain *chain in chains) {
         NSInteger face = ((Dice*) chain.dice[0]).faceValue;
-        chain.score = face * 10 * ([chain.dice count] - 2);
+        // ones = 30, twos = 80, threes = 150, fours = 240, fives = 350, sixes = 480
+        chain.score = face * 10 * ([chain.dice count]);
         
         // for debugging purposes
         NSInteger thing = ((Dice*) chain.dice[0]).faceValue;
