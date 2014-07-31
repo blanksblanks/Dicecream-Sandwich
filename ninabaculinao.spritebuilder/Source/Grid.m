@@ -775,9 +775,13 @@ static const NSInteger GRID_COLUMNS = 6;
     for (Chain *chain in chains) {
         NSInteger face = ((Dice*) chain.dice[0]).faceValue;
         chain.score = face * 10 * ([chain.dice count] - 2);
+        
+        // for debugging purposes
         NSInteger thing = ((Dice*) chain.dice[0]).faceValue;
+        NSInteger thing1 = ((Dice*) chain.dice[0]).row;
+        NSInteger thing2 = ((Dice*) chain.dice[0]).column;
         NSInteger otherthing = [chain.dice count];
-        CCLOG(@"Face: %d chain.dice count: %d chainscore: %d", thing, otherthing, chain.score);
+        CCLOG(@"Face: %d Row: %d Column: %d chain.dice count: %d chainscore: %d", thing, thing1, thing2, otherthing, chain.score);
 //        for (Dice *die in chain.dice) {
 //            chain.score = die.faceValue;
 //            
