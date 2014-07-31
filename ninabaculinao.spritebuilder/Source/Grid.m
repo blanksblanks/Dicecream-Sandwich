@@ -640,19 +640,20 @@ static const NSInteger GRID_COLUMNS = 6;
                 // check if row is valid i.e. filled with dice
                 for (NSInteger i = column; i <= _rightColumn; i++) {
                     rowIsValid = [self indexValidAndOccupiedForRow:row andColumn:i];
-                    // if row is not filled, break
+                    // if row is not filled, break loop
                     if (!rowIsValid) {
                         break;
                     }
+                // if there is a valid row, check if right die has matching face
                 } if (rowIsValid) {
                     _rightDie = _gridArray[row][_rightColumn];
-                    // if there is a valid row, check if right die has matching face
+                    // if there is a valid match, init chain
                     if (_leftDie.faceValue == _rightDie.faceValue) {
+                        Chain *chain = [[Chain alloc] init];
+                        chain.chainType = ChainTypeHorizontal;
                         // if there's a match, add each dice to the chain
                         for (NSInteger i = column; i <= _rightColumn; i++) {
                             Dice *die = _gridArray[row][i];
-                            Chain *chain = [[Chain alloc] init];
-                            chain.chainType = ChainTypeHorizontal;
                             [chain addDice:die];
                             [array addObject:chain];
 //                            [self removeDieAtRow:row andColumn:i];
@@ -684,10 +685,10 @@ static const NSInteger GRID_COLUMNS = 6;
                 } if (columnIsValid) {
                     _aboveDie = _gridArray[_aboveRow][column];
                     if (_belowDie.faceValue == _aboveDie.faceValue) {
+                        Chain *chain = [[Chain alloc] init];
+                        chain.chainType = ChainTypeVertical;
                         for (NSInteger i = row; i <= _aboveRow; i++) {
                             Dice *die = _gridArray[i][column];
-                            Chain *chain = [[Chain alloc] init];
-                            chain.chainType = ChainTypeVertical;
                             [chain addDice:die];
                             [array addObject:chain];
 //                            [self removeDieAtRow:i andColumn:column];
@@ -755,11 +756,12 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void)animateMatchedDice:(NSArray *)chains {
     for (Chain *chain in chains) {
         for (Dice *die in chain.dice) {
-                CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
-                explosion.autoRemoveOnFinish = TRUE;
-                explosion.position = die.position;
-                [die.parent addChild:explosion];
-                
+// TODO: Figure out the bug with the particle effect
+//                CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
+//                explosion.autoRemoveOnFinish = TRUE;
+//                explosion.position = die.position;
+//                [die.parent addChild:explosion];
+//                
                 CCActionDelay *delay = [CCActionDelay actionWithDuration:0.3f];
                 CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.3f scale:0.1f];
                 CCActionSequence *sequence = [CCActionSequence actionWithArray:@[delay, scaleDown]];
