@@ -707,14 +707,6 @@ static const NSInteger GRID_COLUMNS = 6;
     NSSet *horizontalChains = [self detectHorizontalMatches];
     NSSet *verticalChains = [self detectVerticalMatches];
     
-    CCLOG(@"Horizontal matches: %@", horizontalChains);
-    CCLOG(@"Vertical matches: %@", verticalChains);
-    
-    [self removeDice:horizontalChains];
-    [self removeDice:verticalChains];
-    
-    return [horizontalChains setByAddingObjectsFromSet:verticalChains];
-    
     if (matchFound) {
         //        iterate through die and set all to stable = false (unless row 0)
         //        set stabilizing = true
@@ -729,7 +721,14 @@ static const NSInteger GRID_COLUMNS = 6;
         }
         stabilizing = true;
     }
-
+    
+    CCLOG(@"Horizontal matches: %@", horizontalChains);
+    CCLOG(@"Vertical matches: %@", verticalChains);
+    
+    [self removeDice:horizontalChains];
+    [self removeDice:verticalChains];
+    
+    return [horizontalChains setByAddingObjectsFromSet:verticalChains];
 }
 
 - (void) handleMatches {
@@ -738,6 +737,7 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void)removeDice:(NSSet *)chains {
+    // remove from _gridArray
     for (Chain *chain in chains) {
         for (Dice *die in chain.dice) {
             _gridArray[die.row][die.column] = _noTile;
