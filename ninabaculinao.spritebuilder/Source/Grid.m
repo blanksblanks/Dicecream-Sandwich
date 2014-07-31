@@ -626,8 +626,8 @@ static const NSInteger GRID_COLUMNS = 6;
 
 # pragma mark - New match finding methods
 
-- (NSSet *)detectHorizontalMatches {
-    NSMutableSet *set = [NSMutableSet set];
+- (NSArray *)detectHorizontalMatches {
+    NSMutableArray *array = [NSMutableArray array];
     // go through every tile in the grid
     for (NSInteger row = 0; row < GRID_ROWS; row++) {
         for (NSInteger column = 0; column < GRID_COLUMNS - 2; column++) {
@@ -654,7 +654,7 @@ static const NSInteger GRID_COLUMNS = 6;
                             Chain *chain = [[Chain alloc] init];
                             chain.chainType = ChainTypeHorizontal;
                             [chain addDice:die];
-                            [set addObject:chain];
+                            [array addObject:chain];
 //                            [self removeDieAtRow:row andColumn:i];
                         }
                         matchFound = true;
@@ -664,11 +664,11 @@ static const NSInteger GRID_COLUMNS = 6;
             }
         }
     }
-    return set;
+    return array;
 }
 
-- (NSSet *)detectVerticalMatches {
-    NSMutableSet *set = [NSMutableSet set];
+- (NSArray *)detectVerticalMatches {
+    NSMutableArray *array = [NSMutableArray array];
     for (NSInteger row = 0; row < GRID_ROWS-2; row++) {
         for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
             BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
@@ -689,7 +689,7 @@ static const NSInteger GRID_COLUMNS = 6;
                             Chain *chain = [[Chain alloc] init];
                             chain.chainType = ChainTypeVertical;
                             [chain addDice:die];
-                            [set addObject:chain];
+                            [array addObject:chain];
 //                            [self removeDieAtRow:i andColumn:column];
                         }
                         matchFound = true;
@@ -699,13 +699,13 @@ static const NSInteger GRID_COLUMNS = 6;
             }
         }
     }
-    return set;
+    return array;
 }
 
 
-- (NSSet *)removeMatches {
-    NSSet *horizontalChains = [self detectHorizontalMatches];
-    NSSet *verticalChains = [self detectVerticalMatches];
+- (NSArray *)removeMatches {
+    NSArray *horizontalChains = [self detectHorizontalMatches];
+    NSArray *verticalChains = [self detectVerticalMatches];
     
     if (matchFound) {
         //        iterate through die and set all to stable = false (unless row 0)
@@ -731,11 +731,11 @@ static const NSInteger GRID_COLUMNS = 6;
     [self calculateScores:horizontalChains];
     [self calculateScores:verticalChains];
     
-    return [horizontalChains setByAddingObjectsFromSet:verticalChains];
+    return [horizontalChains arrayByAddingObjectsFromArray:verticalChains];
 }
 
 - (void) handleMatches {
-    NSSet *chains = [self removeMatches];
+    NSArray *chains = [self removeMatches];
     [self animateMatchedDice:chains];
     
     for (Chain *chain in chains) {
@@ -743,7 +743,7 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-- (void)removeDice:(NSSet *)chains {
+- (void)removeDice:(NSArray *)chains {
     // remove from _gridArray
     for (Chain *chain in chains) {
         for (Dice *die in chain.dice) {
@@ -752,7 +752,7 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-- (void)animateMatchedDice:(NSSet *)chains {
+- (void)animateMatchedDice:(NSArray *)chains {
     for (Chain *chain in chains) {
         for (Dice *die in chain.dice) {
                 CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
@@ -769,10 +769,10 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-- (void)calculateScores:(NSSet *)chains {
+- (void)calculateScores:(NSArray *)chains {
     for (Chain *chain in chains) {
         NSInteger face = ((Dice*) chain.dice[0]).faceValue;
-        chain.score = face * 10;
+        chain.score = face * 10 * ([chain.dice count] - 2);
         NSInteger thing = ((Dice*) chain.dice[0]).faceValue;
         NSInteger otherthing = [chain.dice count];
         CCLOG(@"Face: %d chain.dice count: %d chainscore: %d", thing, otherthing, chain.score);
