@@ -728,12 +728,19 @@ static const NSInteger GRID_COLUMNS = 6;
     [self removeDice:horizontalChains];
     [self removeDice:verticalChains];
     
+    [self calculateScores:horizontalChains];
+    [self calculateScores:verticalChains];
+    
     return [horizontalChains setByAddingObjectsFromSet:verticalChains];
 }
 
 - (void) handleMatches {
     NSSet *chains = [self removeMatches];
     [self animateMatchedDice:chains];
+    
+    for (Chain *chain in chains) {
+        self.score += chain.score;
+    }
 }
 
 - (void)removeDice:(NSSet *)chains {
@@ -761,6 +768,24 @@ static const NSInteger GRID_COLUMNS = 6;
         }
     }
 }
+
+- (void)calculateScores:(NSSet *)chains {
+    for (Chain *chain in chains) {
+        NSInteger face = ((Dice*) chain.dice[0]).faceValue;
+        chain.score = face * 10;
+        NSInteger thing = ((Dice*) chain.dice[0]).faceValue;
+        NSInteger otherthing = [chain.dice count];
+        CCLOG(@"Face: %d chain.dice count: %d chainscore: %d", thing, otherthing, chain.score);
+//        for (Dice *die in chain.dice) {
+//            chain.score = die.faceValue;
+//            
+//        }
+//        chain.score = 60 * ([chain.dice count] - 2);
+//        self.score += (face * (face+2));
+
+    }
+}
+
 
 # pragma mark - Remove chains and update score
 

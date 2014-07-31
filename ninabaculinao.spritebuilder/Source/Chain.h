@@ -19,8 +19,8 @@ typedef NS_ENUM(NSInteger, ChainType) {
 @interface Chain : NSObject
 
 @property (strong, nonatomic, readonly) NSArray *dice;
-
 @property (assign, nonatomic) ChainType chainType;
+@property (nonatomic, assign) NSInteger score;
 
 - (void)addDice:(Dice *)die;
 
