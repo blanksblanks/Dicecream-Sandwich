@@ -761,10 +761,10 @@ static const NSInteger GRID_COLUMNS = 6;
 //                explosion.autoRemoveOnFinish = TRUE;
 //                explosion.position = die.position;
 //                [die.parent addChild:explosion];
-//                
-                CCActionDelay *delay = [CCActionDelay actionWithDuration:0.3f];
-                CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.3f scale:0.1f];
-                CCActionSequence *sequence = [CCActionSequence actionWithArray:@[delay, scaleDown]];
+// TODO: Figure out if it's possible to do a vert + horiz line at once without setting dice.sprite to nil
+                CCActionEaseOut *easeOut = [CCActionEaseOut actionWithDuration:0.75f];
+                CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.75f scale:0.1f];
+                CCActionSequence *sequence = [CCActionSequence actionWithArray:@[easeOut, scaleDown]];
                 [die runAction:sequence];
                 [die removeFromParent];
         }
