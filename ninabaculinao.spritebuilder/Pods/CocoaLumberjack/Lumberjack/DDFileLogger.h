@@ -230,6 +230,9 @@
 - (id)init;
 - (instancetype)initWithLogFileManager:(id <DDLogFileManager>)logFileManager;
 
+// Expose the currentLogFileInfo: method that is implemented already
+- (DDLogFileInfo *)currentLogFileInfo;
+
 /**
  * Log File Rolling:
  * 

@@ -66,13 +66,24 @@
     [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
     [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor greenColor] backgroundColor:nil forFlag:LOG_FLAG_INFO];
     
+    // Specify location for file logger
+//    NSString * applicationDocumentsDirectory = [[[[NSFileManager defaultManager]
+//                                                  //URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject] path];
+//                                                  URLsForDirectory:(NSString *)currentDirectoryPath inDomains:NSUserDomainMask] lastObject] path];
+//                                                  
+//    DDLogFileManagerDefault *documentsFileManager = [[DDLogFileManagerDefault alloc]
+//                                                     initWithLogsDirectory:applicationDocumentsDirectory];
+    
     // Initialize file logger
     DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
+//                                initWithLogFileManager:documentsFileManager];
     
     // Configure file logger
-    [fileLogger setRollingFrequency:60 * 60 * 24];
-    [[fileLogger logFileManager] setMaximumNumberOfLogFiles:20];
+    [fileLogger setRollingFrequency:60 * 60 * 24]; // 1 hour roll
+    [[fileLogger logFileManager] setMaximumNumberOfLogFiles:10];
     [DDLog addLogger:fileLogger];
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    DDLogInfo(@"log file at: %@", [[fileLogger currentLogFileInfo] filePath]);
     
     return YES;
 }
