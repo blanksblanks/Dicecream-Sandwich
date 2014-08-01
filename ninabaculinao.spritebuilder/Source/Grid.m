@@ -623,8 +623,6 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Calculate scores
 
 - (void)calculateScores:(NSArray *)chains {
-    
-    
     for (Chain *chain in chains) {
         NSInteger face = ((Dice*) chain.dice[0]).faceValue;
         BOOL six = (face == 6);
@@ -637,17 +635,21 @@ static const NSInteger GRID_COLUMNS = 6;
                 six = false;
                 break;
             }
-        } if (six && perfectMatch) {
-            chain.score = 1000;
-            self.combo++;
-            // Perfect match score system: x2
-        } else if (perfectMatch) {
-            chain.score = face * 20 * ([chain.dice count]) + (50 * self.combo);
-            self.combo++;
-            // Regular score system: ones = 30, twos = 80, threes = 150, fours = 240, fives = 350, sixes = 480
+        } if ([chains count] > 1) {
+            self.combo += ([chains count] - 1);
         } else {
-            chain.score = face * 10 * ([chain.dice count]) + (50 * self.combo);
-            self.combo++;
+            if (six && perfectMatch) {
+                chain.score = 1000;
+                self.combo++;
+                // Perfect match score system: x2
+            } else if (perfectMatch) {
+                chain.score = face * 20 * ([chain.dice count]) + (50 * self.combo);
+                self.combo++;
+                // Regular score system: ones = 30, twos = 80, threes = 150, fours = 240, fives = 350, sixes = 480
+            } else {
+                chain.score = face * 10 * ([chain.dice count]) + (50 * self.combo);
+                self.combo++;
+            }
         }
         
         // for debugging purposes
