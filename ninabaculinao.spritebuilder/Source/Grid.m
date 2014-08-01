@@ -124,7 +124,6 @@ static const NSInteger GRID_COLUMNS = 6;
                 // if cant move, set die.stable = true
                 // once done, set stabilizing = false if all die are stable
                 // disable user interaction while stabilizing
-                
             }
             
         }
@@ -196,15 +195,12 @@ static const NSInteger GRID_COLUMNS = 6;
             }
         }
     }
-    
     DDLogInfo(@"%@", _gridStateArray);
 }
 
 # pragma mark - Spawn random pair of dice
 
 - (void)spawnDice {
-//	BOOL spawned = FALSE;
-//	while (!spawned) {
         canSwipe = true;
         matchFound = false;
 		NSInteger firstRow = GRID_ROWS-1;
@@ -222,14 +218,11 @@ static const NSInteger GRID_COLUMNS = 6;
 		if (positionFree && nextPositionFree) {
 			_currentDie1 = [self addDieAtTile:firstColumn row:firstRow];
             _currentDie2 = [self addDieAtTile:nextColumn row:nextRow];
-//            spawned = TRUE;
         } else {
             DDLogInfo(@"Game Over");
             CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
             [[CCDirector sharedDirector] replaceScene:mainScene];
         }
-        
-//	}
 }
 
 - (Dice*) addDieAtTile:(NSInteger)column row:(NSInteger)row {
@@ -245,11 +238,6 @@ static const NSInteger GRID_COLUMNS = 6;
 	CCActionSequence *sequence = [CCActionSequence actionWithArray:@[delay, scaleUp]];
 	[die runAction:sequence];
     return die;
-    
-    //    CCActionMoveTo *fall = [CCActionMoveTo actionWithDuration:5.0f position:ccp(die.position.x, 0)];
-    //    CCActionMoveTo *fallSequence = [CCActionSequence actionWithArray:@[delay, fall]];
-    //    [die runAction:fallSequence];
-    
 }
 
 -(Dice*) randomizeNumbers {
@@ -489,10 +477,7 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-# pragma mark - Detect chains to the north, east, south and west
-
-
-# pragma mark - New match finding methods
+# pragma mark - Detect horizontal and vertical chains
 
 - (NSArray *)detectHorizontalMatches {
     NSMutableArray *array = [NSMutableArray array];
@@ -523,7 +508,6 @@ static const NSInteger GRID_COLUMNS = 6;
                         for (NSInteger i = column; i <= _rightColumn; i++) {
                             Dice *die = _gridArray[row][i];
                             [chain addDice:die];
-//                            [self removeDieAtRow:row andColumn:i];
                         }
                         [array addObject:chain];
                         matchFound = true;
@@ -558,7 +542,6 @@ static const NSInteger GRID_COLUMNS = 6;
                         for (NSInteger i = row; i <= _aboveRow; i++) {
                             Dice *die = _gridArray[i][column];
                             [chain addDice:die];
-//                            [self removeDieAtRow:i andColumn:column];
                         }
                         [array addObject:chain];
                         matchFound = true;
@@ -571,14 +554,15 @@ static const NSInteger GRID_COLUMNS = 6;
     return array;
 }
 
+# pragma mark - Remove and handle matches
 
 - (NSArray *)removeMatches {
     NSArray *horizontalChains = [self detectHorizontalMatches];
     NSArray *verticalChains = [self detectVerticalMatches];
     
+    //        iterate through die and set all to stable = false (unless row 0)
+    //        set stabilizing = true
     if (matchFound) {
-        //        iterate through die and set all to stable = false (unless row 0)
-        //        set stabilizing = true
         for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
             for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
                 BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
@@ -612,15 +596,6 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-- (void)removeDice:(NSArray *)chains {
-    // remove from _gridArray
-    for (Chain *chain in chains) {
-        for (Dice *die in chain.dice) {
-            _gridArray[die.row][die.column] = _noTile;
-        }
-    }
-}
-
 - (void)animateMatchedDice:(NSArray *)chains {
     for (Chain *chain in chains) {
         for (Dice *die in chain.dice) {
@@ -637,6 +612,16 @@ static const NSInteger GRID_COLUMNS = 6;
         }
     }
 }
+
+- (void)removeDice:(NSArray *)chains {
+    for (Chain *chain in chains) {
+        for (Dice *die in chain.dice) {
+            _gridArray[die.row][die.column] = _noTile;
+        }
+    }
+}
+
+# pragma mark - Calculate scores
 
 - (void)calculateScores:(NSArray *)chains {
     for (Chain *chain in chains) {
@@ -663,13 +648,6 @@ static const NSInteger GRID_COLUMNS = 6;
         NSInteger thing2 = ((Dice*) chain.dice[0]).column;
         NSInteger otherthing = [chain.dice count];
         DDLogInfo(@"Face: %d Row: %d Column: %d chain.dice count: %d chainscore: %d", thing, thing1, thing2, otherthing, chain.score);
-//        for (Dice *die in chain.dice) {
-//            chain.score = die.faceValue;
-//            
-//        }
-//        chain.score = 60 * ([chain.dice count] - 2);
-//        self.score += (face * (face+2));
-
     }
 }
 
@@ -763,6 +741,10 @@ static const NSInteger GRID_COLUMNS = 6;
 
 
 
+
+//    CCActionMoveTo *fall = [CCActionMoveTo actionWithDuration:5.0f position:ccp(die.position.x, 0)];
+//    CCActionMoveTo *fallSequence = [CCActionSequence actionWithArray:@[delay, fall]];
+//    [die runAction:fallSequence];
 
 
 
