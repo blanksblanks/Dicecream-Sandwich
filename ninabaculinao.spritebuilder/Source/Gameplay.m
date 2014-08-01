@@ -15,7 +15,9 @@
 @implementation Gameplay {
     Grid *_grid;
     CCLabelTTF *_scoreLabel;
-    CCLabelBMFont *_timeLabel;
+    CCLabelTTF *_targetLabel;
+    CCLabelTTF *_levelLabel;
+    CCLabelTTF *_timeLabel;
     CCLabelTTF *_matchLabel;
 }
 

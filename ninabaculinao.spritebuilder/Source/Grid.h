@@ -17,7 +17,9 @@
 
 @property (nonatomic, assign) NSInteger match;
 @property (nonatomic, assign) NSInteger score;
-@property (assign, nonatomic) NSInteger combo;
+@property (nonatomic, assign) NSInteger targetScore;
+@property (nonatomic, assign) NSInteger level;
+@property (nonatomic, assign) NSInteger combo;
 @property (nonatomic, assign) float timer;
 
 @end
