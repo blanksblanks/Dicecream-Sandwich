@@ -18,7 +18,7 @@
 	CGFloat _tileMarginVertical; //0.9285714285714286
 	CGFloat _tileMarginHorizontal; //0.6153846153846154 2
     
-    NSMutableArray *_gridArray; // a 2d array
+    NSMutableArray *_gridArray;
     NSNull *_noTile;
     
     float _timer;
@@ -29,12 +29,6 @@
     Dice *_currentDie1;
     Dice *_currentDie2;
     
-    NSMutableArray *_matchPoints;
-    Dice *_checkDie;
-    Dice *_eastDie;
-    Dice *_westDie;
-    Dice *_northDie;
-    Dice *_southDie;
     Dice *_leftDie;
     Dice *_rightDie;
     Dice *_aboveDie;
@@ -46,7 +40,7 @@
     BOOL matchFound;
 }
 
-// two constants to describe the amount of rows and columns
+// two constants to describe the number of rows and columns
 static const NSInteger GRID_ROWS = 12;
 static const NSInteger GRID_COLUMNS = 6;
 
@@ -203,7 +197,8 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void)spawnDice {
         canSwipe = true;
         matchFound = false;
-		NSInteger firstRow = GRID_ROWS-1;
+		
+        NSInteger firstRow = GRID_ROWS-1;
 		NSInteger firstColumn = arc4random_uniform(GRID_COLUMNS-2); // int bt 0 and 4
         NSInteger nextRow = firstRow - arc4random_uniform(2);
         NSInteger nextColumn;
@@ -573,10 +568,13 @@ static const NSInteger GRID_COLUMNS = 6;
             }
         }
         stabilizing = true;
+    } if (!matchFound) {
+        [self resetCombo];
     }
     
     DDLogInfo(@"Horizontal matches: %@", horizontalChains);
     DDLogInfo(@"Vertical matches: %@", verticalChains);
+    DDLogInfo(@"Current streak: %d", self.combo);
     
     [self removeDice:horizontalChains];
     [self removeDice:verticalChains];
@@ -613,6 +611,7 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
+
 - (void)removeDice:(NSArray *)chains {
     for (Chain *chain in chains) {
         for (Dice *die in chain.dice) {
@@ -624,22 +623,31 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Calculate scores
 
 - (void)calculateScores:(NSArray *)chains {
+    
+    
     for (Chain *chain in chains) {
         NSInteger face = ((Dice*) chain.dice[0]).faceValue;
+        BOOL six = (face == 6);
         BOOL perfectMatch = false;
         for (Dice *die in chain.dice) {
             if (die.faceValue == face) {
                 perfectMatch = true;
             } else {
                 perfectMatch = false;
+                six = false;
                 break;
             }
-        // Score system: ones = 30, twos = 80, threes = 150, fours = 240, fives = 350, sixes = 480
-        } if (!perfectMatch) {
-            chain.score = face * 10 * ([chain.dice count]);
-        // Perfect match score system: x10
+        } if (six && perfectMatch) {
+            chain.score = 1000;
+            self.combo++;
+            // Perfect match score system: x2
         } else if (perfectMatch) {
-            chain.score = face * 100 * ([chain.dice count]);
+            chain.score = face * 20 * ([chain.dice count]) + (50 * self.combo);
+            self.combo++;
+            // Regular score system: ones = 30, twos = 80, threes = 150, fours = 240, fives = 350, sixes = 480
+        } else {
+            chain.score = face * 10 * ([chain.dice count]) + (50 * self.combo);
+            self.combo++;
         }
         
         // for debugging purposes
@@ -649,6 +657,10 @@ static const NSInteger GRID_COLUMNS = 6;
         NSInteger otherthing = [chain.dice count];
         DDLogInfo(@"Face: %d Row: %d Column: %d chain.dice count: %d chainscore: %d", thing, thing1, thing2, otherthing, chain.score);
     }
+}
+
+- (void)resetCombo {
+    self.combo = 0;
 }
 
 
@@ -673,9 +685,6 @@ static const NSInteger GRID_COLUMNS = 6;
 	CCActionSequence *sequence = [CCActionSequence actionWithArray:@[delay, scaleDown]];
 	[die runAction:sequence];
 	[self removeChild:die];
-    
-//    self.score += die.faceValue;
-    
 }
 
 # pragma mark - Fill in holes
@@ -748,7 +757,7 @@ static const NSInteger GRID_COLUMNS = 6;
 
 
 
-# pragma mark - Move dice
+//# pragma mark - Move dice
 
 //- (void)move:(CGPoint)direction {
 //    // apply negative vector until reaching boundary, this way we get the tile that is the furthest away

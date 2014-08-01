@@ -12,10 +12,12 @@
 @interface Grid : CCSprite
 
 - (void)spawnDice;
+- (void)resetCombo;
 //- (NSSet *)removeMatches;
 
 @property (nonatomic, assign) NSInteger match;
 @property (nonatomic, assign) NSInteger score;
+@property (assign, nonatomic) NSInteger combo;
 @property (nonatomic, assign) float timer;
 
 @end
