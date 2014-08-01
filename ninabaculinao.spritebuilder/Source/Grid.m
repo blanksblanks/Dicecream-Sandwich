@@ -144,7 +144,6 @@ static const NSInteger GRID_COLUMNS = 6;
 	
     // set up initial x and y positions
 	float x = _tileMarginHorizontal;
-
 	float y = _tileMarginVertical;
     
     // initialize the array as a blank NSMutableArray
@@ -198,11 +197,7 @@ static const NSInteger GRID_COLUMNS = 6;
         }
     }
     
-    CCLOG(@"%@", _gridStateArray);
-    DDLogError(@"This is an error.");
-    DDLogWarn(@"This is a warning.");
-    DDLogInfo(@"This is just a message.");
-    DDLogVerbose(@"This is a verbose message.");
+    DDLogInfo(@"%@", _gridStateArray);
 }
 
 # pragma mark - Spawn random pair of dice
@@ -229,7 +224,7 @@ static const NSInteger GRID_COLUMNS = 6;
             _currentDie2 = [self addDieAtTile:nextColumn row:nextRow];
 //            spawned = TRUE;
         } else {
-            CCLOG(@"Game Over");
+            DDLogInfo(@"Game Over");
             CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
             [[CCDirector sharedDirector] replaceScene:mainScene];
         }
@@ -496,165 +491,6 @@ static const NSInteger GRID_COLUMNS = 6;
 
 # pragma mark - Detect chains to the north, east, south and west
 
-- (void)scanForMatches {
-    [self detectHorizontalMatches];
-    [self detectVerticalMatches];
-    if (matchFound) {
-        //        iterate through die and set all to stable = false (unless row 0)
-        //        set stabilizing = true
-        for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
-            for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
-                BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
-                if (positionFree == false) {
-                    Dice *die = _gridArray[row][column];
-                    die.stable = false;
-                }
-            }
-        }
-        stabilizing = true;
-    }
-
-//    [self findMatchesForRow:_currentDie1.row andColumn:_currentDie1.column withFace:_currentDie1.faceValue];
-//    [self findMatchesForRow:_currentDie2.row andColumn:_currentDie2.column withFace:_currentDie2.faceValue];
-//    for (NSInteger row = 0; row < GRID_ROWS; row++) { // start from second row
-//        for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
-//            BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
-//            if (!positionFree) {
-//                Dice *die = _gridArray[row][column];
-//                [self findMatchesForRow:die.row andColumn:die.column withFace:die.faceValue];
-//            }
-//        }
-//
-//    }
-}
-
-- (void)findMatchesForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
-    BOOL foundSouthMatch = [self checkSouthForRow:i andColumn:j withFace:face];
-    BOOL foundNorthMatch = [self checkNorthForRow:i andColumn:j withFace:face];
-    BOOL foundEastMatch = [self checkEastForRow:i andColumn:j withFace:face];
-    BOOL foundWestMatch = [self checkWestForRow:i andColumn:j withFace:face];
-    
-    BOOL foundMatch = (foundSouthMatch || foundNorthMatch || foundEastMatch || foundWestMatch);
-    if (foundMatch) {
-//        iterate through die and set all to stable = false (unless row 0)
-//        set stabilizing = true
-        for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
-            for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
-                BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
-                if (positionFree == false) {
-                    Dice *die = _gridArray[row][column];
-                    die.stable = false;
-                }
-            }
-        }
-        stabilizing = true;
-    }
-
-}
-
-- (BOOL)checkNorthForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
-    NSInteger _north = i+face+1;
-    BOOL foundMatch = false;
-    BOOL columnIsValid;
-    for (NSInteger k = i; k <= _north; k++) {
-        columnIsValid = [self indexValidAndOccupiedForRow:k andColumn:j];
-        if (columnIsValid == false) {
-            break;
-        }
-    }
-    if (columnIsValid) {
-            _northDie = _gridArray[_north][j];
-            if (face == _northDie.faceValue) {
-                for (NSInteger k = i; k <= _north; k++) {
-                    [self removeDieAtRow:k andColumn:j];
-                    _gridArray[k][j] = _noTile;
-                    foundMatch = true;
-                    self.match = face;
-                }
-                self.score += (face * (face+2));
-            }
-        }
-    return foundMatch;
-}
-
-- (BOOL)checkSouthForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
-    NSInteger _south = i-face-1;
-    BOOL foundMatch = false;
-    BOOL columnIsValid;
-    for (NSInteger k = i; k >= _south; k--) {
-        columnIsValid = [self indexValidAndOccupiedForRow:k andColumn:j];
-        if (columnIsValid == false) {
-            break;
-        }
-    }
-    if (columnIsValid) {
-        _southDie = _gridArray[_south][j];
-        if (face == _southDie.faceValue) {
-            for (NSInteger k = i; k >= _south; k--) {
-                [self removeDieAtRow:k andColumn:j];
-                _gridArray[k][j] = _noTile;
-                foundMatch = true;
-                self.match = face;
-            }
-            self.score += (face * (face+2));
-        }
-    }
-    return foundMatch;
-}
-
-- (BOOL)checkEastForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
-    NSInteger _east = j+face+1;
-    BOOL foundMatch = false;
-    BOOL rowIsValid = false;
-    if (i < GRID_ROWS-1) {
-        for (NSInteger k = j; k <= _east; k++) {
-            rowIsValid = [self indexValidAndOccupiedForRow:i andColumn:k];
-            if (rowIsValid == false) {
-                break;
-            }
-        }
-    }
-    
-    if (rowIsValid) {
-        _eastDie = _gridArray[i][_east];
-        if (face == _eastDie.faceValue) {
-            for (NSInteger k = j; k <= _east; k++) {
-                [self removeDieAtRow:i andColumn:k];
-                _gridArray[i][k] = _noTile;
-                foundMatch = true;
-                self.match = face;
-            }
-            self.score += (face * (face+2));
-        }
-    }
-    return foundMatch;
-}
-
-- (BOOL)checkWestForRow: (NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
-    NSInteger _west = j-face-1;
-    BOOL foundMatch = false;
-    BOOL rowIsValid;
-    for (NSInteger k = j; k >= _west; k--) {
-        rowIsValid = [self indexValidAndOccupiedForRow:i andColumn:k];
-        if (rowIsValid == false) {
-            break;
-        }
-    }
-    
-    if (rowIsValid) {
-        _westDie = _gridArray[i][_west];
-        if (face == _westDie.faceValue) {
-            for (NSInteger k = j; k >= _west; k--) {
-                [self removeDieAtRow:i andColumn:k];
-                _gridArray[i][k] = _noTile;
-                foundMatch = true;
-                self.match = face;
-            }
-            self.score += (face * (face+2));
-        }
-    }
-    return foundMatch;
-}
 
 # pragma mark - New match finding methods
 
@@ -755,8 +591,8 @@ static const NSInteger GRID_COLUMNS = 6;
         stabilizing = true;
     }
     
-    CCLOG(@"Horizontal matches: %@", horizontalChains);
-    CCLOG(@"Vertical matches: %@", verticalChains);
+    DDLogInfo(@"Horizontal matches: %@", horizontalChains);
+    DDLogInfo(@"Vertical matches: %@", verticalChains);
     
     [self removeDice:horizontalChains];
     [self removeDice:verticalChains];
@@ -826,7 +662,7 @@ static const NSInteger GRID_COLUMNS = 6;
         NSInteger thing1 = ((Dice*) chain.dice[0]).row;
         NSInteger thing2 = ((Dice*) chain.dice[0]).column;
         NSInteger otherthing = [chain.dice count];
-        CCLOG(@"Face: %d Row: %d Column: %d chain.dice count: %d chainscore: %d", thing, thing1, thing2, otherthing, chain.score);
+        DDLogInfo(@"Face: %d Row: %d Column: %d chain.dice count: %d chainscore: %d", thing, thing1, thing2, otherthing, chain.score);
 //        for (Dice *die in chain.dice) {
 //            chain.score = die.faceValue;
 //            
@@ -995,4 +831,164 @@ static const NSInteger GRID_COLUMNS = 6;
 //    CGPoint newPosition = [self positionForTile:newX row:newY];
 //    CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:2.0f position:newPosition];
 //    [die runAction:moveTo];
+//}
+//
+//- (void)scanForMatches {
+//    [self detectHorizontalMatches];
+//    [self detectVerticalMatches];
+//    if (matchFound) {
+//        //        iterate through die and set all to stable = false (unless row 0)
+//        //        set stabilizing = true
+//        for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
+//            for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
+//                BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
+//                if (positionFree == false) {
+//                    Dice *die = _gridArray[row][column];
+//                    die.stable = false;
+//                }
+//            }
+//        }
+//        stabilizing = true;
+//    }
+//    
+//    //    [self findMatchesForRow:_currentDie1.row andColumn:_currentDie1.column withFace:_currentDie1.faceValue];
+//    //    [self findMatchesForRow:_currentDie2.row andColumn:_currentDie2.column withFace:_currentDie2.faceValue];
+//    //    for (NSInteger row = 0; row < GRID_ROWS; row++) { // start from second row
+//    //        for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
+//    //            BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
+//    //            if (!positionFree) {
+//    //                Dice *die = _gridArray[row][column];
+//    //                [self findMatchesForRow:die.row andColumn:die.column withFace:die.faceValue];
+//    //            }
+//    //        }
+//    //
+//    //    }
+//}
+//
+//- (void)findMatchesForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
+//    BOOL foundSouthMatch = [self checkSouthForRow:i andColumn:j withFace:face];
+//    BOOL foundNorthMatch = [self checkNorthForRow:i andColumn:j withFace:face];
+//    BOOL foundEastMatch = [self checkEastForRow:i andColumn:j withFace:face];
+//    BOOL foundWestMatch = [self checkWestForRow:i andColumn:j withFace:face];
+//    
+//    BOOL foundMatch = (foundSouthMatch || foundNorthMatch || foundEastMatch || foundWestMatch);
+//    if (foundMatch) {
+//        //        iterate through die and set all to stable = false (unless row 0)
+//        //        set stabilizing = true
+//        for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
+//            for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
+//                BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
+//                if (positionFree == false) {
+//                    Dice *die = _gridArray[row][column];
+//                    die.stable = false;
+//                }
+//            }
+//        }
+//        stabilizing = true;
+//    }
+//    
+//}
+//
+//- (BOOL)checkNorthForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
+//    NSInteger _north = i+face+1;
+//    BOOL foundMatch = false;
+//    BOOL columnIsValid;
+//    for (NSInteger k = i; k <= _north; k++) {
+//        columnIsValid = [self indexValidAndOccupiedForRow:k andColumn:j];
+//        if (columnIsValid == false) {
+//            break;
+//        }
+//    }
+//    if (columnIsValid) {
+//        _northDie = _gridArray[_north][j];
+//        if (face == _northDie.faceValue) {
+//            for (NSInteger k = i; k <= _north; k++) {
+//                [self removeDieAtRow:k andColumn:j];
+//                _gridArray[k][j] = _noTile;
+//                foundMatch = true;
+//                self.match = face;
+//            }
+//            self.score += (face * (face+2));
+//        }
+//    }
+//    return foundMatch;
+//}
+//
+//- (BOOL)checkSouthForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
+//    NSInteger _south = i-face-1;
+//    BOOL foundMatch = false;
+//    BOOL columnIsValid;
+//    for (NSInteger k = i; k >= _south; k--) {
+//        columnIsValid = [self indexValidAndOccupiedForRow:k andColumn:j];
+//        if (columnIsValid == false) {
+//            break;
+//        }
+//    }
+//    if (columnIsValid) {
+//        _southDie = _gridArray[_south][j];
+//        if (face == _southDie.faceValue) {
+//            for (NSInteger k = i; k >= _south; k--) {
+//                [self removeDieAtRow:k andColumn:j];
+//                _gridArray[k][j] = _noTile;
+//                foundMatch = true;
+//                self.match = face;
+//            }
+//            self.score += (face * (face+2));
+//        }
+//    }
+//    return foundMatch;
+//}
+//
+//- (BOOL)checkEastForRow:(NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
+//    NSInteger _east = j+face+1;
+//    BOOL foundMatch = false;
+//    BOOL rowIsValid = false;
+//    if (i < GRID_ROWS-1) {
+//        for (NSInteger k = j; k <= _east; k++) {
+//            rowIsValid = [self indexValidAndOccupiedForRow:i andColumn:k];
+//            if (rowIsValid == false) {
+//                break;
+//            }
+//        }
+//    }
+//    
+//    if (rowIsValid) {
+//        _eastDie = _gridArray[i][_east];
+//        if (face == _eastDie.faceValue) {
+//            for (NSInteger k = j; k <= _east; k++) {
+//                [self removeDieAtRow:i andColumn:k];
+//                _gridArray[i][k] = _noTile;
+//                foundMatch = true;
+//                self.match = face;
+//            }
+//            self.score += (face * (face+2));
+//        }
+//    }
+//    return foundMatch;
+//}
+//
+//- (BOOL)checkWestForRow: (NSInteger)i andColumn:(NSInteger)j withFace:(NSInteger)face {
+//    NSInteger _west = j-face-1;
+//    BOOL foundMatch = false;
+//    BOOL rowIsValid;
+//    for (NSInteger k = j; k >= _west; k--) {
+//        rowIsValid = [self indexValidAndOccupiedForRow:i andColumn:k];
+//        if (rowIsValid == false) {
+//            break;
+//        }
+//    }
+//    
+//    if (rowIsValid) {
+//        _westDie = _gridArray[i][_west];
+//        if (face == _westDie.faceValue) {
+//            for (NSInteger k = j; k >= _west; k--) {
+//                [self removeDieAtRow:i andColumn:k];
+//                _gridArray[i][k] = _noTile;
+//                foundMatch = true;
+//                self.match = face;
+//            }
+//            self.score += (face * (face+2));
+//        }
+//    }
+//    return foundMatch;
 //}

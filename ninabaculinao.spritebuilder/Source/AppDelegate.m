@@ -66,13 +66,16 @@
     [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
     [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor greenColor] backgroundColor:nil forFlag:LOG_FLAG_INFO];
     
+//    NSString* url = (NSString *)[[NSFileManager defaultManager] currentDirectoryPath];
+//    NSLog(@"%@", url);
+    
     // Specify location for file logger
 //    NSString * applicationDocumentsDirectory = [[[[NSFileManager defaultManager]
 //                                                  //URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject] path];
-//                                                  URLsForDirectory:(NSString *)currentDirectoryPath inDomains:NSUserDomainMask] lastObject] path];
-//                                                  
+//                                                  URLsForDirectory:url inDomains:NSUserDomainMask] lastObject] path];
+//    
 //    DDLogFileManagerDefault *documentsFileManager = [[DDLogFileManagerDefault alloc]
-//                                                     initWithLogsDirectory:applicationDocumentsDirectory];
+//                                                     initWithLogsDirectory:url];
     
     // Initialize file logger
     DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
