@@ -42,6 +42,7 @@
     [_grid addObserver:self forKeyPath:@"match" options:0 context:NULL];
     [_grid addObserver:self forKeyPath:@"targetScore" options:0 context:NULL];
     [_grid addObserver:self forKeyPath:@"level" options:0 context:NULL];
+    [_grid loadLevel];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -55,10 +56,10 @@
     if ([keyPath isEqualToString:@"match"]) {
         _matchLabel.string = [NSString stringWithFormat:@"%ld", (long) _grid.match];
     }
-    if ([keyPath isEqualToString:@"match"]) {
+    if ([keyPath isEqualToString:@"targetScore"]) {
         _targetLabel.string = [NSString stringWithFormat:@"%ld", (long) _grid.targetScore];
     }
-    if ([keyPath isEqualToString:@"match"]) {
+    if ([keyPath isEqualToString:@"level"]) {
         _levelLabel.string = [NSString stringWithFormat:@"%ld", (long) _grid.level];
     }
 }
@@ -66,6 +67,8 @@
 - (void)dealloc {
     [_grid removeObserver:self forKeyPath:@"score"];
     [_grid removeObserver:self forKeyPath:@"match"];
+    [_grid removeObserver:self forKeyPath:@"targetScore"];
+    [_grid removeObserver:self forKeyPath:@"level"];
 }
 
 - (void)update:(CCTime)delta {

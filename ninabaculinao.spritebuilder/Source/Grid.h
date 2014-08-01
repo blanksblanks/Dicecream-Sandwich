@@ -13,11 +13,13 @@
 
 - (void)spawnDice;
 - (void)resetCombo;
+- (void)loadLevel;
 //- (NSSet *)removeMatches;
 
 @property (nonatomic, assign) NSInteger match;
 @property (nonatomic, assign) NSInteger score;
 @property (nonatomic, assign) NSInteger targetScore;
+@property (nonatomic, assign) NSInteger possibilities;
 @property (nonatomic, assign) NSInteger level;
 @property (nonatomic, assign) NSInteger combo;
 @property (nonatomic, assign) float timer;

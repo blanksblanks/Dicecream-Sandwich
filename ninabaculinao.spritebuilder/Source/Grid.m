@@ -45,10 +45,12 @@ static const NSInteger GRID_ROWS = 12;
 static const NSInteger GRID_COLUMNS = 6;
 
 - (void)didLoadFromCCB{
-
-    self.score = 0;
-    [self loadLevel];
     
+//    self.level = 1;
+//    self.levelSpeed = 1.0f;
+//    self.targetScore = 600;
+//    self.possibilities = 3;
+
     _timer = 0;
     _timeSinceDrop = -0.2;
     _dropInterval = self.levelSpeed;
@@ -80,14 +82,15 @@ static const NSInteger GRID_COLUMNS = 6;
     NSArray *levels = [root objectForKey: @"Levels"];
     
     if (self.score == 0) {
-        self.level = 0;
+        self.level = 1;
     } else if (self.score >= self.targetScore) {
         self.level++;
     }
     
-    NSDictionary *dict = levels[self.level];
+    NSDictionary *dict = levels[self.level-1];
     self.levelSpeed = [dict[@"levelSpeed"] floatValue];
     self.targetScore = [dict[@"targetScore"] intValue];
+    self.possibilities = [dict[@"possibilities"] intValue];
 }
 
 # pragma mark - Update method
@@ -132,9 +135,9 @@ static const NSInteger GRID_COLUMNS = 6;
             stabilizing = [self checkGrid];
             if (!stabilizing) {
                 [self trackGridState];
+                [self handleMatches]; // some bug happening here
                 _dropInterval = self.levelSpeed;
                 _timeSinceDrop = 0;
-                [self handleMatches];
                 // for each not stable die, move down
                 // if cant move, set die.stable = true
                 // once done, set stabilizing = false if all die are stable
@@ -212,9 +215,11 @@ static const NSInteger GRID_COLUMNS = 6;
         }
     }
     
+    // Print out grid state at data level
     for (NSInteger row = GRID_ROWS - 1; row > 0; row--) {
-        DDLogInfo(@"[%ld,%ld,%ld,%ld,%ld,%ld]", (long)_gridStateArray[row][0], (long)_gridStateArray[row][1], (long)_gridStateArray[row][2], (long)_gridStateArray[row][3], (long)_gridStateArray[row][4],  (long)_gridStateArray[row][5]);
+        DDLogInfo(@"[%@ %@ %@ %@ %@ %@]", _gridStateArray[row][0], _gridStateArray[row][1], _gridStateArray[row][2], _gridStateArray[row][3], _gridStateArray[row][4], _gridStateArray[row][5]);
     }
+    DDLogInfo(@"--------------");
 }
 
 # pragma mark - Spawn random pair of dice
@@ -261,7 +266,7 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 -(Dice*) randomizeNumbers {
-    NSInteger random = arc4random_uniform(4)+1;
+    NSInteger random = arc4random_uniform(self.possibilities)+1;
     Dice *die;
     switch(random)
     {
