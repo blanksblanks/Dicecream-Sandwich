@@ -28,6 +28,10 @@
 #import "AppDelegate.h"
 #import "CCBuilderReader.h"
 
+#import "DDASLLogger.h"
+#import "DDTTYLogger.h"
+#import "DDFileLogger.h"
+
 @implementation AppController
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -53,6 +57,22 @@
     //[cocos2dSetup setObject:kEAGLColorFormatRGB565 forKey:CCConfigPixelFormat];
     
     [self setupCocos2dWithOptions:cocos2dSetup];
+    
+    // Configure CocoaLumberjack and override point for customization after application launch.
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    
+    // Enable Colors
+    [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
+    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor greenColor] backgroundColor:nil forFlag:LOG_FLAG_INFO];
+    
+    // Initialize file logger
+    DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
+    
+    // Configure file logger
+    [fileLogger setRollingFrequency:60 * 60 * 24];
+    [[fileLogger logFileManager] setMaximumNumberOfLogFiles:20];
+    [DDLog addLogger:fileLogger];
     
     return YES;
 }

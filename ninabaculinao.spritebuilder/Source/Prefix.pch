@@ -14,4 +14,11 @@
 #import "cocos2d.h"
 #import "cocos2d-ui.h"
 #import "CCBuilderReader.h"
+#import "DDLog.h"
+#endif
+
+#ifdef DEBUG
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+#else
+static const int ddLogLevel = LOG_LEVEL_ERROR;
 #endif

@@ -199,6 +199,10 @@ static const NSInteger GRID_COLUMNS = 6;
     }
     
     CCLOG(@"%@", _gridStateArray);
+    DDLogError(@"This is an error.");
+    DDLogWarn(@"This is a warning.");
+    DDLogInfo(@"This is just a message.");
+    DDLogVerbose(@"This is a verbose message.");
 }
 
 # pragma mark - Spawn random pair of dice
