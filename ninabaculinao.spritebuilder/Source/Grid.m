@@ -53,7 +53,7 @@ static const NSInteger GRID_COLUMNS = 6;
 
     _timer = 0;
     _timeSinceDrop = -0.2;
-    _dropInterval = self.levelSpeed;
+    _dropInterval = 1.0;
     stabilizing = false;
     
     self.userInteractionEnabled = TRUE;
@@ -113,6 +113,7 @@ static const NSInteger GRID_COLUMNS = 6;
 //            } else {
 //                
 //            }
+                CCLOG(@"Dice fell to bottom");
                 [self trackGridState];
                 [self handleMatches];
                 [self loadLevel];
@@ -128,12 +129,16 @@ static const NSInteger GRID_COLUMNS = 6;
                             }
         } else if (stabilizing) {
 //            self.userInteractionEnabled = FALSE;
+            CCLOG(@"Matches handled");
             [self trackGridState];
             [self dieFillHoles];
+            CCLOG(@"Holes filled in");
+            [self trackGridState];
             _timeSinceDrop = 0;
             _dropInterval = 0.1;
             stabilizing = [self checkGrid];
             if (!stabilizing) {
+                CCLOG(@"Grid stabilized");
                 [self trackGridState];
                 [self handleMatches]; // some bug happening here
                 _dropInterval = self.levelSpeed;
@@ -216,10 +221,10 @@ static const NSInteger GRID_COLUMNS = 6;
     }
     
     // Print out grid state at data level
-    for (NSInteger row = GRID_ROWS - 1; row > 0; row--) {
-        DDLogInfo(@"[%@ %@ %@ %@ %@ %@]", _gridStateArray[row][0], _gridStateArray[row][1], _gridStateArray[row][2], _gridStateArray[row][3], _gridStateArray[row][4], _gridStateArray[row][5]);
+    for (NSInteger row = GRID_ROWS - 1; row >= 0; row--) {
+        CCLOG(@"[%@ %@ %@ %@ %@ %@] :%d", _gridStateArray[row][0], _gridStateArray[row][1], _gridStateArray[row][2], _gridStateArray[row][3], _gridStateArray[row][4], _gridStateArray[row][5], row);
     }
-    DDLogInfo(@"--------------");
+    CCLOG(@"--------------");
 }
 
 # pragma mark - Spawn random pair of dice
@@ -681,6 +686,8 @@ static const NSInteger GRID_COLUMNS = 6;
                 self.combo++;
             }
         }
+        
+        CCLOG(@"Face match: %d, chain score: %d, Combo: %d", face, chain.score, self.combo);
         
         // for debugging purposes
 //        NSInteger thing = ((Dice*) chain.dice[0]).faceValue;
