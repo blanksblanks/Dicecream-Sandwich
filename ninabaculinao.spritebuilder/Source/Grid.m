@@ -46,9 +46,12 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)didLoadFromCCB{
 
+    self.score = 0;
+    [self loadLevel];
+    
     _timer = 0;
     _timeSinceDrop = -0.2;
-    _dropInterval = 0.5;
+    _dropInterval = self.levelSpeed;
     stabilizing = false;
     
     self.userInteractionEnabled = TRUE;
@@ -68,6 +71,23 @@ static const NSInteger GRID_COLUMNS = 6;
     
     [self spawnDice];
     
+}
+
+- (void)loadLevel {
+    NSString*path = [[NSBundle mainBundle] pathForResource:@"Levels" ofType:@"plist"];
+    NSDictionary *root = [NSDictionary dictionaryWithContentsOfFile:path];
+    
+    NSArray *levels = [root objectForKey: @"Levels"];
+    
+    if (self.score == 0) {
+        self.level = 0;
+    } else if (self.score >= self.targetScore) {
+        self.level++;
+    }
+    
+    NSDictionary *dict = levels[self.level];
+    self.levelSpeed = [dict[@"levelSpeed"] floatValue];
+    self.targetScore = [dict[@"targetScore"] intValue];
 }
 
 # pragma mark - Update method
@@ -92,8 +112,9 @@ static const NSInteger GRID_COLUMNS = 6;
 //            }
                 [self trackGridState];
                 [self handleMatches];
+                [self loadLevel];
                 [self spawnDice];
-                _dropInterval = 1.0;
+                _dropInterval = self.levelSpeed;
                 _timeSinceDrop = 0.2;
 
 //            }
@@ -111,7 +132,7 @@ static const NSInteger GRID_COLUMNS = 6;
             stabilizing = [self checkGrid];
             if (!stabilizing) {
                 [self trackGridState];
-                _dropInterval = 1.0;
+                _dropInterval = self.levelSpeed;
                 _timeSinceDrop = 0;
                 [self handleMatches];
                 // for each not stable die, move down
@@ -175,6 +196,7 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)trackGridState {
     
+    // copy current grid into gridstate array as 0's and 1-6's
     NSMutableArray *_gridStateArray = [NSMutableArray array];
     for (NSInteger row = 0; row < GRID_ROWS; row++) {
         _gridStateArray[row] = [NSMutableArray array];
@@ -189,7 +211,10 @@ static const NSInteger GRID_COLUMNS = 6;
             }
         }
     }
-    DDLogInfo(@"%@", _gridStateArray);
+    
+    for (NSInteger row = GRID_ROWS - 1; row > 0; row--) {
+        DDLogInfo(@"[%ld,%ld,%ld,%ld,%ld,%ld]", (long)_gridStateArray[row][0], (long)_gridStateArray[row][1], (long)_gridStateArray[row][2], (long)_gridStateArray[row][3], (long)_gridStateArray[row][4],  (long)_gridStateArray[row][5]);
+    }
 }
 
 # pragma mark - Spawn random pair of dice
@@ -214,7 +239,7 @@ static const NSInteger GRID_COLUMNS = 6;
 			_currentDie1 = [self addDieAtTile:firstColumn row:firstRow];
             _currentDie2 = [self addDieAtTile:nextColumn row:nextRow];
         } else {
-            DDLogInfo(@"Game Over");
+//            DDLogInfo(@"Game Over");
             CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
             [[CCDirector sharedDirector] replaceScene:mainScene];
         }
@@ -572,9 +597,9 @@ static const NSInteger GRID_COLUMNS = 6;
         [self resetCombo];
     }
     
-    DDLogInfo(@"Horizontal matches: %@", horizontalChains);
-    DDLogInfo(@"Vertical matches: %@", verticalChains);
-    DDLogInfo(@"Current streak: %d", self.combo);
+//    DDLogInfo(@"Horizontal matches: %@", horizontalChains);
+//    DDLogInfo(@"Vertical matches: %@", verticalChains);
+//    DDLogInfo(@"Current streak: %d", self.combo);
     
     [self removeDice:horizontalChains];
     [self removeDice:verticalChains];
@@ -653,18 +678,17 @@ static const NSInteger GRID_COLUMNS = 6;
         }
         
         // for debugging purposes
-        NSInteger thing = ((Dice*) chain.dice[0]).faceValue;
-        NSInteger thing1 = ((Dice*) chain.dice[0]).row;
-        NSInteger thing2 = ((Dice*) chain.dice[0]).column;
-        NSInteger otherthing = [chain.dice count];
-        DDLogInfo(@"Face: %d Row: %d Column: %d chain.dice count: %d chainscore: %d", thing, thing1, thing2, otherthing, chain.score);
+//        NSInteger thing = ((Dice*) chain.dice[0]).faceValue;
+//        NSInteger thing1 = ((Dice*) chain.dice[0]).row;
+//        NSInteger thing2 = ((Dice*) chain.dice[0]).column;
+//        NSInteger otherthing = [chain.dice count];
+//        DDLogInfo(@"Face: %d Row: %d Column: %d chain.dice count: %d chainscore: %d", thing, thing1, thing2, otherthing, chain.score);
     }
 }
 
 - (void)resetCombo {
     self.combo = 0;
 }
-
 
 # pragma mark - Remove chains and update score
 

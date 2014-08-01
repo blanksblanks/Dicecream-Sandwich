@@ -21,5 +21,6 @@
 @property (nonatomic, assign) NSInteger level;
 @property (nonatomic, assign) NSInteger combo;
 @property (nonatomic, assign) float timer;
+@property (nonatomic, assign) float levelSpeed;
 
 @end

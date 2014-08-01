@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Levels</key>
+	<array>
+		<dict>
+			<key>diceNumber</key>
+			<integer>4</integer>
+			<key>targetScore</key>
+			<integer>600</integer>
+			<key>levelSpeed</key>
+			<integer>1</integer>
+			<key>levelNumber</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>diceNumber</key>
+			<integer>5</integer>
+			<key>targetScore</key>
+			<integer>2000</integer>
+			<key>levelSpeed</key>
+			<real>0.8</real>
+			<key>levelNumber</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -40,6 +40,8 @@
 - (void)didLoadFromCCB {
     [_grid addObserver:self forKeyPath:@"score" options:0 context:NULL];
     [_grid addObserver:self forKeyPath:@"match" options:0 context:NULL];
+    [_grid addObserver:self forKeyPath:@"targetScore" options:0 context:NULL];
+    [_grid addObserver:self forKeyPath:@"level" options:0 context:NULL];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
@@ -52,6 +54,12 @@
     }
     if ([keyPath isEqualToString:@"match"]) {
         _matchLabel.string = [NSString stringWithFormat:@"%ld", (long) _grid.match];
+    }
+    if ([keyPath isEqualToString:@"match"]) {
+        _targetLabel.string = [NSString stringWithFormat:@"%ld", (long) _grid.targetScore];
+    }
+    if ([keyPath isEqualToString:@"match"]) {
+        _levelLabel.string = [NSString stringWithFormat:@"%ld", (long) _grid.level];
     }
 }
 

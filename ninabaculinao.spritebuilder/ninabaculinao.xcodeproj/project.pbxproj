@@ -13,6 +13,7 @@
 		629AA3671977017C003FA512 /* CATchy.wav in Resources */ = {isa = PBXBuildFile; fileRef = 629AA3661977017C003FA512 /* CATchy.wav */; };
 		62EF7F31198814DC001BF598 /* Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 62EF7F30198814DC001BF598 /* Chain.m */; };
 		62EF7F37198837B8001BF598 /* Pause.m in Sources */ = {isa = PBXBuildFile; fileRef = 62EF7F36198837B8001BF598 /* Pause.m */; };
+		62FD140B198BEAD8001D87FF /* Levels.plist in Resources */ = {isa = PBXBuildFile; fileRef = 62FD140A198BEAD8001D87FF /* Levels.plist */; };
 		6356E15654D945E6A7ED8EF1 /* libPods-ninabaculinao.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E20A7973DC3F46ABA862FD52 /* libPods-ninabaculinao.a */; };
 		8392007A18EE8E3300B6C429 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8392007918EE8E3300B6C429 /* GLKit.framework */; };
 		B71F5911188484E7003F4D28 /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
@@ -74,6 +75,7 @@
 		62EF7F30198814DC001BF598 /* Chain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chain.m; path = Source/Chain.m; sourceTree = "<group>"; };
 		62EF7F35198837B8001BF598 /* Pause.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pause.h; path = Source/Pause.h; sourceTree = "<group>"; };
 		62EF7F36198837B8001BF598 /* Pause.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Pause.m; path = Source/Pause.m; sourceTree = "<group>"; };
+		62FD140A198BEAD8001D87FF /* Levels.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Levels.plist; path = Source/Levels.plist; sourceTree = "<group>"; };
 		8392007918EE8E3300B6C429 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		8E48F140D6B54A57BD825A46 /* Pods-ninabaculinao.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ninabaculinao.xcconfig"; path = "Pods/Pods-ninabaculinao.xcconfig"; sourceTree = "<group>"; };
 		B71F5907188484E7003F4D28 /* iPad-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old.png"; path = "Icons/iPad-old.png"; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				623F5D6B196F0C7000DC3EA5 /* Gameplay.m */,
 				623F5D5E196EDB0400DC3EA5 /* Grid.h */,
 				623F5D5F196EDB0400DC3EA5 /* Grid.m */,
+				62FD140A198BEAD8001D87FF /* Levels.plist */,
 				62EF7F2F198814DC001BF598 /* Chain.h */,
 				62EF7F30198814DC001BF598 /* Chain.m */,
 				62EF7F35198837B8001BF598 /* Pause.h */,
@@ -347,6 +350,7 @@
 				B71F5915188484E7003F4D28 /* iPhone-old.png in Resources */,
 				B71F5917188484E7003F4D28 /* iPhone.png in Resources */,
 				B7378975180762440076A88C /* Default-568h@2x.png in Resources */,
+				62FD140B198BEAD8001D87FF /* Levels.plist in Resources */,
 				B71F5918188484E7003F4D28 /* iPhone@2x.png in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
 				B71F5911188484E7003F4D28 /* iPad-old.png in Resources */,
