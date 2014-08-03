@@ -38,6 +38,9 @@
     CGPoint oldTouchPosition;
     BOOL canSwipe;
     BOOL matchFound;
+    BOOL noMoreHoles;
+    
+    CCLabelTTF *_chainScoreLabel;
 }
 
 // two constants to describe the number of rows and columns
@@ -56,11 +59,13 @@ static const NSInteger GRID_COLUMNS = 6;
     _dropInterval = 1.0;
     stabilizing = false;
     
+    _chainScoreLabel.visible = false;
+    
     self.userInteractionEnabled = TRUE;
     
     [self setupGrid];
     
-    // Fill array with null tiles
+    // Populate array with null tiles
     _noTile = [NSNull null];
 	_gridArray = [NSMutableArray array];
     
@@ -98,21 +103,22 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void) update:(CCTime) delta {
     _timer += delta;
     _timeSinceDrop += delta;
-
+    
     if (_timeSinceDrop > _dropInterval) {
+        
         // if not stabilizing, let dice fall down
         if (!stabilizing) {
             [self dieFallDown];
             _timeSinceDrop = 0;
             if (![self canBottomMove]) {
-            
-//            {
-//                _timeSinceBottom = 0;
-//            } else if (_timeSinceBottom < 0.2) {
-//                _timeSinceBottom += delta;
-//            } else {
-//                
-//            }
+                
+                //            {
+                //                _timeSinceBottom = 0;
+                //            } else if (_timeSinceBottom < 0.2) {
+                //                _timeSinceBottom += delta;
+                //            } else {
+                //
+                //            }
                 CCLOG(@"Dice fell to bottom");
                 [self trackGridState];
                 [self handleMatches];
@@ -120,22 +126,22 @@ static const NSInteger GRID_COLUMNS = 6;
                 [self spawnDice];
                 _dropInterval = self.levelSpeed;
                 _timeSinceDrop = 0.2;
-
-//            }
-//            if (![self canBottomMove]) {
-//                _timeSinceBottom = 0;
-//                _timeSinceBottom += delta;
-//            } if (_timeSinceBottom > 0.25) {
-                            }
-        } else if (stabilizing) {
-//            self.userInteractionEnabled = FALSE;
+                
+                //            }
+                //            if (![self canBottomMove]) {
+                //                _timeSinceBottom = 0;
+                //                _timeSinceBottom += delta;
+                //            } if (_timeSinceBottom > 0.25) {
+            }
+        } else while (stabilizing) {
+            //            self.userInteractionEnabled = FALSE;
             CCLOG(@"Matches handled");
-            [self trackGridState];
-            [self dieFillHoles];
-            CCLOG(@"Holes filled in");
             [self trackGridState];
             _timeSinceDrop = 0;
             _dropInterval = 0.1;
+            [self dieFillHoles];
+            CCLOG(@"Holes filled in");
+            [self trackGridState];
             stabilizing = [self checkGrid];
             if (!stabilizing) {
                 CCLOG(@"Grid stabilized");
@@ -222,7 +228,7 @@ static const NSInteger GRID_COLUMNS = 6;
     
     // Print out grid state at data level
     for (NSInteger row = GRID_ROWS - 1; row >= 0; row--) {
-        CCLOG(@"[%@ %@ %@ %@ %@ %@] :%d", _gridStateArray[row][0], _gridStateArray[row][1], _gridStateArray[row][2], _gridStateArray[row][3], _gridStateArray[row][4], _gridStateArray[row][5], row);
+        CCLOG(@"[%@ %@ %@ %@ %@ %@] :%ld", _gridStateArray[row][0], _gridStateArray[row][1], _gridStateArray[row][2], _gridStateArray[row][3], _gridStateArray[row][4], _gridStateArray[row][5], (long)row);
     }
     CCLOG(@"--------------");
 }
@@ -631,6 +637,7 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)animateMatchedDice:(NSArray *)chains {
     for (Chain *chain in chains) {
+        [self animateScoreForChain:chain];
         for (Dice *die in chain.dice) {
                 CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
                 explosion.autoRemoveOnFinish = TRUE;
@@ -687,7 +694,7 @@ static const NSInteger GRID_COLUMNS = 6;
             }
         }
         
-        CCLOG(@"Face match: %d, chain score: %d, Combo: %d", face, chain.score, self.combo);
+        CCLOG(@"Face match: %d, chain score: %d, Combo: %ld", face, chain.score, (long)self.combo);
         
         // for debugging purposes
 //        NSInteger thing = ((Dice*) chain.dice[0]).faceValue;
@@ -700,6 +707,20 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)resetCombo {
     self.combo = 0;
+}
+
+- (void)animateScoreForChain:(Chain *)chain {
+    Dice *firstDie = [chain.dice firstObject];
+    Dice *lastDie = [chain.dice lastObject];
+    CGPoint centerPosition = CGPointMake((firstDie.position.x+lastDie.position.x)/2, (firstDie.position.y+lastDie.position.y)/2 + 15);
+    
+    _chainScoreLabel.string = [NSString stringWithFormat:@"%lu", (long)chain.score];
+    _chainScoreLabel.position = CGPointMake(centerPosition.x, (centerPosition.y-15));
+    _chainScoreLabel.visible = true;
+    
+    CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.7f position:centerPosition];
+    [_chainScoreLabel runAction:moveTo];
+    _chainScoreLabel.visible = false;
 }
 
 # pragma mark - Remove chains and update score
@@ -1021,3 +1042,45 @@ static const NSInteger GRID_COLUMNS = 6;
 //    }
 //    return foundMatch;
 //}
+
+# pragma mark - broken update
+
+
+//- (void) update:(CCTime) delta {
+//    _timer += delta;
+//    _timeSinceDrop += delta;
+//    _timeSinceBottom += delta;
+//
+//    if (!stabilizing) {
+//        if (_timeSinceDrop > _dropInterval) {
+//            _dropInterval = self.levelSpeed;
+//            _timeSinceDrop = -0.2;
+//            [self dieFallDown];
+//            _timeSinceDrop = 0;
+//            if (![self canBottomMove]) {
+//                _timeSinceBottom = 0;
+//                if (_timeSinceBottom > 0.8) {
+//                    CCLOG(@"Dice fell to bottom");
+//                    [self trackGridState];
+//                    [self handleMatches];
+//                    stabilizing = [self checkGrid];
+//                    [self loadLevel];
+//                    [self spawnDice];
+//                }
+//            }
+//        } else while (stabilizing) {
+//                                                        CCLOG(@"Matches handled");
+//                                                        [self trackGridState];
+//            _timeSinceDrop = 0;
+//            _dropInterval = 0.1;
+//            noMoreHoles = [self dieFillHoles];
+//            if (noMoreHoles) {
+//                                                        CCLOG(@"Holes filled in");
+//                                                        [self trackGridState];
+//            [self handleMatches];
+//            }
+//            stabilizing = [self checkGrid];
+//        }
+//    }
+//}
+//
