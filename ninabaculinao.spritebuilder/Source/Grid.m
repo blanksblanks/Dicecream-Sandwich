@@ -139,12 +139,12 @@ static const NSInteger GRID_COLUMNS = 6;
         case 3: { // handling matches
             [self handleMatches];
             [self loadLevel];
-            stabilizing = [self checkGrid];
-            if (stabilizing) { // implies matches found
+//            stabilizing = [self checkGrid];
+            if (matchFound) { // implies matches found
                 _dropInterval = 0.1;
                 CCLOG(@"Matches handled:"); [self trackGridState];
                 actionIndex = 2; CCLOG(@"Going to case 2: filling holes");
-            } else if (!stabilizing) { // implies no matches found
+            } else if (!matchFound) { // implies no matches found
                 _dropInterval = self.levelSpeed;
                 actionIndex = 0; CCLOG(@"Going to case 0: spawning dice");
             }
@@ -229,9 +229,6 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Spawn random pair of dice
 
 - (void)spawnDice {
-        canSwipe = false;
-        matchFound = false;
-		
         NSInteger firstRow = GRID_ROWS-1;
 		NSInteger firstColumn = arc4random_uniform(GRID_COLUMNS-2); // int bt 0 and 4
         NSInteger nextRow = firstRow - arc4random_uniform(2);
@@ -617,19 +614,14 @@ static const NSInteger GRID_COLUMNS = 6;
         for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
             for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
                 BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
-                if (positionFree == false) {
+                if (!positionFree) {
                     Dice *die = _gridArray[row][column];
-                    //if ([die isEqual: _currentDie1] || [die isEqual: _currentDie2]) {
-                    //    continue;
-                    //} else {
                     die.stable = false;
-                    //}
                 }
             }
         }
     } else if (!matchFound) {
         [self resetCombo];
-        stabilizing = false;
     }
     
 //    DDLogInfo(@"Horizontal matches: %@", horizontalChains);
@@ -734,6 +726,8 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Fill in holes
 
 - (void) dieFillHoles {
+    matchFound = false; // reset before checking matches
+    
     for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
 		for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
             BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
