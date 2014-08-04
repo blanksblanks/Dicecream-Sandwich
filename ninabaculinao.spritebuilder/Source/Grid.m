@@ -311,7 +311,7 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Convert position for tile from (column, row) to ccp(x,y)
 
 - (CGPoint)positionForTile:(NSInteger)column row:(NSInteger)row {
-	float x = _tileMarginHorizontal + column * (_tileMarginHorizontal + _tileWidth) - (_tileWidth/2);
+	float x = _tileMarginHorizontal + column * (_tileMarginHorizontal + _tileWidth) + (_tileWidth/2);
 	float y = _tileMarginVertical + row * (_tileMarginVertical + _tileWidth) + (_tileWidth/2);
 	return CGPointMake(x,y);
 }
