@@ -41,10 +41,8 @@
     CGPoint oldTouchPosition;
     NSTimeInterval oldTouchTime;
     NSTimeInterval newTouchTime;
-    NSTimeInterval previousTouchTime;
-    BOOL canSwipe;
+//    NSTimeInterval previousTouchTime;
     BOOL matchFound;
-    BOOL noMoreHoles;
     
     CCLabelTTF *_chainScoreLabel;
 }
@@ -101,6 +99,7 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Update method
 
 - (void) update:(CCTime) delta {
+    
     _timer += delta;
     _timeSinceDrop += delta;
     
@@ -119,6 +118,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 _timeSinceDrop = 0;
                 if (![self canBottomMove]) {
                     CCLOG(@"Dice fell to bottom:"); [self trackGridState];
+                    _dropInterval = 0.1;
                     actionIndex = 2; CCLOG(@"Going to case 2: filling holes");
                 }
             }
@@ -126,8 +126,8 @@ static const NSInteger GRID_COLUMNS = 6;
         }
         case 2: { // dice filling holes
             if (_timeSinceDrop > _dropInterval) {
-                _timeSinceDrop = 0;
                 [self dieFillHoles]; // --> stabilized
+                _timeSinceDrop = 0;
                 stabilizing = [self checkGrid];
                 if (!stabilizing) {
                     CCLOG(@"Holes filled:"); [self trackGridState];
@@ -139,14 +139,13 @@ static const NSInteger GRID_COLUMNS = 6;
         case 3: { // handling matches
             [self handleMatches];
             [self loadLevel];
-//            stabilizing = [self checkGrid];
-            if (matchFound) { // implies matches found
-                _dropInterval = 0.1;
+            if (matchFound) {
                 CCLOG(@"Matches handled:"); [self trackGridState];
+                _dropInterval = 0.1;
                 actionIndex = 2; CCLOG(@"Going to case 2: filling holes");
-            } else if (!matchFound) { // implies no matches found
+            } else if (!matchFound) {
                 _dropInterval = self.levelSpeed;
-                actionIndex = 0; CCLOG(@"Going to case 0: spawning dice");
+                actionIndex = 0; CCLOG(@"No matches found. Going to case 0: spawning dice");
             }
         break;
         }
@@ -344,15 +343,13 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     oldTouchPosition = [touch locationInNode:self];
     oldTouchTime = touch.timestamp;
-    canSwipe = true;
 }
 
 - (void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint newTouchPosition = [touch locationInNode:self];
     float ydifference = oldTouchPosition.y - newTouchPosition.y;
     float xdifference = oldTouchPosition.x - newTouchPosition.x;
-
-    if (canSwipe == true) {
+    
     // determine in which column touch ended, cannot go out of bounds
     NSInteger column = ((newTouchPosition.x - _tileMarginHorizontal) / (_tileWidth + _tileMarginHorizontal));
     if (column > GRID_COLUMNS-1) {
@@ -361,14 +358,13 @@ static const NSInteger GRID_COLUMNS = 6;
         column = 0;
     }
 
-    // soft drop
-    if (ydifference > 0.2*(self.contentSize.height) && (newTouchPosition.y < _currentDie1.position.y) && (newTouchPosition.y < _currentDie2.position.y)) {
+    if ((ydifference > 0.2*(self.contentSize.height)) && (newTouchPosition.y < _currentDie1.position.y) && (newTouchPosition.y < _currentDie2.position.y)) {
         _dropInterval = 0.03;
-    } else if (xdifference > 0.5*(_tileWidth)) {
+    } else if ((xdifference > 0.5*(_tileWidth))) {
         [self swipeLeftTo:column];
 //    } else if (xdifference > 0.1*(self.contentSize.width) && xdifference < 0.3*(self.contentSize.width)) {
 //        [self swipeLeft];
-    } else if (xdifference < -0.5*(_tileWidth)) {
+    } else if ((xdifference < -0.5*(_tileWidth))) {
         [self swipeRightTo:column];
 //    } else if (xdifference < -0.1*(self.contentSize.width) && xdifference > -0.3*(self.contentSize.width)){
 //        [self swipeRight];
@@ -376,31 +372,27 @@ static const NSInteger GRID_COLUMNS = 6;
         _dropInterval = self.levelSpeed;
     }
 }
-}
 
 - (void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint newTouchPosition = [touch locationInNode:self];
-    previousTouchTime = newTouchTime;
+    float ydifference = oldTouchPosition.y - newTouchPosition.y;
+    float xdifference = oldTouchPosition.x - newTouchPosition.x;
+
     newTouchTime = touch.timestamp;
-        // calculate lengths of swipes
-        float ydifference = oldTouchPosition.y - newTouchPosition.y;
-        NSTimeInterval touchInterval = newTouchTime - oldTouchTime;
+    NSTimeInterval touchInterval = newTouchTime - oldTouchTime;
+
+//    previousTouchTime = newTouchTime;
+    // calculate lengths of swipes
 //        CCLOG(@"Touch interval %f", touchInterval);
     
-    NSTimeInterval timeBetweenSwipes = newTouchTime - previousTouchTime;
+//    NSTimeInterval timeBetweenSwipes = newTouchTime - previousTouchTime;
 //    CCLOG(@"Time between swipes %f", timeBetweenSwipes);
-    
-        // consider adjusting speed of fall with swiping
-        // define types of swipes: swipe up or down, long swipe left, short swipe left,
-        // long swipe right, short swipe right, tap to rotate
+
         if ((touchInterval > 0.2)  && (ydifference > 0.2*(self.contentSize.height))) {
-            _dropInterval = self.levelSpeed;
-        }
-        else if ((touchInterval < 0.2) && (ydifference > 0.2*(self.contentSize.height))) {
-            if (timeBetweenSwipes > 10.0) {
-                _dropInterval = 0.01;
-            }
-        } else {
+            _dropInterval = self.levelSpeed; // soft drop
+        } else if ((touchInterval < 0.2) && (ydifference > 0.2*(self.contentSize.height))) {
+            _dropInterval = 0.01; // hard drop
+        } else if ((touchInterval < 0.2) && (xdifference < 0.5*(_tileWidth)) && (xdifference > -0.5*(_tileWidth))) {
             [self rotate];
         }
 }
@@ -734,6 +726,7 @@ static const NSInteger GRID_COLUMNS = 6;
             BOOL bottomCanMove = [_gridArray[row-1][column] isEqual: _noTile];
             if (!positionFree) {
                 Dice *die = _gridArray[row][column];
+                die.stable = false;
                 if (bottomCanMove) {
                     die.row--;
                     _gridArray[die.row][die.column] = die; // set die to new row and column
