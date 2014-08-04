@@ -38,6 +38,9 @@
     Dice *_lastDie;
     
     CGPoint oldTouchPosition;
+    NSTimeInterval oldTouchTime;
+    NSTimeInterval newTouchTime;
+    NSTimeInterval previousTouchTime;
     BOOL canSwipe;
     BOOL matchFound;
     BOOL noMoreHoles;
@@ -214,7 +217,7 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Spawn random pair of dice
 
 - (void)spawnDice {
-        canSwipe = true;
+        canSwipe = false;
         matchFound = false;
 		
         NSInteger firstRow = GRID_ROWS-1;
@@ -330,14 +333,16 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     oldTouchPosition = [touch locationInNode:self];
+    oldTouchTime = touch.timestamp;
+    canSwipe = true;
 }
 
-- (void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+- (void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
     CGPoint newTouchPosition = [touch locationInNode:self];
-    // calculate lengths of swipes
-    float xdifference = oldTouchPosition.x - newTouchPosition.x;
     float ydifference = oldTouchPosition.y - newTouchPosition.y;
-    
+    float xdifference = oldTouchPosition.x - newTouchPosition.x;
+
+    if (canSwipe == true) {
     // determine in which column touch ended, cannot go out of bounds
     NSInteger column = ((newTouchPosition.x - _tileMarginHorizontal) / (_tileWidth + _tileMarginHorizontal));
     if (column > GRID_COLUMNS-1) {
@@ -345,26 +350,49 @@ static const NSInteger GRID_COLUMNS = 6;
     } else if (column < 0) {
         column = 0;
     }
-    
-    // consider adjusting speed of fall with swiping
-    // define types of swipes: swipe up or down, long swipe left, short swipe left,
-    // long swipe right, short swipe right, tap to rotate
-    if (ydifference > 0.2*(self.contentSize.height) || ydifference < -0.2*(self.contentSize.height)) {
-        if (canSwipe) {
-            [self dropDown];
-//            canSwipe = false;
-        }
+
+    // soft drop
+    if (ydifference > 0.2*(self.contentSize.height) && (newTouchPosition.y < _currentDie1.position.y) && (newTouchPosition.y < _currentDie2.position.y)) {
+        _dropInterval = 0.03;
     } else if (xdifference > 0.3*(self.contentSize.width)) {
         [self swipeLeftTo:column];
-    } else if (xdifference > 0.1*(self.contentSize.width) && xdifference < 0.3*(self.contentSize.width)) {
-        [self swipeLeft];
+//    } else if (xdifference > 0.1*(self.contentSize.width) && xdifference < 0.3*(self.contentSize.width)) {
+//        [self swipeLeft];
     } else if (xdifference < -0.3*(self.contentSize.width)) {
         [self swipeRightTo:column];
-    } else if (xdifference < -0.1*(self.contentSize.width) && xdifference > -0.3*(self.contentSize.width)){
-        [self swipeRight];
+//    } else if (xdifference < -0.1*(self.contentSize.width) && xdifference > -0.3*(self.contentSize.width)){
+//        [self swipeRight];
     } else {
-        [self rotate];
+        _dropInterval = self.levelSpeed;
     }
+}
+}
+
+- (void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+    CGPoint newTouchPosition = [touch locationInNode:self];
+    previousTouchTime = newTouchTime;
+    newTouchTime = touch.timestamp;
+        // calculate lengths of swipes
+        float ydifference = oldTouchPosition.y - newTouchPosition.y;
+        NSTimeInterval touchInterval = newTouchTime - oldTouchTime;
+        CCLOG(@"Touch interval %f", touchInterval);
+    
+    NSTimeInterval timeBetweenSwipes = newTouchTime - previousTouchTime;
+    CCLOG(@"Time between swipes %f", timeBetweenSwipes);
+        
+        // consider adjusting speed of fall with swiping
+        // define types of swipes: swipe up or down, long swipe left, short swipe left,
+        // long swipe right, short swipe right, tap to rotate
+        if ((touchInterval > 0.2)  && (ydifference > 0.2*(self.contentSize.height))) {
+            _dropInterval = self.levelSpeed;
+        }
+        else if ((touchInterval < 0.2) && (ydifference > 0.2*(self.contentSize.height))) {
+            if (timeBetweenSwipes > 10.0) {
+                _dropInterval = 0.01;
+            }
+        } else {
+            [self rotate];
+        }
 }
 
 - (void)swipeLeftTo:(NSInteger)column {
@@ -412,10 +440,6 @@ static const NSInteger GRID_COLUMNS = 6;
         _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
         _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
     }
-}
-
-- (void)dropDown {
-    _dropInterval = 0.001;
 }
 
 - (void)rotate {
@@ -582,7 +606,11 @@ static const NSInteger GRID_COLUMNS = 6;
                 BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
                 if (positionFree == false) {
                     Dice *die = _gridArray[row][column];
+                    //if ([die isEqual: _currentDie1] || [die isEqual: _currentDie2]) {
+                    //    continue;
+                    //} else {
                     die.stable = false;
+                    //}
                 }
             }
         }
