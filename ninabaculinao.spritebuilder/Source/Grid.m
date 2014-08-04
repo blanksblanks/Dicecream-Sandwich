@@ -41,7 +41,6 @@
     CGPoint oldTouchPosition;
     NSTimeInterval oldTouchTime;
     NSTimeInterval newTouchTime;
-//    NSTimeInterval previousTouchTime;
     BOOL matchFound;
     
     CCLabelTTF *_chainScoreLabel;
@@ -200,7 +199,7 @@ static const NSInteger GRID_COLUMNS = 6;
     return stabilizing;
 }
 
-- (void)trackGridState {
+- (void)trackGridState { // aka my beautiful debugging log
     
     // copy current grid into gridstate array as 0's and 1-6's
     NSMutableArray *_gridStateArray = [NSMutableArray array];
@@ -244,7 +243,7 @@ static const NSInteger GRID_COLUMNS = 6;
 			_currentDie1 = [self addDieAtTile:firstColumn row:firstRow];
             _currentDie2 = [self addDieAtTile:nextColumn row:nextRow];
         } else {
-//            DDLogInfo(@"Game Over");
+//          CCLOG(@"Game Over");
             CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
             [[CCDirector sharedDirector] replaceScene:mainScene];
         }
@@ -350,7 +349,7 @@ static const NSInteger GRID_COLUMNS = 6;
     float ydifference = oldTouchPosition.y - newTouchPosition.y;
     float xdifference = oldTouchPosition.x - newTouchPosition.x;
     
-    // determine in which column touch ended, cannot go out of bounds
+    // determine to which column touch goes, cannot go past columns 0 and 5
     NSInteger column = ((newTouchPosition.x - _tileMarginHorizontal) / (_tileWidth + _tileMarginHorizontal));
     if (column > GRID_COLUMNS-1) {
         column = GRID_COLUMNS-1;
@@ -362,12 +361,8 @@ static const NSInteger GRID_COLUMNS = 6;
         _dropInterval = 0.03;
     } else if ((xdifference > 0.5*(_tileWidth))) {
         [self swipeLeftTo:column];
-//    } else if (xdifference > 0.1*(self.contentSize.width) && xdifference < 0.3*(self.contentSize.width)) {
-//        [self swipeLeft];
     } else if ((xdifference < -0.5*(_tileWidth))) {
         [self swipeRightTo:column];
-//    } else if (xdifference < -0.1*(self.contentSize.width) && xdifference > -0.3*(self.contentSize.width)){
-//        [self swipeRight];
     } else {
         _dropInterval = self.levelSpeed;
     }
@@ -380,21 +375,14 @@ static const NSInteger GRID_COLUMNS = 6;
 
     newTouchTime = touch.timestamp;
     NSTimeInterval touchInterval = newTouchTime - oldTouchTime;
-
-//    previousTouchTime = newTouchTime;
-    // calculate lengths of swipes
-//        CCLOG(@"Touch interval %f", touchInterval);
     
-//    NSTimeInterval timeBetweenSwipes = newTouchTime - previousTouchTime;
-//    CCLOG(@"Time between swipes %f", timeBetweenSwipes);
-
-        if ((touchInterval > 0.2)  && (ydifference > 0.2*(self.contentSize.height))) {
-            _dropInterval = self.levelSpeed; // soft drop
-        } else if ((touchInterval < 0.2) && (ydifference > 0.2*(self.contentSize.height))) {
-            _dropInterval = 0.01; // hard drop
-        } else if ((touchInterval < 0.2) && (xdifference < 0.5*(_tileWidth)) && (xdifference > -0.5*(_tileWidth))) {
-            [self rotate];
-        }
+    if ((touchInterval > 0.2)  && (ydifference > 0.2*(self.contentSize.height))) {
+        _dropInterval = self.levelSpeed; // soft drop
+    } else if ((touchInterval < 0.2) && (ydifference > 0.2*(self.contentSize.height))) {
+        _dropInterval = 0.01; // hard drop
+    } else if ((touchInterval < 0.2) && (xdifference < 0.5*(_tileWidth)) && (xdifference > -0.5*(_tileWidth))) {
+        [self rotate];
+    }
 }
 
 - (void)swipeLeftTo:(NSInteger)column {
@@ -416,8 +404,6 @@ static const NSInteger GRID_COLUMNS = 6;
         _currentDie2.column--;
         _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
         _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
-        //CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:2.0f position:_currentDie2.position];
-        //[_currentDie2 runAction:moveTo];
     }
 }
 
@@ -616,9 +602,9 @@ static const NSInteger GRID_COLUMNS = 6;
         [self resetCombo];
     }
     
-//    DDLogInfo(@"Horizontal matches: %@", horizontalChains);
-//    DDLogInfo(@"Vertical matches: %@", verticalChains);
-//    DDLogInfo(@"Current streak: %d", self.combo);
+//    CCLOG(@"Horizontal matches: %@", horizontalChains);
+//    CCLOG(@"Vertical matches: %@", verticalChains);
+//    CCLOG(@"Current streak: %d", self.combo);
     
     [self removeDice:horizontalChains];
     [self removeDice:verticalChains];
@@ -673,7 +659,6 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)calculateScores:(NSArray *)chains {
     self.combo = -1;
-    
     for (Chain *chain in chains) {
         NSInteger face = ((Dice*) chain.dice[0]).faceValue;
         BOOL six = (face == 6);
@@ -1147,3 +1132,10 @@ static const NSInteger GRID_COLUMNS = 6;
         }
     }
 }*/
+
+//    previousTouchTime = newTouchTime;
+// calculate lengths of swipes
+//        CCLOG(@"Touch interval %f", touchInterval);
+
+//    NSTimeInterval timeBetweenSwipes = newTouchTime - previousTouchTime;
+//    CCLOG(@"Time between swipes %f", timeBetweenSwipes);
