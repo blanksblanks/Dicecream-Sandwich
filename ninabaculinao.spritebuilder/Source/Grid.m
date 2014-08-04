@@ -35,6 +35,9 @@
     Dice *_belowDie;
     NSInteger _face;
     
+    Dice *_firstDie;
+    Dice *_lastDie;
+    
     CGPoint oldTouchPosition;
     BOOL canSwipe;
     BOOL matchFound;
@@ -59,7 +62,7 @@ static const NSInteger GRID_COLUMNS = 6;
     _dropInterval = 1.0;
     stabilizing = false;
     
-    _chainScoreLabel.visible = false;
+    _chainScoreLabel.visible = FALSE;
     
     self.userInteractionEnabled = TRUE;
     
@@ -638,11 +641,15 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void)animateMatchedDice:(NSArray *)chains {
     for (Chain *chain in chains) {
         [self animateScoreForChain:chain];
+        _firstDie = [chain.dice firstObject];
+        _lastDie = [chain.dice lastObject];
         for (Dice *die in chain.dice) {
+            if ([die isEqual: _firstDie] || [die isEqual: _lastDie]) {
                 CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
                 explosion.autoRemoveOnFinish = TRUE;
                 explosion.position = die.position;
                 [self addChild:explosion];
+            }
 // TODO: Figure out if it's possible to do a vert + horiz line at once without setting dice.sprite to nil
                 CCActionEaseOut *easeOut = [CCActionEaseOut actionWithDuration:0.75f];
                 CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.75f scale:0.1f];
@@ -710,40 +717,18 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void)animateScoreForChain:(Chain *)chain {
-    Dice *firstDie = [chain.dice firstObject];
-    Dice *lastDie = [chain.dice lastObject];
-    CGPoint centerPosition = CGPointMake((firstDie.position.x+lastDie.position.x)/2, (firstDie.position.y+lastDie.position.y)/2 + 15);
+    _firstDie = [chain.dice firstObject];
+    _lastDie = [chain.dice lastObject];
+    CGPoint centerPosition = CGPointMake(((_firstDie.position.x+_lastDie.position.x)/2), ((_firstDie.position.y+_lastDie.position.y)/2 + 15));
+    CCLOG(@"Chain score position: %f, %f", centerPosition.x, centerPosition.y);
     
-    _chainScoreLabel.string = [NSString stringWithFormat:@"%lu", (long)chain.score];
-    _chainScoreLabel.position = CGPointMake(centerPosition.x, (centerPosition.y-15));
-    _chainScoreLabel.visible = true;
+    _chainScoreLabel.string = [NSString stringWithFormat:@"%ld", (long)chain.score];
+    _chainScoreLabel.positionInPoints = CGPointMake(centerPosition.x, (centerPosition.y-15));
+    _chainScoreLabel.visible = TRUE;
     
-    CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.7f position:centerPosition];
+    CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:2.7f position:centerPosition];
     [_chainScoreLabel runAction:moveTo];
-    _chainScoreLabel.visible = false;
-}
-
-# pragma mark - Remove chains and update score
-
-- (void) removeDieAtRow:(NSInteger)row andColumn:(NSInteger)column {
-    Dice* die = _gridArray[row][column];
-    die.row = row;
-    die.column = column;
-    
-    // load particle effect
-    CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
-    // make the particle effect clean itself up once it's completed
-    explosion.autoRemoveOnFinish = TRUE;
-    // place the particle effect on the seal's position
-    explosion.position = die.position;
-    // add the particle effect to the same node the seal is on
-    [die.parent addChild:explosion];
-    
-    CCActionDelay *delay = [CCActionDelay actionWithDuration:0.3f];
-	CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.3f scale:0.1f];
-	CCActionSequence *sequence = [CCActionSequence actionWithArray:@[delay, scaleDown]];
-	[die runAction:sequence];
-	[self removeChild:die];
+    _chainScoreLabel.visible = FALSE;
 }
 
 # pragma mark - Fill in holes
@@ -1042,6 +1027,32 @@ static const NSInteger GRID_COLUMNS = 6;
 //    }
 //    return foundMatch;
 //}
+//
+//
+//# pragma mark - Remove chains and update score
+//
+//- (void) removeDieAtRow:(NSInteger)row andColumn:(NSInteger)column {
+//    Dice* die = _gridArray[row][column];
+//    die.row = row;
+//    die.column = column;
+//    
+//    // load particle effect
+//    CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
+//    // make the particle effect clean itself up once it's completed
+//    explosion.autoRemoveOnFinish = TRUE;
+//    // place the particle effect on the seal's position
+//    explosion.position = die.position;
+//    // add the particle effect to the same node the seal is on
+//    [die.parent addChild:explosion];
+//    
+//    CCActionDelay *delay = [CCActionDelay actionWithDuration:0.3f];
+//	CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.3f scale:0.1f];
+//	CCActionSequence *sequence = [CCActionSequence actionWithArray:@[delay, scaleDown]];
+//	[die runAction:sequence];
+//	[self removeChild:die];
+//}
+//
+
 
 # pragma mark - broken update
 
