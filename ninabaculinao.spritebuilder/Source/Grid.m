@@ -109,48 +109,29 @@ static const NSInteger GRID_COLUMNS = 6;
             [self dieFallDown];
             _timeSinceDrop = 0;
             if (![self canBottomMove]) {
-                
-                //            {
-                //                _timeSinceBottom = 0;
-                //            } else if (_timeSinceBottom < 0.2) {
-                //                _timeSinceBottom += delta;
-                //            } else {
-                //
-                //            }
                 CCLOG(@"Dice fell to bottom");
                 [self trackGridState];
-                [self handleMatches];
+                [self handleMatches]; // --> stabilizing
                 [self loadLevel];
                 [self spawnDice];
                 _dropInterval = self.levelSpeed;
                 _timeSinceDrop = 0.2;
-                
-                //            }
-                //            if (![self canBottomMove]) {
-                //                _timeSinceBottom = 0;
-                //                _timeSinceBottom += delta;
-                //            } if (_timeSinceBottom > 0.25) {
             }
-        } else while (stabilizing) {
-            //            self.userInteractionEnabled = FALSE;
+        } else if (stabilizing) {
             CCLOG(@"Matches handled");
             [self trackGridState];
             _timeSinceDrop = 0;
             _dropInterval = 0.1;
-            [self dieFillHoles];
-            CCLOG(@"Holes filled in");
-            [self trackGridState];
+            [self dieFillHoles]; // --> stabilized
             stabilizing = [self checkGrid];
             if (!stabilizing) {
-                CCLOG(@"Grid stabilized");
+                CCLOG(@"Holes filled in");
                 [self trackGridState];
-                [self handleMatches]; // some bug happening here
+                [self handleMatches]; // -> stabilizing
                 _dropInterval = self.levelSpeed;
                 _timeSinceDrop = 0;
-                // for each not stable die, move down
-                // if cant move, set die.stable = true
-                // once done, set stabilizing = false if all die are stable
-                // disable user interaction while stabilizing
+                CCLOG(@"Grid stabilized");
+                [self trackGridState];
             }
             
         }
@@ -718,7 +699,9 @@ static const NSInteger GRID_COLUMNS = 6;
             BOOL bottomCanMove = [self indexValidAndUnoccupiedForRow:row-1 andColumn:column];
             if (positionFilled) {
                 Dice *die = _gridArray[row][column];
-                if (!die.stable && bottomCanMove) {
+                if ([die isEqual: _currentDie1] || [die isEqual: _currentDie2]) {
+                    continue;
+                } else if (!die.stable && bottomCanMove) {
                     die.row--;
                     _gridArray[die.row][die.column] = die; // set die to new row and column
                     die.position = [self positionForTile:die.column row:die.row];
@@ -1073,3 +1056,19 @@ static const NSInteger GRID_COLUMNS = 6;
 //    }
 //}
 //
+
+
+//            {
+//                _timeSinceBottom = 0;
+//            } else if (_timeSinceBottom < 0.2) {
+//                _timeSinceBottom += delta;
+//            } else {
+//
+//            }
+
+
+//            }
+//            if (![self canBottomMove]) {
+//                _timeSinceBottom = 0;
+//                _timeSinceBottom += delta;
+//            } if (_timeSinceBottom > 0.25) {
