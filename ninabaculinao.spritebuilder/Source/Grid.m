@@ -650,11 +650,11 @@ static const NSInteger GRID_COLUMNS = 6;
                 [self addChild:explosion];
             }
             // TODO: Figure out this can do a vert + horiz line at once without setting dice.sprite to nil
-                CCActionEaseOut *easeOut = [CCActionEaseOut actionWithDuration:0.75f];
-                CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.75f scale:0.1f];
-                CCActionSequence *sequence = [CCActionSequence actionWithArray:@[easeOut, scaleDown]];
-                [die runAction:sequence];
-                [die removeFromParent];
+            CCActionEaseOut *easeOut = [CCActionEaseOut actionWithDuration:0.75f];
+            CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.75f scale:0.1f];
+            CCActionSequence *sequence = [CCActionSequence actionWithArray:@[easeOut, scaleDown]];
+            [die runAction:sequence];
+            [die removeFromParent];
         }
     }
 }
@@ -717,16 +717,18 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void)animateScoreForChain:(Chain *)chain {
     _firstDie = [chain.dice firstObject];
     _lastDie = [chain.dice lastObject];
-    CGPoint centerPosition = CGPointMake(((_firstDie.position.x+_lastDie.position.x)/2), ((_firstDie.position.y+_lastDie.position.y)/2 + 15));
+    CGPoint centerPosition = CGPointMake(((_firstDie.position.x+_lastDie.position.x)/2), ((_firstDie.position.y+_lastDie.position.y)/2));
     CCLOG(@"Chain score position: %f, %f", centerPosition.x, centerPosition.y);
     
     _chainScoreLabel.string = [NSString stringWithFormat:@"%ld", (long)chain.score];
     _chainScoreLabel.positionInPoints = CGPointMake(centerPosition.x, (centerPosition.y-15));
     _chainScoreLabel.visible = TRUE;
     
-   CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:2.7f position:centerPosition];
-   [_chainScoreLabel runAction:moveTo];
-//   _chainScoreLabel.visible = FALSE;
+    CCActionFadeIn *fadeIn = [CCActionFadeIn actionWithDuration:0.25f];
+    CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.75f position:centerPosition];
+    CCActionFadeOut *fadeOut = [CCActionFadeOut actionWithDuration:0.75f];
+    CCActionSequence *sequence = [CCActionSequence actionWithArray:@[fadeIn, moveTo, fadeOut]];
+    [_chainScoreLabel runAction:sequence];
 }
 
 # pragma mark - Fill in holes
