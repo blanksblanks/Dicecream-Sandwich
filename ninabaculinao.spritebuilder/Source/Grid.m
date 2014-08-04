@@ -14,7 +14,6 @@
     BOOL stabilizing;
     
     CGFloat _tileWidth; //37
-	CGFloat _tileHeight; //37
 	CGFloat _tileMarginVertical; //0.9285714285714286
 	CGFloat _tileMarginHorizontal; //0.6153846153846154 2
     
@@ -167,11 +166,10 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void)setupGrid
 {
 	_tileWidth = 37.f;
-	_tileHeight = 37.f;
     
 	// calculate the margin by subtracting the block sizes from the grid size
 	_tileMarginHorizontal = (self.contentSize.width - (GRID_COLUMNS * _tileWidth)) / (GRID_COLUMNS+1);
-	_tileMarginVertical = (self.contentSize.height - (GRID_ROWS * _tileHeight)) / (GRID_ROWS+1);
+	_tileMarginVertical = (self.contentSize.height - (GRID_ROWS * _tileWidth)) / (GRID_ROWS+1);
 	
     // set up initial x and y positions
 	float x = _tileMarginHorizontal;
@@ -191,7 +189,7 @@ static const NSInteger GRID_COLUMNS = 6;
 			x+= _tileWidth + _tileMarginHorizontal; // after positioning a block increase x variable
 		}
         
-		y+= _tileHeight + _tileMarginVertical; // after completing row increase y variable
+		y+= _tileWidth + _tileMarginVertical; // after completing row increase y variable
 	}
 }
 
@@ -313,8 +311,8 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Convert position for tile from (column, row) to ccp(x,y)
 
 - (CGPoint)positionForTile:(NSInteger)column row:(NSInteger)row {
-	float x = _tileMarginHorizontal + column * (_tileMarginHorizontal + _tileWidth);
-	float y = _tileMarginVertical + row * (_tileMarginVertical + _tileHeight);
+	float x = _tileMarginHorizontal + column * (_tileMarginHorizontal + _tileWidth) - (_tileWidth/2);
+	float y = _tileMarginVertical + row * (_tileMarginVertical + _tileWidth) + (_tileWidth/2);
 	return CGPointMake(x,y);
 }
 
@@ -644,13 +642,14 @@ static const NSInteger GRID_COLUMNS = 6;
         _firstDie = [chain.dice firstObject];
         _lastDie = [chain.dice lastObject];
         for (Dice *die in chain.dice) {
+            //TODO: Change this to a glow animation or something before the dice get cleared
             if ([die isEqual: _firstDie] || [die isEqual: _lastDie]) {
                 CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
                 explosion.autoRemoveOnFinish = TRUE;
                 explosion.position = die.position;
                 [self addChild:explosion];
             }
-// TODO: Figure out if it's possible to do a vert + horiz line at once without setting dice.sprite to nil
+            // TODO: Figure out this can do a vert + horiz line at once without setting dice.sprite to nil
                 CCActionEaseOut *easeOut = [CCActionEaseOut actionWithDuration:0.75f];
                 CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.75f scale:0.1f];
                 CCActionSequence *sequence = [CCActionSequence actionWithArray:@[easeOut, scaleDown]];
@@ -659,7 +658,6 @@ static const NSInteger GRID_COLUMNS = 6;
         }
     }
 }
-
 
 - (void)removeDice:(NSArray *)chains {
     for (Chain *chain in chains) {
@@ -726,9 +724,9 @@ static const NSInteger GRID_COLUMNS = 6;
     _chainScoreLabel.positionInPoints = CGPointMake(centerPosition.x, (centerPosition.y-15));
     _chainScoreLabel.visible = TRUE;
     
-    CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:2.7f position:centerPosition];
-    [_chainScoreLabel runAction:moveTo];
-    _chainScoreLabel.visible = FALSE;
+   CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:2.7f position:centerPosition];
+   [_chainScoreLabel runAction:moveTo];
+//   _chainScoreLabel.visible = FALSE;
 }
 
 # pragma mark - Fill in holes
