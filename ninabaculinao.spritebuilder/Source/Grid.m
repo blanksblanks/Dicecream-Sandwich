@@ -51,11 +51,6 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)didLoadFromCCB{
     
-//    self.level = 1;
-//    self.levelSpeed = 1.0f;
-//    self.targetScore = 600;
-//    self.possibilities = 3;
-
     _timer = 0;
     _timeSinceDrop = -0.2;
     _dropInterval = 1.0;
@@ -78,6 +73,7 @@ static const NSInteger GRID_COLUMNS = 6;
 		}
 	}
     
+    [self loadLevel];
     [self spawnDice];
     
 }
