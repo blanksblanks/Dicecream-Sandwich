@@ -9,6 +9,13 @@
 #import "CCSprite.h"
 #import "Chain.h"
 
+typedef NS_ENUM(NSInteger, GridState) {
+    GridStateSpawningDice,
+    GridStateFallingDice,
+    GridStateFillingHoles,
+    GridStateHandlingMatches
+};
+
 @interface Grid : CCSprite
 
 - (void)spawnDice;
@@ -16,6 +23,7 @@
 - (void)loadLevel;
 //- (NSSet *)removeMatches;
 
+@property (nonatomic, assign) GridState currentGridState;
 @property (nonatomic, assign) NSInteger match;
 @property (nonatomic, assign) NSInteger score;
 @property (nonatomic, assign) NSInteger targetScore;

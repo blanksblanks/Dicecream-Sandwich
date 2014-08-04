@@ -11,6 +11,7 @@
 
 @implementation Grid {
     
+    NSInteger actionIndex;
     BOOL stabilizing;
     
     CGFloat _tileWidth; //37
@@ -55,8 +56,6 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void)didLoadFromCCB{
     
     _timer = 0;
-    _timeSinceDrop = -0.2;
-    _dropInterval = 1.0;
     stabilizing = false;
     
     _chainScoreLabel.visible = FALSE;
@@ -77,8 +76,8 @@ static const NSInteger GRID_COLUMNS = 6;
 	}
     
     [self loadLevel];
-    [self spawnDice];
     
+    actionIndex = 0;
 }
 
 - (void)loadLevel {
@@ -105,38 +104,51 @@ static const NSInteger GRID_COLUMNS = 6;
     _timer += delta;
     _timeSinceDrop += delta;
     
-    if (_timeSinceDrop > _dropInterval) {
-        
-        // if not stabilizing, let dice fall down
-        if (!stabilizing) {
-            [self dieFallDown];
-            _timeSinceDrop = 0;
-            if (![self canBottomMove]) {
-                CCLOG(@"Dice fell to bottom");
-                [self trackGridState];
-                [self handleMatches]; // --> stabilizing
-                [self loadLevel];
-                [self spawnDice];
-                _dropInterval = self.levelSpeed;
-                _timeSinceDrop = 0.2;
-            }
-        } else if (stabilizing) {
-            CCLOG(@"Matches handled");
-            [self trackGridState];
-            _timeSinceDrop = 0;
-            _dropInterval = 0.1;
-            [self dieFillHoles]; // --> stabilized
-            stabilizing = [self checkGrid];
-            if (!stabilizing) {
-                CCLOG(@"Holes filled in");
-                [self trackGridState];
-                [self handleMatches]; // -> stabilizing
-                _dropInterval = self.levelSpeed;
+    switch (actionIndex%4) {
+        case 0: { // spawn dice
+            [self spawnDice];
+            _timeSinceDrop = -0.2;
+            _dropInterval = self.levelSpeed;
+            CCLOG(@"Dice spawned"); [self trackGridState];
+            actionIndex = 1; CCLOG(@"Going to case 1: dice falling down");
+            break;
+        }
+        case 1: { // dice falling down
+            if (_timeSinceDrop > _dropInterval) {
+                [self dieFallDown];
                 _timeSinceDrop = 0;
-                CCLOG(@"Grid stabilized");
-                [self trackGridState];
+                if (![self canBottomMove]) {
+                    CCLOG(@"Dice fell to bottom:"); [self trackGridState];
+                    actionIndex = 2; CCLOG(@"Going to case 2: filling holes");
+                }
             }
-            
+            break;
+        }
+        case 2: { // dice filling holes
+            if (_timeSinceDrop > _dropInterval) {
+                _timeSinceDrop = 0;
+                [self dieFillHoles]; // --> stabilized
+                stabilizing = [self checkGrid];
+                if (!stabilizing) {
+                    CCLOG(@"Holes filled:"); [self trackGridState];
+                    actionIndex = 3; CCLOG(@"Going to case 3: handling matches");
+                }
+            }
+            break;
+        }
+        case 3: { // handling matches
+            [self handleMatches];
+            [self loadLevel];
+            stabilizing = [self checkGrid];
+            if (stabilizing) { // implies matches found
+                _dropInterval = 0.1;
+                CCLOG(@"Matches handled:"); [self trackGridState];
+                actionIndex = 2; CCLOG(@"Going to case 2: filling holes");
+            } else if (!stabilizing) { // implies no matches found
+                _dropInterval = self.levelSpeed;
+                actionIndex = 0; CCLOG(@"Going to case 0: spawning dice");
+            }
+        break;
         }
     }
 }
@@ -316,17 +328,18 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (BOOL) canBottomMove {
+    BOOL bottomCanMove;
     if (_currentDie1.row != _currentDie2.row) {
         if (_currentDie1.row > _currentDie2.row) {
-            return [self indexValidAndUnoccupiedForRow:_currentDie2.row-1 andColumn:_currentDie2.column];
+            bottomCanMove = [self indexValidAndUnoccupiedForRow:_currentDie2.row-1 andColumn:_currentDie2.column];
         } else {
-            
-            return [self indexValidAndUnoccupiedForRow:_currentDie1.row-1 andColumn:_currentDie1.column];
+            bottomCanMove = [self indexValidAndUnoccupiedForRow:_currentDie1.row-1 andColumn:_currentDie1.column];
         }
     }
     else {
-        return [self indexValidAndUnoccupiedForRow:_currentDie2.row-1 andColumn:_currentDie2.column] && [self indexValidAndUnoccupiedForRow:_currentDie1.row-1 andColumn:_currentDie1.column];
+        bottomCanMove = [self indexValidAndUnoccupiedForRow:_currentDie2.row-1 andColumn:_currentDie2.column] && [self indexValidAndUnoccupiedForRow:_currentDie1.row-1 andColumn:_currentDie1.column];
     }
+    return bottomCanMove;
 }
 
 # pragma mark - Touch handling - let player swipe left/right/down/rotate
@@ -354,11 +367,11 @@ static const NSInteger GRID_COLUMNS = 6;
     // soft drop
     if (ydifference > 0.2*(self.contentSize.height) && (newTouchPosition.y < _currentDie1.position.y) && (newTouchPosition.y < _currentDie2.position.y)) {
         _dropInterval = 0.03;
-    } else if (xdifference > 0.3*(self.contentSize.width)) {
+    } else if (xdifference > 0.5*(_tileWidth)) {
         [self swipeLeftTo:column];
 //    } else if (xdifference > 0.1*(self.contentSize.width) && xdifference < 0.3*(self.contentSize.width)) {
 //        [self swipeLeft];
-    } else if (xdifference < -0.3*(self.contentSize.width)) {
+    } else if (xdifference < -0.5*(_tileWidth)) {
         [self swipeRightTo:column];
 //    } else if (xdifference < -0.1*(self.contentSize.width) && xdifference > -0.3*(self.contentSize.width)){
 //        [self swipeRight];
@@ -375,11 +388,11 @@ static const NSInteger GRID_COLUMNS = 6;
         // calculate lengths of swipes
         float ydifference = oldTouchPosition.y - newTouchPosition.y;
         NSTimeInterval touchInterval = newTouchTime - oldTouchTime;
-        CCLOG(@"Touch interval %f", touchInterval);
+//        CCLOG(@"Touch interval %f", touchInterval);
     
     NSTimeInterval timeBetweenSwipes = newTouchTime - previousTouchTime;
-    CCLOG(@"Time between swipes %f", timeBetweenSwipes);
-        
+//    CCLOG(@"Time between swipes %f", timeBetweenSwipes);
+    
         // consider adjusting speed of fall with swiping
         // define types of swipes: swipe up or down, long swipe left, short swipe left,
         // long swipe right, short swipe right, tap to rotate
@@ -614,9 +627,9 @@ static const NSInteger GRID_COLUMNS = 6;
                 }
             }
         }
-        stabilizing = true;
-    } if (!matchFound) {
+    } else if (!matchFound) {
         [self resetCombo];
+        stabilizing = false;
     }
     
 //    DDLogInfo(@"Horizontal matches: %@", horizontalChains);
@@ -723,13 +736,11 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void) dieFillHoles {
     for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
 		for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
-            BOOL positionFilled = [self indexValidAndOccupiedForRow:row andColumn:column];
-            BOOL bottomCanMove = [self indexValidAndUnoccupiedForRow:row-1 andColumn:column];
-            if (positionFilled) {
+            BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
+            BOOL bottomCanMove = [_gridArray[row-1][column] isEqual: _noTile];
+            if (!positionFree) {
                 Dice *die = _gridArray[row][column];
-                if ([die isEqual: _currentDie1] || [die isEqual: _currentDie2]) {
-                    continue;
-                } else if (!die.stable && bottomCanMove) {
+                if (bottomCanMove) {
                     die.row--;
                     _gridArray[die.row][die.column] = die; // set die to new row and column
                     die.position = [self positionForTile:die.column row:die.row];
@@ -1100,3 +1111,52 @@ static const NSInteger GRID_COLUMNS = 6;
 //                _timeSinceBottom = 0;
 //                _timeSinceBottom += delta;
 //            } if (_timeSinceBottom > 0.25) {
+
+
+
+
+
+
+
+/* Original update method
+ # pragma mark - Update method
+
+- (void) update:(CCTime) delta {
+    _timer += delta;
+    _timeSinceDrop += delta;
+    
+    if (_timeSinceDrop > _dropInterval) {
+        
+        // if not stabilizing, let dice fall down
+        if (!stabilizing) {
+            [self dieFallDown];
+            _timeSinceDrop = 0;
+            if (![self canBottomMove]) {
+                CCLOG(@"Dice fell to bottom");
+                [self trackGridState];
+                [self handleMatches]; // --> stabilizing
+                [self loadLevel];
+                [self spawnDice];
+                _dropInterval = self.levelSpeed;
+                _timeSinceDrop = 0.2;
+            }
+        } else if (stabilizing) {
+            CCLOG(@"Matches handled");
+            [self trackGridState];
+            _timeSinceDrop = 0;
+            _dropInterval = 0.1;
+            [self dieFillHoles]; // --> stabilized
+            stabilizing = [self checkGrid];
+            if (!stabilizing) {
+                CCLOG(@"Holes filled in");
+                [self trackGridState];
+                [self handleMatches]; // -> stabilizing
+                _dropInterval = self.levelSpeed;
+                _timeSinceDrop = 0;
+                CCLOG(@"Grid stabilized");
+                [self trackGridState];
+            }
+            
+        }
+    }
+}*/
