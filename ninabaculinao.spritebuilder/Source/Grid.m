@@ -666,43 +666,25 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Calculate scores
 
 - (void)calculateScores:(NSArray *)chains {
+    self.combo = -1;
+    
     for (Chain *chain in chains) {
         NSInteger face = ((Dice*) chain.dice[0]).faceValue;
         BOOL six = (face == 6);
-        BOOL perfectMatch = false;
+        self.combo++;
         for (Dice *die in chain.dice) {
-            if (die.faceValue == face) {
-                perfectMatch = true;
-            } else {
-                perfectMatch = false;
-                six = false;
-                break;
-            }
-        } if ([chains count] > 1) {
-            self.combo += ([chains count] - 1);
-        } else {
+            BOOL perfectMatch = (die.faceValue == face);
             if (six && perfectMatch) {
                 chain.score = 1000;
-                self.combo++;
                 // Perfect match score system: x2
             } else if (perfectMatch) {
                 chain.score = face * 20 * ([chain.dice count]) + (50 * self.combo);
-                self.combo++;
                 // Regular score system: ones = 30, twos = 80, threes = 150, fours = 240, fives = 350, sixes = 480
             } else {
                 chain.score = face * 10 * ([chain.dice count]) + (50 * self.combo);
-                self.combo++;
             }
         }
-        
         CCLOG(@"Face match: %d, chain score: %d, Combo: %ld", face, chain.score, (long)self.combo);
-        
-        // for debugging purposes
-//        NSInteger thing = ((Dice*) chain.dice[0]).faceValue;
-//        NSInteger thing1 = ((Dice*) chain.dice[0]).row;
-//        NSInteger thing2 = ((Dice*) chain.dice[0]).column;
-//        NSInteger otherthing = [chain.dice count];
-//        DDLogInfo(@"Face: %d Row: %d Column: %d chain.dice count: %d chainscore: %d", thing, thing1, thing2, otherthing, chain.score);
     }
 }
 
