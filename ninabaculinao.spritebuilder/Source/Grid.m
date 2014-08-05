@@ -305,29 +305,20 @@ static const NSInteger GRID_COLUMNS = 6;
 	return CGPointMake(x,y);
 }
 
-# pragma mark - Ghost methods
+# pragma mark - Spawn ghost
 
 - (void)spawnGhost {
     NSInteger ghostRow1;
     NSInteger ghostRow2;
     
     if (_currentDie1.row > _currentDie2.row) {
-        for (NSInteger row = GRID_ROWS-2; row >= 0; row--) {
-            if ([_gridArray[row][_currentDie2.column] isEqual: _noTile]) {
-                ghostRow2 = row;
-            }
-            ghostRow1 = ghostRow2 + 1;
-        }
+        ghostRow2 = [self findBottomforColumn:_currentDie2.column];
+        ghostRow1 = ghostRow2 + 1;
     } else {
-        for (NSInteger row = GRID_ROWS-2; row >= 0; row--) {
-            if ([_gridArray[row][_currentDie1.column] isEqual: _noTile]) {
-                ghostRow1 = row;
-            }
-            if ([_gridArray[row][_currentDie2.column] isEqual: _noTile]) {
-                ghostRow2 = row;
-            }
-        }
+        ghostRow1 = [self findBottomforColumn:_currentDie1.column];
+        ghostRow2 = [self findBottomforColumn:_currentDie2.column];
     }
+    
     _ghostDie1 = [self addGhostAtTile:_currentDie1.column row:ghostRow1];
     _ghostDie2 = [self addGhostAtTile:_currentDie2.column row:ghostRow2];
 }
@@ -347,17 +338,14 @@ static const NSInteger GRID_COLUMNS = 6;
     return die;
 }
 
-- (void)moveGhost {
-    for (NSInteger row = GRID_ROWS-1; row >= 0; row--) { // start from second row
-        BOOL position1Free = [_gridArray[row][_currentDie1.column] isEqual: _noTile];
-        if (!position1Free) {
-            _ghostDie1 = [self addGhostAtTile:_currentDie1.column row:row+1];
-        }
-        BOOL position2Free = [_gridArray[row][_currentDie2.column] isEqual: _noTile];
-        if (!position2Free) {
-            _ghostDie2 = [self addGhostAtTile:_currentDie1.column row:row+1];
+- (NSInteger)findBottomforColumn:(NSInteger)column {
+    NSInteger ghostRow;
+    for (NSInteger row = GRID_ROWS-2; row >= 0; row--) {
+        if([_gridArray[row][column] isEqual: _noTile]) {
+            ghostRow = row;
         }
     }
+    return ghostRow;
 }
 
 # pragma mark - Make pair of dice fall
