@@ -19,7 +19,7 @@ typedef NS_ENUM(NSInteger, GridState) {
 @interface Grid : CCSprite
 
 - (void)spawnDice;
-- (void)resetCombo;
+//- (void)resetCombo;
 - (void)loadLevel;
 //- (NSSet *)removeMatches;
 

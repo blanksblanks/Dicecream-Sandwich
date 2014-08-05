@@ -117,7 +117,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 _timeSinceDrop = 0;
                 if (![self canBottomMove]) {
                     CCLOG(@"Dice fell to bottom:"); [self trackGridState];
-                    _dropInterval = 0.1;
+                    _dropInterval = 0.05;
                     actionIndex = 2; CCLOG(@"Going to case 2: filling holes");
                 }
             }
@@ -140,7 +140,7 @@ static const NSInteger GRID_COLUMNS = 6;
             [self loadLevel];
             if (matchFound) {
                 CCLOG(@"Matches handled:"); [self trackGridState];
-                _dropInterval = 0.1;
+                _dropInterval = 0.05;
                 actionIndex = 2; CCLOG(@"Going to case 2: filling holes");
             } else if (!matchFound) {
                 _dropInterval = self.levelSpeed;
@@ -599,7 +599,7 @@ static const NSInteger GRID_COLUMNS = 6;
             }
         }
     } else if (!matchFound) {
-        [self resetCombo];
+        self.combo = 0; // reset combo
     }
     
 //    CCLOG(@"Horizontal matches: %@", horizontalChains);
@@ -631,12 +631,12 @@ static const NSInteger GRID_COLUMNS = 6;
         _lastDie = [chain.dice lastObject];
         for (Dice *die in chain.dice) {
             //TODO: Change this to a glow animation or something before the dice get cleared
-            if ([die isEqual: _firstDie] || [die isEqual: _lastDie]) {
+//            if ([die isEqual: _firstDie] || [die isEqual: _lastDie]) {
                 CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
                 explosion.autoRemoveOnFinish = TRUE;
                 explosion.position = die.position;
                 [self addChild:explosion];
-            }
+//            }
             // TODO: Figure out this can do a vert + horiz line at once without setting dice.sprite to nil
             CCActionEaseOut *easeOut = [CCActionEaseOut actionWithDuration:0.75f];
             CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.75f scale:0.1f];
@@ -677,10 +677,6 @@ static const NSInteger GRID_COLUMNS = 6;
         }
         CCLOG(@"Face match: %d, chain score: %d, Combo: %ld", face, chain.score, (long)self.combo);
     }
-}
-
-- (void)resetCombo {
-    self.combo = 0;
 }
 
 - (void)animateScoreForChain:(Chain *)chain {
