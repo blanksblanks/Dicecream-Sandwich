@@ -107,7 +107,7 @@ static const NSInteger GRID_COLUMNS = 6;
     switch (actionIndex%4) {
         case 0: { // spawn dice
             [self spawnDice];
-            [self spawnGhost];
+//            [self spawnGhost];
             _timeSinceDrop = -0.2;
             _dropInterval = self.levelSpeed;
             CCLOG(@"Dice spawned"); [self trackGridState];
@@ -340,17 +340,32 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void) dieFallDown {
     BOOL bottomCanMove = [self canBottomMove];
     if (bottomCanMove) {
-        [self moveDie:_currentDie1 inDirection:ccp(0, -1)];
-        [self moveDie:_currentDie2 inDirection:ccp(0, -1)];
+        _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
+        _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+
+        _currentDie1.row--;
+        _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
+        _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
+        
+        _currentDie2.row--;
+        _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+        _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+//        [self moveDie:_currentDie1 inDirection:ccp(0, -1)];
+//        [self moveDie:_currentDie2 inDirection:ccp(0, -1)];
     }
 }
 
 - (void) moveDie:(Dice*)die inDirection:(CGPoint)direction {
-    _gridArray[die.row][die.column] = _noTile; // Set old index of the die in the array to null
-    die.row += direction.y; // Change die row and column properties based on direction coordinates
-    die.column += direction.x;
-    _gridArray[die.row][die.column] = die; // Set new index in the grid array to the die
-    die.position = [self positionForTile:die.column row:die.row]; // Position dice object in the visual grid
+//    NSInteger newRow = die.row + direction.y;
+//    NSInteger newColumn = die.column + direction.x;
+//    BOOL positionFree = [self indexValidAndOccupiedForRow:newRow andColumn:newColumn];
+//    if (positionFree) {
+        _gridArray[die.row][die.column] = _noTile; // Set old index of the die in the array to null
+        die.row += direction.y; // Change die row and column properties based on direction coordinates
+        die.column += direction.x;
+        _gridArray[die.row][die.column] = die; // Set new index in the grid array to the die
+        die.position = [self positionForTile:die.column row:die.row]; // Position dice object in the visual grid
+//    }
 }
 
 - (BOOL) canBottomMove {
@@ -730,10 +745,11 @@ static const NSInteger GRID_COLUMNS = 6;
                 Dice *die = _gridArray[row][column];
                 die.stable = false;
                 if (bottomCanMove) {
-                    die.row--;
-                    _gridArray[die.row][die.column] = die; // set die to new row and column
-                    die.position = [self positionForTile:die.column row:die.row];
-                    _gridArray[row][column] = _noTile; // set old row and column to null
+                    [self moveDie:die inDirection:ccp(0,-1)];
+//                    die.row--;
+//                    _gridArray[die.row][die.column] = die; // set die to new row and column
+//                    die.position = [self positionForTile:die.column row:die.row];
+//                    _gridArray[row][column] = _noTile; // set old row and column to null
                 } else if (!bottomCanMove) {
                     die.stable = true;
                 }
@@ -1157,16 +1173,4 @@ static const NSInteger GRID_COLUMNS = 6;
 //    NSTimeInterval timeBetweenSwipes = newTouchTime - previousTouchTime;
 //    CCLOG(@"Time between swipes %f", timeBetweenSwipes);
 
-
-//
-//        _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
-//        _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
-//
-//        _currentDie1.row--;
-//        _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
-//        _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
-//
-//        _currentDie2.row--;
-//        _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
-//        _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
 
