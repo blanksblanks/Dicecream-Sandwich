@@ -353,7 +353,6 @@ static const NSInteger GRID_COLUMNS = 6;
     die.position = [self positionForTile:die.column row:die.row]; // Position dice object in the visual grid
 }
 
-
 - (BOOL) canBottomMove {
     BOOL bottomCanMove;
     if (_currentDie1.row != _currentDie2.row) {
@@ -426,16 +425,8 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void)swipeLeft {
     BOOL canMoveLeft = [self indexValidAndUnoccupiedForRow:_currentDie2.row andColumn:_currentDie2.column-1] && [self indexValidAndUnoccupiedForRow:_currentDie1.row andColumn:_currentDie1.column-1];
     if (canMoveLeft) {
-        _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
-        _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
-        
-        _currentDie1.column--;
-        _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
-        _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
-        
-        _currentDie2.column--;
-        _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
-        _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+        [self moveDie:_currentDie1 inDirection:ccp(-1, 0)];
+        [self moveDie:_currentDie2 inDirection:ccp(-1, 0)];
     }
 }
 
@@ -446,19 +437,10 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void)swipeRight {
-//    [self move:ccp(1, 0)];
     BOOL canMoveRight = [self indexValidAndUnoccupiedForRow:_currentDie2.row andColumn:_currentDie2.column+1] && [self indexValidAndUnoccupiedForRow:_currentDie1.row andColumn:_currentDie1.column+1];
     if (canMoveRight) {
-        _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
-        _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
-        
-        _currentDie1.column++;
-        _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
-        _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
-        
-        _currentDie2.column++;
-        _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
-        _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+        [self moveDie:_currentDie1 inDirection:ccp(1, 0)];
+        [self moveDie:_currentDie2 inDirection:ccp(1, 0)];
     }
 }
 
@@ -472,62 +454,69 @@ static const NSInteger GRID_COLUMNS = 6;
             //            [2]
             // check if new placement is occupied
            if ([_gridArray[_currentDie2.row-1][_currentDie2.column-1] isEqual: _noTile]) {
-                _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
-                _currentDie2.row--; _currentDie2.column--;
-                _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
-                _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+               [self moveDie:_currentDie2 inDirection:ccp(-1,-1)];
+//                _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+//                _currentDie2.row--; _currentDie2.column--;
+//                _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+//                _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
            }
         } else if (_currentDie1.row > _currentDie2.row) {
             // [1]
             // [2] --> [2][1] means die1 moves when it's in rightmost column
             if (_currentDie2.column == 0) {
                 if ([_gridArray[_currentDie1.row-1][_currentDie1.column+1] isEqual: _noTile]) {
-                _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
-                _currentDie1.row--; _currentDie1.column++;
-                _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
-                _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
+                    [self moveDie:_currentDie1 inDirection:ccp(1, -1)];
+//                _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
+//                _currentDie1.row--; _currentDie1.column++;
+//                _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
+//                _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
                 }
             } else if (_currentDie1.row == GRID_ROWS-1) { // when die1 is on top row
                 if ([_gridArray[_currentDie1.row-1][_currentDie1.column-1] isEqual: _noTile]) {
-                    _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
-                    _currentDie1.row--; _currentDie1.column--;
-                    _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
-                    _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
+                    [self moveDie:_currentDie1 inDirection:ccp(-1, -1)];
+//                    _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
+//                    _currentDie1.row--; _currentDie1.column--;
+//                    _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
+//                    _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
                 }
             }
             else {
                 if ([_gridArray[_currentDie2.row+1][_currentDie2.column-1] isEqual: _noTile]) {
-                    _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
-                    _currentDie2.row++; _currentDie2.column--;
-                    _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
-                    _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+                    [self moveDie:_currentDie2 inDirection:ccp(-1, 1)];
+//                    _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+//                    _currentDie2.row++; _currentDie2.column--;
+//                    _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+//                    _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
                 }
             }
         } else if (_currentDie1.column > _currentDie2.column) {
             // [2][1] --> [2]
             //            [1]
             if ([_gridArray[_currentDie2.row+1][_currentDie2.column+1] isEqual: _noTile]) {
-                _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
-                _currentDie2.row++; _currentDie2.column++;
-                _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
-                _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+                [self moveDie:_currentDie2 inDirection:ccp(1, 1)];
+//                _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+//                _currentDie2.row++; _currentDie2.column++;
+//                _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+//                _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
             }
         } else {
             // [2]
             // [1]  --> [1][2] means die1 moves when it's in leftmost column
             if (_currentDie2.column == GRID_COLUMNS-1) {
                 if ([_gridArray[_currentDie1.row+1][_currentDie1.column-1] isEqual: _noTile]) {
-                    _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
-                    _currentDie1.row++; _currentDie1.column--;
-                    _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
-                    _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
+                    [self moveDie:_currentDie1 inDirection:ccp(-1, 1)];
+//                    _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
+//                    _currentDie1.row++; _currentDie1.column--;
+//                    _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
+//                    _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
                 }
             } else {
                 if ([_gridArray[_currentDie2.row-1][_currentDie2.column+1] isEqual: _noTile]) {
-                    _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
-                    _currentDie2.row--; _currentDie2.column++;
-                    _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
-                    _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+                    [self moveDie:_currentDie2 inDirection:ccp(1, -1)];
+//                    _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+//                    _currentDie2.row--; _currentDie2.column++;
+//                    _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+//                    _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
                 }
             }
         }
