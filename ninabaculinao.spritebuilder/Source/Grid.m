@@ -28,6 +28,8 @@
     
     Dice *_currentDie1;
     Dice *_currentDie2;
+    Dice *_ghostDie1;
+    Dice *_ghostDie2;
     
     Dice *_leftDie;
     Dice *_rightDie;
@@ -105,6 +107,7 @@ static const NSInteger GRID_COLUMNS = 6;
     switch (actionIndex%4) {
         case 0: { // spawn dice
             [self spawnDice];
+            [self spawnGhost];
             _timeSinceDrop = -0.2;
             _dropInterval = self.levelSpeed;
             CCLOG(@"Dice spawned"); [self trackGridState];
@@ -153,8 +156,7 @@ static const NSInteger GRID_COLUMNS = 6;
 
 # pragma mark - Create initial grid and check grid state
 
-- (void)setupGrid
-{
+- (void)setupGrid {
 	_tileWidth = 37.f;
     
 	// calculate the margin by subtracting the block sizes from the grid size
@@ -301,6 +303,61 @@ static const NSInteger GRID_COLUMNS = 6;
 	float x = _tileMarginHorizontal + column * (_tileMarginHorizontal + _tileWidth) + (_tileWidth/2);
 	float y = _tileMarginVertical + row * (_tileMarginVertical + _tileWidth) + (_tileWidth/2);
 	return CGPointMake(x,y);
+}
+
+# pragma mark - Ghost methods
+
+- (void)spawnGhost {
+    NSInteger ghostRow1;
+    NSInteger ghostRow2;
+    
+    if (_currentDie1.row > _currentDie2.row) {
+        for (NSInteger row = GRID_ROWS-2; row >= 0; row--) {
+            if ([_gridArray[row][_currentDie2.column] isEqual: _noTile]) {
+                ghostRow2 = row;
+            }
+            ghostRow1 = ghostRow2 + 1;
+        }
+    } else {
+        for (NSInteger row = GRID_ROWS-2; row >= 0; row--) {
+            if ([_gridArray[row][_currentDie1.column] isEqual: _noTile]) {
+                ghostRow1 = row;
+            }
+            if ([_gridArray[row][_currentDie2.column] isEqual: _noTile]) {
+                ghostRow2 = row;
+            }
+        }
+    }
+    _ghostDie1 = [self addGhostAtTile:_currentDie1.column row:ghostRow1];
+    _ghostDie2 = [self addGhostAtTile:_currentDie2.column row:ghostRow2];
+}
+
+- (Dice*) addGhostAtTile:(NSInteger)column row:(NSInteger)row {
+    Dice* die = (Dice*) [CCBReader load:@"Dice/Dice"];
+	_gridArray[row][column] = die;
+    die.row = row;
+    die.column = column;
+	die.scale = 0.f;
+	[self addChild:die];
+	die.position = [self positionForTile:column row:row];
+	CCActionDelay *delay = [CCActionDelay actionWithDuration:0.3f];
+	CCActionScaleTo *scaleUp = [CCActionScaleTo actionWithDuration:0.2f scale:1.f];
+	CCActionSequence *sequence = [CCActionSequence actionWithArray:@[delay, scaleUp]];
+	[die runAction:sequence];
+    return die;
+}
+
+- (void)moveGhost {
+    for (NSInteger row = GRID_ROWS-1; row >= 0; row--) { // start from second row
+        BOOL position1Free = [_gridArray[row][_currentDie1.column] isEqual: _noTile];
+        if (!position1Free) {
+            _ghostDie1 = [self addGhostAtTile:_currentDie1.column row:row+1];
+        }
+        BOOL position2Free = [_gridArray[row][_currentDie2.column] isEqual: _noTile];
+        if (!position2Free) {
+            _ghostDie2 = [self addGhostAtTile:_currentDie1.column row:row+1];
+        }
+    }
 }
 
 # pragma mark - Make pair of dice fall
