@@ -319,7 +319,6 @@ static const NSInteger GRID_COLUMNS = 6;
         ghostRow1 = [self findBottomforColumn:_currentDie1.column];
         ghostRow2 = [self findBottomforColumn:_currentDie2.column];
     }
-    
     _ghostDie1 = (Dice*) [CCBReader load:@"Dice/Dice"];
     _ghostDie2 = (Dice*) [CCBReader load:@"Dice/Dice"];
     _ghostDie1 = [self addDie:_ghostDie1 atColumn:_currentDie1.column andRow:ghostRow1];
@@ -341,19 +340,19 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void) dieFallDown {
     BOOL bottomCanMove = [self canBottomMove];
     if (bottomCanMove) {
-        _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
-        _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
-        
-        _currentDie1.row--;
-        _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
-        _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
-        
-        _currentDie2.row--;
-        _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
-        _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+        [self moveDie:_currentDie1 inDirection:ccp(0, -1)];
+        [self moveDie:_currentDie2 inDirection:ccp(0, -1)];
     }
-    
 }
+
+- (void) moveDie:(Dice*)die inDirection:(CGPoint)direction {
+    _gridArray[die.row][die.column] = _noTile; // Set old index of the die in the array to null
+    die.row += direction.y; // Change die row and column properties based on direction coordinates
+    die.column += direction.x;
+    _gridArray[die.row][die.column] = die; // Set new index in the grid array to the die
+    die.position = [self positionForTile:die.column row:die.row]; // Position dice object in the visual grid
+}
+
 
 - (BOOL) canBottomMove {
     BOOL bottomCanMove;
@@ -1168,3 +1167,17 @@ static const NSInteger GRID_COLUMNS = 6;
 
 //    NSTimeInterval timeBetweenSwipes = newTouchTime - previousTouchTime;
 //    CCLOG(@"Time between swipes %f", timeBetweenSwipes);
+
+
+//
+//        _gridArray[_currentDie1.row][_currentDie1.column] = _noTile;
+//        _gridArray[_currentDie2.row][_currentDie2.column] = _noTile;
+//
+//        _currentDie1.row--;
+//        _gridArray[_currentDie1.row][_currentDie1.column] = _currentDie1;
+//        _currentDie1.position = [self positionForTile:_currentDie1.column row:_currentDie1.row];
+//
+//        _currentDie2.row--;
+//        _gridArray[_currentDie2.row][_currentDie2.column] = _currentDie2;
+//        _currentDie2.position = [self positionForTile:_currentDie2.column row:_currentDie2.row];
+
