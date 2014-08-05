@@ -242,17 +242,18 @@ static const NSInteger GRID_COLUMNS = 6;
         BOOL positionFree = ([_gridArray[firstRow][firstColumn] isEqual: _noTile]);
         BOOL nextPositionFree = ([_gridArray[nextRow][nextColumn] isEqual: _noTile]);
 		if (positionFree && nextPositionFree) {
-			_currentDie1 = [self addDieAtTile:firstColumn row:firstRow];
-            _currentDie2 = [self addDieAtTile:nextColumn row:nextRow];
+			_currentDie1 = [self randomizeNumbers];
+            _currentDie1 = [self addDie:_currentDie1 atColumn:firstColumn andRow:firstRow];
+            _currentDie2 = [self randomizeNumbers];
+            _currentDie2 = [self addDie:_currentDie2 atColumn:nextColumn andRow:nextRow];
         } else {
-//          CCLOG(@"Game Over");
+            CCLOG(@"Game Over");
             CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
             [[CCDirector sharedDirector] replaceScene:mainScene];
         }
 }
 
-- (Dice*) addDieAtTile:(NSInteger)column row:(NSInteger)row {
-    Dice* die = [self randomizeNumbers];
+- (Dice*) addDie:(Dice*)die atColumn:(NSInteger)column andRow:(NSInteger)row {
 	_gridArray[row][column] = die;
     die.row = row;
     die.column = column;
@@ -319,23 +320,10 @@ static const NSInteger GRID_COLUMNS = 6;
         ghostRow2 = [self findBottomforColumn:_currentDie2.column];
     }
     
-    _ghostDie1 = [self addGhostAtTile:_currentDie1.column row:ghostRow1];
-    _ghostDie2 = [self addGhostAtTile:_currentDie2.column row:ghostRow2];
-}
-
-- (Dice*) addGhostAtTile:(NSInteger)column row:(NSInteger)row {
-    Dice* die = (Dice*) [CCBReader load:@"Dice/Dice"];
-	_gridArray[row][column] = die;
-    die.row = row;
-    die.column = column;
-	die.scale = 0.f;
-	[self addChild:die];
-	die.position = [self positionForTile:column row:row];
-	CCActionDelay *delay = [CCActionDelay actionWithDuration:0.3f];
-	CCActionScaleTo *scaleUp = [CCActionScaleTo actionWithDuration:0.2f scale:1.f];
-	CCActionSequence *sequence = [CCActionSequence actionWithArray:@[delay, scaleUp]];
-	[die runAction:sequence];
-    return die;
+    _ghostDie1 = (Dice*) [CCBReader load:@"Dice/Dice"];
+    _ghostDie2 = (Dice*) [CCBReader load:@"Dice/Dice"];
+    _ghostDie1 = [self addDie:_ghostDie1 atColumn:_currentDie1.column andRow:ghostRow1];
+    _ghostDie2 = [self addDie:_ghostDie2 atColumn:_currentDie2.column andRow:ghostRow2];
 }
 
 - (NSInteger)findBottomforColumn:(NSInteger)column {
