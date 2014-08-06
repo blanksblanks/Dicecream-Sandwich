@@ -119,6 +119,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 [self dieFallDown];
                 _timeSinceDrop = 0;
                 if (![self canBottomMove]) {
+                    [self removeGhost];
                     CCLOG(@"Dice fell to bottom:"); [self trackGridState];
                     _dropInterval = 0.05;
                     actionIndex = 2; CCLOG(@"Going to case 2: filling holes");
@@ -335,6 +336,17 @@ static const NSInteger GRID_COLUMNS = 6;
     return ghostRow;
 }
 
+- (void)removeGhost {
+//    CCActionEaseOut *easeOut = [CCActionEaseOut actionWithDuration:0.75f];
+//    CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.75f scale:0.1f];
+//    CCActionSequence *sequence = [CCActionSequence actionWithArray:@[easeOut, scaleDown]];
+//    [_ghostDie1 runAfction:sequence];
+    _gridArray[_ghostDie1.row][_ghostDie1.column] = _noTile;
+    _gridArray[_ghostDie2.row][_ghostDie2.column] = _noTile;
+    [_ghostDie1 removeFromParent];
+    [_ghostDie2 removeFromParent];
+}
+
 # pragma mark - Make pair of dice fall
 
 - (void) dieFallDown {
@@ -372,7 +384,7 @@ static const NSInteger GRID_COLUMNS = 6;
         ghostRow2 = ghostRow1 + 2;
     } else {
         ghostRow1 = [self findBottomforColumn:_currentDie1.column];
-        ghostRow2 = [self findBottomforColumn:_currentDie2.column];
+        ghostRow2 = ghostRow1;
     }
 
     NSInteger y1 = _ghostDie1.row - ghostRow1;
@@ -735,7 +747,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 die.stable = false;
                 if (bottomCanMove) {
                     [self moveDie:die inDirection:ccp(0,-1)];
-                } else if (!bottomCanMove) {
+                } else {
                     die.stable = true;
                 }
             }
