@@ -335,7 +335,7 @@ static const NSInteger GRID_COLUMNS = 6;
 - (NSInteger)findBottomforColumn:(NSInteger)column {
     NSInteger ghostRow;
     for (NSInteger row = GRID_ROWS-2; row >= 0; row--) {
-        if([self indexValidAndUnoccupiedForRow:row andColumn:column]) {
+        if([_gridArray[row][column] isEqual:_noTile] || [_gridArray[row][column] isEqual:_ghostDie1] || [_gridArray[row][column] isEqual:_ghostDie2]) {
             ghostRow = row;
         }
     }
@@ -352,6 +352,34 @@ static const NSInteger GRID_COLUMNS = 6;
     [_ghostDie1 removeFromParent];
     [_ghostDie2 removeFromParent];
 }
+
+- (void)moveGhostDice{
+    NSInteger ghostRow1;
+    NSInteger ghostRow2;
+    NSInteger ghostColumn1 = _currentDie1.column;
+    NSInteger ghostColumn2 = _currentDie2.column;
+    
+    if (_currentDie1.row > _currentDie2.row) {
+        ghostRow2 = [self findBottomforColumn:ghostColumn2];
+        ghostRow1 = ghostRow2 + 1;
+    } else if (_currentDie2.row > _currentDie1.row) {
+        ghostRow1 = [self findBottomforColumn:ghostColumn1];
+        ghostRow2 = ghostRow1 + 1;
+    } else {
+        ghostRow1 = [self findBottomforColumn:ghostColumn1];
+        ghostRow2 = [self findBottomforColumn:ghostColumn2];
+    }
+    
+    NSInteger x1 = _ghostDie1.column - ghostColumn1;
+    NSInteger x2 = _ghostDie2.column - ghostColumn2;
+    
+    NSInteger y1 = _ghostDie1.row - ghostRow1;
+    NSInteger y2 = _ghostDie2.row - ghostRow2;
+    
+    [self moveDie:_ghostDie1 inDirection:ccp(-x1, -y1)];
+    [self moveDie:_ghostDie2 inDirection:ccp(-x2, -y2)];
+}
+
 
 # pragma mark - Make pair of dice fall
 
@@ -378,28 +406,6 @@ static const NSInteger GRID_COLUMNS = 6;
         _gridArray[die.row][die.column] = die; // Set new index in the grid array to the die
         die.position = [self positionForTile:die.column row:die.row]; // Position dice object in the visual grid
 }
-
-- (void)moveGhostDiceByX:(NSInteger)x {
-    NSInteger ghostRow1;
-    NSInteger ghostRow2;
-    if (_currentDie1.row > _currentDie2.row) {
-        ghostRow2 = [self findBottomforColumn:_currentDie2.column];
-        ghostRow1 = ghostRow2 + 1;
-    } else if (_currentDie2.row > _currentDie1.row) {
-        ghostRow1 = [self findBottomforColumn:_currentDie2.column];
-        ghostRow2 = ghostRow1 + 2;
-    } else {
-        ghostRow1 = [self findBottomforColumn:_currentDie1.column];
-        ghostRow2 = ghostRow1;
-    }
-
-    NSInteger y1 = _ghostDie1.row - ghostRow1;
-    NSInteger y2 = _ghostDie2.row - ghostRow2;
-    
-    [self moveDie:_ghostDie1 inDirection:ccp(x, -y1)];
-    [self moveDie:_ghostDie2 inDirection:ccp(x, -y2)];
-}
-
 
 - (BOOL) canBottomMove {
     BOOL bottomCanMove;
@@ -475,7 +481,7 @@ static const NSInteger GRID_COLUMNS = 6;
     if (canMoveLeft) {
         [self moveDie:_currentDie1 inDirection:ccp(-1, 0)];
         [self moveDie:_currentDie2 inDirection:ccp(-1, 0)];
-        [self moveGhostDiceByX:-1];
+        [self moveGhostDice];
     }
 }
 
@@ -490,15 +496,14 @@ static const NSInteger GRID_COLUMNS = 6;
     if (canMoveRight) {
         [self moveDie:_currentDie1 inDirection:ccp(1, 0)];
         [self moveDie:_currentDie2 inDirection:ccp(1, 0)];
-        [self moveGhostDiceByX:1];
+        [self moveGhostDice];
     }
 }
 
 - (void)rotate {
     BOOL bottomCanMove = [self canBottomMove];
-    BOOL isRotating = true;
     
-    if (isRotating && bottomCanMove) {
+    if (bottomCanMove) {
         if (_currentDie2.column > _currentDie1.column) {
             // [1][2] --> [1]
             //            [2]
@@ -542,8 +547,8 @@ static const NSInteger GRID_COLUMNS = 6;
                 }
             }
         }
-        isRotating = false;
     }
+    [self moveGhostDice];
 }
 
 # pragma mark - Detect horizontal and vertical chains
@@ -781,9 +786,9 @@ static const NSInteger GRID_COLUMNS = 6;
         return FALSE;
     }
     else {
-        BOOL unoccupied = [_gridArray[row][column] isEqual:_noTile] || [_gridArray[row][column] isEqual:_currentDie2]  || [_gridArray[row][column] isEqual:_currentDie1];
+        BOOL unoccupied = [_gridArray[row][column] isEqual:_noTile] || [_gridArray[row][column] isEqual:_currentDie1]  || [_gridArray[row][column] isEqual:_currentDie2];
+//        || [_gridArray[row][column] isEqual:_ghostDie1] || [_gridArray[row][column] isEqual:_ghostDie2];
         return unoccupied;
-
     }
 }
 
