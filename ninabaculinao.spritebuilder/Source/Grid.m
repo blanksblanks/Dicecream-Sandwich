@@ -107,7 +107,7 @@ static const NSInteger GRID_COLUMNS = 6;
     switch (actionIndex%4) {
         case 0: { // spawn dice
             [self spawnDice];
-//            [self spawnGhost];
+            [self spawnGhost];
             _timeSinceDrop = -0.2;
             _dropInterval = self.levelSpeed;
             CCLOG(@"Dice spawned"); [self trackGridState];
@@ -328,7 +328,7 @@ static const NSInteger GRID_COLUMNS = 6;
 - (NSInteger)findBottomforColumn:(NSInteger)column {
     NSInteger ghostRow;
     for (NSInteger row = GRID_ROWS-2; row >= 0; row--) {
-        if([_gridArray[row][column] isEqual: _noTile]) {
+        if([self indexValidAndUnoccupiedForRow:row andColumn:column]) {
             ghostRow = row;
         }
     }
@@ -360,6 +360,28 @@ static const NSInteger GRID_COLUMNS = 6;
         _gridArray[die.row][die.column] = die; // Set new index in the grid array to the die
         die.position = [self positionForTile:die.column row:die.row]; // Position dice object in the visual grid
 }
+
+- (void)moveGhostDiceByX:(NSInteger)x {
+    NSInteger ghostRow1;
+    NSInteger ghostRow2;
+    if (_currentDie1.row > _currentDie2.row) {
+        ghostRow2 = [self findBottomforColumn:_currentDie2.column];
+        ghostRow1 = ghostRow2 + 1;
+    } else if (_currentDie2.row > _currentDie1.row) {
+        ghostRow1 = [self findBottomforColumn:_currentDie2.column];
+        ghostRow2 = ghostRow1 + 2;
+    } else {
+        ghostRow1 = [self findBottomforColumn:_currentDie1.column];
+        ghostRow2 = [self findBottomforColumn:_currentDie2.column];
+    }
+
+    NSInteger y1 = _ghostDie1.row - ghostRow1;
+    NSInteger y2 = _ghostDie2.row - ghostRow2;
+    
+    [self moveDie:_ghostDie1 inDirection:ccp(x, -y1)];
+    [self moveDie:_ghostDie2 inDirection:ccp(x, -y2)];
+}
+
 
 - (BOOL) canBottomMove {
     BOOL bottomCanMove;
@@ -435,6 +457,7 @@ static const NSInteger GRID_COLUMNS = 6;
     if (canMoveLeft) {
         [self moveDie:_currentDie1 inDirection:ccp(-1, 0)];
         [self moveDie:_currentDie2 inDirection:ccp(-1, 0)];
+        [self moveGhostDiceByX:-1];
     }
 }
 
@@ -449,6 +472,7 @@ static const NSInteger GRID_COLUMNS = 6;
     if (canMoveRight) {
         [self moveDie:_currentDie1 inDirection:ccp(1, 0)];
         [self moveDie:_currentDie2 inDirection:ccp(1, 0)];
+        [self moveGhostDiceByX:1];
     }
 }
 
@@ -676,7 +700,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 chain.score = face * 10 * ([chain.dice count]) + (50 * self.combo);
             }
         }
-        CCLOG(@"Face match: %d, chain score: %d, Combo: %ld", face, chain.score, (long)self.combo);
+        CCLOG(@"Face match: %ld, chain score: %ld, Combo: %ld", (long)face, (long)chain.score, (long)self.combo);
     }
 }
 
