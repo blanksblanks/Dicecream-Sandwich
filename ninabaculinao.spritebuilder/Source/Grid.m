@@ -340,7 +340,7 @@ static const NSInteger GRID_COLUMNS = 6;
 //    CCActionEaseOut *easeOut = [CCActionEaseOut actionWithDuration:0.75f];
 //    CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.75f scale:0.1f];
 //    CCActionSequence *sequence = [CCActionSequence actionWithArray:@[easeOut, scaleDown]];
-//    [_ghostDie1 runAfction:sequence];
+//    [_ghostDie1 runAction:sequence];
     _gridArray[_ghostDie1.row][_ghostDie1.column] = _noTile;
     _gridArray[_ghostDie2.row][_ghostDie2.column] = _noTile;
     [_ghostDie1 removeFromParent];
@@ -746,7 +746,10 @@ static const NSInteger GRID_COLUMNS = 6;
                 Dice *die = _gridArray[row][column];
                 die.stable = false;
                 if (bottomCanMove) {
-                    [self moveDie:die inDirection:ccp(0,-1)];
+                    die.row--;
+                    _gridArray[die.row][die.column] = die; // set die to new row and column
+                    die.position = [self positionForTile:die.column row:die.row];
+                    _gridArray[row][column] = _noTile; // set old row and column to null
                 } else {
                     die.stable = true;
                 }
