@@ -320,10 +320,16 @@ static const NSInteger GRID_COLUMNS = 6;
         ghostRow1 = [self findBottomforColumn:_currentDie1.column];
         ghostRow2 = [self findBottomforColumn:_currentDie2.column];
     }
-    _ghostDie1 = (Dice*) [CCBReader load:@"Dice/Dice"];
-    _ghostDie2 = (Dice*) [CCBReader load:@"Dice/Dice"];
-    _ghostDie1 = [self addDie:_ghostDie1 atColumn:_currentDie1.column andRow:ghostRow1];
-    _ghostDie2 = [self addDie:_ghostDie2 atColumn:_currentDie2.column andRow:ghostRow2];
+    
+    BOOL same1 = ((_ghostDie1.row == _currentDie1.row) && (_ghostDie1.column == _currentDie1.column));
+    BOOL same2 = ((_ghostDie2.row == _currentDie2.row) && (_ghostDie2.column == _currentDie2.column));
+    
+    if (!same1 && !same2) {
+        _ghostDie1 = (Dice*) [CCBReader load:@"Dice/Dice"];
+        _ghostDie2 = (Dice*) [CCBReader load:@"Dice/Dice"];
+        _ghostDie1 = [self addDie:_ghostDie1 atColumn:_currentDie1.column andRow:ghostRow1];
+        _ghostDie2 = [self addDie:_ghostDie2 atColumn:_currentDie2.column andRow:ghostRow2];
+    }
 }
 
 - (NSInteger)findBottomforColumn:(NSInteger)column {
