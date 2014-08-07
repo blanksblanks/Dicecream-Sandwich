@@ -123,8 +123,16 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>workingAssets/Dice/Dice-blank.png</string>
+							<string>workingAssets/Dice/Dice-blank filled.png</string>
 						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>opacity</string>
+						<key>type</key>
+						<string>Float</string>
+						<key>value</key>
+						<real>0.75</real>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -136,10 +144,12 @@
 							<real>1</real>
 							<real>1</real>
 							<real>1</real>
-							<real>1</real>
+							<real>0.75</real>
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
@@ -225,8 +235,6 @@
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

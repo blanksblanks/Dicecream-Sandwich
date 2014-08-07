@@ -107,7 +107,7 @@ static const NSInteger GRID_COLUMNS = 6;
     switch (actionIndex%4) {
         case 0: { // spawn dice
             [self spawnDice];
-            [self spawnGhost];
+//            [self spawnGhost];
             _timeSinceDrop = -0.2;
             _dropInterval = self.levelSpeed;
             CCLOG(@"Dice spawned"); [self trackGridState];
@@ -119,7 +119,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 [self dieFallDown];
                 _timeSinceDrop = 0;
                 if (![self canBottomMove]) {
-                    [self removeGhost];
+//                    [self removeGhost];
                     CCLOG(@"Dice fell to bottom:"); [self trackGridState];
                     _dropInterval = 0.05;
                     actionIndex = 2; CCLOG(@"Going to case 2: filling holes");
@@ -333,24 +333,13 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (NSInteger)findBottomforColumn:(NSInteger)column {
-    NSInteger ghostRow;
-    for (NSInteger row = GRID_ROWS-2; row >= 0; row--) {
+    NSInteger ghostRow = 0;
+    for (NSInteger row = GRID_ROWS-3; row >= 0; row--) {
         if([_gridArray[row][column] isEqual:_noTile] || [_gridArray[row][column] isEqual:_ghostDie1] || [_gridArray[row][column] isEqual:_ghostDie2]) {
             ghostRow = row;
         }
     }
     return ghostRow;
-}
-
-- (void)removeGhost {
-//    CCActionEaseOut *easeOut = [CCActionEaseOut actionWithDuration:0.75f];
-//    CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.75f scale:0.1f];
-//    CCActionSequence *sequence = [CCActionSequence actionWithArray:@[easeOut, scaleDown]];
-//    [_ghostDie1 runAction:sequence];
-    _gridArray[_ghostDie1.row][_ghostDie1.column] = _noTile;
-    _gridArray[_ghostDie2.row][_ghostDie2.column] = _noTile;
-    [_ghostDie1 removeFromParent];
-    [_ghostDie2 removeFromParent];
 }
 
 - (void)moveGhostDice{
@@ -380,6 +369,21 @@ static const NSInteger GRID_COLUMNS = 6;
     [self moveDie:_ghostDie2 inDirection:ccp(-x2, -y2)];
 }
 
+- (void)removeGhost {
+    if (_gridArray[_ghostDie1.row][_ghostDie1.column] != _currentDie1 && _gridArray[_ghostDie1.row][_ghostDie1.column] != _currentDie2 && _gridArray[_ghostDie2.row][_ghostDie2.column] != _currentDie1 && _gridArray[_ghostDie2.row][_ghostDie2.column] != _currentDie2) {
+        _gridArray[_ghostDie1.row][_ghostDie1.column] = _noTile;
+        _gridArray[_ghostDie2.row][_ghostDie2.column] = _noTile;
+    }
+    
+    CCActionEaseOut *easeOut = [CCActionEaseOut actionWithDuration:0.75f];
+    CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.75f scale:0.1f];
+    CCActionSequence *sequence = [CCActionSequence actionWithArray:@[easeOut, scaleDown]];
+    [_ghostDie1 runAction:sequence];
+    [_ghostDie2 runAction:sequence];
+    
+    [_ghostDie1 removeFromParent];
+    [_ghostDie2 removeFromParent];
+}
 
 # pragma mark - Make pair of dice fall
 
@@ -481,7 +485,7 @@ static const NSInteger GRID_COLUMNS = 6;
     if (canMoveLeft) {
         [self moveDie:_currentDie1 inDirection:ccp(-1, 0)];
         [self moveDie:_currentDie2 inDirection:ccp(-1, 0)];
-        [self moveGhostDice];
+//        [self moveGhostDice];
     }
 }
 
@@ -496,7 +500,7 @@ static const NSInteger GRID_COLUMNS = 6;
     if (canMoveRight) {
         [self moveDie:_currentDie1 inDirection:ccp(1, 0)];
         [self moveDie:_currentDie2 inDirection:ccp(1, 0)];
-        [self moveGhostDice];
+//        [self moveGhostDice];
     }
 }
 
@@ -548,7 +552,7 @@ static const NSInteger GRID_COLUMNS = 6;
             }
         }
     }
-    [self moveGhostDice];
+//    [self moveGhostDice];
 }
 
 # pragma mark - Detect horizontal and vertical chains
