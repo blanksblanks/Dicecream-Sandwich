@@ -10,7 +10,7 @@
 #import "Grid.h"
 
 @implementation PauseMenu {
-    Grid *_grid;
+    
     
 }
 
@@ -22,7 +22,7 @@
 
 - (void) game {
     CCLOG(@"game button pressed");
-    [_grid unpause];
+    [self.grid unpause];
     [self removeFromParent];
 }
 

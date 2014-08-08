@@ -8,9 +8,13 @@
 
 #import "CCNode.h"
 
+@class Grid;
+
 @interface PauseMenu : CCNode
 
 - (void) home;
 - (void) game;
+
+@property (nonatomic, strong) Grid *grid;
 
 @end

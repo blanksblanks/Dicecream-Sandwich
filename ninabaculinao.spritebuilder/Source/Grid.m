@@ -48,7 +48,7 @@
     NSTimeInterval newTouchTime;
     BOOL matchFound;
     
-    ChainScore *chainScore;
+//    ChainScore *chainScore;
 }
 
 // two constants to describe the number of rows and columns
@@ -513,33 +513,37 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void)swipeLeftTo:(NSInteger)column {
-    while (_currentDie1.column > column && _currentDie2.column > column) {
-        [self swipeLeft];
+    BOOL canMoveLeft = TRUE;
+    while (_currentDie1.column > column && _currentDie2.column > column && canMoveLeft) {
+        canMoveLeft = [self swipeLeft];
     }
 }
 
-- (void)swipeLeft {
+- (BOOL)swipeLeft {
     BOOL canMoveLeft = [self indexValidAndUnoccupiedForRow:_currentDie2.row andColumn:_currentDie2.column-1] && [self indexValidAndUnoccupiedForRow:_currentDie1.row andColumn:_currentDie1.column-1];
     if (canMoveLeft) {
         [self moveDie:_currentDie1 inDirection:ccp(-1, 0)];
         [self moveDie:_currentDie2 inDirection:ccp(-1, 0)];
 //        [self moveGhostDice];
     }
+    return canMoveLeft;
 }
 
 - (void)swipeRightTo:(NSInteger)column {
-    while (_currentDie1.column < column && _currentDie2.column < column) {
-        [self swipeRight];
+    BOOL canMoveRight = TRUE;
+    while (_currentDie1.column < column && _currentDie2.column < column && canMoveRight) {
+        canMoveRight = [self swipeRight];
     }
 }
 
-- (void)swipeRight {
+- (BOOL)swipeRight {
     BOOL canMoveRight = [self indexValidAndUnoccupiedForRow:_currentDie2.row andColumn:_currentDie2.column+1] && [self indexValidAndUnoccupiedForRow:_currentDie1.row andColumn:_currentDie1.column+1];
     if (canMoveRight) {
         [self moveDie:_currentDie1 inDirection:ccp(1, 0)];
         [self moveDie:_currentDie2 inDirection:ccp(1, 0)];
 //        [self moveGhostDice];
     }
+    return canMoveRight;
 }
 
 - (void)rotate {
@@ -595,49 +599,49 @@ static const NSInteger GRID_COLUMNS = 6;
 
 # pragma mark - Detect horizontal and vertical chains
 
-- (NSArray *)detectPowerUps {
-    NSMutableArray *array = [NSMutableArray array];
-    for (NSInteger row = 0; row < GRID_ROWS; row++) {
-        for (NSInteger column = 0; column < GRID_COLUMNS - 2; column++) {
-            BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
-            if (!positionFree) {
-                Dice *die = _gridArray[row][column];
-                _face = die.faceValue;
-                if (_face > 6) {
-                    Chain *chain = [[Chain alloc] init];
-                    switch(_face)
-                    {
-                        case 7:
-                            chain.chainType = ChainTypeBomb;
-                            // go through the row on top, below and where the current cell is
-                            for (NSInteger x = (row-1); x <= (row+1); x++)
-                            {
-                                // go through the column to left, right and where the cell is
-                                for (NSInteger y = (column-1); y <= (column+1); y++)
-                                {
-                                    // check that the cell we're checking isn't off the screen
-                                    BOOL isIndexValid;
-                                    isIndexValid = [self indexValidForRow:row andColumn:column];
-                                    // skip over all cells that are off screen
-                                    // AND cell that contains creature we are updating
-                                    if (!((x == row) && (y == column)) && isIndexValid)
-                                    {
-                                        Dice *neighbor = _gridArray[x][y];
-                                        [chain addDice:neighbor];
-                                    }
-                                    [array addObject:chain];
-                                }
-                            break;
-                        case 8:
-                            break;
-                        case 9:
-                            break;
-                }
-            }
-        }
-    }
-    return array;
-}
+//- (NSArray *)detectPowerUps {
+//    NSMutableArray *array = [NSMutableArray array];
+//    for (NSInteger row = 0; row < GRID_ROWS; row++) {
+//        for (NSInteger column = 0; column < GRID_COLUMNS - 2; column++) {
+//            BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
+//            if (!positionFree) {
+//                Dice *die = _gridArray[row][column];
+//                _face = die.faceValue;
+//                if (_face > 6) {
+//                    Chain *chain = [[Chain alloc] init];
+//                    switch(_face)
+//                    {
+//                        case 7:
+//                            chain.chainType = ChainTypeBomb;
+//                            // go through the row on top, below and where the current cell is
+//                            for (NSInteger x = (row-1); x <= (row+1); x++)
+//                            {
+//                                // go through the column to left, right and where the cell is
+//                                for (NSInteger y = (column-1); y <= (column+1); y++)
+//                                {
+//                                    // check that the cell we're checking isn't off the screen
+//                                    BOOL isIndexValid;
+//                                    isIndexValid = [self indexValidForRow:row andColumn:column];
+//                                    // skip over all cells that are off screen
+//                                    // AND cell that contains creature we are updating
+//                                    if (!((x == row) && (y == column)) && isIndexValid)
+//                                    {
+//                                        Dice *neighbor = _gridArray[x][y];
+//                                        [chain addDice:neighbor];
+//                                    }
+//                                    [array addObject:chain];
+//                                }
+//                            break;
+//                        case 8:
+//                            break;
+//                        case 9:
+//                            break;
+//                }
+//            }
+//        }
+//    }
+//    return array;
+//}
 
 - (NSArray *)detectHorizontalMatches {
     NSMutableArray *array = [NSMutableArray array];
@@ -818,9 +822,12 @@ static const NSInteger GRID_COLUMNS = 6;
     _lastDie = [chain.dice lastObject];
     CGPoint centerPosition = CGPointMake(((_firstDie.position.x+_lastDie.position.x)/2), ((_firstDie.position.y+_lastDie.position.y)/2));
     CGPoint beginPosition = CGPointMake(centerPosition.x, (centerPosition.y-15));
+    NSString *scoreString = [NSString stringWithFormat:@"%ld", (long)chain.score];
 
-    chainScore = (ChainScore *)[CCBReader load:@"ChainScore"];
-    chainScore.scoreString = [NSString stringWithFormat:@"%ld", (long)chain.score];
+//    chainScore = (ChainScore *)[CCBReader load:@"ChainScore"];
+    CCLabelTTF *chainScore = [CCLabelTTF labelWithString:scoreString fontName:@"GillSans-Bold" fontSize:18];
+    chainScore.outlineColor = [CCColor redColor];
+    chainScore.outlineWidth = 3.0f;
     chainScore.positionInPoints = beginPosition;
     CCLOG(@"Chain score position: %f, %f", centerPosition.x, centerPosition.y);
     [self addChild:chainScore];
@@ -830,7 +837,10 @@ static const NSInteger GRID_COLUMNS = 6;
     CCActionFadeOut *fadeOut = [CCActionFadeOut actionWithDuration:0.75f];
     CCActionSequence *sequence = [CCActionSequence actionWithArray:@[fadeIn, moveTo, fadeOut]];
     [chainScore runAction:sequence];
-    [chainScore removeFromParent];
+    [self scheduleBlock:^(CCTimer *timer) {
+        [chainScore removeFromParent];
+
+    } delay:1.75];
 }
 
 # pragma mark - Fill in holes

@@ -9,6 +9,7 @@
 #import "Gameplay.h"
 #import "Grid.h"
 #import "Dice.h"
+#import "PauseMenu.h"
 #import <OALSimpleAudio.h>
 
 
@@ -79,10 +80,11 @@
 {
 //    CCScene *pause = [CCBReader loadAsScene:@"Pause"];
 //    [[CCDirector sharedDirector] pushScene:pause];
-    CCNode *pauseMenu = [CCBReader load:@"PauseMenu"];
+    PauseMenu *pauseMenu = (PauseMenu*) [CCBReader load:@"PauseMenu"];
     [pauseMenu setPosition:ccp(0, 0)];
     [self addChild:pauseMenu];
     [_grid pause];
+    pauseMenu.grid = _grid;
 }
 
   
