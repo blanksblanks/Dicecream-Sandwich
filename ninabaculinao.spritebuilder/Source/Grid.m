@@ -317,15 +317,15 @@ static const NSInteger GRID_COLUMNS = 6;
     Dice *die;
     NSInteger chance = arc4random_uniform(100);
     if ((_counter%5 == 0) && (chance <= 100)) {
-        NSInteger randomPowerUp = arc4random_uniform(3);
+        NSInteger randomPowerUp = arc4random_uniform(3)+7;
         switch(randomPowerUp){
-            case 0 :
+            case 7 :
                 die = (Dice*) [CCBReader load:@"Dice/Bomb"];
                 break;
-            case 1:
+            case 8:
                 die = (Dice*) [CCBReader load:@"Dice/Laser"];
                 break;
-            case 2:
+            case 9:
                 die = (Dice*) [CCBReader load:@"Dice/Mystery"];
             default:
                 break;
@@ -595,16 +595,49 @@ static const NSInteger GRID_COLUMNS = 6;
 
 # pragma mark - Detect horizontal and vertical chains
 
-//- (NSArray *)detectPowerUps {
-//    NSMutableArray *array = [NSMutableArray array];
-//    for (NSInteger row = 0; row < GRID_ROWS; row++) {
-//        for (NSInteger column = 0; column < GRID_COLUMNS - 2; column++) {
-//            BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
-//            if (!positionFree) {
-//                Dice *die = _gridArray[row][column];
-//                _face = die.faceValue;
-//                if (_face ==)
-//}
+- (NSArray *)detectPowerUps {
+    NSMutableArray *array = [NSMutableArray array];
+    for (NSInteger row = 0; row < GRID_ROWS; row++) {
+        for (NSInteger column = 0; column < GRID_COLUMNS - 2; column++) {
+            BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
+            if (!positionFree) {
+                Dice *die = _gridArray[row][column];
+                _face = die.faceValue;
+                if (_face > 6) {
+                    Chain *chain = [[Chain alloc] init];
+                    switch(_face)
+                    {
+                        case 7:
+                            chain.chainType = ChainTypeBomb;
+                            // go through the row on top, below and where the current cell is
+                            for (NSInteger x = (row-1); x <= (row+1); x++)
+                            {
+                                // go through the column to left, right and where the cell is
+                                for (NSInteger y = (column-1); y <= (column+1); y++)
+                                {
+                                    // check that the cell we're checking isn't off the screen
+                                    BOOL isIndexValid;
+                                    isIndexValid = [self indexValidForRow:row andColumn:column];
+                                    // skip over all cells that are off screen
+                                    // AND cell that contains creature we are updating
+                                    if (!((x == row) && (y == column)) && isIndexValid)
+                                    {
+                                        Dice *neighbor = _gridArray[x][y];
+                                        [chain addDice:neighbor];
+                                    }
+                                    [array addObject:chain];
+                                }
+                            break;
+                        case 8:
+                            break;
+                        case 9:
+                            break;
+                }
+            }
+        }
+    }
+    return array;
+}
 
 - (NSArray *)detectHorizontalMatches {
     NSMutableArray *array = [NSMutableArray array];

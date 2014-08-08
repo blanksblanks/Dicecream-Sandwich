@@ -14,6 +14,9 @@
 typedef NS_ENUM(NSInteger, ChainType) {
     ChainTypeHorizontal,
     ChainTypeVertical,
+    ChainTypeBomb,
+    ChainTypeLaser,
+    ChainTypeMystery,
 };
 
 @interface Chain : NSObject
