@@ -755,14 +755,47 @@ static const NSInteger GRID_COLUMNS = 6;
                                     }
                                 }
                             }
-                            [array addObject:chain];
-                            specialFound = true;
                             break;
                         case 8:
+                            chain.chainType = ChainTypeLaser;
+                            // go through all the tiles that share the laser column
+                            for (NSInteger x = 0; x < GRID_ROWS; x++) {
+                                BOOL indexValidAndOccupied = [self indexValidAndOccupiedForRow:x andColumn:column];
+                                if (indexValidAndOccupied) {
+                                    Dice *columnMate = _gridArray[x][column];
+                                    [chain addDice:columnMate];
+                                }
+                            }
+//                            // go through all the tiles that share the laser row
+//                            for (NSInteger y = 0; y < GRID_COLUMNS; y++) {
+//                                BOOL indexValidAndOccupied = [self indexValidAndOccupiedForRow:row andColumn:y];
+//                                if (indexValidAndOccupied && y != column) {
+//                                    Dice *rowMate = _gridArray[y][column];
+//                                    [chain addDice:rowMate];
+//                                }
+//                            }
                             break;
                         case 9:
+                            chain.chainType = ChainTypeMystery;
+                            // Add mystery die to the chain so it's deleted even if there's no face matches
+                            [chain addDice:die];
+                            // Assign a random face value to mystery die
+                            _face = arc4random_uniform(6)+1;
+                            for (NSInteger x = 0; x < GRID_ROWS; x++) {
+                                for (NSInteger y = 0; y < GRID_COLUMNS; y++) {
+                                    BOOL indexValidAndOccupied = [self indexValidAndOccupiedForRow:x andColumn:y];
+                                    if (indexValidAndOccupied) {
+                                        Dice *faceMate = _gridArray[x][y];
+                                        if (faceMate.faceValue == _face) {
+                                            [chain addDice:faceMate];
+                                        }
+                                    }
+                                }
+                            }
                             break;
                     }
+                    [array addObject:chain];
+                    specialFound = true;
                 }
             }
         }
