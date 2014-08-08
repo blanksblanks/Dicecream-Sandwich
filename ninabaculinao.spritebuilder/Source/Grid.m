@@ -116,7 +116,7 @@ static const NSInteger GRID_COLUMNS = 6;
         _timer += delta;
         _timeSinceDrop += delta;
         
-        switch (actionIndex%4) {
+        switch (actionIndex%5) {
             case 0: { // spawn dice
                 [self spawnDice];
                 //            [self spawnGhost];
@@ -156,18 +156,25 @@ static const NSInteger GRID_COLUMNS = 6;
             }
             case 3: { // activating specials
                 [self handleSpecials];
+                [self loadLevel];
                 if (specialFound) {
-                    CCLOG(@"Specials (if any) activated:"); [self trackGridState];
+                    CCLOG(@"Specials activated:"); [self trackGridState];
+                    _timeSinceDrop = 0;
+                    _dropInterval = 0.05;
+                    actionIndex = 2; CCLOG(@"Special found. Going to case 2: filling holes");
+                } else if (!specialFound) {
                     actionIndex = 4; CCLOG(@"No specials found. Going to case 4: handling matches");
                 }
+                break;
             }
             case 4: { // handling matches
                 [self handleMatches];
                 [self loadLevel];
                 if (matchFound) {
                     CCLOG(@"Matches handled:"); [self trackGridState];
+                    _timeSinceDrop = 0;
                     _dropInterval = 0.05;
-                    actionIndex = 2; CCLOG(@"Going to case 2: filling holes");
+                    actionIndex = 2; CCLOG(@"Match found. Going to case 2: filling holes");
                 } else if (!matchFound) {
                     _dropInterval = self.levelSpeed;
                     actionIndex = 0; CCLOG(@"No matches found. Going to case 0: spawning dice");
@@ -726,7 +733,7 @@ static const NSInteger GRID_COLUMNS = 6;
 - (NSArray *)detectSpecialMatches {
     NSMutableArray *array = [NSMutableArray array];
     for (NSInteger row = 0; row < GRID_ROWS; row++) {
-        for (NSInteger column = 0; column < GRID_COLUMNS - 2; column++) {
+        for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
             BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
             if (!positionFree) {
                 Dice *die = _gridArray[row][column];
