@@ -766,14 +766,14 @@ static const NSInteger GRID_COLUMNS = 6;
                                     [chain addDice:columnMate];
                                 }
                             }
-//                            // go through all the tiles that share the laser row
-//                            for (NSInteger y = 0; y < GRID_COLUMNS; y++) {
-//                                BOOL indexValidAndOccupied = [self indexValidAndOccupiedForRow:row andColumn:y];
-//                                if (indexValidAndOccupied && y != column) {
-//                                    Dice *rowMate = _gridArray[y][column];
-//                                    [chain addDice:rowMate];
-//                                }
-//                            }
+                            // go through all the tiles that share the laser row
+                            for (NSInteger y = 0; y < GRID_COLUMNS; y++) {
+                                BOOL indexValidAndOccupied = [self indexValidAndOccupiedForRow:row andColumn:y];
+                                if (indexValidAndOccupied && y != column) {
+                                    Dice *rowMate = _gridArray[row][y];
+                                    [chain addDice:rowMate];
+                                }
+                            }
                             break;
                         case 9:
                             chain.chainType = ChainTypeMystery;
