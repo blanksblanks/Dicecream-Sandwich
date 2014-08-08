@@ -22,6 +22,9 @@ typedef NS_ENUM(NSInteger, GridState) {
 //- (void)resetCombo;
 - (void)loadLevel;
 //- (NSSet *)removeMatches;
+- (void)pause;
+- (void)unpause;
+
 
 @property (nonatomic, assign) GridState currentGridState;
 @property (nonatomic, assign) NSInteger match;
@@ -32,5 +35,6 @@ typedef NS_ENUM(NSInteger, GridState) {
 @property (nonatomic, assign) NSInteger combo;
 @property (nonatomic, assign) float timer;
 @property (nonatomic, assign) float levelSpeed;
+@property (nonatomic, assign) BOOL paused;
 
 @end

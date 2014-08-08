@@ -60,8 +60,8 @@ static const NSInteger GRID_COLUMNS = 6;
     _timer = 0;
     _counter = 0;
     stabilizing = false;
-    
-    self.userInteractionEnabled = TRUE;
+    self.paused = false;
+    self.userInteractionEnabled = true;
     
     [self setupGrid];
     
@@ -99,10 +99,20 @@ static const NSInteger GRID_COLUMNS = 6;
     self.possibilities = [dict[@"possibilities"] intValue];
 }
 
+- (void)pause {
+//    [self unschedule:@selector(update)];
+    self.paused = true;
+}
+
+- (void)unpause {
+    self.paused = false;
+}
+
 # pragma mark - Update method
 
 - (void) update:(CCTime) delta {
-    
+
+    if (!self.paused) {
     _timer += delta;
     _timeSinceDrop += delta;
     
@@ -154,6 +164,7 @@ static const NSInteger GRID_COLUMNS = 6;
             }
         break;
         }
+    }
     }
 }
 

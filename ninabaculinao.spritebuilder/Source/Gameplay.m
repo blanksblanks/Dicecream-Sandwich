@@ -82,8 +82,7 @@
     CCNode *pauseMenu = [CCBReader load:@"PauseMenu"];
     [pauseMenu setPosition:ccp(0, 0)];
     [self addChild:pauseMenu];
-    _grid.userInteractionEnabled = false;
-    pauseMenu.userInteractionEnabled = true;
+    [_grid pause];
 }
 
   
