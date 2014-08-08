@@ -10,6 +10,7 @@
 		623F5D60196EDB0400DC3EA5 /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = 623F5D5F196EDB0400DC3EA5 /* Grid.m */; };
 		623F5D6C196F0C7000DC3EA5 /* Gameplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 623F5D6B196F0C7000DC3EA5 /* Gameplay.m */; };
 		623F5D71196F128100DC3EA5 /* Dice.m in Sources */ = {isa = PBXBuildFile; fileRef = 623F5D70196F128100DC3EA5 /* Dice.m */; };
+		624577E619955C700017D267 /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = 624577E519955C700017D267 /* GameState.m */; };
 		629019961994FA4F00ADF4DD /* PauseMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 629019951994FA4F00ADF4DD /* PauseMenu.m */; };
 		629AA3671977017C003FA512 /* CATchy.wav in Resources */ = {isa = PBXBuildFile; fileRef = 629AA3661977017C003FA512 /* CATchy.wav */; };
 		62EF7F31198814DC001BF598 /* Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 62EF7F30198814DC001BF598 /* Chain.m */; };
@@ -72,6 +73,8 @@
 		623F5D6B196F0C7000DC3EA5 /* Gameplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Gameplay.m; path = Source/Gameplay.m; sourceTree = "<group>"; };
 		623F5D6F196F128100DC3EA5 /* Dice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dice.h; path = Source/Dice.h; sourceTree = "<group>"; };
 		623F5D70196F128100DC3EA5 /* Dice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dice.m; path = Source/Dice.m; sourceTree = "<group>"; };
+		624577E419955C700017D267 /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameState.h; path = Source/GameState.h; sourceTree = "<group>"; };
+		624577E519955C700017D267 /* GameState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameState.m; path = Source/GameState.m; sourceTree = "<group>"; };
 		629019941994FA4F00ADF4DD /* PauseMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PauseMenu.h; path = Source/PauseMenu.h; sourceTree = "<group>"; };
 		629019951994FA4F00ADF4DD /* PauseMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PauseMenu.m; path = Source/PauseMenu.m; sourceTree = "<group>"; };
 		629AA3661977017C003FA512 /* CATchy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CATchy.wav; sourceTree = "<group>"; };
@@ -154,6 +157,8 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				624577E419955C700017D267 /* GameState.h */,
+				624577E519955C700017D267 /* GameState.m */,
 				B737893D1807617C0076A88C /* AppDelegate.h */,
 				B737893E1807617C0076A88C /* AppDelegate.m */,
 				B7378992180767190076A88C /* MainScene.h */,
@@ -426,6 +431,7 @@
 				623F5D71196F128100DC3EA5 /* Dice.m in Sources */,
 				629019961994FA4F00ADF4DD /* PauseMenu.m in Sources */,
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
+				624577E619955C700017D267 /* GameState.m in Sources */,
 				623F5D6C196F0C7000DC3EA5 /* Gameplay.m in Sources */,
 				62EF7F31198814DC001BF598 /* Chain.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
