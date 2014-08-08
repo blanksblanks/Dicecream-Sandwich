@@ -110,7 +110,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>workingAssets/Backgrounds/black-stars_midrange.png</string>
+							<string>workingAssets/Spritehoard Backgrounds/Space-Field-ipadhd@4x.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -127,6 +127,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -189,8 +191,6 @@
 						<string>Grid.ccb</string>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
