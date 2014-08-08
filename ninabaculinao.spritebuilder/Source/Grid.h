@@ -13,6 +13,7 @@ typedef NS_ENUM(NSInteger, GridState) {
     GridStateSpawningDice,
     GridStateFallingDice,
     GridStateFillingHoles,
+    GridStateActivatingSpecials,
     GridStateHandlingMatches
 };
 
