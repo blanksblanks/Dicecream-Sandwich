@@ -77,8 +77,13 @@
 
 - (void)pause
 {
-    CCScene *pause = [CCBReader loadAsScene:@"Pause"];
-    [[CCDirector sharedDirector] pushScene:pause];
+//    CCScene *pause = [CCBReader loadAsScene:@"Pause"];
+//    [[CCDirector sharedDirector] pushScene:pause];
+    CCNode *pauseMenu = [CCBReader load:@"PauseMenu"];
+    [pauseMenu setPosition:ccp(0, 0)];
+    [self addChild:pauseMenu];
+    _grid.userInteractionEnabled = false;
+    pauseMenu.userInteractionEnabled = true;
 }
 
   
