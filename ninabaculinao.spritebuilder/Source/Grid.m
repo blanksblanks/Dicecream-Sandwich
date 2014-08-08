@@ -62,7 +62,7 @@ static const NSInteger GRID_COLUMNS = 6;
     _counter = 0;
     stabilizing = false;
     self.paused = false;
-    self.userInteractionEnabled = true;
+    self.userInteractionEnabled = TRUE;
     
     [self setupGrid];
     
@@ -120,6 +120,7 @@ static const NSInteger GRID_COLUMNS = 6;
             case 0: { // spawn dice
                 [self spawnDice];
                 //            [self spawnGhost];
+                self.userInteractionEnabled = TRUE;
                 _timeSinceDrop = -0.2;
                 _dropInterval = self.levelSpeed;
                 CCLOG(@"Dice spawned"); [self trackGridState];
@@ -131,8 +132,9 @@ static const NSInteger GRID_COLUMNS = 6;
                     [self dieFallDown];
                     _timeSinceDrop = 0;
                     if (![self canBottomMove]) {
-                        //                    [self removeGhost];
                         CCLOG(@"Dice fell to bottom:"); [self trackGridState];
+                        //                    [self removeGhost];
+                        self.userInteractionEnabled = FALSE;
                         _dropInterval = 0.05;
                         actionIndex = 2; CCLOG(@"Going to case 2: filling holes");
                     }
@@ -159,7 +161,6 @@ static const NSInteger GRID_COLUMNS = 6;
                 [self loadLevel];
                 if (specialFound) {
                     CCLOG(@"Specials activated:"); [self trackGridState];
-                    _timeSinceDrop = 0;
                     _dropInterval = 0.05;
                     actionIndex = 2; CCLOG(@"Special found. Going to case 2: filling holes");
                 } else if (!specialFound) {
