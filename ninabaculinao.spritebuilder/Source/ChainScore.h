@@ -10,4 +10,6 @@
 
 @interface ChainScore : CCNode
 
+@property (nonatomic, assign) NSString* scoreString;
+
 @end

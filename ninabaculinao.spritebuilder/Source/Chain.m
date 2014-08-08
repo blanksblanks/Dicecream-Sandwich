@@ -23,10 +23,4 @@
     return _dice;
 }
 
-
-//- (NSString *)description {
-//    return [NSString stringWithFormat:@"type:%ld cookies:%@", (long)self.chainType, self.cookies];
-//}
-
-
 @end

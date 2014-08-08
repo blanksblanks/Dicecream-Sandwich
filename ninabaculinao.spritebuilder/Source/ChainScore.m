@@ -9,7 +9,12 @@
 #import "ChainScore.h"
 
 @implementation ChainScore {
-    CCLabelTTF *_chainScore;
+    CCLabelTTF *_chainScoreLabel;
+}
+
+- (void) onEnter {
+    _chainScoreLabel.string = self.scoreString;
+    [super onEnter];
 }
 
 @end

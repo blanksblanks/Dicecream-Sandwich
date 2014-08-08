@@ -8,6 +8,7 @@
 
 #import "Grid.h"
 #import "Dice.h"
+#import "ChainScore.h"
 
 @implementation Grid {
     
@@ -47,7 +48,7 @@
     NSTimeInterval newTouchTime;
     BOOL matchFound;
     
-    CCLabelTTF *_chainScoreLabel;
+    ChainScore *chainScore;
 }
 
 // two constants to describe the number of rows and columns
@@ -59,8 +60,6 @@ static const NSInteger GRID_COLUMNS = 6;
     _timer = 0;
     _counter = 0;
     stabilizing = false;
-    
-    _chainScoreLabel.visible = FALSE;
     
     self.userInteractionEnabled = TRUE;
     
@@ -585,6 +584,17 @@ static const NSInteger GRID_COLUMNS = 6;
 
 # pragma mark - Detect horizontal and vertical chains
 
+//- (NSArray *)detectPowerUps {
+//    NSMutableArray *array = [NSMutableArray array];
+//    for (NSInteger row = 0; row < GRID_ROWS; row++) {
+//        for (NSInteger column = 0; column < GRID_COLUMNS - 2; column++) {
+//            BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
+//            if (!positionFree) {
+//                Dice *die = _gridArray[row][column];
+//                _face = die.faceValue;
+//                if (_face ==)
+//}
+
 - (NSArray *)detectHorizontalMatches {
     NSMutableArray *array = [NSMutableArray array];
     // go through every tile in the grid
@@ -763,17 +773,20 @@ static const NSInteger GRID_COLUMNS = 6;
     _firstDie = [chain.dice firstObject];
     _lastDie = [chain.dice lastObject];
     CGPoint centerPosition = CGPointMake(((_firstDie.position.x+_lastDie.position.x)/2), ((_firstDie.position.y+_lastDie.position.y)/2));
+    CGPoint beginPosition = CGPointMake(centerPosition.x, (centerPosition.y-15));
+
+    chainScore = (ChainScore *)[CCBReader load:@"ChainScore"];
+    chainScore.scoreString = [NSString stringWithFormat:@"%ld", (long)chain.score];
+    chainScore.positionInPoints = beginPosition;
     CCLOG(@"Chain score position: %f, %f", centerPosition.x, centerPosition.y);
-    
-    _chainScoreLabel.string = [NSString stringWithFormat:@"%ld", (long)chain.score];
-    _chainScoreLabel.positionInPoints = CGPointMake(centerPosition.x, (centerPosition.y-15));
-    _chainScoreLabel.visible = TRUE;
+    [self addChild:chainScore];
     
     CCActionFadeIn *fadeIn = [CCActionFadeIn actionWithDuration:0.25f];
     CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.75f position:centerPosition];
     CCActionFadeOut *fadeOut = [CCActionFadeOut actionWithDuration:0.75f];
     CCActionSequence *sequence = [CCActionSequence actionWithArray:@[fadeIn, moveTo, fadeOut]];
-    [_chainScoreLabel runAction:sequence];
+    [chainScore runAction:sequence];
+    [chainScore removeFromParent];
 }
 
 # pragma mark - Fill in holes
