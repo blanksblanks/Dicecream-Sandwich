@@ -13,6 +13,8 @@
     
     NSInteger actionIndex;
     BOOL stabilizing;
+    NSInteger _counter;
+
     
     CGFloat _tileWidth; //37
 	CGFloat _tileMarginVertical; //0.9285714285714286
@@ -55,6 +57,7 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void)didLoadFromCCB{
     
     _timer = 0;
+    _counter = 0;
     stabilizing = false;
     
     _chainScoreLabel.visible = FALSE;
@@ -243,9 +246,9 @@ static const NSInteger GRID_COLUMNS = 6;
         BOOL positionFree = ([_gridArray[firstRow][firstColumn] isEqual: _noTile]);
         BOOL nextPositionFree = ([_gridArray[nextRow][nextColumn] isEqual: _noTile]);
 		if (positionFree && nextPositionFree) {
-			_currentDie1 = [self randomizeNumbers];
+			_currentDie1 = [self randomizeDice];
             _currentDie1 = [self addDie:_currentDie1 atColumn:firstColumn andRow:firstRow];
-            _currentDie2 = [self randomizeNumbers];
+            _currentDie2 = [self randomizeDice];
             _currentDie2 = [self addDie:_currentDie2 atColumn:nextColumn andRow:nextRow];
         } else {
             CCLOG(@"Game Over");
@@ -269,9 +272,9 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 -(Dice*) randomizeNumbers {
-    NSInteger random = arc4random_uniform(self.possibilities)+1;
+    NSInteger randomNumber = arc4random_uniform(self.possibilities)+1;
     Dice *die;
-    switch(random)
+    switch(randomNumber)
     {
         case 1:
             die = (Dice*) [CCBReader load:@"Dice/One"];
@@ -296,6 +299,31 @@ static const NSInteger GRID_COLUMNS = 6;
             break;
     }
     die.stable = true;
+
+    return die;
+}
+
+-(Dice*) randomizeDice {
+    Dice *die;
+    NSInteger chance = arc4random_uniform(100);
+    if ((_counter%5 == 0) && (chance <= 100)) {
+        NSInteger randomPowerUp = arc4random_uniform(3);
+        switch(randomPowerUp){
+            case 0 :
+                die = (Dice*) [CCBReader load:@"Dice/Bomb"];
+                break;
+            case 1:
+                die = (Dice*) [CCBReader load:@"Dice/Laser"];
+                break;
+            case 2:
+                die = (Dice*) [CCBReader load:@"Dice/Mystery"];
+            default:
+                break;
+        }
+    } else {
+        die = [self randomizeNumbers];
+    }
+    _counter++;
     return die;
 }
 

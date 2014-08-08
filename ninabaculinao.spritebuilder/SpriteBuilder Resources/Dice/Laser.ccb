@@ -49,7 +49,7 @@
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>CCSprite</string>
+				<string>LaserRed</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -71,8 +71,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>5</real>
+							<real>6</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -110,7 +110,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>workingAssets/Dice/BombBlue.png</string>
+							<string>workingAssets/Dice/LaserRed.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -141,7 +141,7 @@
 				<key>type</key>
 				<integer>0</integer>
 				<key>value</key>
-				<string>7</string>
+				<string>8</string>
 			</dict>
 		</array>
 		<key>displayName</key>
@@ -212,6 +212,8 @@
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
