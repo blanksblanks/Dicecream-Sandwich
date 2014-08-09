@@ -364,7 +364,7 @@ static const NSInteger GRID_COLUMNS = 6;
 	return CGPointMake(x,y);
 }
 
-# pragma mark - Spawn ghost
+# pragma mark - Spawn ghost (obsolete)
 
 - (void)spawnGhost {
     NSInteger ghostRow1;
@@ -614,6 +614,18 @@ static const NSInteger GRID_COLUMNS = 6;
         }
     }
     //    [self moveGhostDice];
+}
+
+- (void)valueChanged:(CCSlider *)slider {
+    float x = slider.sliderValue * self.contentSize.width;
+    NSInteger column = (x - (_tileMarginHorizontal + _tileWidth/2))/(_tileMarginHorizontal+_tileWidth);
+    if (column > _currentDie1.column && column > _currentDie2.column) {
+        [self swipeRightTo:column];
+    }
+    else {
+        [self swipeLeftTo:column];
+    }
+    CCLOG(@"%f col:%d", slider.sliderValue, column);
 }
 
 # pragma mark - Detect horizontal and vertical chains

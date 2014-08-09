@@ -148,9 +148,17 @@
 						<string>Block</string>
 						<key>value</key>
 						<array>
-							<string>slider</string>
+							<string>valueChanged:</string>
 							<integer>1</integer>
 						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>continuous</string>
+						<key>type</key>
+						<string>Check</string>
+						<key>value</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>name</key>
