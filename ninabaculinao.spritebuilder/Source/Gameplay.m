@@ -14,6 +14,7 @@
 
 
 @implementation Gameplay {
+    OALSimpleAudio *audio;
     Grid *_grid;
     CCLabelTTF *_scoreLabel;
     CCLabelTTF *_targetLabel;
@@ -28,7 +29,7 @@
         
         self.userInteractionEnabled = TRUE;
         // access audio object
-        OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+        audio = [OALSimpleAudio sharedInstance];
         // play background sound
         [audio playBg:@"CATchy.wav" loop:TRUE];
          _timeLabel.string = [NSString stringWithFormat:@"%ld", (long)_grid.timer];
@@ -76,15 +77,15 @@
     _timeLabel.string = [NSString stringWithFormat:@"%ld", (long)_grid.timer];
 }
 
-- (void)pause
-{
-//    CCScene *pause = [CCBReader loadAsScene:@"Pause"];
-//    [[CCDirector sharedDirector] pushScene:pause];
+- (void)pause {
     PauseMenu *pauseMenu = (PauseMenu*) [CCBReader load:@"PauseMenu"];
+    audio.paused = TRUE;
     [pauseMenu setPosition:ccp(0, 0)];
     [self addChild:pauseMenu];
     [_grid pause];
+    
     pauseMenu.grid = _grid;
+    pauseMenu.audio = audio;
 }
 
   

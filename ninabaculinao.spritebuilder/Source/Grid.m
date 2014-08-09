@@ -8,7 +8,6 @@
 
 #import "Grid.h"
 #import "Dice.h"
-#import "ChainScore.h"
 
 @implementation Grid {
     

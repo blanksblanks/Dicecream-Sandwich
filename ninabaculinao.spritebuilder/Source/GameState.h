@@ -15,7 +15,6 @@
 //code goes here!
 @property (nonatomic) NSInteger highScore;
 
-
 + (instancetype) sharedInstance;
 
 @end

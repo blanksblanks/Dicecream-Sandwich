@@ -23,6 +23,7 @@
 - (void) game {
     CCLOG(@"game button pressed");
     [self.grid unpause];
+    self.audio.paused = FALSE;
     [self removeFromParent];
 //    [GameState sharedInstance].highScore;
     
