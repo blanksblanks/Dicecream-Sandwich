@@ -24,7 +24,6 @@
     CCLOG(@"game button pressed");
     [self.grid unpause];
     [self removeFromParent];
-    
 //    [GameState sharedInstance].highScore;
     
 }

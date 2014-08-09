@@ -336,7 +336,7 @@ static const NSInteger GRID_COLUMNS = 6;
 -(Dice*) randomizeDice {
     Dice *die;
     NSInteger chance = arc4random_uniform(100);
-    if ((_counter%5 == 0) && (chance <= 100)) {
+    if ((_counter%5 == 0) && (chance <= 20)) {
         NSInteger randomSpecial = arc4random_uniform(3)+7;
         switch(randomSpecial){
             case 7 :

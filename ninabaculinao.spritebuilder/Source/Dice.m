@@ -12,9 +12,6 @@
 
 - (instancetype)initDice {
     self = [super init];
-    if (self) {
-        CCLOG(@"Die created");
-    }
     return self;
 }
 

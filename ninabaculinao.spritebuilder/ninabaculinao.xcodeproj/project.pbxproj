@@ -14,9 +14,7 @@
 		629019961994FA4F00ADF4DD /* PauseMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 629019951994FA4F00ADF4DD /* PauseMenu.m */; };
 		629AA3671977017C003FA512 /* CATchy.wav in Resources */ = {isa = PBXBuildFile; fileRef = 629AA3661977017C003FA512 /* CATchy.wav */; };
 		62EF7F31198814DC001BF598 /* Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 62EF7F30198814DC001BF598 /* Chain.m */; };
-		62EF7F37198837B8001BF598 /* Pause.m in Sources */ = {isa = PBXBuildFile; fileRef = 62EF7F36198837B8001BF598 /* Pause.m */; };
 		62FD140B198BEAD8001D87FF /* Levels.plist in Resources */ = {isa = PBXBuildFile; fileRef = 62FD140A198BEAD8001D87FF /* Levels.plist */; };
-		62FD14181991DE5A001D87FF /* ChainScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 62FD14171991DE5A001D87FF /* ChainScore.m */; };
 		6356E15654D945E6A7ED8EF1 /* libPods-ninabaculinao.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E20A7973DC3F46ABA862FD52 /* libPods-ninabaculinao.a */; };
 		8392007A18EE8E3300B6C429 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8392007918EE8E3300B6C429 /* GLKit.framework */; };
 		B71F5911188484E7003F4D28 /* iPad-old.png in Resources */ = {isa = PBXBuildFile; fileRef = B71F5907188484E7003F4D28 /* iPad-old.png */; };
@@ -80,11 +78,7 @@
 		629AA3661977017C003FA512 /* CATchy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CATchy.wav; sourceTree = "<group>"; };
 		62EF7F2F198814DC001BF598 /* Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chain.h; path = Source/Chain.h; sourceTree = "<group>"; };
 		62EF7F30198814DC001BF598 /* Chain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chain.m; path = Source/Chain.m; sourceTree = "<group>"; };
-		62EF7F35198837B8001BF598 /* Pause.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Pause.h; path = Source/Pause.h; sourceTree = "<group>"; };
-		62EF7F36198837B8001BF598 /* Pause.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Pause.m; path = Source/Pause.m; sourceTree = "<group>"; };
 		62FD140A198BEAD8001D87FF /* Levels.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Levels.plist; path = Source/Levels.plist; sourceTree = "<group>"; };
-		62FD14161991DE5A001D87FF /* ChainScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChainScore.h; path = Source/ChainScore.h; sourceTree = "<group>"; };
-		62FD14171991DE5A001D87FF /* ChainScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChainScore.m; path = Source/ChainScore.m; sourceTree = "<group>"; };
 		8392007918EE8E3300B6C429 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		8E48F140D6B54A57BD825A46 /* Pods-ninabaculinao.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ninabaculinao.xcconfig"; path = "Pods/Pods-ninabaculinao.xcconfig"; sourceTree = "<group>"; };
 		B71F5907188484E7003F4D28 /* iPad-old.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iPad-old.png"; path = "Icons/iPad-old.png"; sourceTree = "<group>"; };
@@ -157,27 +151,23 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				624577E419955C700017D267 /* GameState.h */,
-				624577E519955C700017D267 /* GameState.m */,
 				B737893D1807617C0076A88C /* AppDelegate.h */,
 				B737893E1807617C0076A88C /* AppDelegate.m */,
+				624577E419955C700017D267 /* GameState.h */,
+				624577E519955C700017D267 /* GameState.m */,
 				B7378992180767190076A88C /* MainScene.h */,
 				B7378993180767190076A88C /* MainScene.m */,
-				623F5D6F196F128100DC3EA5 /* Dice.h */,
-				623F5D70196F128100DC3EA5 /* Dice.m */,
 				623F5D6A196F0C7000DC3EA5 /* Gameplay.h */,
 				623F5D6B196F0C7000DC3EA5 /* Gameplay.m */,
-				629019941994FA4F00ADF4DD /* PauseMenu.h */,
-				629019951994FA4F00ADF4DD /* PauseMenu.m */,
 				623F5D5E196EDB0400DC3EA5 /* Grid.h */,
 				623F5D5F196EDB0400DC3EA5 /* Grid.m */,
-				62FD14161991DE5A001D87FF /* ChainScore.h */,
-				62FD14171991DE5A001D87FF /* ChainScore.m */,
-				62FD140A198BEAD8001D87FF /* Levels.plist */,
+				623F5D6F196F128100DC3EA5 /* Dice.h */,
+				623F5D70196F128100DC3EA5 /* Dice.m */,
 				62EF7F2F198814DC001BF598 /* Chain.h */,
 				62EF7F30198814DC001BF598 /* Chain.m */,
-				62EF7F35198837B8001BF598 /* Pause.h */,
-				62EF7F36198837B8001BF598 /* Pause.m */,
+				629019941994FA4F00ADF4DD /* PauseMenu.h */,
+				629019951994FA4F00ADF4DD /* PauseMenu.m */,
+				62FD140A198BEAD8001D87FF /* Levels.plist */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -426,8 +416,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62FD14181991DE5A001D87FF /* ChainScore.m in Sources */,
-				62EF7F37198837B8001BF598 /* Pause.m in Sources */,
 				623F5D71196F128100DC3EA5 /* Dice.m in Sources */,
 				629019961994FA4F00ADF4DD /* PauseMenu.m in Sources */,
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
