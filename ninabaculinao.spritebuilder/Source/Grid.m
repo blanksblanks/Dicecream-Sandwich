@@ -16,7 +16,7 @@
     NSInteger _counter;
     
     
-    CGFloat _tileWidth; //37
+    CGFloat _tileWidth; //37, same as tile height
 	CGFloat _tileMarginVertical; //0.9285714285714286
 	CGFloat _tileMarginHorizontal; //0.6153846153846154 2
     
@@ -48,6 +48,7 @@
     BOOL specialFound;
     BOOL matchFound;
     
+    CCSlider *slider;
     //    ChainScore *chainScore;
 }
 
@@ -61,6 +62,7 @@ static const NSInteger GRID_COLUMNS = 6;
     _counter = 0;
     stabilizing = false;
     self.paused = false;
+    slider.visible = TRUE;
     self.userInteractionEnabled = TRUE;
     
     [self setupGrid];
@@ -118,10 +120,11 @@ static const NSInteger GRID_COLUMNS = 6;
         switch (actionIndex%5) {
             case 0: { // spawn dice
                 [self spawnDice];
+                [self resetValue:slider];
                 //            [self spawnGhost];
                 self.userInteractionEnabled = TRUE;
                 _timeSinceDrop = -0.2;
-                _dropInterval = 1000;//self.levelSpeed;
+                _dropInterval = self.levelSpeed;
                 CCLOG(@"Dice spawned"); [self trackGridState];
                 actionIndex = 1; CCLOG(@"Going to case 1: dice falling down");
                 break;
@@ -488,6 +491,14 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     oldTouchPosition = [touch locationInNode:self];
     oldTouchTime = touch.timestamp;
+//    float x = slider.sliderValue * self.contentSize.width;
+    
+    if (oldTouchPosition.y < _tileWidth) {
+        slider.visible = TRUE;
+        [self resetValue:slider];
+    } else if (oldTouchPosition.y > _tileWidth) {
+        slider.visible = FALSE;
+    }
 }
 
 - (void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
@@ -530,6 +541,17 @@ static const NSInteger GRID_COLUMNS = 6;
         [self rotate];
     }
 }
+
+//- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+//    if (oldTouchPosition.y < slider.handle.position.y+10 && oldTouchPosition.y > slider.handle.position.y-10 && oldTouchPosition.x < slider.handle.position.x+10 & oldTouchPosition.y > slider.handle.position.x-10) {
+//        CCLOG(@"%f %f", slider.handle.position.x, slider.handle.position.y);
+//        for (UITouch *touch in touches) {
+//            if (touch.tapCount >= 2) {
+//                [self rotate];
+//            }
+//        }
+//    }
+//}
 
 - (void)swipeLeftTo:(NSInteger)column {
     BOOL canMoveLeft = TRUE;
@@ -616,16 +638,29 @@ static const NSInteger GRID_COLUMNS = 6;
     //    [self moveGhostDice];
 }
 
-- (void)valueChanged:(CCSlider *)slider {
+# pragma mark - Slider controls
+
+- (void)resetValue:(CCSlider*)sliderBar {
+    NSInteger column = _currentDie1.column;
+    float x = _tileMarginHorizontal + column * (_tileMarginHorizontal + _tileWidth) + (_tileWidth/2);
+    slider.sliderValue = x / self.contentSize.width;
+}
+
+- (void)valueChanged:(CCSlider *)sliderBar {
+    slider = sliderBar;
     float x = slider.sliderValue * self.contentSize.width;
-    NSInteger column = (x-_tileMarginHorizontal)/(_tileMarginHorizontal+_tileWidth);
+    NSInteger column = ( x - _tileMarginHorizontal) / (_tileMarginHorizontal + _tileWidth);
     if (column > _currentDie1.column && column > _currentDie2.column) {
         [self swipeRightTo:column];
-    }
-    else {
+    } else {
         [self swipeLeftTo:column];
     }
     CCLOG(@"%f col:%d", slider.sliderValue, column);
+//    CCAction *fadeIn = [CCActionFadeIn actionWithDuration:0.75f];
+//    CCAction *delay = [CCActionDelay actionWithDuration:1.00f];
+//    CCAction *fadeOut = [CCActionFadeOut actionWithDuration:0.75f];
+//    CCAction *sequence = [CCActionSequence actionWithArray:@[fadeIn, delay, fadeOut]];
+//    [sliderBar runAction:sequence];
 }
 
 # pragma mark - Detect horizontal and vertical chains
@@ -730,8 +765,6 @@ static const NSInteger GRID_COLUMNS = 6;
                 }
             }
         }
-    } else if (!matchFound) {
-        self.combo = 0; // reset combo
     }
     
     [self removeDice:specialChains];
@@ -918,11 +951,11 @@ static const NSInteger GRID_COLUMNS = 6;
     _lastDie = [chain.dice lastObject];
     CGPoint centerPosition = CGPointMake(((_firstDie.position.x+_lastDie.position.x)/2), ((_firstDie.position.y+_lastDie.position.y)/2));
     CGPoint beginPosition = CGPointMake(centerPosition.x, (centerPosition.y-15));
-    NSString *scoreString = [NSString stringWithFormat:@"%ld", (long)chain.score];
+    NSString *scoreString = [NSString stringWithFormat:@"+ %ld", (long)chain.score];
     
     //    chainScore = (ChainScore *)[CCBReader load:@"ChainScore"];
     CCLabelTTF *chainScore = [CCLabelTTF labelWithString:scoreString fontName:@"GillSans-Bold" fontSize:18];
-    chainScore.outlineColor = [CCColor redColor];
+    chainScore.outlineColor = [CCColor purpleColor];
     chainScore.outlineWidth = 3.0f;
     chainScore.positionInPoints = beginPosition;
     CCLOG(@"Chain score position: %f, %f", centerPosition.x, centerPosition.y);
