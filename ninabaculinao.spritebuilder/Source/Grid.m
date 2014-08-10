@@ -47,6 +47,7 @@
     NSTimeInterval newTouchTime;
     BOOL specialFound;
     BOOL matchFound;
+    BOOL comboCondition; // dice spawned but match found false
     
     CCSlider *slider;
     //    ChainScore *chainScore;
@@ -287,6 +288,7 @@ static const NSInteger GRID_COLUMNS = 6;
         [[CCDirector sharedDirector] replaceScene:mainScene];
     }
     specialFound = false;
+    comboCondition = true;
 }
 
 - (Dice*) addDie:(Dice*)die atColumn:(NSInteger)column andRow:(NSInteger)row {
@@ -304,7 +306,7 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 -(Dice*) randomizeNumbers {
-    NSInteger randomNumber = arc4random_uniform(self.possibilities)+1;
+    NSInteger randomNumber = arc4random_uniform(1)+1;//(self.possibilities)+1;
     Dice *die;
     switch(randomNumber)
     {
@@ -542,6 +544,7 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
+// TODO: Figure out if tapping the slider button can trigger rotation
 //- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 //    if (oldTouchPosition.y < slider.handle.position.y+10 && oldTouchPosition.y > slider.handle.position.y-10 && oldTouchPosition.x < slider.handle.position.x+10 & oldTouchPosition.y > slider.handle.position.x-10) {
 //        CCLOG(@"%f %f", slider.handle.position.x, slider.handle.position.y);
@@ -698,6 +701,7 @@ static const NSInteger GRID_COLUMNS = 6;
                         }
                         [array addObject:chain];
                         matchFound = true;
+                        comboCondition = false;
                         self.match = _rightDie.faceValue;
                     }
                 }
@@ -732,6 +736,7 @@ static const NSInteger GRID_COLUMNS = 6;
                         }
                         [array addObject:chain];
                         matchFound = true;
+                        comboCondition = false;
                         self.match = _belowDie.faceValue;
                     }
                 }
@@ -865,13 +870,13 @@ static const NSInteger GRID_COLUMNS = 6;
                 }
             }
         }
-    } else if (!matchFound) {
+    } else if (!comboCondition && !matchFound) {
         self.combo = 0; // reset combo
     }
     
     //    CCLOG(@"Horizontal matches: %@", horizontalChains);
     //    CCLOG(@"Vertical matches: %@", verticalChains);
-    //    CCLOG(@"Current streak: %d", self.combo);
+    CCLOG(@"Current streak: %d", self.combo);
     
     [self removeDice:horizontalChains];
     [self removeDice:verticalChains];
@@ -894,6 +899,7 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void)animateMatchedDice:(NSArray *)chains {
     for (Chain *chain in chains) {
         [self animateScoreForChain:chain];
+        [self animateGameMessage];
         _firstDie = [chain.dice firstObject];
         _lastDie = [chain.dice lastObject];
         for (Dice *die in chain.dice) {
@@ -971,6 +977,34 @@ static const NSInteger GRID_COLUMNS = 6;
         
     } delay:1.75];
 }
+
+- (void)animateGameMessage {
+//    if (self.combo > 0) {
+        CGPoint beginPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 8.5);
+        CGPoint endPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 10.5);
+        NSString *scoreString = [NSString stringWithFormat:@"Streak: %ld", (long)self.combo];
+
+        CCLabelTTF *gameMessage = [CCLabelTTF labelWithString:scoreString fontName:@"GillSans-Bold" fontSize:36];
+        gameMessage.outlineColor = [CCColor purpleColor];
+        gameMessage.outlineWidth = 3.0f;
+        gameMessage.position = beginPosition;
+    
+        [self addChild:gameMessage];
+        
+        CCActionFadeIn *fadeIn = [CCActionFadeIn actionWithDuration:0.25f];
+        CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.75f position:endPosition];
+        CCActionFadeOut *fadeOut = [CCActionFadeOut actionWithDuration:0.75f];
+        CCActionSequence *sequence = [CCActionSequence actionWithArray:@[fadeIn, moveTo, fadeOut]];
+        [gameMessage runAction:sequence];
+        
+        [self scheduleBlock:^(CCTimer *timer) {
+            [gameMessage removeFromParent];
+            
+        } delay:1.75];
+//    }
+}
+
+
 
 # pragma mark - Fill in holes
 
