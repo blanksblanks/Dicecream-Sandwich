@@ -288,7 +288,7 @@ static const NSInteger GRID_COLUMNS = 6;
         [[CCDirector sharedDirector] replaceScene:mainScene];
     }
     specialFound = false;
-    comboCondition = true;
+    comboCondition = false;
 }
 
 - (Dice*) addDie:(Dice*)die atColumn:(NSInteger)column andRow:(NSInteger)row {
@@ -701,7 +701,7 @@ static const NSInteger GRID_COLUMNS = 6;
                         }
                         [array addObject:chain];
                         matchFound = true;
-                        comboCondition = false;
+                        comboCondition = true;
                         self.combo++;
                         self.match = _rightDie.faceValue;
                     }
@@ -737,7 +737,7 @@ static const NSInteger GRID_COLUMNS = 6;
                         }
                         [array addObject:chain];
                         matchFound = true;
-                        comboCondition = false;
+                        comboCondition = true;
                         self.combo++;
                         self.match = _belowDie.faceValue;
                     }
@@ -872,7 +872,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 }
             }
         }
-    } else if (comboCondition && !matchFound) {
+    } else if (!comboCondition && !matchFound) {
         self.combo = 0; // reset combo
     }
     
