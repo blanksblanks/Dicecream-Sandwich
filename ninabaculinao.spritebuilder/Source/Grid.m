@@ -54,8 +54,8 @@
 }
 
 // two constants to describe the number of rows and columns
-static const NSInteger GRID_ROWS = 10;
-static const NSInteger GRID_COLUMNS = 8;
+static const NSInteger GRID_ROWS = 9;
+static const NSInteger GRID_COLUMNS = 6;
 
 - (void)didLoadFromCCB{
     
@@ -194,7 +194,7 @@ static const NSInteger GRID_COLUMNS = 8;
 # pragma mark - Create initial grid and check grid state
 
 - (void)setupGrid {
-	_tileWidth = 37.f;
+	_tileWidth = 47.f;
     
 	// calculate the margin by subtracting the block sizes from the grid size
 	_tileMarginHorizontal = (self.contentSize.width - (GRID_COLUMNS * _tileWidth)) / (GRID_COLUMNS+1);
@@ -910,20 +910,20 @@ static const NSInteger GRID_COLUMNS = 8;
         for (Dice *die in chain.dice) {
             //TODO: Change this to a glow animation or something before the dice get cleared
             //            if ([die isEqual: _firstDie] || [die isEqual: _lastDie]) {
-//            CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
-//            explosion.autoRemoveOnFinish = TRUE;
-//            explosion.position = die.position;
-//            [self addChild:explosion];
+            CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
+            explosion.autoRemoveOnFinish = TRUE;
+            explosion.position = die.position;
+            [self addChild:explosion];
             //            }
             // TODO: Figure out this can do a vert + horiz line at once without setting dice.sprite to nil
-            CCActionEaseOut *easeOut = [CCActionEaseOut actionWithDuration:0.75f];
-            CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.75f scale:0.1f];
-            CCActionSequence *sequence = [CCActionSequence actionWithArray:@[easeOut, scaleDown]];
-            [die runAction:sequence];
+//            CCActionEaseOut *easeOut = [CCActionEaseOut actionWithDuration:0.75f];
+//            CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.75f scale:0.1f];
+//            CCActionSequence *sequence = [CCActionSequence actionWithArray:@[easeOut, scaleDown]];
+//            [die runAction:sequence];
             [self scheduleBlock:^(CCTimer *timer) {
                 [die removeFromParent];
                 
-            } delay:1.5];
+            } delay:1.0];
         }
     }
 }
