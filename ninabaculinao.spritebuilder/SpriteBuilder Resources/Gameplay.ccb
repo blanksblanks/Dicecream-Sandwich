@@ -161,7 +161,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>10</real>
+							<real>15</real>
 							<integer>3</integer>
 							<integer>2</integer>
 							<integer>0</integer>
@@ -189,6 +189,8 @@
 						<string>Grid.ccb</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
