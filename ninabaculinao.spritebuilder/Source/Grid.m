@@ -497,10 +497,17 @@ static const NSInteger GRID_COLUMNS = 8;
 //    float x = slider.sliderValue * self.contentSize.width;
     
     if (oldTouchPosition.y < _tileWidth) {
+//        CCAction *fadeIn = [CCActionFadeIn actionWithDuration:1.5f];
+//        [slider runAction:fadeIn];
         slider.visible = TRUE;
         [self resetValue:slider];
     } else if (oldTouchPosition.y > _tileWidth) {
-        slider.visible = FALSE;
+//        CCAction *fadeOut = [CCActionFadeOut actionWithDuration:1.5f];
+//        [slider runAction:fadeOut];
+//        [self scheduleBlock:^(CCTimer *timer) {
+            slider.visible = FALSE;
+//            
+//        } delay:1.5];
     }
 }
 
@@ -660,11 +667,6 @@ static const NSInteger GRID_COLUMNS = 8;
         [self swipeLeftTo:column];
     }
     CCLOG(@"%f col:%d", slider.sliderValue, column);
-//    CCAction *fadeIn = [CCActionFadeIn actionWithDuration:0.75f];
-//    CCAction *delay = [CCActionDelay actionWithDuration:1.00f];
-//    CCAction *fadeOut = [CCActionFadeOut actionWithDuration:0.75f];
-//    CCAction *sequence = [CCActionSequence actionWithArray:@[fadeIn, delay, fadeOut]];
-//    [sliderBar runAction:sequence];
 }
 
 # pragma mark - Detect horizontal and vertical chains
