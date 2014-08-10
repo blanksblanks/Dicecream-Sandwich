@@ -702,6 +702,7 @@ static const NSInteger GRID_COLUMNS = 6;
                         [array addObject:chain];
                         matchFound = true;
                         comboCondition = false;
+                        self.combo++;
                         self.match = _rightDie.faceValue;
                     }
                 }
@@ -737,6 +738,7 @@ static const NSInteger GRID_COLUMNS = 6;
                         [array addObject:chain];
                         matchFound = true;
                         comboCondition = false;
+                        self.combo++;
                         self.match = _belowDie.faceValue;
                     }
                 }
@@ -870,7 +872,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 }
             }
         }
-    } else if (!comboCondition && !matchFound) {
+    } else if (comboCondition && !matchFound) {
         self.combo = 0; // reset combo
     }
     
@@ -931,11 +933,9 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Calculate scores
 
 - (void)calculateScores:(NSArray *)chains {
-    self.combo = -1;
     for (Chain *chain in chains) {
         NSInteger face = ((Dice*) chain.dice[0]).faceValue;
         BOOL six = (face == 6);
-        self.combo++;
         for (Dice *die in chain.dice) {
             BOOL perfectMatch = (die.faceValue == face);
             if (six && perfectMatch) {
