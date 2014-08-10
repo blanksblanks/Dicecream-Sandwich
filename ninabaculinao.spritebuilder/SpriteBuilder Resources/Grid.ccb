@@ -64,7 +64,7 @@
 									<integer>4</integer>
 									<key>value</key>
 									<array>
-										<real>1.1499999761581421</real>
+										<real>1</real>
 										<real>1</real>
 									</array>
 								</dict>
@@ -143,7 +143,7 @@
 						<string>ScaleLock</string>
 						<key>value</key>
 						<array>
-							<real>1.1499999761581421</real>
+							<real>1</real>
 							<real>1</real>
 							<false/>
 							<integer>0</integer>
@@ -175,7 +175,7 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>200</real>
+							<real>320</real>
 							<real>10</real>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -299,7 +299,7 @@
 				<string>Point</string>
 				<key>value</key>
 				<array>
-					<real>1</real>
+					<real>0.5</real>
 					<real>0.5</real>
 				</array>
 			</dict>
@@ -324,7 +324,7 @@
 				<key>value</key>
 				<array>
 					<string></string>
-					<string>workingAssets/Grid/6x12-Grid2.png</string>
+					<string>workingAssets/Grid/8x10-Grid2.png</string>
 				</array>
 			</dict>
 			<dict>
@@ -349,6 +349,8 @@
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

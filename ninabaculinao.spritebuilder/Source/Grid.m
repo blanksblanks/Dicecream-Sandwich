@@ -54,8 +54,8 @@
 }
 
 // two constants to describe the number of rows and columns
-static const NSInteger GRID_ROWS = 12;
-static const NSInteger GRID_COLUMNS = 6;
+static const NSInteger GRID_ROWS = 10;
+static const NSInteger GRID_COLUMNS = 8;
 
 - (void)didLoadFromCCB{
     
