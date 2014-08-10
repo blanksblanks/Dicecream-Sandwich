@@ -94,6 +94,7 @@ static const NSInteger GRID_COLUMNS = 6;
         self.level = 1;
     } else if (self.score >= self.targetScore) {
         self.level++;
+        [self animateLevelUp];
     }
     
     NSDictionary *dict = levels[self.level-1];
@@ -306,7 +307,7 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 -(Dice*) randomizeNumbers {
-    NSInteger randomNumber = arc4random_uniform(1)+1;//(self.possibilities)+1;
+    NSInteger randomNumber = arc4random_uniform(self.possibilities)+1;
     Dice *die;
     switch(randomNumber)
     {
@@ -979,7 +980,7 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void)animateGameMessage {
-//    if (self.combo > 0) {
+    if (self.combo > 0) {
         CGPoint beginPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 8.5);
         CGPoint endPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 10.5);
         NSString *scoreString = [NSString stringWithFormat:@"Streak: %ld", (long)self.combo];
@@ -1001,7 +1002,32 @@ static const NSInteger GRID_COLUMNS = 6;
             [gameMessage removeFromParent];
             
         } delay:1.75];
-//    }
+    }
+}
+
+- (void)animateLevelUp {
+    CGPoint beginPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 3.5);
+    CGPoint endPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 5.5);
+    NSString *scoreString = [NSString stringWithFormat:@"Level Up!"];
+    
+    CCLabelTTF *gameMessage = [CCLabelTTF labelWithString:scoreString fontName:@"GillSans-Bold" fontSize:48];
+    gameMessage.outlineColor = [CCColor purpleColor];
+    gameMessage.outlineWidth = 3.0f;
+    gameMessage.position = beginPosition;
+    
+    [self addChild:gameMessage];
+    
+    CCActionFadeIn *fadeIn = [CCActionFadeIn actionWithDuration:0.25f];
+    CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.75f position:endPosition];
+    CCActionFadeOut *fadeOut = [CCActionFadeOut actionWithDuration:0.75f];
+    CCActionSequence *sequence = [CCActionSequence actionWithArray:@[fadeIn, moveTo, fadeOut]];
+    [gameMessage runAction:sequence];
+    
+    [self scheduleBlock:^(CCTimer *timer) {
+        [gameMessage removeFromParent];
+        
+    } delay:1.75];
+    //    }
 }
 
 
