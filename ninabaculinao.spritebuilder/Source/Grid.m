@@ -121,7 +121,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 //            [self spawnGhost];
                 self.userInteractionEnabled = TRUE;
                 _timeSinceDrop = -0.2;
-                _dropInterval = self.levelSpeed;
+                _dropInterval = 1000;//self.levelSpeed;
                 CCLOG(@"Dice spawned"); [self trackGridState];
                 actionIndex = 1; CCLOG(@"Going to case 1: dice falling down");
                 break;
@@ -618,7 +618,7 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)valueChanged:(CCSlider *)slider {
     float x = slider.sliderValue * self.contentSize.width;
-    NSInteger column = (x - (_tileMarginHorizontal + _tileWidth/2))/(_tileMarginHorizontal+_tileWidth);
+    NSInteger column = (x-_tileMarginHorizontal)/(_tileMarginHorizontal+_tileWidth);
     if (column > _currentDie1.column && column > _currentDie2.column) {
         [self swipeRightTo:column];
     }
