@@ -47,6 +47,7 @@
     NSTimeInterval newTouchTime;
     BOOL specialFound;
     BOOL matchFound;
+    BOOL animationFinished;
     BOOL comboCondition; // dice spawned but match found false
     
     CCSlider *slider;
@@ -163,8 +164,9 @@ static const NSInteger GRID_COLUMNS = 6;
             case 3: { // activating specials
                 [self handleSpecials];
                 [self loadLevel];
-                if (specialFound) {
+                if (specialFound && animationFinished) {
                     CCLOG(@"Specials activated:"); [self trackGridState];
+                    _timeSinceDrop = -0.2;
                     _dropInterval = 0.05;
                     actionIndex = 2; CCLOG(@"Special found. Going to case 2: filling holes");
                 } else if (!specialFound) {
@@ -175,9 +177,9 @@ static const NSInteger GRID_COLUMNS = 6;
             case 4: { // handling matches
                 [self handleMatches];
                 [self loadLevel];
-                if (matchFound) {
+                if (matchFound && animationFinished) {
                     CCLOG(@"Matches handled:"); [self trackGridState];
-                    _timeSinceDrop = 0;
+                    _timeSinceDrop = -0.2;
                     _dropInterval = 0.05;
                     actionIndex = 2; CCLOG(@"Match found. Going to case 2: filling holes");
                 } else if (!matchFound) {
@@ -703,8 +705,8 @@ static const NSInteger GRID_COLUMNS = 6;
                             [chain addDice:die];
                         }
                         [array addObject:chain];
-                        matchFound = true;
                         comboCondition = true;
+                        matchFound = true;
                         self.combo++;
                         self.match = _rightDie.faceValue;
                     }
@@ -922,8 +924,9 @@ static const NSInteger GRID_COLUMNS = 6;
 //            [die runAction:sequence];
             [self scheduleBlock:^(CCTimer *timer) {
                 [die removeFromParent];
+                animationFinished = true;
                 
-            } delay:1.0];
+            } delay:1.5];
         }
     }
 }
@@ -1032,7 +1035,6 @@ static const NSInteger GRID_COLUMNS = 6;
         [gameMessage removeFromParent];
         
     } delay:1.75];
-    //    }
 }
 
 
@@ -1041,6 +1043,7 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void) dieFillHoles {
     matchFound = false; // reset before checking matches
+    animationFinished = false;
     
     for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
 		for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
