@@ -55,7 +55,7 @@
 }
 
 // two constants to describe the number of rows and columns
-static const NSInteger GRID_ROWS = 9;
+static const NSInteger GRID_ROWS = 12;
 static const NSInteger GRID_COLUMNS = 6;
 
 - (void)didLoadFromCCB{
@@ -267,6 +267,7 @@ static const NSInteger GRID_COLUMNS = 6;
 
 # pragma mark - Spawn random pair of dice
 
+// TODO: make dice appear so long as their spaces for it in the top
 - (void)spawnDice {
     NSInteger firstRow = GRID_ROWS-1;
     NSInteger firstColumn = arc4random_uniform(GRID_COLUMNS-2); // int bt 0 and 4
