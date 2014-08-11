@@ -473,7 +473,9 @@ static const NSInteger GRID_COLUMNS = 6;
     die.row += direction.y; // Change die row and column properties based on direction coordinates
     die.column += direction.x;
     _gridArray[die.row][die.column] = die; // Set new index in the grid array to the die
-    die.position = [self positionForTile:die.column row:die.row]; // Position dice object in the visual grid
+    CGPoint newPosition = [self positionForTile:die.column row:die.row]; // Position dice object in the visual grid
+    CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.2f position:newPosition];
+    [die runAction:moveTo];
 }
 
 - (BOOL) canBottomMove {
