@@ -196,7 +196,7 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Create initial grid and check grid state
 
 - (void)setupGrid {
-	_tileWidth = 47.f;
+	_tileWidth = 37.f;
     
 	// calculate the margin by subtracting the block sizes from the grid size
 	_tileMarginHorizontal = (self.contentSize.width - (GRID_COLUMNS * _tileWidth)) / (GRID_COLUMNS+1);
@@ -470,13 +470,19 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void) moveDie:(Dice*)die inDirection:(CGPoint)direction {
-    _gridArray[die.row][die.column] = _noTile; // Set old index of the die in the array to null
-    die.row += direction.y; // Change die row and column properties based on direction coordinates
-    die.column += direction.x;
-    _gridArray[die.row][die.column] = die; // Set new index in the grid array to the die
-    CGPoint newPosition = [self positionForTile:die.column row:die.row]; // Position dice object in the visual grid
-    CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.2f position:newPosition];
-    [die runAction:moveTo];
+//    NSInteger newRow = die.row + direction.y;
+//    NSInteger newColumn = die.column + direction.x;
+//    BOOL indexValid = [self indexValidForRow:newRow andColumn:newColumn];
+//    if (indexValid) {
+        _gridArray[die.row][die.column] = _noTile; // Set old index of the die in the array to null
+        die.row += direction.y; // Change die row and column properties based on direction coordinates
+        die.column += direction.x;
+        _gridArray[die.row][die.column] = die; // Set new index in the grid array to the die
+        die.position = [self positionForTile:die.column row:die.row];
+//        CGPoint newPosition = [self positionForTile:die.column row:die.row]; // Position dice object in the visual grid
+//        CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.2f position:newPosition];
+//        [die runAction:moveTo];
+//    }
 }
 
 - (BOOL) canBottomMove {
@@ -570,11 +576,15 @@ static const NSInteger GRID_COLUMNS = 6;
 //}
 
 - (void)swipeLeftTo:(NSInteger)column {
-    BOOL canMoveLeft = TRUE;
+    __block BOOL canMoveLeft = TRUE;
     while (_currentDie1.column > column && _currentDie2.column > column && canMoveLeft) {
-        canMoveLeft = [self swipeLeft];
+//        [self scheduleBlock:^(CCTimer *timer) {
+            canMoveLeft = [self swipeLeft];
+//        } delay:0.8];
+
     }
 }
+
 
 - (BOOL)swipeLeft {
     BOOL canMoveLeft = [self indexValidAndUnoccupiedForRow:_currentDie2.row andColumn:_currentDie2.column-1] && [self indexValidAndUnoccupiedForRow:_currentDie1.row andColumn:_currentDie1.column-1];
