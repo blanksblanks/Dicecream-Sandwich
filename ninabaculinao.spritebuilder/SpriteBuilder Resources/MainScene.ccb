@@ -112,7 +112,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>workingAssets/Spritehoard Backgrounds/Space-Field-ipadhd@4x.png</string>
+							<string>workingAssets/Backgrounds/black-stars_midrange.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -129,8 +129,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -165,10 +163,10 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.20000000298023224</real>
-							<integer>1</integer>
+							<real>356</real>
+							<integer>0</integer>
 							<integer>2</integer>
-							<integer>2</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -227,7 +225,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>100</real>
+							<real>72</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>0</integer>
@@ -321,7 +319,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>workingAssets/Buttons/buttons-30.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -332,7 +330,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonHighlighted.png</string>
+							<string>workingAssets/Buttons/buttons-31.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -356,7 +354,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>workingAssets/Buttons/buttons-31.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -375,7 +373,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>workingAssets/Buttons/buttons-31.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -519,6 +517,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -553,7 +553,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.5</real>
+							<real>0.40000000596046448</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>2</integer>

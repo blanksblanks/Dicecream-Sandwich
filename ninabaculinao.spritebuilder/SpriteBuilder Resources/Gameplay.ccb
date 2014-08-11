@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>39</integer>
+	<integer>41</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -39,6 +39,68 @@
 		<string>CCNode</string>
 		<key>children</key>
 		<array>
+			<dict>
+				<key>UUID</key>
+				<integer>40</integer>
+				<key>baseClass</key>
+				<string>CCBFile</string>
+				<key>children</key>
+				<array/>
+				<key>customClass</key>
+				<string></string>
+				<key>displayName</key>
+				<string>CCBFile</string>
+				<key>memberVarAssignmentName</key>
+				<string></string>
+				<key>memberVarAssignmentType</key>
+				<integer>1</integer>
+				<key>properties</key>
+				<array>
+					<dict>
+						<key>name</key>
+						<string>name</string>
+						<key>type</key>
+						<string>StringSimple</string>
+						<key>value</key>
+						<string></string>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>position</string>
+						<key>type</key>
+						<string>Position</string>
+						<key>value</key>
+						<array>
+							<real>0.5</real>
+							<real>356</real>
+							<integer>3</integer>
+							<integer>2</integer>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>scale</string>
+						<key>type</key>
+						<string>ScaleLock</string>
+						<key>value</key>
+						<array>
+							<real>1</real>
+							<real>1</real>
+							<false/>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>ccbFile</string>
+						<key>type</key>
+						<string>CCBFile</string>
+						<key>value</key>
+						<string>Fortune.ccb</string>
+					</dict>
+				</array>
+			</dict>
 			<dict>
 				<key>UUID</key>
 				<integer>1</integer>
@@ -115,6 +177,14 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>opacity</string>
+						<key>type</key>
+						<string>Float</string>
+						<key>value</key>
+						<real>0.80000001192092896</real>
+					</dict>
+					<dict>
+						<key>name</key>
 						<string>color</string>
 						<key>type</key>
 						<string>Color3</string>
@@ -123,12 +193,10 @@
 							<real>1</real>
 							<real>1</real>
 							<real>1</real>
-							<real>1</real>
+							<real>0.80000001192092896</real>
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -470,8 +538,8 @@
 										<string>ScaleLock</string>
 										<key>value</key>
 										<array>
-											<real>0.80000001192092896</real>
-											<real>0.80000001192092896</real>
+											<real>0.5</real>
+											<real>0.5</real>
 											<false/>
 											<integer>0</integer>
 										</array>
@@ -771,7 +839,7 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>58</real>
+											<real>54</real>
 											<real>20</real>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -828,7 +896,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>24</real>
+											<real>16</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -902,7 +970,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>3</real>
+											<real>1</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -978,7 +1046,7 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>83</real>
+											<real>75</real>
 											<real>20</real>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -1185,7 +1253,7 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>108</real>
+											<real>96</real>
 											<real>20</real>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -1242,7 +1310,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>24</real>
+											<real>16</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -1316,7 +1384,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>3</real>
+											<real>1</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -1392,7 +1460,7 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>135</real>
+											<real>119</real>
 											<real>20</real>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -1599,8 +1667,8 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>162</real>
-											<real>2</real>
+											<real>142</real>
+											<real>9</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -1656,7 +1724,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>24</real>
+											<real>16</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -1730,7 +1798,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>3</real>
+											<real>1</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -1806,7 +1874,7 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>188</real>
+											<real>164</real>
 											<real>20</real>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -2013,7 +2081,7 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>214</real>
+											<real>186</real>
 											<real>20</real>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -2070,7 +2138,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>24</real>
+											<real>16</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -2144,7 +2212,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>3</real>
+											<real>1</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -2187,6 +2255,8 @@
 										</array>
 									</dict>
 								</array>
+								<key>selected</key>
+								<true/>
 							</dict>
 							<dict>
 								<key>UUID</key>
@@ -2220,7 +2290,7 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>240</real>
+											<real>208</real>
 											<real>20</real>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -2683,7 +2753,7 @@
 			<key>name</key>
 			<string>Default Timeline</string>
 			<key>offset</key>
-			<real>7.6484375</real>
+			<real>6.3203125</real>
 			<key>position</key>
 			<real>10</real>
 			<key>resolution</key>

@@ -989,8 +989,8 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)animateGameMessage {
     if (self.combo > 0) {
-        CGPoint beginPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 8.5);
-        CGPoint endPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 10.5);
+        CGPoint beginPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 5.5);
+        CGPoint endPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 8.5);
         NSString *scoreString = [NSString stringWithFormat:@"Streak: %ld", (long)self.combo];
 
         CCLabelTTF *gameMessage = [CCLabelTTF labelWithString:scoreString fontName:@"GillSans-Bold" fontSize:36];

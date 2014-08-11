@@ -175,7 +175,7 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>320</real>
+							<real>290</real>
 							<real>10</real>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -197,7 +197,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbSliderBgNormal.png</string>
+							<string>workingAssets/Buttons/ccbSliderBgNormal.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -208,7 +208,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbSliderHandle.png</string>
+							<string>workingAssets/Buttons/ccbSliderHandle.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -219,7 +219,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbSliderBgHighlighted.png</string>
+							<string>workingAssets/Buttons/ccbSliderBgHighlighted.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -256,6 +256,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
@@ -349,8 +351,6 @@
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

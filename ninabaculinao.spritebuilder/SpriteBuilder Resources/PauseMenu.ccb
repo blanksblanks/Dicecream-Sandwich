@@ -120,7 +120,7 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>40</real>
+							<real>100</real>
 							<real>40</real>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -166,7 +166,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>workingAssets/Buttons/buttons-30.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -177,7 +177,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonHighlighted.png</string>
+							<string>workingAssets/Buttons/buttons-31.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -446,7 +446,7 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>40</real>
+							<real>100</real>
 							<real>40</real>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -492,7 +492,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonNormal.png</string>
+							<string>workingAssets/Buttons/buttons-30.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -503,7 +503,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>ccbResources/ccbButtonHighlighted.png</string>
+							<string>workingAssets/Buttons/buttons-31.png</string>
 						</array>
 					</dict>
 					<dict>
