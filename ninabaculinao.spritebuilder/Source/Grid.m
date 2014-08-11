@@ -65,7 +65,7 @@ static const NSInteger GRID_COLUMNS = 6;
     stabilizing = false;
     self.paused = false;
     slider.visible = TRUE;
-    self.userInteractionEnabled = TRUE;
+//    self.userInteractionEnabled = TRUE;
     
     [self setupGrid];
     
@@ -125,7 +125,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 [self spawnDice];
                 [self resetValue:slider];
                 //            [self spawnGhost];
-                self.userInteractionEnabled = TRUE;
+//                self.userInteractionEnabled = TRUE;
                 _timeSinceDrop = -0.2;
                 _dropInterval = self.levelSpeed;
                 CCLOG(@"Dice spawned"); [self trackGridState];
@@ -139,7 +139,7 @@ static const NSInteger GRID_COLUMNS = 6;
                     if (![self canBottomMove]) {
                         CCLOG(@"Dice fell to bottom:"); [self trackGridState];
                         //                    [self removeGhost];
-                        self.userInteractionEnabled = FALSE;
+//                        self.userInteractionEnabled = FALSE;
                         _dropInterval = 0.05;
                         actionIndex = 2; CCLOG(@"Going to case 2: filling holes");
                     }
@@ -896,7 +896,7 @@ static const NSInteger GRID_COLUMNS = 6;
     
     //    CCLOG(@"Horizontal matches: %@", horizontalChains);
     //    CCLOG(@"Vertical matches: %@", verticalChains);
-    CCLOG(@"Current streak: %d", self.combo);
+//    CCLOG(@"Current streak: %d", self.combo);
     
     [self removeDice:horizontalChains];
     [self removeDice:verticalChains];
