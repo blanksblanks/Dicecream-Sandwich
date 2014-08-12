@@ -69,6 +69,7 @@ static const NSInteger GRID_COLUMNS = 6;
     self.paused = false;
     slider.visible = TRUE;
     specialsAllowed = false;
+    self.touchEnabled = TRUE;
 //    self.userInteractionEnabled = TRUE;
     
     [self setupGrid];
@@ -130,6 +131,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 [self resetValue:slider];
                 //            [self spawnGhost];
 //                self.userInteractionEnabled = TRUE;
+                self.touchEnabled = TRUE;
                 _timeSinceDrop = -0.2;
                 _dropInterval = self.levelSpeed;
                 CCLOG(@"Dice spawned"); [self trackGridState];
@@ -143,7 +145,7 @@ static const NSInteger GRID_COLUMNS = 6;
                     if (![self canBottomMove]) {
                         CCLOG(@"Dice fell to bottom:"); [self trackGridState];
                         //                    [self removeGhost];
-//                        self.userInteractionEnabled = FALSE;
+                        self.touchEnabled = FALSE;
                         _dropInterval = 0.05;
                         actionIndex = 2; CCLOG(@"Going to case 2: filling holes");
                     }

@@ -75,6 +75,11 @@
 
 - (void)update:(CCTime)delta {
     _timeLabel.string = [NSString stringWithFormat:@"%ld", (long)_grid.timer];
+    if (_grid.touchEnabled) {
+        self.userInteractionEnabled = TRUE;
+    } else {
+        self.userInteractionEnabled = FALSE;
+    }
 }
 
 - (void)pause {

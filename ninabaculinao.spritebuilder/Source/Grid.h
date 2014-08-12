@@ -34,5 +34,6 @@ typedef NS_ENUM(NSInteger, GridState) {
 @property (nonatomic, assign) float timer;
 @property (nonatomic, assign) float levelSpeed;
 @property (nonatomic, assign) BOOL paused;
+@property (nonatomic, assign) BOOL touchEnabled;
 
 @end
