@@ -92,14 +92,6 @@
 				<array>
 					<dict>
 						<key>name</key>
-						<string>visible</string>
-						<key>type</key>
-						<string>Check</string>
-						<key>value</key>
-						<false/>
-					</dict>
-					<dict>
-						<key>name</key>
 						<string>name</string>
 						<key>type</key>
 						<string>StringSimple</string>
@@ -197,7 +189,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>workingAssets/Buttons/ccbSliderBgNormal.png</string>
+							<string>workingAssets/interface_glossy-game-interface 2/Slider.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -208,7 +200,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>workingAssets/Buttons/ccbSliderHandle.png</string>
+							<string>workingAssets/set_platformer-candy-pack/creamMocca.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -219,7 +211,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>workingAssets/Buttons/ccbSliderBgNormal.png</string>
+							<string>workingAssets/interface_glossy-game-interface 2/Slider.png</string>
 						</array>
 					</dict>
 					<dict>
