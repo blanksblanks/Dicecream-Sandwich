@@ -64,7 +64,7 @@
 									<integer>4</integer>
 									<key>value</key>
 									<array>
-										<real>1.1499999761581421</real>
+										<real>1</real>
 										<real>1</real>
 									</array>
 								</dict>
@@ -135,7 +135,7 @@
 						<string>ScaleLock</string>
 						<key>value</key>
 						<array>
-							<real>1.1499999761581421</real>
+							<real>1</real>
 							<real>1</real>
 							<false/>
 							<integer>0</integer>
@@ -167,7 +167,7 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>200</real>
+							<real>290</real>
 							<real>10</real>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -318,7 +318,7 @@
 				<key>value</key>
 				<array>
 					<string></string>
-					<string>workingAssets/Grid/6x12-Grid2.png</string>
+					<string>workingAssets/Grid/6x9-Grid2 copy.png</string>
 				</array>
 			</dict>
 			<dict>

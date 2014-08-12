@@ -96,11 +96,19 @@
 						<string>ScaleLock</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
-							<real>1</real>
+							<real>1.1499999761581421</real>
+							<real>1.1499999761581421</real>
 							<false/>
 							<integer>0</integer>
 						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>rotation</string>
+						<key>type</key>
+						<string>Degrees</string>
+						<key>value</key>
+						<real>90</real>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -110,7 +118,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>workingAssets/Dice/LaserRed.png</string>
+							<string>workingAssets/Dice/laserUp@4x.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -127,6 +135,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
@@ -212,8 +222,6 @@
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

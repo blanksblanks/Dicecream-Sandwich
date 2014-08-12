@@ -51,13 +51,14 @@
     BOOL matchFound;
     BOOL animationFinished;
     BOOL comboCondition; // dice spawned but match found false
+    BOOL specialsAllowed;
     
     CCSlider *slider;
     //    ChainScore *chainScore;
 }
 
 // two constants to describe the number of rows and columns
-static const NSInteger GRID_ROWS = 6;
+static const NSInteger GRID_ROWS = 9;
 static const NSInteger GRID_COLUMNS = 6;
 
 - (void)didLoadFromCCB{
@@ -67,6 +68,7 @@ static const NSInteger GRID_COLUMNS = 6;
     stabilizing = false;
     self.paused = false;
     slider.visible = TRUE;
+    specialsAllowed = false;
 //    self.userInteractionEnabled = TRUE;
     
     [self setupGrid];
@@ -324,7 +326,7 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 -(Dice*) randomizeNumbers {
-    NSInteger randomNumber = arc4random_uniform(6)+1;//(self.possibilities)+1;
+    NSInteger randomNumber = arc4random_uniform(self.possibilities)+1;
     Dice *die;
     switch(randomNumber)
     {
@@ -357,20 +359,22 @@ static const NSInteger GRID_COLUMNS = 6;
 
 -(Dice*) randomizeDice {
     Dice *die;
-    NSInteger chance = arc4random_uniform(100);
-    if ((_counter%5 == 0) && (chance <= 20)) {
-        NSInteger randomSpecial = arc4random_uniform(3)+7;
-        switch(randomSpecial){
-            case 7 :
-                die = (Dice*) [CCBReader load:@"Dice/Bomb"];
-                break;
-            case 8:
-                die = (Dice*) [CCBReader load:@"Dice/Laser"];
-                break;
-            case 9:
-                die = (Dice*) [CCBReader load:@"Dice/Mystery"];
-            default:
-                break;
+    if (specialsAllowed) {
+        NSInteger chance = arc4random_uniform(100);
+        if ((_counter%5 == 0) && (chance <= 20)) {
+            NSInteger randomSpecial = arc4random_uniform(3)+7;
+            switch(randomSpecial){
+                case 7 :
+                    die = (Dice*) [CCBReader load:@"Dice/Bomb"];
+                    break;
+                case 8:
+                    die = (Dice*) [CCBReader load:@"Dice/Laser"];
+                    break;
+                case 9:
+                    die = (Dice*) [CCBReader load:@"Dice/Mystery"];
+                default:
+                    break;
+            }
         }
     } else {
         die = [self randomizeNumbers];
