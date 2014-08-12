@@ -67,7 +67,7 @@ static const NSInteger GRID_COLUMNS = 6;
     _counter = 0;
     stabilizing = false;
     self.paused = false;
-    slider.visible = TRUE;
+//    slider.visible = TRUE;
     specialsAllowed = false;
     self.touchEnabled = TRUE;
 //    self.userInteractionEnabled = TRUE;
@@ -128,7 +128,7 @@ static const NSInteger GRID_COLUMNS = 6;
         switch (actionIndex%5) {
             case 0: { // spawn dice
                 [self spawnDice];
-                [self resetValue:slider];
+//                [self resetValue:slider];
                 //            [self spawnGhost];
 //                self.userInteractionEnabled = TRUE;
                 self.touchEnabled = TRUE;
@@ -527,19 +527,20 @@ static const NSInteger GRID_COLUMNS = 6;
     oldTouchTime = touch.timestamp;
 //    float x = slider.sliderValue * self.contentSize.width;
     
-    if (oldTouchPosition.y < _tileWidth) {
-//        CCAction *fadeIn = [CCActionFadeIn actionWithDuration:1.5f];
-//        [slider runAction:fadeIn];
-        slider.visible = TRUE;
-        [self resetValue:slider];
-    } else if (oldTouchPosition.y > _tileWidth) {
-//        CCAction *fadeOut = [CCActionFadeOut actionWithDuration:1.5f];
-//        [slider runAction:fadeOut];
-//        [self scheduleBlock:^(CCTimer *timer) {
-            slider.visible = FALSE;
-//            
-//        } delay:1.5];
-    }
+// TODO: test is slider functionality is actually desirable
+//    if (oldTouchPosition.y < _tileWidth) {
+////        CCAction *fadeIn = [CCActionFadeIn actionWithDuration:1.5f];
+////        [slider runAction:fadeIn];
+//        slider.visible = TRUE;
+//        [self resetValue:slider];
+//    } else if (oldTouchPosition.y > _tileWidth) {
+////        CCAction *fadeOut = [CCActionFadeOut actionWithDuration:1.5f];
+////        [slider runAction:fadeOut];
+////        [self scheduleBlock:^(CCTimer *timer) {
+//            slider.visible = FALSE;
+////            
+////        } delay:1.5];
+//    }
 }
 
 - (void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
