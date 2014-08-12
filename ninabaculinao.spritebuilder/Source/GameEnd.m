@@ -8,6 +8,33 @@
 
 #import "GameEnd.h"
 
-@implementation GameEnd
+@implementation GameEnd {
+    
+}
+
+- (void) resume {
+    
+}
+
+- (void) restart {
+    
+}
+
+- (void) help {
+    
+}
+
+- (void) settings {
+    
+}
+
+- (void) stats {
+    
+}
+
+- (void) home {
+    
+}
+
 
 @end
