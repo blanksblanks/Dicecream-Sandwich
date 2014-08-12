@@ -13,6 +13,7 @@
 		624577E619955C700017D267 /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = 624577E519955C700017D267 /* GameState.m */; };
 		629019961994FA4F00ADF4DD /* PauseMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 629019951994FA4F00ADF4DD /* PauseMenu.m */; };
 		629AA3671977017C003FA512 /* CATchy.wav in Resources */ = {isa = PBXBuildFile; fileRef = 629AA3661977017C003FA512 /* CATchy.wav */; };
+		62C91DA919997D69008A6C9D /* GameEnd.m in Sources */ = {isa = PBXBuildFile; fileRef = 62C91DA819997D69008A6C9D /* GameEnd.m */; };
 		62EF7F31198814DC001BF598 /* Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 62EF7F30198814DC001BF598 /* Chain.m */; };
 		62FD140B198BEAD8001D87FF /* Levels.plist in Resources */ = {isa = PBXBuildFile; fileRef = 62FD140A198BEAD8001D87FF /* Levels.plist */; };
 		6356E15654D945E6A7ED8EF1 /* libPods-ninabaculinao.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E20A7973DC3F46ABA862FD52 /* libPods-ninabaculinao.a */; };
@@ -76,6 +77,8 @@
 		629019941994FA4F00ADF4DD /* PauseMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PauseMenu.h; path = Source/PauseMenu.h; sourceTree = "<group>"; };
 		629019951994FA4F00ADF4DD /* PauseMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PauseMenu.m; path = Source/PauseMenu.m; sourceTree = "<group>"; };
 		629AA3661977017C003FA512 /* CATchy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CATchy.wav; sourceTree = "<group>"; };
+		62C91DA719997D69008A6C9D /* GameEnd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameEnd.h; path = Source/GameEnd.h; sourceTree = "<group>"; };
+		62C91DA819997D69008A6C9D /* GameEnd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameEnd.m; path = Source/GameEnd.m; sourceTree = "<group>"; };
 		62EF7F2F198814DC001BF598 /* Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chain.h; path = Source/Chain.h; sourceTree = "<group>"; };
 		62EF7F30198814DC001BF598 /* Chain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Chain.m; path = Source/Chain.m; sourceTree = "<group>"; };
 		62FD140A198BEAD8001D87FF /* Levels.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Levels.plist; path = Source/Levels.plist; sourceTree = "<group>"; };
@@ -161,6 +164,8 @@
 				623F5D6B196F0C7000DC3EA5 /* Gameplay.m */,
 				623F5D5E196EDB0400DC3EA5 /* Grid.h */,
 				623F5D5F196EDB0400DC3EA5 /* Grid.m */,
+				62C91DA719997D69008A6C9D /* GameEnd.h */,
+				62C91DA819997D69008A6C9D /* GameEnd.m */,
 				623F5D6F196F128100DC3EA5 /* Dice.h */,
 				623F5D70196F128100DC3EA5 /* Dice.m */,
 				62EF7F2F198814DC001BF598 /* Chain.h */,
@@ -419,6 +424,7 @@
 				623F5D71196F128100DC3EA5 /* Dice.m in Sources */,
 				629019961994FA4F00ADF4DD /* PauseMenu.m in Sources */,
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
+				62C91DA919997D69008A6C9D /* GameEnd.m in Sources */,
 				624577E619955C700017D267 /* GameState.m in Sources */,
 				623F5D6C196F0C7000DC3EA5 /* Gameplay.m in Sources */,
 				62EF7F31198814DC001BF598 /* Chain.m in Sources */,

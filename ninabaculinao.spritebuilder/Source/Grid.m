@@ -8,6 +8,7 @@
 
 #import "Grid.h"
 #import "Dice.h"
+#import "GameEnd.h"
 
 @implementation Grid {
     
@@ -269,6 +270,10 @@ static const NSInteger GRID_COLUMNS = 6;
 
 // TODO: make dice appear so long as their spaces for it in the top
 - (void)spawnDice {
+    
+    specialFound = false;
+    comboCondition = false;
+
     NSInteger firstRow = GRID_ROWS-1;
     NSInteger firstColumn = arc4random_uniform(GRID_COLUMNS-2); // int bt 0 and 4
     NSInteger nextRow = firstRow - arc4random_uniform(2);
@@ -288,11 +293,13 @@ static const NSInteger GRID_COLUMNS = 6;
         _currentDie2 = [self addDie:_currentDie2 atColumn:nextColumn andRow:nextRow];
     } else {
         CCLOG(@"Game Over");
-        CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
-        [[CCDirector sharedDirector] replaceScene:mainScene];
+        GameEnd *gameEnd = (GameEnd*) [CCBReader load:@"GameEnd"];
+//        gameEnd.position = ccp(self.parent.contentSize.width/2, self.parent.contentSize.height/2);
+        [gameEnd setPositionType:CCPositionTypeNormalized];
+        gameEnd.position = ccp(0.5, 0.5);
+        [self.parent addChild:gameEnd];
+        [self pause];
     }
-    specialFound = false;
-    comboCondition = false;
 }
 
 - (Dice*) addDie:(Dice*)die atColumn:(NSInteger)column andRow:(NSInteger)row {
@@ -681,7 +688,7 @@ static const NSInteger GRID_COLUMNS = 6;
     } else {
         [self swipeLeftTo:column];
     }
-    CCLOG(@"%f col:%d", slider.sliderValue, column);
+    CCLOG(@"%f col:%ld", slider.sliderValue, (long)column);
 }
 
 # pragma mark - Detect horizontal and vertical chains
@@ -1004,7 +1011,7 @@ static const NSInteger GRID_COLUMNS = 6;
     if (self.combo > 0) {
         CGPoint beginPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 5.5);
         CGPoint endPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 8.5);
-        NSString *scoreString = [NSString stringWithFormat:@"Streak: %ld", (long)self.combo];
+        NSString *scoreString = [NSString stringWithFormat:@"x%ld", (long)self.combo];
 
         CCLabelTTF *gameMessage = [CCLabelTTF labelWithString:scoreString fontName:@"GillSans-Bold" fontSize:36];
         gameMessage.outlineColor = [CCColor purpleColor];

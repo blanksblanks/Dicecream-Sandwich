@@ -1,8 +1,8 @@
 //
-//  PauseMenu.h
+//  GameEnd.h
 //  ninabaculinao
 //
-//  Created by Nina Baculinao on 8/8/14.
+//  Created by Nina Baculinao on 8/11/14.
 //  Copyright (c) 2014 Apportable. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 @class Grid;
 
-@interface PauseMenu : CCNode
+@interface GameEnd : CCNode
 
 - (void) resume;
 - (void) restart;
@@ -21,5 +21,6 @@
 
 @property (nonatomic, strong) Grid *grid;
 @property (nonatomic, strong) OALSimpleAudio *audio;
+
 
 @end

@@ -14,13 +14,7 @@
     
 }
 
-- (void) home {
-    CCLOG(@"home button pressed");
-    CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
-    [[CCDirector sharedDirector] replaceScene:mainScene];
-}
-
-- (void) game {
+- (void) resume {
     CCLOG(@"game button pressed");
     [self.grid unpause];
     self.audio.paused = FALSE;
@@ -28,5 +22,28 @@
 //    [GameState sharedInstance].highScore;
     
 }
+- (void) restart {
+    CCScene *gamePlay = [CCBReader loadAsScene:@"Gameplay"];
+    [[CCDirector sharedDirector] replaceScene:gamePlay];
+    
+}
+
+- (void) help {
+    
+}
+- (void) settings {
+    
+}
+
+- (void) stats {
+    
+}
+
+- (void) home {
+    CCLOG(@"home button pressed");
+    CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
+    [[CCDirector sharedDirector] replaceScene:mainScene];
+}
+
 
 @end

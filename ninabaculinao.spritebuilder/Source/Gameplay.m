@@ -21,8 +21,6 @@
     CCLabelTTF *_levelLabel;
     CCLabelTTF *_timeLabel;
     CCLabelTTF *_matchLabel;
-    CGPoint menuPosition;
-
 }
 
 - (id)init
@@ -42,8 +40,6 @@
 }
 
 - (void)didLoadFromCCB {
-//    menuPosition = CGPointMake(self.contentSize.width/2, self.contentSize.height/2);
-
     [_grid addObserver:self forKeyPath:@"score" options:0 context:NULL];
     [_grid addObserver:self forKeyPath:@"match" options:0 context:NULL];
     [_grid addObserver:self forKeyPath:@"targetScore" options:0 context:NULL];
@@ -82,8 +78,6 @@
 }
 
 - (void)pause {
-    CCLOG(@"%f %f", menuPosition.x, menuPosition.y);
-    
     PauseMenu *pauseMenu = (PauseMenu*) [CCBReader load:@"PauseMenu"];
     [pauseMenu setPositionType:CCPositionTypeNormalized];
 
