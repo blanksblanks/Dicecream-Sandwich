@@ -13,8 +13,18 @@
 
 - (void)play {
     CCLOG(@"play button pressed");
-    CCScene *gameplayScene = [CCBReader loadAsScene:@"Gameplay"];
-    [[CCDirector sharedDirector] replaceScene:gameplayScene];
+    [self performSelector:@selector(clearDicecream)];
+    [self scheduleBlock:^(CCTimer *timer) {
+        CCScene *gameplayScene = [CCBReader loadAsScene:@"Gameplay"];
+        [[CCDirector sharedDirector] replaceScene:gameplayScene];
+    
+    } delay:1.5];
+}
+
+- (void)clearDicecream
+{
+    CCAnimationManager* animationManager = self.animationManager;
+    [animationManager runAnimationsForSequenceNamed:@"clearDicecream"];
 }
 
 
