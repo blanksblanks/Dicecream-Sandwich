@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "CCNode.h"
 
-@interface GameState : NSObject
 
+static NSString *const GAME_STATE_SCORE_NOTIFICATION = @"GameState_ScoreChanged";
+
+@interface GameState : NSObject
 
 //code goes here!
 //@property (nonatomic) NSInteger highScore;

@@ -8,6 +8,7 @@
 
 #import "Grid.h"
 #import "Dice.h"
+#import "GameState.h"
 #import "GameEnd.h"
 
 @implementation Grid {
@@ -56,7 +57,7 @@
 }
 
 // two constants to describe the number of rows and columns
-static const NSInteger GRID_ROWS = 12;
+static const NSInteger GRID_ROWS = 6;
 static const NSInteger GRID_COLUMNS = 6;
 
 - (void)didLoadFromCCB{
@@ -293,6 +294,12 @@ static const NSInteger GRID_COLUMNS = 6;
         _currentDie2 = [self addDie:_currentDie2 atColumn:nextColumn andRow:nextRow];
     } else {
         CCLOG(@"Game Over");
+        // Set game state values to those in game
+        [GameState sharedInstance].currentScore = self.score;
+        if ([GameState sharedInstance].bestScore < self.score) {
+            [GameState sharedInstance].bestScore = self.score;
+        }
+//        if (self.score > [GameState sharedInstance].currentScore.bestScore
         GameEnd *gameEnd = (GameEnd*) [CCBReader load:@"GameEnd"];
 //        gameEnd.position = ccp(self.parent.contentSize.width/2, self.parent.contentSize.height/2);
         [gameEnd setPositionType:CCPositionTypeNormalized];
@@ -317,7 +324,7 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 -(Dice*) randomizeNumbers {
-    NSInteger randomNumber = arc4random_uniform(self.possibilities)+1;
+    NSInteger randomNumber = arc4random_uniform(6)+1;//(self.possibilities)+1;
     Dice *die;
     switch(randomNumber)
     {

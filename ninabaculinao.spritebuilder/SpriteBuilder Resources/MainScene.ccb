@@ -14,7 +14,7 @@
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
-	<integer>1</integer>
+	<integer>2</integer>
 	<key>currentSequenceId</key>
 	<integer>1</integer>
 	<key>docDimensionsType</key>
@@ -124,9 +124,9 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.22231587767601013</real>
-							<real>0.11268229782581329</real>
-							<real>0.0014491032343357801</real>
+							<real>0.50196081399917603</real>
+							<real>0.0</real>
+							<real>1</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -137,9 +137,9 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.50196081399917603</real>
-							<real>0.25098040699958801</real>
-							<real>0.0</real>
+							<real>0.40000000596046448</real>
+							<real>0.40000000596046448</real>
+							<real>1</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -155,6 +155,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -202,8 +204,8 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>132.5</real>
-											<real>29</real>
+											<real>133</real>
+											<real>30</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -409,8 +411,8 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>132.5</real>
-											<real>87</real>
+											<real>133</real>
+											<real>90</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>

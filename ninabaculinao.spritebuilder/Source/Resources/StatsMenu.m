@@ -18,6 +18,13 @@
     CCLabelTTF *_streakLabel;
     CCLabelTTF *_allClearLabel;
     CCLabelTTF *_timeLabel;
+}
+
+- (void) resume {
+    
+}
+
+- (void) restart {
     
 }
 

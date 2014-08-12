@@ -12,14 +12,10 @@
 
 @interface GameEnd : CCNode
 
-- (void) resume;
-- (void) restart;
-- (void) help;
-- (void) settings;
 - (void) stats;
 - (void) home;
 
-@property (nonatomic, strong) Grid *grid;
+@property (nonatomic, weak) Grid *grid;
 @property (nonatomic, strong) OALSimpleAudio *audio;
 
 

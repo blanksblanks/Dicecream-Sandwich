@@ -153,6 +153,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -392,7 +394,7 @@
 										<key>customClass</key>
 										<string></string>
 										<key>displayName</key>
-										<string>Level-iconn</string>
+										<string>LevelIcon</string>
 										<key>memberVarAssignmentName</key>
 										<string></string>
 										<key>memberVarAssignmentType</key>
@@ -481,9 +483,9 @@
 										<key>customClass</key>
 										<string></string>
 										<key>displayName</key>
-										<string>Level</string>
+										<string>LevelLabel</string>
 										<key>memberVarAssignmentName</key>
-										<string></string>
+										<string>_levelLabel</string>
 										<key>memberVarAssignmentType</key>
 										<integer>1</integer>
 										<key>properties</key>
@@ -688,7 +690,7 @@
 										<key>customClass</key>
 										<string></string>
 										<key>displayName</key>
-										<string>SquareClock</string>
+										<string>lockIcon</string>
 										<key>memberVarAssignmentName</key>
 										<string></string>
 										<key>memberVarAssignmentType</key>
@@ -777,9 +779,9 @@
 										<key>customClass</key>
 										<string></string>
 										<key>displayName</key>
-										<string>Level</string>
+										<string>TimeLabel</string>
 										<key>memberVarAssignmentName</key>
-										<string></string>
+										<string>_timeLabel</string>
 										<key>memberVarAssignmentType</key>
 										<integer>1</integer>
 										<key>properties</key>
@@ -984,7 +986,7 @@
 										<key>customClass</key>
 										<string></string>
 										<key>displayName</key>
-										<string>Dice-1-bwhite copy</string>
+										<string>Dice1</string>
 										<key>memberVarAssignmentName</key>
 										<string></string>
 										<key>memberVarAssignmentType</key>
@@ -1073,7 +1075,7 @@
 										<key>customClass</key>
 										<string></string>
 										<key>displayName</key>
-										<string>Dice-2a-b copy</string>
+										<string>Dice2</string>
 										<key>memberVarAssignmentName</key>
 										<string></string>
 										<key>memberVarAssignmentType</key>
@@ -1162,7 +1164,7 @@
 										<key>customClass</key>
 										<string></string>
 										<key>displayName</key>
-										<string>Dice-1-bwhite copy</string>
+										<string>Dice1</string>
 										<key>memberVarAssignmentName</key>
 										<string></string>
 										<key>memberVarAssignmentType</key>
@@ -1251,9 +1253,9 @@
 										<key>customClass</key>
 										<string></string>
 										<key>displayName</key>
-										<string>Chains</string>
+										<string>ChainsLabel</string>
 										<key>memberVarAssignmentName</key>
-										<string></string>
+										<string>_chainsLabel</string>
 										<key>memberVarAssignmentType</key>
 										<integer>1</integer>
 										<key>properties</key>
@@ -1550,9 +1552,9 @@
 												<key>customClass</key>
 												<string></string>
 												<key>displayName</key>
-												<string>CCLabelTTF</string>
+												<string>bestLabel</string>
 												<key>memberVarAssignmentName</key>
-												<string></string>
+												<string>_bestLabel</string>
 												<key>memberVarAssignmentType</key>
 												<integer>1</integer>
 												<key>properties</key>
@@ -1757,9 +1759,9 @@
 												<key>customClass</key>
 												<string></string>
 												<key>displayName</key>
-												<string>CCLabelTTF</string>
+												<string>scoreLabel</string>
 												<key>memberVarAssignmentName</key>
-												<string></string>
+												<string>_scoreLabel</string>
 												<key>memberVarAssignmentType</key>
 												<integer>1</integer>
 												<key>properties</key>
@@ -2188,7 +2190,7 @@
 														<string>Block</string>
 														<key>value</key>
 														<array>
-															<string></string>
+															<string>home</string>
 															<integer>1</integer>
 														</array>
 													</dict>
@@ -2514,7 +2516,7 @@
 														<string>Block</string>
 														<key>value</key>
 														<array>
-															<string></string>
+															<string>stats</string>
 															<integer>1</integer>
 														</array>
 													</dict>
@@ -3072,7 +3074,7 @@
 			</dict>
 		</array>
 		<key>customClass</key>
-		<string></string>
+		<string>GameEnd</string>
 		<key>displayName</key>
 		<string>CCNode</string>
 		<key>memberVarAssignmentName</key>
@@ -3194,9 +3196,9 @@
 			<key>name</key>
 			<string>Default Timeline</string>
 			<key>offset</key>
-			<real>0.0</real>
+			<real>6.3203125</real>
 			<key>position</key>
-			<real>0.0</real>
+			<real>10</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>

@@ -11,7 +11,6 @@
 
 @implementation PauseMenu {
     
-    
 }
 
 - (void) resume {
@@ -19,18 +18,17 @@
     [self.grid unpause];
     self.audio.paused = FALSE;
     [self removeFromParent];
-//    [GameState sharedInstance].highScore;
     
 }
 - (void) restart {
     CCScene *gamePlay = [CCBReader loadAsScene:@"Gameplay"];
     [[CCDirector sharedDirector] replaceScene:gamePlay];
-    
 }
 
 - (void) help {
     
 }
+
 - (void) settings {
     
 }
