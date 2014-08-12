@@ -16,31 +16,31 @@
 		</dict>
 		<dict>
 			<key>possibilities</key>
-			<integer>3</integer>
+			<integer>4</integer>
 			<key>targetScore</key>
-			<integer>1600</integer>
+			<real>1600</real>
 			<key>levelSpeed</key>
-			<real>0.2</real>
+			<real>0.4</real>
 			<key>level</key>
 			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>possibilities</key>
-			<integer>4</integer>
+			<integer>5</integer>
 			<key>targetScore</key>
 			<real>3600</real>
 			<key>levelSpeed</key>
-			<real>0.1</real>
+			<real>0.4</real>
 			<key>level</key>
 			<integer>3</integer>
 		</dict>
 		<dict>
 			<key>possibilities</key>
-			<integer>5</integer>
+			<integer>6</integer>
 			<key>targetScore</key>
 			<real>6000</real>
 			<key>levelSpeed</key>
-			<real>0.05</real>
+			<real>0.4</real>
 			<key>level</key>
 			<integer>4</integer>
 		</dict>
@@ -50,7 +50,7 @@
 			<key>targetScore</key>
 			<real>8600</real>
 			<key>levelSpeed</key>
-			<real>0.01</real>
+			<real>0.3</real>
 			<key>level</key>
 			<integer>5</integer>
 		</dict>
@@ -60,7 +60,7 @@
 			<key>targetScore</key>
 			<integer>0</integer>
 			<key>levelSpeed</key>
-			<real>0.005</real>
+			<real>0.2</real>
 			<key>level</key>
 			<integer>6</integer>
 		</dict>
