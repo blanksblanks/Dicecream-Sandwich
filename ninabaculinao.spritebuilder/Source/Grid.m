@@ -84,7 +84,6 @@ static const NSInteger GRID_COLUMNS = 6;
 		}
 	}
 
-    self.level = 1;
     [self loadLevel];
     
     actionIndex = 0;
@@ -96,9 +95,11 @@ static const NSInteger GRID_COLUMNS = 6;
     
     NSArray *levels = [root objectForKey: @"Levels"];
     
-    if (self.level > 1 && self.score >= self.targetScore) {
+    if (self.score == 0) {
+        self.level = 1;
+    } else if (self.score >= self.targetScore) {
         self.level++;
-        [self animateLevelUp];
+            [self animateLevelUp];
     }
     
     if (self.level > 5) {

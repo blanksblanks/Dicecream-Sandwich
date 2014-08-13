@@ -17,6 +17,9 @@
 @implementation Gameplay {
     OALSimpleAudio *audio;
     Grid *_grid;
+    CCSprite *_rainbowBright;
+    BOOL rainbowPastel;
+    CCAnimationManager* animationManager;
     CCLabelTTF *_scoreLabel;
     CCLabelTTF *_targetLabel;
     CCLabelTTF *_levelLabel;
@@ -41,6 +44,11 @@
 }
 
 - (void)didLoadFromCCB {
+    
+    animationManager = self.animationManager;
+    [animationManager runAnimationsForSequenceNamed:@"rainbowPastel"];
+    rainbowPastel = true;
+    
     [_grid addObserver:self forKeyPath:@"score" options:0 context:NULL];
     [_grid addObserver:self forKeyPath:@"match" options:0 context:NULL];
     [_grid addObserver:self forKeyPath:@"targetScore" options:0 context:NULL];
@@ -55,7 +63,6 @@
 {
     if ([keyPath isEqualToString:@"score"]) {
         _scoreLabel.string = [NSString stringWithFormat:@"%li", (long) _grid.score];
-        CCAnimationManager* animationManager = self.animationManager;
         [animationManager runAnimationsForSequenceNamed:@"scorePulse"];
     }
     if ([keyPath isEqualToString:@"match"]) {
@@ -66,8 +73,17 @@
     }
     if ([keyPath isEqualToString:@"level"]) {
         _levelLabel.string = [NSString stringWithFormat:@"%li", (long) _grid.level];
-        CCAnimationManager* animationManager = self.animationManager;
-        [animationManager runAnimationsForSequenceNamed:@"levelPulse"];
+        if (_grid.level > 1) {
+            [animationManager runAnimationsForSequenceNamed:@"levelPulse"];
+            if (rainbowPastel) {
+                _rainbowBright.visible = true;
+                rainbowPastel = false;
+            } else {
+                [animationManager runAnimationsForSequenceNamed:@"rainbowPastel"];
+                _rainbowBright.visible = false;
+                rainbowPastel = true;
+            }
+        }
     }
 }
 
