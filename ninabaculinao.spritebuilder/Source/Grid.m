@@ -83,7 +83,8 @@ static const NSInteger GRID_COLUMNS = 6;
 			_gridArray[i][j] = _noTile;
 		}
 	}
-    
+
+    self.level = 1;
     [self loadLevel];
     
     actionIndex = 0;
@@ -95,9 +96,7 @@ static const NSInteger GRID_COLUMNS = 6;
     
     NSArray *levels = [root objectForKey: @"Levels"];
     
-    if (self.score == 0) {
-        self.level = 1;
-    } else if (self.score >= self.targetScore) {
+    if (self.level > 1 && self.score >= self.targetScore) {
         self.level++;
         [self animateLevelUp];
     }
@@ -495,22 +494,6 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-- (void) moveDie:(Dice*)die inDirection:(CGPoint)direction {
-    NSInteger newRow = die.row + direction.y;
-    NSInteger newColumn = die.column + direction.x;
-    BOOL indexValid = [self indexValidForRow:newRow andColumn:newColumn];
-    if (indexValid) {
-        _gridArray[die.row][die.column] = _noTile; // Set old index of the die in the array to null
-        die.row += direction.y; // Change die row and column properties based on direction coordinates
-        die.column += direction.x;
-        _gridArray[die.row][die.column] = die; // Set new index in the grid array to the die
-        die.position = [self positionForTile:die.column row:die.row];
-//        CGPoint newPosition = [self positionForTile:die.column row:die.row]; // Position dice object in the visual grid
-//        CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.2f position:newPosition];
-//        [die runAction:moveTo];
-    }
-}
-
 - (BOOL) canBottomMove {
     BOOL bottomCanMove;
     if (_currentDie1.row != _currentDie2.row) {
@@ -629,6 +612,8 @@ static const NSInteger GRID_COLUMNS = 6;
         canMoveRight = [self swipeRight];
     }
 }
+// TODO: try to do ccaction move animation again - determine how much it can move ie 5 col and then move by in one action
+// Don't use it on rotate though, that's weird
 
 - (BOOL)swipeRight {
     BOOL canMoveRight = [self indexValidAndUnoccupiedForRow:_currentDie2.row andColumn:_currentDie2.column+1] && [self indexValidAndUnoccupiedForRow:_currentDie1.row andColumn:_currentDie1.column+1];
@@ -689,6 +674,23 @@ static const NSInteger GRID_COLUMNS = 6;
         }
     }
     //    [self moveGhostDice];
+}
+
+
+- (void) moveDie:(Dice*)die inDirection:(CGPoint)direction {
+    NSInteger newRow = die.row + direction.y;
+    NSInteger newColumn = die.column + direction.x;
+    BOOL indexValid = [self indexValidForRow:newRow andColumn:newColumn];
+    if (indexValid) {
+        _gridArray[die.row][die.column] = _noTile; // Set old index of the die in the array to null
+        die.row += direction.y; // Change die row and column properties based on direction coordinates
+        die.column += direction.x;
+        _gridArray[die.row][die.column] = die; // Set new index in the grid array to the die
+        die.position = [self positionForTile:die.column row:die.row];
+        //        CGPoint newPosition = [self positionForTile:die.column row:die.row]; // Position dice object in the visual grid
+        //        CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.2f position:newPosition];
+        //        [die runAction:moveTo];
+    }
 }
 
 # pragma mark - Slider controls
