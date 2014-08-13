@@ -18,7 +18,13 @@
     CCLOG(@"game button pressed");
     [self.grid unpause];
     self.audio.paused = FALSE;
-    [self removeFromParent];
+    CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.2f position:ccp(0, 25)];
+    [self runAction:moveTo];
+    
+    [self scheduleBlock:^(CCTimer *timer) {
+        [self removeFromParent];
+    } delay:0.2];
+    
     
 }
 

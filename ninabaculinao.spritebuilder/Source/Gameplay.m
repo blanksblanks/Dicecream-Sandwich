@@ -12,6 +12,7 @@
 #import "PauseMenu.h"
 #import <OALSimpleAudio.h>
 
+//#define convertTime(time) (time / 60)
 
 @implementation Gameplay {
     OALSimpleAudio *audio;
@@ -39,7 +40,7 @@
     return self;
 }
 
-- (void)didLoadFromCCB {    
+- (void)didLoadFromCCB {
     [_grid addObserver:self forKeyPath:@"score" options:0 context:NULL];
     [_grid addObserver:self forKeyPath:@"match" options:0 context:NULL];
     [_grid addObserver:self forKeyPath:@"targetScore" options:0 context:NULL];
@@ -75,7 +76,7 @@
 
 - (void)update:(CCTime)delta {
     
-    [self convertTime];
+    [self convertAndUpdateTime];
     
     if (_grid.touchEnabled) {
         self.userInteractionEnabled = TRUE;
@@ -84,7 +85,7 @@
     }
 }
 
-- (void)convertTime {
+- (void)convertAndUpdateTime {
     NSInteger seconds = (long)_grid.timer,
     forHours = seconds / 3600,
     remainder = seconds % 3600,
@@ -109,13 +110,16 @@
 
 - (void)pause {
     PauseMenu *pauseMenu = (PauseMenu*) [CCBReader load:@"PauseMenu"];
-//    [pauseMenu setPositionType:CCPositionTypeNormalized];
-
     audio.paused = TRUE;
-    pauseMenu.position = ccp(0, 25);
+    pauseMenu.position = ccp(51, 25);
     [self addChild:pauseMenu];
     [_grid pause];
     
+    CCActionDelay *delay = [CCActionDelay actionWithDuration:0.05f];
+    CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.2f position:ccp(296, 25)];
+    CCActionSequence *sequence = [CCActionSequence actionWithArray:@[delay, moveTo]];
+    [pauseMenu runAction:sequence];
+
     pauseMenu.grid = _grid;
     pauseMenu.audio = audio;
 }

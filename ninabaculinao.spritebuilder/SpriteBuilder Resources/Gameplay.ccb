@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>159</integer>
+	<integer>161</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -26,7 +26,7 @@
 	<key>gridspaceHeight</key>
 	<integer>64</integer>
 	<key>gridspaceWidth</key>
-	<integer>64</integer>
+	<integer>51</integer>
 	<key>guides</key>
 	<array/>
 	<key>joints</key>
