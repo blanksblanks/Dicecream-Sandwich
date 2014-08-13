@@ -21,13 +21,6 @@
     CCLabelTTF *_levelLabel;
     CCLabelTTF *_timeLabel;
     CCLabelTTF *_matchLabel;
-    
-    NSInteger seconds;
-    NSInteger minutes;
-    NSInteger hours;
-    NSString *s;
-    NSString *m;
-    NSString *h;
 }
 
 - (id)init
@@ -46,11 +39,7 @@
     return self;
 }
 
-- (void)didLoadFromCCB {
-    seconds = 0;
-    minutes = 0;
-    hours = 0;
-    
+- (void)didLoadFromCCB {    
     [_grid addObserver:self forKeyPath:@"score" options:0 context:NULL];
     [_grid addObserver:self forKeyPath:@"match" options:0 context:NULL];
     [_grid addObserver:self forKeyPath:@"targetScore" options:0 context:NULL];
@@ -86,22 +75,36 @@
 
 - (void)update:(CCTime)delta {
     
-    //Calculate time
-    seconds = (long)_grid.timer%60;
-    minutes = (long)(_grid.timer - seconds)/60;
-
-//    if (seconds < 10) {
-//        h = [NSString stringWithFormat:@("0%ld", (long)seconds)];
-//    } else {
-//        h = [NSString stringWithformat:@("%ld", (long)seconds)];
-//    }
-//    _timeLabel.string = [NSString stringWithFormat:@"%ld : %ld : %ld", (long)hours, (long)minutes, (long)seconds];
-
+    [self convertTime];
+    
     if (_grid.touchEnabled) {
         self.userInteractionEnabled = TRUE;
     } else {
         self.userInteractionEnabled = FALSE;
     }
+}
+
+- (void)convertTime {
+    NSInteger seconds = (long)_grid.timer,
+    forHours = seconds / 3600,
+    remainder = seconds % 3600,
+    forMinutes = remainder / 60,
+    forSeconds = remainder % 60;
+    
+    NSString *hh = [self checkIfLeadingZeroNeeded:forHours];
+    NSString *mm = [self checkIfLeadingZeroNeeded:forMinutes];
+    NSString *ss = [self checkIfLeadingZeroNeeded:forSeconds];
+    _timeLabel.string = [NSString stringWithFormat:@"%@ : %@ : %@", hh, mm, ss];
+}
+
+- (NSString*)checkIfLeadingZeroNeeded:(NSInteger)time {
+    NSString *digits;
+    if (time < 10) {
+        digits = [NSString stringWithFormat:@"0%ld", (long)time];
+    } else {
+        digits = [NSString stringWithFormat:@"%ld", (long)time];
+    }
+    return digits;
 }
 
 - (void)pause {
