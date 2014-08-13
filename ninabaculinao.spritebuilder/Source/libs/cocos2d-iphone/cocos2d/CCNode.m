@@ -1108,6 +1108,11 @@ CGAffineTransformMakeRigid(CGPoint translate, CGFloat radians)
 		[[CCDirector sharedDirector].actionManager migrateActions:self from:[CCDirector sharedDirector].actionManagerFixed];
 		[self setActionManager:[CCDirector sharedDirector].actionManager];
 	}
+    
+# pragma mark - Bug fix https://github.com/cocojoe/cocos2d-iphone/commit/a696415d3a93e408f423f9425ed6e4fc1e07137c
+    if(_animationManager) {
+            [_animationManager performSelector:@selector(onEnter)];
+    }
 	
 	[self wasRunning:wasRunning];
 }

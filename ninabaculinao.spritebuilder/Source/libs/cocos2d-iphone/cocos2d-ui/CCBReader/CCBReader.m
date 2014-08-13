@@ -1339,7 +1339,9 @@ static inline float readFloat(CCBReader *self)
         embeddedNode.scaleX = ccbFileNode.scaleX;
         embeddedNode.scaleY = ccbFileNode.scaleY;
         embeddedNode.name = ccbFileNode.name;
-        embeddedNode.visible = YES;
+# pragma mark - Bug Fix - https://github.com/cocojoe/cocos2d-iphone/commit/cac1daa01da2a4e1b6129b0784570073cbf7f4f4
+        embeddedNode.visible = ccbFileNode.visible;
+//        embeddedNode.visible = YES;
         //embeddedNode.ignoreAnchorPointForPosition = ccbFileNode.ignoreAnchorPointForPosition;
         
         [animationManager moveAnimationsFromNode:ccbFileNode toNode:embeddedNode];

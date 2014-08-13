@@ -52,10 +52,12 @@ static NSInteger ccbAnimationManagerID = 0;
     _nodeSequences = [[NSMutableDictionary alloc] init];
     _baseValues = [[NSMutableDictionary alloc] init];
     
-    // Scheduler
-    _scheduler = [[CCDirector sharedDirector] scheduler];
-    [_scheduler scheduleTarget:self];
-    [_scheduler setPaused:NO target:self];
+# pragma mark - Bug fix
+    
+//    // Scheduler
+//    _scheduler = [[CCDirector sharedDirector] scheduler];
+//    [_scheduler scheduleTarget:self];
+//    [_scheduler setPaused:NO target:self];
     
     // Current Sequence Actions
     _currentActions = [[NSMutableArray alloc] init];
@@ -79,6 +81,14 @@ static NSInteger ccbAnimationManagerID = 0;
     } else {
         return _rootContainerSize;
     }
+}
+
+# pragma mark - Bug fix https://github.com/cocojoe/cocos2d-iphone/commit/a696415d3a93e408f423f9425ed6e4fc1e07137c
+- (void)onEnter {
+    // Setup Scheduler
+    _scheduler = [[CCDirector sharedDirector] scheduler];
+    [_scheduler scheduleTarget:self];
+    [_scheduler setPaused:NO target:self];
 }
 
 - (void)addNode:(CCNode*)node andSequences:(NSDictionary*)seq
@@ -199,7 +209,9 @@ static NSInteger ccbAnimationManagerID = 0;
     } else if ([name isEqualToString:@"rotationalSkewY"]) {
         return [CCActionRotateTo actionWithDuration:duration angleY:[kf1.value floatValue]];
     } else if ([name isEqualToString:@"opacity"]) {
-        return [CCActionFadeTo actionWithDuration:duration opacity:[kf1.value intValue]];
+//        return [CCActionFadeTo actionWithDuration:duration opacity:[kf1.value intValue]];
+# pragma mark - Bug Fix - https://github.com/cocojoe/cocos2d-iphone/commit/5f68099c0451ef40c1619643940d35f9b9db7071
+        return [CCActionFadeTo actionWithDuration:duration opacity:[kf1.value floatValue]];
     } else if ([name isEqualToString:@"color"]) {
         CCColor* color = kf1.value;
         return [CCActionTintTo actionWithDuration:duration color:color];
