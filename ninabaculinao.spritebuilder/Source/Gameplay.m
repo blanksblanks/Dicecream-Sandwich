@@ -21,6 +21,13 @@
     CCLabelTTF *_levelLabel;
     CCLabelTTF *_timeLabel;
     CCLabelTTF *_matchLabel;
+    
+    NSInteger seconds;
+    NSInteger minutes;
+    NSInteger hours;
+    NSString *s;
+    NSString *m;
+    NSString *h;
 }
 
 - (id)init
@@ -40,6 +47,10 @@
 }
 
 - (void)didLoadFromCCB {
+    seconds = 0;
+    minutes = 0;
+    hours = 0;
+    
     [_grid addObserver:self forKeyPath:@"score" options:0 context:NULL];
     [_grid addObserver:self forKeyPath:@"match" options:0 context:NULL];
     [_grid addObserver:self forKeyPath:@"targetScore" options:0 context:NULL];
@@ -74,7 +85,18 @@
 }
 
 - (void)update:(CCTime)delta {
-    _timeLabel.string = [NSString stringWithFormat:@"%ld", (long)_grid.timer];
+    
+    //Calculate time
+    seconds = (long)_grid.timer%60;
+    minutes = (long)(_grid.timer - seconds)/60;
+
+//    if (seconds < 10) {
+//        h = [NSString stringWithFormat:@("0%ld", (long)seconds)];
+//    } else {
+//        h = [NSString stringWithformat:@("%ld", (long)seconds)];
+//    }
+//    _timeLabel.string = [NSString stringWithFormat:@"%ld : %ld : %ld", (long)hours, (long)minutes, (long)seconds];
+
     if (_grid.touchEnabled) {
         self.userInteractionEnabled = TRUE;
     } else {
@@ -87,7 +109,7 @@
 //    [pauseMenu setPositionType:CCPositionTypeNormalized];
 
     audio.paused = TRUE;
-    pauseMenu.position = ccp(0, 30);
+    pauseMenu.position = ccp(0, 25);
     [self addChild:pauseMenu];
     [_grid pause];
     
