@@ -35,7 +35,7 @@
 - (void) help {
     HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpStart"];
     [helpMenu setPositionType:CCPositionTypeNormalized];
-    helpMenu.position = ccp(0.5, 0.5);
+    helpMenu.position = ccp(0.5, 0.53); // or consider .scale = 0.8f;
     [self.parent addChild:helpMenu];
 }
 

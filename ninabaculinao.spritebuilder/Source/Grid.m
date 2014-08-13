@@ -720,74 +720,77 @@ static const NSInteger GRID_COLUMNS = 6;
 - (NSArray *)detectHorizontalMatches {
     NSMutableArray *array = [NSMutableArray array];
     // go through every tile in the grid
-    for (NSInteger row = 0; row < GRID_ROWS; row++) {
-        for (NSInteger column = 0; column < GRID_COLUMNS - 2; column++) {
-            // skip over any empty tiles
-            BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
-            if (!positionFree) {
-                _leftDie = _gridArray[row][column];
-                NSInteger _rightColumn = _leftDie.faceValue+column+1;
-                BOOL rowIsValid = false;
-                // check if row is valid i.e. filled with dice
-                for (NSInteger i = column; i <= _rightColumn; i++) {
-                    rowIsValid = [self indexValidAndOccupiedForRow:row andColumn:i];
-                    // if row is not filled, break loop
-                    if (!rowIsValid) {
-                        break;
-                    }
-                    // if there is a valid row, check if right die has matching face
-                } if (rowIsValid) {
-                    _rightDie = _gridArray[row][_rightColumn];
-                    // if there is a valid match, init chain
-                    if (_leftDie.faceValue == _rightDie.faceValue) {
-                        Chain *chain = [[Chain alloc] init];
-                        chain.chainType = ChainTypeHorizontal;
-                        // if there's a match, add each dice to the chain
-                        for (NSInteger i = column; i <= _rightColumn; i++) {
-                            Dice *die = _gridArray[row][i];
-                            [chain addDice:die];
+        for (NSInteger row = 0; row < GRID_ROWS; row++) {
+            for (NSInteger column = 0; column < GRID_COLUMNS - 2; column++) {
+                // skip over any empty tiles
+                BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
+                if (!positionFree) {
+                    _leftDie = _gridArray[row][column];
+                    NSInteger _rightColumn = _leftDie.faceValue+column+1;
+                    BOOL rowIsValid = false;
+                    // check if row is valid i.e. filled with dice
+                    for (NSInteger i = column; i <= _rightColumn; i++) {
+                        rowIsValid = [self indexValidAndOccupiedForRow:row andColumn:i];
+                        // if row is not filled, break loop
+                        if (!rowIsValid) {
+                            break;
                         }
-                        [array addObject:chain];
-                        comboCondition = true;
-                        matchFound = true;
-                        self.combo++;
-                        self.match = _rightDie.faceValue;
+                        // if there is a valid row, check if right die has matching face
+                    } if (rowIsValid) {
+                        _rightDie = _gridArray[row][_rightColumn];
+                        // if there is a valid match, init chain
+                        if (_leftDie.faceValue == _rightDie.faceValue) {
+                            Chain *chain = [[Chain alloc] init];
+                            chain.chainType = ChainTypeHorizontal;
+                            // if there's a match, add each dice to the chain
+                            for (NSInteger i = column; i <= _rightColumn; i++) {
+                                Dice *die = _gridArray[row][i];
+                                [chain addDice:die];
+                            }
+                            [array addObject:chain];
+                            comboCondition = true;
+                            matchFound = true;
+                            self.combo++;
+                            self.match = _rightDie.faceValue;
+                            break;
+                        }
                     }
                 }
             }
         }
-    }
+//    }
     return array;
 }
 
 - (NSArray *)detectVerticalMatches {
     NSMutableArray *array = [NSMutableArray array];
-    for (NSInteger row = 0; row < GRID_ROWS-2; row++) {
-        for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
-            BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
-            if (!positionFree) {
-                _belowDie = _gridArray[row][column];
-                NSInteger _aboveRow = _belowDie.faceValue+row+1;
-                BOOL columnIsValid;
-                for (NSInteger i = row; i <= _aboveRow; i++) {
-                    columnIsValid = [self indexValidAndOccupiedForRow:i andColumn:column];
-                    if (!columnIsValid) {
-                        break;
-                    }
-                } if (columnIsValid) {
-                    _aboveDie = _gridArray[_aboveRow][column];
-                    if (_belowDie.faceValue == _aboveDie.faceValue) {
-                        Chain *chain = [[Chain alloc] init];
-                        chain.chainType = ChainTypeVertical;
-                        for (NSInteger i = row; i <= _aboveRow; i++) {
-                            Dice *die = _gridArray[i][column];
-                            [chain addDice:die];
+        for (NSInteger row = 0; row < GRID_ROWS-2; row++) {
+            for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
+                BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
+                if (!positionFree) {
+                    _belowDie = _gridArray[row][column];
+                    NSInteger _aboveRow = _belowDie.faceValue+row+1;
+                    BOOL columnIsValid;
+                    for (NSInteger i = row; i <= _aboveRow; i++) {
+                        columnIsValid = [self indexValidAndOccupiedForRow:i andColumn:column];
+                        if (!columnIsValid) {
+                            break;
                         }
-                        [array addObject:chain];
-                        matchFound = true;
-                        comboCondition = true;
-                        self.combo++;
-                        self.match = _belowDie.faceValue;
+                    } if (columnIsValid) {
+                        _aboveDie = _gridArray[_aboveRow][column];
+                        if (_belowDie.faceValue == _aboveDie.faceValue) {
+                            Chain *chain = [[Chain alloc] init];
+                            chain.chainType = ChainTypeVertical;
+                            for (NSInteger i = row; i <= _aboveRow; i++) {
+                                Dice *die = _gridArray[i][column];
+                                [chain addDice:die];
+                            }
+                            [array addObject:chain];
+                            matchFound = true;
+                            comboCondition = true;
+                            self.combo++;
+                            self.match = _belowDie.faceValue;
+                            break;
                     }
                 }
             }

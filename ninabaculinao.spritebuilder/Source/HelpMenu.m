@@ -15,14 +15,14 @@
         case 0: {
             HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpCont"];
             [helpMenu setPositionType:CCPositionTypeNormalized];
-            helpMenu.position = ccp(0.5, 0.5);
+            helpMenu.position = ccp(0.5, 0.53);
             [self.parent addChild:helpMenu];
             [self removeFromParent];
         }
         case 1: {
             HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpEnd"];
             [helpMenu setPositionType:CCPositionTypeNormalized];
-            helpMenu.position = ccp(0.5, 0.5);
+            helpMenu.position = ccp(0.5, 0.53);
             [self.parent addChild:helpMenu];
             [self removeFromParent];
         }
