@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>44</integer>
+	<integer>80</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -41,15 +41,15 @@
 		<array>
 			<dict>
 				<key>UUID</key>
-				<integer>43</integer>
+				<integer>39</integer>
 				<key>baseClass</key>
-				<string>CCNodeColor</string>
+				<string>CCNodeGradient</string>
 				<key>children</key>
 				<array/>
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>CCNodeColor</string>
+				<string>CCNodeGradient</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -117,30 +117,46 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>color</string>
+						<string>startColor</string>
 						<key>type</key>
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.20999999344348907</real>
-							<real>0.64999997615814209</real>
-							<real>0.87000000476837158</real>
+							<real>0.40000000596046448</real>
+							<real>0.80000001192092896</real>
+							<real>1</real>
 							<real>1</real>
 						</array>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>opacity</string>
+						<string>endColor</string>
 						<key>type</key>
-						<string>Float</string>
+						<string>Color3</string>
 						<key>value</key>
-						<real>1</real>
+						<array>
+							<real>0.80000001192092896</real>
+							<real>1</real>
+							<real>0.40000000596046448</real>
+							<real>1</real>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>vector</string>
+						<key>type</key>
+						<string>Point</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>-1</real>
+						</array>
 					</dict>
 				</array>
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>18</integer>
+				<integer>40</integer>
 				<key>baseClass</key>
 				<string>CCLabelTTF</string>
 				<key>children</key>
@@ -275,9 +291,9 @@
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
-							<real>1</real>
-							<real>1</real>
+							<real>0.50196081399917603</real>
+							<real>0.25098040699958801</real>
+							<real>0.0</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -347,7 +363,7 @@
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>19</integer>
+				<integer>41</integer>
 				<key>baseClass</key>
 				<string>CCButton</string>
 				<key>children</key>
@@ -460,7 +476,7 @@
 						<string>String</string>
 						<key>value</key>
 						<array>
-							<string>NEXT</string>
+							<string>LET'S GO!</string>
 							<false/>
 						</array>
 					</dict>
@@ -673,7 +689,7 @@
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>22</integer>
+				<integer>44</integer>
 				<key>baseClass</key>
 				<string>CCLabelTTF</string>
 				<key>children</key>
@@ -703,7 +719,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
+							<real>0.5103447437286377</real>
 							<real>332.00006103515625</real>
 							<integer>0</integer>
 							<integer>2</integer>
@@ -741,10 +757,8 @@
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>Dicecream sandwiches are made of
-dice “cookies” and “filling.”
-
-The “cookies” have to match.</string>
+							<string>Score extra points with perfect
+matches and other combos!</string>
 							<false/>
 						</array>
 					</dict>
@@ -811,9 +825,9 @@ The “cookies” have to match.</string>
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
-							<real>1</real>
-							<real>1</real>
+							<real>0.50196081399917603</real>
+							<real>0.25098040699958801</real>
+							<real>0.0</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -883,7 +897,7 @@ The “cookies” have to match.</string>
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>26</integer>
+				<integer>45</integer>
 				<key>baseClass</key>
 				<string>CCLabelTTF</string>
 				<key>children</key>
@@ -913,8 +927,8 @@ The “cookies” have to match.</string>
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.49999988079071045</real>
-							<real>100.00006103515625</real>
+							<real>0.5</real>
+							<real>165</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>0</integer>
@@ -951,8 +965,7 @@ The “cookies” have to match.</string>
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>and the number on the cookie tells
-you how many fillings you need.</string>
+							<string>4 fillings</string>
 							<false/>
 						</array>
 					</dict>
@@ -1002,7 +1015,7 @@ you how many fillings you need.</string>
 						<key>type</key>
 						<string>IntegerLabeled</string>
 						<key>value</key>
-						<integer>1</integer>
+						<integer>0</integer>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1019,9 +1032,9 @@ you how many fillings you need.</string>
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
-							<real>1</real>
-							<real>1</real>
+							<real>0.50196081399917603</real>
+							<real>0.25098040699958801</real>
+							<real>0.0</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -1091,7 +1104,7 @@ you how many fillings you need.</string>
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>31</integer>
+				<integer>46</integer>
 				<key>baseClass</key>
 				<string>CCSprite</string>
 				<key>children</key>
@@ -1177,12 +1190,10 @@ you how many fillings you need.</string>
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>38</integer>
+				<integer>47</integer>
 				<key>baseClass</key>
 				<string>CCLabelTTF</string>
 				<key>children</key>
@@ -1212,8 +1223,8 @@ you how many fillings you need.</string>
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
-							<real>238.00006103515625</real>
+							<real>0.56000000238418579</real>
+							<real>262</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>0</integer>
@@ -1277,7 +1288,7 @@ you how many fillings you need.</string>
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>100</real>
+							<real>180</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -1325,9 +1336,9 @@ you how many fillings you need.</string>
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
-							<real>1</real>
-							<real>1</real>
+							<real>0.50196081399917603</real>
+							<real>0.25098040699958801</real>
+							<real>0.0</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -1397,21 +1408,21 @@ you how many fillings you need.</string>
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>39</integer>
+				<integer>48</integer>
 				<key>baseClass</key>
 				<string>CCNode</string>
 				<key>children</key>
 				<array>
 					<dict>
 						<key>UUID</key>
-						<integer>40</integer>
+						<integer>49</integer>
 						<key>baseClass</key>
 						<string>CCLayoutBox</string>
 						<key>children</key>
 						<array>
 							<dict>
 								<key>UUID</key>
-								<integer>33</integer>
+								<integer>61</integer>
 								<key>baseClass</key>
 								<string>CCBFile</string>
 								<key>children</key>
@@ -1428,7 +1439,7 @@ you how many fillings you need.</string>
 										<key>type</key>
 										<integer>0</integer>
 										<key>value</key>
-										<string>1</string>
+										<string>4</string>
 									</dict>
 								</array>
 								<key>displayName</key>
@@ -1480,13 +1491,13 @@ you how many fillings you need.</string>
 										<key>type</key>
 										<string>CCBFile</string>
 										<key>value</key>
-										<string>Dice/One.ccb</string>
+										<string>Dice/Four.ccb</string>
 									</dict>
 								</array>
 							</dict>
 							<dict>
 								<key>UUID</key>
-								<integer>37</integer>
+								<integer>62</integer>
 								<key>baseClass</key>
 								<string>CCBFile</string>
 								<key>children</key>
@@ -1503,7 +1514,7 @@ you how many fillings you need.</string>
 										<key>type</key>
 										<integer>0</integer>
 										<key>value</key>
-										<string>3</string>
+										<string>4</string>
 									</dict>
 								</array>
 								<key>displayName</key>
@@ -1555,13 +1566,13 @@ you how many fillings you need.</string>
 										<key>type</key>
 										<string>CCBFile</string>
 										<key>value</key>
-										<string>Dice/Three.ccb</string>
+										<string>Dice/Four.ccb</string>
 									</dict>
 								</array>
 							</dict>
 							<dict>
 								<key>UUID</key>
-								<integer>34</integer>
+								<integer>65</integer>
 								<key>baseClass</key>
 								<string>CCBFile</string>
 								<key>children</key>
@@ -1578,7 +1589,7 @@ you how many fillings you need.</string>
 										<key>type</key>
 										<integer>0</integer>
 										<key>value</key>
-										<string>1</string>
+										<string>4</string>
 									</dict>
 								</array>
 								<key>displayName</key>
@@ -1630,7 +1641,232 @@ you how many fillings you need.</string>
 										<key>type</key>
 										<string>CCBFile</string>
 										<key>value</key>
-										<string>Dice/One.ccb</string>
+										<string>Dice/Four.ccb</string>
+									</dict>
+								</array>
+							</dict>
+							<dict>
+								<key>UUID</key>
+								<integer>68</integer>
+								<key>baseClass</key>
+								<string>CCBFile</string>
+								<key>children</key>
+								<array/>
+								<key>customClass</key>
+								<string></string>
+								<key>customProperties</key>
+								<array>
+									<dict>
+										<key>name</key>
+										<string>faceValue</string>
+										<key>optimized</key>
+										<false/>
+										<key>type</key>
+										<integer>0</integer>
+										<key>value</key>
+										<string>4</string>
+									</dict>
+								</array>
+								<key>displayName</key>
+								<string>Dice</string>
+								<key>memberVarAssignmentName</key>
+								<string></string>
+								<key>memberVarAssignmentType</key>
+								<integer>1</integer>
+								<key>properties</key>
+								<array>
+									<dict>
+										<key>name</key>
+										<string>name</string>
+										<key>type</key>
+										<string>StringSimple</string>
+										<key>value</key>
+										<string></string>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>position</string>
+										<key>type</key>
+										<string>Position</string>
+										<key>value</key>
+										<array>
+											<real>111</real>
+											<real>0.0</real>
+											<integer>0</integer>
+											<integer>0</integer>
+											<integer>0</integer>
+										</array>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>scale</string>
+										<key>type</key>
+										<string>ScaleLock</string>
+										<key>value</key>
+										<array>
+											<real>1</real>
+											<real>1</real>
+											<false/>
+											<integer>0</integer>
+										</array>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>ccbFile</string>
+										<key>type</key>
+										<string>CCBFile</string>
+										<key>value</key>
+										<string>Dice/Four.ccb</string>
+									</dict>
+								</array>
+							</dict>
+							<dict>
+								<key>UUID</key>
+								<integer>71</integer>
+								<key>baseClass</key>
+								<string>CCBFile</string>
+								<key>children</key>
+								<array/>
+								<key>customClass</key>
+								<string></string>
+								<key>customProperties</key>
+								<array>
+									<dict>
+										<key>name</key>
+										<string>faceValue</string>
+										<key>optimized</key>
+										<false/>
+										<key>type</key>
+										<integer>0</integer>
+										<key>value</key>
+										<string>4</string>
+									</dict>
+								</array>
+								<key>displayName</key>
+								<string>Dice</string>
+								<key>memberVarAssignmentName</key>
+								<string></string>
+								<key>memberVarAssignmentType</key>
+								<integer>1</integer>
+								<key>properties</key>
+								<array>
+									<dict>
+										<key>name</key>
+										<string>name</string>
+										<key>type</key>
+										<string>StringSimple</string>
+										<key>value</key>
+										<string></string>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>position</string>
+										<key>type</key>
+										<string>Position</string>
+										<key>value</key>
+										<array>
+											<real>148</real>
+											<real>0.0</real>
+											<integer>0</integer>
+											<integer>0</integer>
+											<integer>0</integer>
+										</array>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>scale</string>
+										<key>type</key>
+										<string>ScaleLock</string>
+										<key>value</key>
+										<array>
+											<real>1</real>
+											<real>1</real>
+											<false/>
+											<integer>0</integer>
+										</array>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>ccbFile</string>
+										<key>type</key>
+										<string>CCBFile</string>
+										<key>value</key>
+										<string>Dice/Four.ccb</string>
+									</dict>
+								</array>
+							</dict>
+							<dict>
+								<key>UUID</key>
+								<integer>74</integer>
+								<key>baseClass</key>
+								<string>CCBFile</string>
+								<key>children</key>
+								<array/>
+								<key>customClass</key>
+								<string></string>
+								<key>customProperties</key>
+								<array>
+									<dict>
+										<key>name</key>
+										<string>faceValue</string>
+										<key>optimized</key>
+										<false/>
+										<key>type</key>
+										<integer>0</integer>
+										<key>value</key>
+										<string>4</string>
+									</dict>
+								</array>
+								<key>displayName</key>
+								<string>Dice</string>
+								<key>memberVarAssignmentName</key>
+								<string></string>
+								<key>memberVarAssignmentType</key>
+								<integer>1</integer>
+								<key>properties</key>
+								<array>
+									<dict>
+										<key>name</key>
+										<string>name</string>
+										<key>type</key>
+										<string>StringSimple</string>
+										<key>value</key>
+										<string></string>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>position</string>
+										<key>type</key>
+										<string>Position</string>
+										<key>value</key>
+										<array>
+											<real>185</real>
+											<real>0.0</real>
+											<integer>0</integer>
+											<integer>0</integer>
+											<integer>0</integer>
+										</array>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>scale</string>
+										<key>type</key>
+										<string>ScaleLock</string>
+										<key>value</key>
+										<array>
+											<real>1</real>
+											<real>1</real>
+											<false/>
+											<integer>0</integer>
+										</array>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>ccbFile</string>
+										<key>type</key>
+										<string>CCBFile</string>
+										<key>value</key>
+										<string>Dice/Four.ccb</string>
 									</dict>
 								</array>
 							</dict>
@@ -1660,10 +1896,10 @@ you how many fillings you need.</string>
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>0.5</real>
-									<real>18</real>
+									<real>21</real>
+									<real>11</real>
 									<integer>0</integer>
-									<integer>2</integer>
+									<integer>0</integer>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -1674,8 +1910,8 @@ you how many fillings you need.</string>
 								<string>Point</string>
 								<key>value</key>
 								<array>
-									<real>0.33000001311302185</real>
-									<real>0.0</real>
+									<real>0.5</real>
+									<real>0.5</real>
 								</array>
 							</dict>
 							<dict>
@@ -1739,7 +1975,7 @@ you how many fillings you need.</string>
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>202.00003051757812</real>
+							<real>230</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>0</integer>
@@ -1752,8 +1988,8 @@ you how many fillings you need.</string>
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>111</real>
-							<real>37</real>
+							<real>0.0</real>
+							<real>0.0</real>
 							<integer>0</integer>
 							<integer>0</integer>
 						</array>
@@ -1765,8 +2001,8 @@ you how many fillings you need.</string>
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
-							<real>0.5</real>
+							<real>0.0</real>
+							<real>0.0</real>
 						</array>
 					</dict>
 					<dict>
@@ -1786,7 +2022,7 @@ you how many fillings you need.</string>
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>41</integer>
+				<integer>59</integer>
 				<key>baseClass</key>
 				<string>CCLabelTTF</string>
 				<key>children</key>
@@ -1817,7 +2053,7 @@ you how many fillings you need.</string>
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>269.00006103515625</real>
+							<real>285</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>0</integer>
@@ -1854,8 +2090,7 @@ you how many fillings you need.</string>
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>(cookies)
-both 1’s </string>
+							<string>all 4’s</string>
 							<false/>
 						</array>
 					</dict>
@@ -1922,9 +2157,9 @@ both 1’s </string>
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
-							<real>1</real>
-							<real>1</real>
+							<real>0.50196081399917603</real>
+							<real>0.25098040699958801</real>
+							<real>0.0</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -1994,7 +2229,222 @@ both 1’s </string>
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>42</integer>
+				<integer>77</integer>
+				<key>baseClass</key>
+				<string>CCLabelTTF</string>
+				<key>children</key>
+				<array/>
+				<key>customClass</key>
+				<string></string>
+				<key>displayName</key>
+				<string>CCLabelTTF</string>
+				<key>memberVarAssignmentName</key>
+				<string></string>
+				<key>memberVarAssignmentType</key>
+				<integer>1</integer>
+				<key>properties</key>
+				<array>
+					<dict>
+						<key>name</key>
+						<string>name</string>
+						<key>type</key>
+						<string>StringSimple</string>
+						<key>value</key>
+						<string></string>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>position</string>
+						<key>type</key>
+						<string>Position</string>
+						<key>value</key>
+						<array>
+							<real>0.46000000834465027</real>
+							<real>185</real>
+							<integer>0</integer>
+							<integer>2</integer>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>anchorPoint</string>
+						<key>type</key>
+						<string>Point</string>
+						<key>value</key>
+						<array>
+							<real>0.5</real>
+							<real>0.5</real>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>scale</string>
+						<key>type</key>
+						<string>ScaleLock</string>
+						<key>value</key>
+						<array>
+							<real>0.5</real>
+							<real>1</real>
+							<false/>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>rotation</string>
+						<key>type</key>
+						<string>Degrees</string>
+						<key>value</key>
+						<real>270</real>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>string</string>
+						<key>type</key>
+						<string>Text</string>
+						<key>value</key>
+						<array>
+							<string>{</string>
+							<false/>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>fontName</string>
+						<key>type</key>
+						<string>FontTTF</string>
+						<key>value</key>
+						<string>Didot</string>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>fontSize</string>
+						<key>type</key>
+						<string>FloatScale</string>
+						<key>value</key>
+						<array>
+							<real>130</real>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>adjustsFontSizeToFit</string>
+						<key>type</key>
+						<string>Check</string>
+						<key>value</key>
+						<false/>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>dimensions</string>
+						<key>type</key>
+						<string>Size</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>0.0</real>
+							<integer>0</integer>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>horizontalAlignment</string>
+						<key>type</key>
+						<string>IntegerLabeled</string>
+						<key>value</key>
+						<integer>0</integer>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>verticalAlignment</string>
+						<key>type</key>
+						<string>IntegerLabeled</string>
+						<key>value</key>
+						<integer>0</integer>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>fontColor</string>
+						<key>type</key>
+						<string>Color4</string>
+						<key>value</key>
+						<array>
+							<real>0.50196081399917603</real>
+							<real>0.25098040699958801</real>
+							<real>0.0</real>
+							<real>1</real>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>outlineColor</string>
+						<key>type</key>
+						<string>Color4</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>0.0</real>
+							<real>0.0</real>
+							<real>0.0</real>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>outlineWidth</string>
+						<key>type</key>
+						<string>FloatScale</string>
+						<key>value</key>
+						<array>
+							<real>1</real>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>shadowColor</string>
+						<key>type</key>
+						<string>Color4</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>0.0</real>
+							<real>0.0</real>
+							<real>0.0</real>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>shadowBlurRadius</string>
+						<key>type</key>
+						<string>FloatScale</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>shadowOffset</string>
+						<key>type</key>
+						<string>Position</string>
+						<key>value</key>
+						<array>
+							<real>0.0</real>
+							<real>0.0</real>
+							<integer>0</integer>
+							<integer>0</integer>
+							<integer>0</integer>
+						</array>
+					</dict>
+				</array>
+			</dict>
+			<dict>
+				<key>UUID</key>
+				<integer>79</integer>
 				<key>baseClass</key>
 				<string>CCLabelTTF</string>
 				<key>children</key>
@@ -2025,7 +2475,7 @@ both 1’s </string>
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>160</real>
+							<real>120</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>0</integer>
@@ -2062,9 +2512,8 @@ both 1’s </string>
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>|
-1 die
-(filling)</string>
+							<string>Time’s ticking! Don’t let the dice
+reach the top!</string>
 							<false/>
 						</array>
 					</dict>
@@ -2131,9 +2580,9 @@ both 1’s </string>
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
-							<real>1</real>
-							<real>1</real>
+							<real>0.50196081399917603</real>
+							<real>0.25098040699958801</real>
+							<real>0.0</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -2203,7 +2652,20 @@ both 1’s </string>
 			</dict>
 		</array>
 		<key>customClass</key>
-		<string></string>
+		<string>HelpMenu</string>
+		<key>customProperties</key>
+		<array>
+			<dict>
+				<key>name</key>
+				<string>step</string>
+				<key>optimized</key>
+				<false/>
+				<key>type</key>
+				<integer>0</integer>
+				<key>value</key>
+				<string>2</string>
+			</dict>
+		</array>
 		<key>displayName</key>
 		<string>CCNode</string>
 		<key>memberVarAssignmentName</key>
@@ -2254,8 +2716,8 @@ both 1’s </string>
 				<string>Point</string>
 				<key>value</key>
 				<array>
-					<real>0.0</real>
-					<real>0.0</real>
+					<real>0.5</real>
+					<real>0.5</real>
 				</array>
 			</dict>
 			<dict>
@@ -2272,6 +2734,8 @@ both 1’s </string>
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

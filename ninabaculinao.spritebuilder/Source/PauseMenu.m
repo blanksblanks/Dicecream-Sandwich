@@ -7,6 +7,7 @@
 //
 
 #import "PauseMenu.h"
+#import "HelpMenu.h"
 #import "Grid.h"
 
 @implementation PauseMenu {
@@ -20,17 +21,26 @@
     [self removeFromParent];
     
 }
+
+// TODO: "Are you sure?" pop up
 - (void) restart {
     CCScene *gamePlay = [CCBReader loadAsScene:@"Gameplay"];
     [[CCDirector sharedDirector] replaceScene:gamePlay];
 }
 
 - (void) help {
-    
+    HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpStart"];
+    [helpMenu setPositionType:CCPositionTypeNormalized];
+    helpMenu.position = ccp(0.5, 0.5);
+    [self.parent addChild:helpMenu];
 }
 
 - (void) settings {
-    
+    if (!self.audio.muted) {
+        self.audio.muted = true;
+    } else {
+        self.audio.muted = false;
+    }
 }
 
 - (void) home {

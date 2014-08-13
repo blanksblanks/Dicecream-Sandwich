@@ -330,6 +330,7 @@ static const NSInteger GRID_COLUMNS = 6;
     return die;
 }
 
+//TODO: ask about alloc/dealloc necessity
 -(Dice*) randomizeNumbers {
     NSInteger randomNumber = arc4random_uniform(self.possibilities)+1;
     Dice *die;
