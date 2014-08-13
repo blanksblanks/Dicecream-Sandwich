@@ -66,6 +66,8 @@
     }
     if ([keyPath isEqualToString:@"level"]) {
         _levelLabel.string = [NSString stringWithFormat:@"%li", (long) _grid.level];
+        CCAnimationManager* animationManager = self.animationManager;
+        [animationManager runAnimationsForSequenceNamed:@"levelPulse"];
     }
 }
 
