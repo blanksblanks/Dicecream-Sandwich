@@ -256,8 +256,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
@@ -326,16 +324,8 @@
 				<key>value</key>
 				<array>
 					<string></string>
-					<string>workingAssets/Grid/6x12-Grid2.png</string>
+					<string>newAssets/forGameplay/Grid_Purple_50_trans.png</string>
 				</array>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>opacity</string>
-				<key>type</key>
-				<string>Float</string>
-				<key>value</key>
-				<real>0.20000000298023224</real>
 			</dict>
 			<dict>
 				<key>name</key>
@@ -347,7 +337,7 @@
 					<real>1</real>
 					<real>1</real>
 					<real>1</real>
-					<real>0.20000000298023224</real>
+					<real>1</real>
 				</array>
 			</dict>
 		</array>

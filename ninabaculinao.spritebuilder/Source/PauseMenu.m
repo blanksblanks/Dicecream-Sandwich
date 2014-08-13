@@ -43,6 +43,7 @@
     }
 }
 
+// TODO: "Are you sure?" pop up
 - (void) home {
     CCLOG(@"home button pressed");
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
