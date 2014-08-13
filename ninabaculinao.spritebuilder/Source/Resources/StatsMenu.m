@@ -25,7 +25,7 @@
 }
 
 - (void) didLoadFromCCB {
-    _scoreLabel.string = [NSString stringWithFormat:@"SCORE: %i", [GameState sharedInstance].currentScore];
+    _scoreLabel.string = [NSString stringWithFormat:@"SCORE: %li", (long)[GameState sharedInstance].currentScore];
 }
 
 - (void) home {

@@ -33,7 +33,7 @@
         audio = [OALSimpleAudio sharedInstance];
         // play background sound
         [audio playBg:@"CATchy.wav" loop:TRUE];
-         _timeLabel.string = [NSString stringWithFormat:@"%ld", (long)_grid.timer];
+         _timeLabel.string = [NSString stringWithFormat:@"%li", (long)_grid.timer];
   
     }
     
@@ -54,16 +54,18 @@
                        context:(void *)context
 {
     if ([keyPath isEqualToString:@"score"]) {
-        _scoreLabel.string = [NSString stringWithFormat:@"%ld", (long) _grid.score];
+        _scoreLabel.string = [NSString stringWithFormat:@"%li", (long) _grid.score];
+        CCAnimationManager* animationManager = self.animationManager;
+        [animationManager runAnimationsForSequenceNamed:@"scorePulse"];
     }
     if ([keyPath isEqualToString:@"match"]) {
-        _matchLabel.string = [NSString stringWithFormat:@"%ld", (long) _grid.match];
+        _matchLabel.string = [NSString stringWithFormat:@"%li", (long) _grid.match];
     }
     if ([keyPath isEqualToString:@"targetScore"]) {
-        _targetLabel.string = [NSString stringWithFormat:@"%ld", (long) _grid.targetScore];
+        _targetLabel.string = [NSString stringWithFormat:@"%li", (long) _grid.targetScore];
     }
     if ([keyPath isEqualToString:@"level"]) {
-        _levelLabel.string = [NSString stringWithFormat:@"%ld", (long) _grid.level];
+        _levelLabel.string = [NSString stringWithFormat:@"%li", (long) _grid.level];
     }
 }
 
@@ -101,9 +103,9 @@
 - (NSString*)checkIfLeadingZeroNeeded:(NSInteger)time {
     NSString *digits;
     if (time < 10) {
-        digits = [NSString stringWithFormat:@"0%ld", (long)time];
+        digits = [NSString stringWithFormat:@"0%li", (long)time];
     } else {
-        digits = [NSString stringWithFormat:@"%ld", (long)time];
+        digits = [NSString stringWithFormat:@"%li", (long)time];
     }
     return digits;
 }

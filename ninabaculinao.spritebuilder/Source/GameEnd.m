@@ -17,7 +17,6 @@
     CCLabelTTF *_levelLabel;
     CCLabelTTF *_chainsLabel;
     CCLabelTTF *_timeLabel;
-    
 }
 
 - (void) didLoadFromCCB {

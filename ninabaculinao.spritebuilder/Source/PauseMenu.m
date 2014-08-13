@@ -24,8 +24,6 @@
     [self scheduleBlock:^(CCTimer *timer) {
         [self removeFromParent];
     } delay:0.2];
-    
-    
 }
 
 // TODO: "Are you sure?" pop up
