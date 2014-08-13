@@ -1831,7 +1831,7 @@
 						<key>value</key>
 						<array>
 							<real>0.49999988079071045</real>
-							<real>98.00006103515625</real>
+							<real>103.00006103515625</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>0</integer>
@@ -2018,7 +2018,7 @@ to clear dice!</string>
 				<key>displayName</key>
 				<string>Cancel</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>cancel</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -2094,6 +2094,8 @@ to clear dice!</string>
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

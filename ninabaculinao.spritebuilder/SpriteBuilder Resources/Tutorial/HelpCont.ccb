@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>43</integer>
+	<integer>44</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -41,15 +41,15 @@
 		<array>
 			<dict>
 				<key>UUID</key>
-				<integer>17</integer>
+				<integer>43</integer>
 				<key>baseClass</key>
-				<string>CCNodeGradient</string>
+				<string>CCNodeColor</string>
 				<key>children</key>
 				<array/>
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>CCNodeGradient</string>
+				<string>CCNodeColor</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -117,40 +117,24 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>startColor</string>
+						<string>color</string>
 						<key>type</key>
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.40000000596046448</real>
-							<real>0.80000001192092896</real>
-							<real>1</real>
+							<real>0.20999999344348907</real>
+							<real>0.64999997615814209</real>
+							<real>0.87000000476837158</real>
 							<real>1</real>
 						</array>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>endColor</string>
+						<string>opacity</string>
 						<key>type</key>
-						<string>Color3</string>
+						<string>Float</string>
 						<key>value</key>
-						<array>
-							<real>0.80000001192092896</real>
-							<real>1</real>
-							<real>0.40000000596046448</real>
-							<real>1</real>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>vector</string>
-						<key>type</key>
-						<string>Point</string>
-						<key>value</key>
-						<array>
-							<real>0.0</real>
-							<real>-1</real>
-						</array>
+						<real>1</real>
 					</dict>
 				</array>
 			</dict>
@@ -291,9 +275,9 @@
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>0.50196081399917603</real>
-							<real>0.25098040699958801</real>
-							<real>0.0</real>
+							<real>1</real>
+							<real>1</real>
+							<real>1</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -719,7 +703,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.5103447437286377</real>
+							<real>0.5</real>
 							<real>332.00006103515625</real>
 							<integer>0</integer>
 							<integer>2</integer>
@@ -758,9 +742,9 @@
 						<key>value</key>
 						<array>
 							<string>Dicecream sandwiches are made of
-“cookies” and “filling.”
+dice “cookies” and “filling.”
 
-The cookies have to match.</string>
+The “cookies” have to match.</string>
 							<false/>
 						</array>
 					</dict>
@@ -827,9 +811,9 @@ The cookies have to match.</string>
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>0.50196081399917603</real>
-							<real>0.25098040699958801</real>
-							<real>0.0</real>
+							<real>1</real>
+							<real>1</real>
+							<real>1</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -930,7 +914,7 @@ The cookies have to match.</string>
 						<key>value</key>
 						<array>
 							<real>0.49999988079071045</real>
-							<real>111.00006103515625</real>
+							<real>100.00006103515625</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>0</integer>
@@ -1018,7 +1002,7 @@ you how many fillings you need.</string>
 						<key>type</key>
 						<string>IntegerLabeled</string>
 						<key>value</key>
-						<integer>0</integer>
+						<integer>1</integer>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1035,9 +1019,9 @@ you how many fillings you need.</string>
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>0.50196081399917603</real>
-							<real>0.25098040699958801</real>
-							<real>0.0</real>
+							<real>1</real>
+							<real>1</real>
+							<real>1</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -1117,7 +1101,7 @@ you how many fillings you need.</string>
 				<key>displayName</key>
 				<string>Cancel</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>cancel</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -1193,6 +1177,8 @@ you how many fillings you need.</string>
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -1226,7 +1212,7 @@ you how many fillings you need.</string>
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.49310335516929626</real>
+							<real>0.5</real>
 							<real>238.00006103515625</real>
 							<integer>0</integer>
 							<integer>2</integer>
@@ -1339,9 +1325,9 @@ you how many fillings you need.</string>
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>0.50196081399917603</real>
-							<real>0.25098040699958801</real>
-							<real>0.0</real>
+							<real>1</real>
+							<real>1</real>
+							<real>1</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -1674,10 +1660,10 @@ you how many fillings you need.</string>
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
-									<real>0.0</real>
+									<real>0.5</real>
+									<real>18</real>
 									<integer>0</integer>
-									<integer>0</integer>
+									<integer>2</integer>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -1688,7 +1674,7 @@ you how many fillings you need.</string>
 								<string>Point</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
+									<real>0.33000001311302185</real>
 									<real>0.0</real>
 								</array>
 							</dict>
@@ -1752,10 +1738,10 @@ you how many fillings you need.</string>
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>95.000030517578125</real>
+							<real>0.5</real>
 							<real>202.00003051757812</real>
 							<integer>0</integer>
-							<integer>0</integer>
+							<integer>2</integer>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -1779,8 +1765,8 @@ you how many fillings you need.</string>
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>0.5</real>
+							<real>0.5</real>
 						</array>
 					</dict>
 					<dict>
@@ -1830,8 +1816,8 @@ you how many fillings you need.</string>
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.45517230033874512</real>
-							<real>261.00006103515625</real>
+							<real>0.5</real>
+							<real>269.00006103515625</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>0</integer>
@@ -1868,7 +1854,8 @@ you how many fillings you need.</string>
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>both 1’s</string>
+							<string>(cookies)
+both 1’s </string>
 							<false/>
 						</array>
 					</dict>
@@ -1935,9 +1922,9 @@ you how many fillings you need.</string>
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>0.50196081399917603</real>
-							<real>0.25098040699958801</real>
-							<real>0.0</real>
+							<real>1</real>
+							<real>1</real>
+							<real>1</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -2037,8 +2024,8 @@ you how many fillings you need.</string>
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.45517230033874512</real>
-							<real>163.00006103515625</real>
+							<real>0.5</real>
+							<real>160</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>0</integer>
@@ -2076,7 +2063,8 @@ you how many fillings you need.</string>
 						<key>value</key>
 						<array>
 							<string>|
-1 die</string>
+1 die
+(filling)</string>
 							<false/>
 						</array>
 					</dict>
@@ -2143,9 +2131,9 @@ you how many fillings you need.</string>
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>0.50196081399917603</real>
-							<real>0.25098040699958801</real>
-							<real>0.0</real>
+							<real>1</real>
+							<real>1</real>
+							<real>1</real>
 							<real>1</real>
 						</array>
 					</dict>
