@@ -84,10 +84,10 @@
 
 - (void)pause {
     PauseMenu *pauseMenu = (PauseMenu*) [CCBReader load:@"PauseMenu"];
-    [pauseMenu setPositionType:CCPositionTypeNormalized];
+//    [pauseMenu setPositionType:CCPositionTypeNormalized];
 
     audio.paused = TRUE;
-    pauseMenu.position = ccp(0.5, 0.5);
+    pauseMenu.position = ccp(0, 30);
     [self addChild:pauseMenu];
     [_grid pause];
     
