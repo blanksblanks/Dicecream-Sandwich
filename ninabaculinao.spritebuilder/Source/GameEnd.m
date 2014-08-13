@@ -27,8 +27,9 @@
 
 - (void) stats {
     StatsMenu *statsMenu = (StatsMenu*) [CCBReader load:@"StatsMenu"];
-    statsMenu.position = self.position;
-    [self addChild:statsMenu];
+    [statsMenu setPositionType:CCPositionTypeNormalized];
+    statsMenu.position = ccp(0.5, 0.5);
+    [self.parent addChild:statsMenu];
     [self removeFromParent];
 }
 
@@ -38,6 +39,12 @@
     [[CCDirector sharedDirector] replaceScene:mainScene];
     
 }
+
+- (void) restart {
+    CCScene *gamePlay = [CCBReader loadAsScene:@"Gameplay"];
+    [[CCDirector sharedDirector] replaceScene:gamePlay];
+}
+
 
 
 @end

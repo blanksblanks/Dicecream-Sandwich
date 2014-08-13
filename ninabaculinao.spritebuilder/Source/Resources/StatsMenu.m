@@ -7,6 +7,10 @@
 //
 
 #import "StatsMenu.h"
+#import "GameEnd.h"
+#import "GameState.h"
+#import "Grid.h"
+
 
 @implementation StatsMenu {
     CCLabelTTF *_scoreLabel;
@@ -20,12 +24,19 @@
     CCLabelTTF *_timeLabel;
 }
 
-- (void) resume {
-    
+- (void) didLoadFromCCB {
+    _scoreLabel.string = [NSString stringWithFormat:@"SCORE: %i", [GameState sharedInstance].currentScore];
+}
+
+- (void) home {
+    CCLOG(@"home button pressed");
+    CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
+    [[CCDirector sharedDirector] replaceScene:mainScene];
 }
 
 - (void) restart {
-    
+    CCScene *gamePlay = [CCBReader loadAsScene:@"Gameplay"];
+    [[CCDirector sharedDirector] replaceScene:gamePlay];
 }
 
 @end

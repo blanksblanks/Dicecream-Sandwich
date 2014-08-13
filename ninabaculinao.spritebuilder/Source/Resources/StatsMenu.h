@@ -10,9 +10,6 @@
 
 @interface StatsMenu : CCNode
 
-- (void) resume;
-- (void) restart;
-
-
+@property (nonatomic, strong) OALSimpleAudio *audio;
 
 @end

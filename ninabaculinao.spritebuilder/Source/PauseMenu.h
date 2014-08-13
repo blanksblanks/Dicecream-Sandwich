@@ -16,7 +16,6 @@
 - (void) restart;
 - (void) help;
 - (void) settings;
-- (void) stats;
 - (void) home;
 
 @property (nonatomic, strong) Grid *grid;
