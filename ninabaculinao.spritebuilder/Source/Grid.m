@@ -114,10 +114,12 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)pause {
     self.paused = true;
+    self.touchEnabled = false;
 }
 
 - (void)unpause {
     self.paused = false;
+    self.touchEnabled = true;
 }
 
 # pragma mark - Update method

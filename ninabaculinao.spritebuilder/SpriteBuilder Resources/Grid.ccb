@@ -324,8 +324,16 @@
 				<key>value</key>
 				<array>
 					<string></string>
-					<string>newAssets/forGameplay/Grid_Purple_50_trans.png</string>
+					<string>newAssets/forGameplay/Grid_Purple_no_trans.png</string>
 				</array>
+			</dict>
+			<dict>
+				<key>name</key>
+				<string>opacity</string>
+				<key>type</key>
+				<string>Float</string>
+				<key>value</key>
+				<real>0.80000001192092896</real>
 			</dict>
 			<dict>
 				<key>name</key>
@@ -337,7 +345,7 @@
 					<real>1</real>
 					<real>1</real>
 					<real>1</real>
-					<real>1</real>
+					<real>0.80000001192092896</real>
 				</array>
 			</dict>
 		</array>

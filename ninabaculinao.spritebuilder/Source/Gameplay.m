@@ -119,15 +119,21 @@
 
 
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    [_grid touchBegan:touch withEvent:event];
+    if (_grid.touchEnabled) {
+        [_grid touchBegan:touch withEvent:event];
+    }
 }
 
 - (void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
-    [_grid touchMoved:touch withEvent:event];
+    if (_grid.touchEnabled) {
+        [_grid touchMoved:touch withEvent:event];
+    }
 }
 
 - (void)touchEnded:(UITouch*)touch withEvent:(UIEvent *)event {
-    [_grid touchEnded:touch withEvent:event];
+    if (_grid.touchEnabled) {
+        [_grid touchEnded:touch withEvent:event];
+    }
 }
 
 
