@@ -175,7 +175,7 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>290</real>
+							<real>228</real>
 							<real>10</real>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -326,7 +326,7 @@
 				<key>value</key>
 				<array>
 					<string></string>
-					<string>workingAssets/Grid/6x9-Grid2 copy.png</string>
+					<string>workingAssets/Grid/6x12-Grid2.png</string>
 				</array>
 			</dict>
 			<dict>

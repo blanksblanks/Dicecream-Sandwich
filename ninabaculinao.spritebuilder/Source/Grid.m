@@ -54,11 +54,10 @@
     BOOL specialsAllowed;
     
     CCSlider *slider;
-    //    ChainScore *chainScore;
 }
 
 // two constants to describe the number of rows and columns
-static const NSInteger GRID_ROWS = 9;
+static const NSInteger GRID_ROWS = 12;
 static const NSInteger GRID_COLUMNS = 6;
 
 - (void)didLoadFromCCB{
@@ -101,6 +100,10 @@ static const NSInteger GRID_COLUMNS = 6;
     } else if (self.score >= self.targetScore) {
         self.level++;
         [self animateLevelUp];
+    }
+    
+    if (self.level > 5) {
+        specialsAllowed = TRUE;
     }
     
     NSDictionary *dict = levels[self.level-1];
@@ -490,19 +493,19 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void) moveDie:(Dice*)die inDirection:(CGPoint)direction {
-//    NSInteger newRow = die.row + direction.y;
-//    NSInteger newColumn = die.column + direction.x;
-//    BOOL indexValid = [self indexValidForRow:newRow andColumn:newColumn];
-//    if (indexValid) {
+    NSInteger newRow = die.row + direction.y;
+    NSInteger newColumn = die.column + direction.x;
+    BOOL indexValid = [self indexValidForRow:newRow andColumn:newColumn];
+    if (indexValid) {
         _gridArray[die.row][die.column] = _noTile; // Set old index of the die in the array to null
         die.row += direction.y; // Change die row and column properties based on direction coordinates
         die.column += direction.x;
         _gridArray[die.row][die.column] = die; // Set new index in the grid array to the die
         die.position = [self positionForTile:die.column row:die.row];
-//        CGPoint newPosition = [self positionForTile:die.column row:die.row]; // Position dice object in the visual grid
-//        CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.2f position:newPosition];
-//        [die runAction:moveTo];
-//    }
+        CGPoint newPosition = [self positionForTile:die.column row:die.row]; // Position dice object in the visual grid
+        CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.2f position:newPosition];
+        [die runAction:moveTo];
+    }
 }
 
 - (BOOL) canBottomMove {
