@@ -4,9 +4,10 @@
 <dict>
 	<key>Levels</key>
 	<array>
+		<string></string>
 		<dict>
 			<key>possibilities</key>
-			<integer>2</integer>
+			<integer>3</integer>
 			<key>targetScore</key>
 			<integer>600</integer>
 			<key>levelSpeed</key>
