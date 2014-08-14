@@ -780,7 +780,6 @@ static const NSInteger GRID_COLUMNS = 6;
                             comboCondition = true;
                             matchFound = true;
                             self.combo++;
-                            self.match = _rightDie.faceValue;
                             break;
                         }
                     }
@@ -819,7 +818,6 @@ static const NSInteger GRID_COLUMNS = 6;
                             matchFound = true;
                             comboCondition = true;
                             self.combo++;
-                            self.match = _belowDie.faceValue;
                             break;
                     }
                 }

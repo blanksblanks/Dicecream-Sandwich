@@ -25,7 +25,6 @@ typedef NS_ENUM(NSInteger, GridState) {
 - (void)unpause;
 
 @property (nonatomic, assign) GridState currentGridState;
-@property (nonatomic, assign) NSInteger match;
 @property (nonatomic, assign) NSInteger score;
 @property (nonatomic, assign) NSInteger targetScore;
 @property (nonatomic, assign) NSInteger possibilities;

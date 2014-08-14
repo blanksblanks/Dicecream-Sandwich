@@ -23,7 +23,6 @@
     CCLabelTTF *_targetLabel;
     CCLabelTTF *_levelLabel;
     CCLabelTTF *_timeLabel;
-    CCLabelTTF *_matchLabel;
 }
 
 - (id)init {
@@ -44,7 +43,6 @@
     animationManager = self.animationManager;
     
     [_grid addObserver:self forKeyPath:@"score" options:0 context:NULL];
-    [_grid addObserver:self forKeyPath:@"match" options:0 context:NULL];
     [_grid addObserver:self forKeyPath:@"targetScore" options:0 context:NULL];
     [_grid addObserver:self forKeyPath:@"level" options:0 context:NULL];
     [_grid loadLevel];
@@ -58,9 +56,6 @@
     if ([keyPath isEqualToString:@"score"]) {
         _scoreLabel.string = [NSString stringWithFormat:@"%li", (long) _grid.score];
         [animationManager runAnimationsForSequenceNamed:@"scorePulse"];
-    }
-    if ([keyPath isEqualToString:@"match"]) {
-        _matchLabel.string = [NSString stringWithFormat:@"%li", (long) _grid.match];
     }
     if ([keyPath isEqualToString:@"targetScore"]) {
         _targetLabel.string = [NSString stringWithFormat:@"%li", (long) _grid.targetScore];
@@ -79,7 +74,6 @@
 
 - (void)dealloc {
     [_grid removeObserver:self forKeyPath:@"score"];
-    [_grid removeObserver:self forKeyPath:@"match"];
     [_grid removeObserver:self forKeyPath:@"targetScore"];
     [_grid removeObserver:self forKeyPath:@"level"];
 }
