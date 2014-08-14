@@ -69,10 +69,10 @@
         _levelLabel.string = [NSString stringWithFormat:@"%li", (long) _grid.level];
         if (_grid.level > 1) {
             [animationManager runAnimationsForSequenceNamed:@"levelPulse"];
-            _rainbowBright.visible = !_rainbowBright.visible;
-            if (_grid.zOrder < _rainbowBright.zOrder) {
-                //TODO: debug why rainbow sometimes appears above grid
-            }
+//            _rainbowBright.visible = !_rainbowBright.visible;
+//            if (_grid.zOrder < _rainbowBright.zOrder) {
+//                //TODO: debug why rainbow sometimes appears above grid
+//            }
         }
     }
 }

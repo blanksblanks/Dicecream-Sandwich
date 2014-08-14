@@ -184,7 +184,7 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>138</real>
+											<real>123</real>
 											<real>22.5</real>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -1594,7 +1594,7 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>35</real>
+											<real>20</real>
 											<real>45</real>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -2410,7 +2410,7 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>15</real>
+											<real>0.0</real>
 											<real>231</real>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -2488,8 +2488,8 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>138</real>
-											<real>307</real>
+											<real>123</real>
+											<real>301.60000610351562</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -2526,8 +2526,7 @@
 										<string>Text</string>
 										<key>value</key>
 										<array>
-											<string>GOOD GAME!
-</string>
+											<string>GOOD GAME!</string>
 											<false/>
 										</array>
 									</dict>
@@ -2537,7 +2536,7 @@
 										<key>type</key>
 										<string>FontTTF</string>
 										<key>value</key>
-										<string>workingAssets/Vanilla.ttf</string>
+										<string>Fonts/RumRaisin-Regular.ttf</string>
 									</dict>
 									<dict>
 										<key>name</key>
@@ -2546,7 +2545,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>36</real>
+											<real>48</real>
 											<integer>0</integer>
 										</array>
 									</dict>
