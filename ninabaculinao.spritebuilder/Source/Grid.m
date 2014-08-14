@@ -792,8 +792,10 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (NSArray *)detectVerticalMatches {
     NSMutableArray *array = [NSMutableArray array];
-        for (NSInteger row = 0; row < GRID_ROWS-2; row++) {
-            for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
+    // For loops have to be in this order to break out of for loop when vertical match is made
+    // If we don't break out of "for row" loop it will continue to look at dice in row above
+        for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
+            for (NSInteger row = 0; row < GRID_ROWS-2; row++) {
                 BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
                 if (!positionFree) {
                     _belowDie = _gridArray[row][column];
