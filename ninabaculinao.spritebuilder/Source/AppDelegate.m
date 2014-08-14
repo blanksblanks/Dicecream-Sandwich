@@ -28,9 +28,9 @@
 #import "AppDelegate.h"
 #import "CCBuilderReader.h"
 
-#import "DDASLLogger.h"
-#import "DDTTYLogger.h"
-#import "DDFileLogger.h"
+//#import "DDASLLogger.h"
+//#import "DDTTYLogger.h"
+//#import "DDFileLogger.h"
 
 @implementation AppController
 
@@ -58,14 +58,14 @@
     
     [self setupCocos2dWithOptions:cocos2dSetup];
     
-    // Configure CocoaLumberjack and override point for customization after application launch.
-    [DDLog addLogger:[DDASLLogger sharedInstance]];
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
-    
-    // Enable Colors
-    [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
-    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor greenColor] backgroundColor:nil forFlag:LOG_FLAG_INFO];
-    
+//    // Configure CocoaLumberjack and override point for customization after application launch.
+//    [DDLog addLogger:[DDASLLogger sharedInstance]];
+//    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+//    
+//    // Enable Colors
+//    [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
+//    [[DDTTYLogger sharedInstance] setForegroundColor:[UIColor greenColor] backgroundColor:nil forFlag:LOG_FLAG_INFO];
+  
 //    NSString* url = (NSString *)[[NSFileManager defaultManager] currentDirectoryPath];
 //    NSLog(@"%@", url);
     
@@ -77,17 +77,17 @@
 //    DDLogFileManagerDefault *documentsFileManager = [[DDLogFileManagerDefault alloc]
 //                                                     initWithLogsDirectory:url];
     
-    // Initialize file logger
-    DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
+//    // Initialize file logger
+//    DDFileLogger *fileLogger = [[DDFileLogger alloc] init];
 //                                initWithLogFileManager:documentsFileManager];
-    
-    // Configure file logger
-    [fileLogger setRollingFrequency:60 * 60 * 24]; // 1 hour roll
-    [[fileLogger logFileManager] setMaximumNumberOfLogFiles:10];
-    [DDLog addLogger:fileLogger];
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
-    DDLogInfo(@"log file at: %@", [[fileLogger currentLogFileInfo] filePath]);
-    
+  
+//    // Configure file logger
+//    [fileLogger setRollingFrequency:60 * 60 * 24]; // 1 hour roll
+//    [[fileLogger logFileManager] setMaximumNumberOfLogFiles:10];
+//    [DDLog addLogger:fileLogger];
+//    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+//    DDLogInfo(@"log file at: %@", [[fileLogger currentLogFileInfo] filePath]);
+  
     return YES;
 }
 
