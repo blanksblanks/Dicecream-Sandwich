@@ -936,7 +936,7 @@
 									<key>value</key>
 									<array>
 										<real>0.5</real>
-										<real>0.25999999046325684</real>
+										<real>355.20001220703125</real>
 									</array>
 								</dict>
 								<dict>
@@ -954,7 +954,7 @@
 									<key>value</key>
 									<array>
 										<real>0.5</real>
-										<real>0.30000001192092896</real>
+										<real>336</real>
 									</array>
 								</dict>
 								<dict>
@@ -972,7 +972,7 @@
 									<key>value</key>
 									<array>
 										<real>0.5</real>
-										<real>0.30000001192092896</real>
+										<real>336</real>
 									</array>
 								</dict>
 								<dict>
@@ -990,7 +990,7 @@
 									<key>value</key>
 									<array>
 										<real>0.5</real>
-										<real>0.25999999046325684</real>
+										<real>355.20001220703125</real>
 									</array>
 								</dict>
 								<dict>
@@ -1008,7 +1008,7 @@
 									<key>value</key>
 									<array>
 										<real>0.5</real>
-										<real>0.30000001192092896</real>
+										<real>336</real>
 									</array>
 								</dict>
 								<dict>
@@ -1026,7 +1026,7 @@
 									<key>value</key>
 									<array>
 										<real>0.5</real>
-										<real>0.30000001192092896</real>
+										<real>336</real>
 									</array>
 								</dict>
 								<dict>
@@ -1044,7 +1044,7 @@
 									<key>value</key>
 									<array>
 										<real>0.5</real>
-										<real>0.25999999046325684</real>
+										<real>355.20001220703125</real>
 									</array>
 								</dict>
 							</array>
@@ -1081,7 +1081,7 @@
 						<key>baseValue</key>
 						<array>
 							<real>0.5</real>
-							<real>0.2604166567325592</real>
+							<real>300</real>
 						</array>
 						<key>name</key>
 						<string>position</string>
@@ -1090,10 +1090,10 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.2604166567325592</real>
+							<real>300</real>
+							<integer>1</integer>
+							<integer>2</integer>
 							<integer>0</integer>
-							<integer>2</integer>
-							<integer>2</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1104,7 +1104,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.5</real>
+							<real>1</real>
 						</array>
 					</dict>
 					<dict>
@@ -1138,8 +1138,8 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>150</real>
-							<real>75</real>
+							<real>0.0</real>
+							<real>0.0</real>
 							<integer>0</integer>
 							<integer>0</integer>
 						</array>
@@ -1255,7 +1255,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Fonts/Cloudy With a Chance of Love.ttf</string>
+						<string>Fonts/DimboRegular.ttf</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1264,7 +1264,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>48</real>
+							<real>68</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -1478,8 +1478,8 @@
 									<integer>3</integer>
 									<key>value</key>
 									<array>
-										<real>0.50000005960464478</real>
-										<real>0.5</real>
+										<real>0.49999994039535522</real>
+										<real>240</real>
 									</array>
 								</dict>
 								<dict>
@@ -1496,8 +1496,8 @@
 									<integer>3</integer>
 									<key>value</key>
 									<array>
-										<real>-0.18437500298023224</real>
-										<real>1.0104166269302368</real>
+										<real>1.1843750476837158</real>
+										<real>-4.999969482421875</real>
 									</array>
 								</dict>
 							</array>
@@ -1583,8 +1583,8 @@
 					<dict>
 						<key>baseValue</key>
 						<array>
-							<real>0.50000005960464478</real>
-							<real>0.375</real>
+							<real>0.49999994039535522</real>
+							<real>300</real>
 						</array>
 						<key>name</key>
 						<string>position</string>
@@ -1592,11 +1592,11 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.50000005960464478</real>
-							<real>0.375</real>
-							<integer>3</integer>
+							<real>0.49999994039535522</real>
+							<real>300</real>
+							<integer>1</integer>
 							<integer>2</integer>
-							<integer>2</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1607,7 +1607,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.5</real>
+							<real>0.40000000596046448</real>
 						</array>
 					</dict>
 					<dict>
@@ -1658,6 +1658,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
@@ -1986,8 +1988,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

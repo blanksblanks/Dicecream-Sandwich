@@ -32,8 +32,8 @@
     
     Dice *_currentDie1;
     Dice *_currentDie2;
-    Dice *_ghostDie1;
-    Dice *_ghostDie2;
+//    Dice *_ghostDie1;
+//    Dice *_ghostDie2;
     
     Dice *_leftDie;
     Dice *_rightDie;
@@ -141,8 +141,7 @@ static const NSInteger GRID_COLUMNS = 6;
             case 0: { // spawn dice
                 [self spawnDice];
 //                [self resetValue:slider];
-                //            [self spawnGhost];
-//                self.userInteractionEnabled = TRUE;
+//                [self spawnGhost];
                 self.touchEnabled = TRUE;
                 _timeSinceDrop = -0.2;
                 _dropInterval = self.levelSpeed;
@@ -161,6 +160,7 @@ static const NSInteger GRID_COLUMNS = 6;
                         _dropInterval = 0.05;
                         actionIndex = 2; CCLOG(@"Going to case 2: filling holes");
                     }
+                    
                 }
                 break;
             }
@@ -258,6 +258,25 @@ static const NSInteger GRID_COLUMNS = 6;
     return stabilizing;
 }
 
+
+- (void) checkIfAllClear {
+    BOOL allClear = false;
+    for (NSInteger row = 0; row < GRID_ROWS; row++) {
+        for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
+            BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
+            if (positionFree) {
+                allClear = true;
+            } else {
+                break;
+            }
+        }
+    }
+    if (allClear) {
+        self.allClear++;
+    }
+}
+
+
 - (void)trackGridState { // aka my beautiful debugging log
     
     // copy current grid into gridstate array as 0's and 1-6's
@@ -315,39 +334,6 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-- (void) gameEnd {
-    CCLOG(@"Game Over");
-    [self assignStats];
-    GameEnd *gameEnd = (GameEnd*) [CCBReader load:@"GameEnd"];
-    [gameEnd setPositionType:CCPositionTypeNormalized];
-    gameEnd.position = ccp(0.5, 0.5);
-    [self.parent addChild:gameEnd];
-}
-
--(void) assignStats {
-    // Set game state values to those in game
-    [GameState sharedInstance].currentScore = self.score;
-    [GameState sharedInstance].currentLevel = self.level;
-    [GameState sharedInstance].currentTime = self.timer;
-    [GameState sharedInstance].currentChains = self.chains;
-    [GameState sharedInstance].currentChainsPerMin = self.chains/(self.timer/60);
-    [GameState sharedInstance].current6Chains = self.sixChains;
-    [GameState sharedInstance].currentPerfectMatches = self.perfectMatches;
-    [GameState sharedInstance].currentStreak = self.streak;
-    [GameState sharedInstance].currentAllClear = self.allClear;
-    
-    if ([GameState sharedInstance].bestScore < self.score) {
-        [GameState sharedInstance].bestScore = self.score;
-        [GameState sharedInstance].bestLevel = self.level;
-        [GameState sharedInstance].bestTime = self.timer;
-        [GameState sharedInstance].bestChains = self.chains;
-        [GameState sharedInstance].bestChainsPerMin = self.chains/(self.timer/60);
-        [GameState sharedInstance].best6Chains = self.sixChains;
-        [GameState sharedInstance].bestPerfectMatches = self.perfectMatches;
-        [GameState sharedInstance].bestStreak = self.streak;
-        [GameState sharedInstance].bestAllClear = self.allClear;
-    }
-}
 
 -(Dice*) addDie:(Dice*)die atColumn:(NSInteger)column andRow:(NSInteger)row {
 	_gridArray[row][column] = die;
@@ -429,84 +415,6 @@ static const NSInteger GRID_COLUMNS = 6;
 	return CGPointMake(x,y);
 }
 
-# pragma mark - Spawn ghost (obsolete)
-
-- (void)spawnGhost {
-    NSInteger ghostRow1;
-    NSInteger ghostRow2;
-    
-    if (_currentDie1.row > _currentDie2.row) {
-        ghostRow2 = [self findBottomforColumn:_currentDie2.column];
-        ghostRow1 = ghostRow2 + 1;
-    } else {
-        ghostRow1 = [self findBottomforColumn:_currentDie1.column];
-        ghostRow2 = [self findBottomforColumn:_currentDie2.column];
-    }
-    
-    BOOL same1 = ((_ghostDie1.row == _currentDie1.row) && (_ghostDie1.column == _currentDie1.column));
-    BOOL same2 = ((_ghostDie2.row == _currentDie2.row) && (_ghostDie2.column == _currentDie2.column));
-    
-    if (!same1 && !same2) {
-        _ghostDie1 = (Dice*) [CCBReader load:@"Dice/Dice"];
-        _ghostDie2 = (Dice*) [CCBReader load:@"Dice/Dice"];
-        _ghostDie1 = [self addDie:_ghostDie1 atColumn:_currentDie1.column andRow:ghostRow1];
-        _ghostDie2 = [self addDie:_ghostDie2 atColumn:_currentDie2.column andRow:ghostRow2];
-    }
-}
-
-- (NSInteger)findBottomforColumn:(NSInteger)column {
-    NSInteger ghostRow = 0;
-    for (NSInteger row = GRID_ROWS-3; row >= 0; row--) {
-        if([_gridArray[row][column] isEqual:_noTile] || [_gridArray[row][column] isEqual:_ghostDie1] || [_gridArray[row][column] isEqual:_ghostDie2]) {
-            ghostRow = row;
-        }
-    }
-    return ghostRow;
-}
-
-- (void)moveGhostDice{
-    NSInteger ghostRow1;
-    NSInteger ghostRow2;
-    NSInteger ghostColumn1 = _currentDie1.column;
-    NSInteger ghostColumn2 = _currentDie2.column;
-    
-    if (_currentDie1.row > _currentDie2.row) {
-        ghostRow2 = [self findBottomforColumn:ghostColumn2];
-        ghostRow1 = ghostRow2 + 1;
-    } else if (_currentDie2.row > _currentDie1.row) {
-        ghostRow1 = [self findBottomforColumn:ghostColumn1];
-        ghostRow2 = ghostRow1 + 1;
-    } else {
-        ghostRow1 = [self findBottomforColumn:ghostColumn1];
-        ghostRow2 = [self findBottomforColumn:ghostColumn2];
-    }
-    
-    NSInteger x1 = _ghostDie1.column - ghostColumn1;
-    NSInteger x2 = _ghostDie2.column - ghostColumn2;
-    
-    NSInteger y1 = _ghostDie1.row - ghostRow1;
-    NSInteger y2 = _ghostDie2.row - ghostRow2;
-    
-    [self moveDie:_ghostDie1 inDirection:ccp(-x1, -y1)];
-    [self moveDie:_ghostDie2 inDirection:ccp(-x2, -y2)];
-}
-
-- (void)removeGhost {
-    if (_gridArray[_ghostDie1.row][_ghostDie1.column] != _currentDie1 && _gridArray[_ghostDie1.row][_ghostDie1.column] != _currentDie2 && _gridArray[_ghostDie2.row][_ghostDie2.column] != _currentDie1 && _gridArray[_ghostDie2.row][_ghostDie2.column] != _currentDie2) {
-        _gridArray[_ghostDie1.row][_ghostDie1.column] = _noTile;
-        _gridArray[_ghostDie2.row][_ghostDie2.column] = _noTile;
-    }
-    
-    CCActionEaseOut *easeOut = [CCActionEaseOut actionWithDuration:0.75f];
-    CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.75f scale:0.1f];
-    CCActionSequence *sequence = [CCActionSequence actionWithArray:@[easeOut, scaleDown]];
-    [_ghostDie1 runAction:sequence];
-    [_ghostDie2 runAction:sequence];
-    
-    [_ghostDie1 removeFromParent];
-    [_ghostDie2 removeFromParent];
-}
-
 # pragma mark - Make pair of dice fall
 
 - (void) dieFallDown {
@@ -545,22 +453,26 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     oldTouchPosition = [touch locationInNode:self];
     oldTouchTime = touch.timestamp;
-//    float x = slider.sliderValue * self.contentSize.width;
+
+    /* // No longer using slider
+    float x = slider.sliderValue * self.contentSize.width;
     
-// TODO: test is slider functionality is actually desirable
-//    if (oldTouchPosition.y < _tileWidth) {
-////        CCAction *fadeIn = [CCActionFadeIn actionWithDuration:1.5f];
-////        [slider runAction:fadeIn];
-//        slider.visible = TRUE;
-//        [self resetValue:slider];
-//    } else if (oldTouchPosition.y > _tileWidth) {
-////        CCAction *fadeOut = [CCActionFadeOut actionWithDuration:1.5f];
-////        [slider runAction:fadeOut];
-////        [self scheduleBlock:^(CCTimer *timer) {
-//            slider.visible = FALSE;
-////            
-////        } delay:1.5];
-//    }
+    if (oldTouchPosition.y < _tileWidth) {
+        CCAction *fadeIn = [CCActionFadeIn actionWithDuration:1.5f];
+        [slider runAction:fadeIn];
+        slider.visible = TRUE;
+        [self resetValue:slider];
+    } else if (oldTouchPosition.y > _tileWidth) {
+        CCAction *fadeOut = [CCActionFadeOut actionWithDuration:1.5f];
+        [slider runAction:fadeOut];
+        [self scheduleBlock:^(CCTimer *timer) {
+            slider.visible = FALSE;
+            
+        } delay:1.5];
+    }
+    */
+    
+    
 }
 
 - (void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
@@ -604,25 +516,23 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-// TODO: Figure out if tapping the slider button can trigger rotation
-//- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-//    if (oldTouchPosition.y < slider.handle.position.y+10 && oldTouchPosition.y > slider.handle.position.y-10 && oldTouchPosition.x < slider.handle.position.x+10 & oldTouchPosition.y > slider.handle.position.x-10) {
-//        CCLOG(@"%f %f", slider.handle.position.x, slider.handle.position.y);
-//        for (UITouch *touch in touches) {
-//            if (touch.tapCount >= 2) {
-//                [self rotate];
-//            }
-//        }
-//    }
-//}
+/* TODO: Figure out if tapping the slider button can trigger rotation
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (oldTouchPosition.y < slider.handle.position.y+10 && oldTouchPosition.y > slider.handle.position.y-10 && oldTouchPosition.x < slider.handle.position.x+10 & oldTouchPosition.y > slider.handle.position.x-10) {
+        CCLOG(@"%f %f", slider.handle.position.x, slider.handle.position.y);
+        for (UITouch *touch in touches) {
+            if (touch.tapCount >= 2) {
+                [self rotate];
+            }
+        }
+    }
+}
+*/
 
 - (void)swipeLeftTo:(NSInteger)column {
     __block BOOL canMoveLeft = TRUE;
     while (_currentDie1.column > column && _currentDie2.column > column && canMoveLeft) {
-//        [self scheduleBlock:^(CCTimer *timer) {
             canMoveLeft = [self swipeLeft];
-//        } delay:0.8];
-
     }
 }
 
@@ -724,7 +634,9 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-# pragma mark - Slider controls
+/*
+ 
+# pragma mark - Slider controls - obsolete
 
 - (void)resetValue:(CCSlider*)sliderBar {
     NSInteger column = _currentDie1.column;
@@ -745,6 +657,8 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 # pragma mark - Detect horizontal and vertical chains
+ 
+ */
 
 
 - (NSArray *)detectHorizontalMatches {
@@ -958,10 +872,6 @@ static const NSInteger GRID_COLUMNS = 6;
         self.combo = 0; // reset combo
     }
     
-    //    CCLOG(@"Horizontal matches: %@", horizontalChains);
-    //    CCLOG(@"Vertical matches: %@", verticalChains);
-//    CCLOG(@"Current streak: %d", self.combo);
-    
     [self removeDice:horizontalChains];
     [self removeDice:verticalChains];
     
@@ -971,24 +881,6 @@ static const NSInteger GRID_COLUMNS = 6;
     [self checkIfAllClear];
     
     return [horizontalChains arrayByAddingObjectsFromArray:verticalChains];
-}
-
-// TODO: put this method in the right place
-- (void) checkIfAllClear {
-    BOOL allClear = false;
-    for (NSInteger row = 0; row < GRID_ROWS; row++) {
-        for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
-            BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
-            if (positionFree) {
-                allClear = true;
-            } else {
-                break;
-            }
-        }
-    }
-    if (allClear) {
-        self.allClear++;
-    }
 }
 
 - (void) handleMatches {
@@ -1007,7 +899,6 @@ static const NSInteger GRID_COLUMNS = 6;
         _firstDie = [chain.dice firstObject];
         _lastDie = [chain.dice lastObject];
         for (Dice *die in chain.dice) {
-            //TODO: Change this to a glow animation or something before the dice get cleared
             if ([die isEqual: _firstDie] || [die isEqual: _lastDie]) {
                 CCAnimationManager* animationManager = die.animationManager;
                 [animationManager runAnimationsForSequenceNamed:@"colorFill"];
@@ -1016,12 +907,6 @@ static const NSInteger GRID_COLUMNS = 6;
             explosion.autoRemoveOnFinish = TRUE;
             explosion.position = die.position;
             [self addChild:explosion];
-            //            }
-            // TODO: Figure out if this can do a vert + horiz line at once without setting dice.sprite to nil
-//            CCActionEaseOut *easeOut = [CCActionEaseOut actionWithDuration:0.75f];
-//            CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.75f scale:0.1f];
-//            CCActionSequence *sequence = [CCActionSequence actionWithArray:@[easeOut, scaleDown]];
-//            [die runAction:sequence];
             [self scheduleBlock:^(CCTimer *timer) {
                 [die removeFromParent];
                 animationFinished = true;
@@ -1039,7 +924,7 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-# pragma mark - Calculate scores
+# pragma mark - Calculate scores and animate them
 
 - (void)calculateScores:(NSArray *)chains {
     for (Chain *chain in chains) {
@@ -1089,6 +974,12 @@ static const NSInteger GRID_COLUMNS = 6;
     CCActionSequence *chainSequence = [CCActionSequence actionWithArray:@[fadeIn, moveToEnd, fadeOut]];
     [chainScore runAction:chainSequence];
     
+    [self scheduleBlock:^(CCTimer *timer) {
+        [chainScore removeFromParent];
+    } delay:1.75];
+    
+/* TODO: Deal with combos later
+ 
     if (self.combo > 0) {
         
         if (self.combo > self.streak) {
@@ -1110,12 +1001,9 @@ static const NSInteger GRID_COLUMNS = 6;
         
         [self scheduleBlock:^(CCTimer *timer) {
             [chainScore removeFromParent];
+            [comboScore removeFromParent];
         } delay:1.75];
-    } else {
-        [self scheduleBlock:^(CCTimer *timer) {
-            [chainScore removeFromParent];
-        } delay:1.75];
-    }
+*/
 
 }
 
@@ -1234,9 +1122,126 @@ static const NSInteger GRID_COLUMNS = 6;
     
 }
 
+# pragma mark - Game Over
+
+- (void) gameEnd {
+    CCLOG(@"Game Over");
+    [self assignStats];
+    GameEnd *gameEnd = (GameEnd*) [CCBReader load:@"GameEnd"];
+    [gameEnd setPositionType:CCPositionTypeNormalized];
+    gameEnd.position = ccp(0.5, 0.5);
+    [self.parent addChild:gameEnd];
+}
+
+-(void) assignStats {
+    // Set game state values to those in game
+    [GameState sharedInstance].currentScore = self.score;
+    [GameState sharedInstance].currentLevel = self.level;
+    [GameState sharedInstance].currentTime = self.timer;
+    [GameState sharedInstance].currentChains = self.chains;
+    [GameState sharedInstance].currentChainsPerMin = self.chains/(self.timer/60);
+    [GameState sharedInstance].current6Chains = self.sixChains;
+    [GameState sharedInstance].currentPerfectMatches = self.perfectMatches;
+    [GameState sharedInstance].currentStreak = self.streak;
+    [GameState sharedInstance].currentAllClear = self.allClear;
+    
+    if ([GameState sharedInstance].bestScore < self.score) {
+        [GameState sharedInstance].bestScore = self.score;
+        [GameState sharedInstance].bestLevel = self.level;
+        [GameState sharedInstance].bestTime = self.timer;
+        [GameState sharedInstance].bestChains = self.chains;
+        [GameState sharedInstance].bestChainsPerMin = self.chains/(self.timer/60);
+        [GameState sharedInstance].best6Chains = self.sixChains;
+        [GameState sharedInstance].bestPerfectMatches = self.perfectMatches;
+        [GameState sharedInstance].bestStreak = self.streak;
+        [GameState sharedInstance].bestAllClear = self.allClear;
+    }
+}
+
+-(void) endGame {
+    [self gameEnd];
+}
+
+/*
+ 
+ # pragma mark - Spawn ghost (obsolete - maybe work on it later)
+ 
+ - (void)spawnGhost {
+ NSInteger ghostRow1;
+ NSInteger ghostRow2;
+ 
+ if (_currentDie1.row > _currentDie2.row) {
+ ghostRow2 = [self findBottomforColumn:_currentDie2.column];
+ ghostRow1 = ghostRow2 + 1;
+ } else {
+ ghostRow1 = [self findBottomforColumn:_currentDie1.column];
+ ghostRow2 = [self findBottomforColumn:_currentDie2.column];
+ }
+ 
+ BOOL same1 = ((_ghostDie1.row == _currentDie1.row) && (_ghostDie1.column == _currentDie1.column));
+ BOOL same2 = ((_ghostDie2.row == _currentDie2.row) && (_ghostDie2.column == _currentDie2.column));
+ 
+ if (!same1 && !same2) {
+ _ghostDie1 = (Dice*) [CCBReader load:@"Dice/Dice"];
+ _ghostDie2 = (Dice*) [CCBReader load:@"Dice/Dice"];
+ _ghostDie1 = [self addDie:_ghostDie1 atColumn:_currentDie1.column andRow:ghostRow1];
+ _ghostDie2 = [self addDie:_ghostDie2 atColumn:_currentDie2.column andRow:ghostRow2];
+ }
+ }
+ 
+ - (NSInteger)findBottomforColumn:(NSInteger)column {
+ NSInteger ghostRow = 0;
+ for (NSInteger row = GRID_ROWS-3; row >= 0; row--) {
+ if([_gridArray[row][column] isEqual:_noTile] || [_gridArray[row][column] isEqual:_ghostDie1] || [_gridArray[row][column] isEqual:_ghostDie2]) {
+ ghostRow = row;
+ }
+ }
+ return ghostRow;
+ }
+ 
+ - (void)moveGhostDice{
+ NSInteger ghostRow1;
+ NSInteger ghostRow2;
+ NSInteger ghostColumn1 = _currentDie1.column;
+ NSInteger ghostColumn2 = _currentDie2.column;
+ 
+ if (_currentDie1.row > _currentDie2.row) {
+ ghostRow2 = [self findBottomforColumn:ghostColumn2];
+ ghostRow1 = ghostRow2 + 1;
+ } else if (_currentDie2.row > _currentDie1.row) {
+ ghostRow1 = [self findBottomforColumn:ghostColumn1];
+ ghostRow2 = ghostRow1 + 1;
+ } else {
+ ghostRow1 = [self findBottomforColumn:ghostColumn1];
+ ghostRow2 = [self findBottomforColumn:ghostColumn2];
+ }
+ 
+ NSInteger x1 = _ghostDie1.column - ghostColumn1;
+ NSInteger x2 = _ghostDie2.column - ghostColumn2;
+ 
+ NSInteger y1 = _ghostDie1.row - ghostRow1;
+ NSInteger y2 = _ghostDie2.row - ghostRow2;
+ 
+ [self moveDie:_ghostDie1 inDirection:ccp(-x1, -y1)];
+ [self moveDie:_ghostDie2 inDirection:ccp(-x2, -y2)];
+ }
+ 
+ - (void)removeGhost {
+ if (_gridArray[_ghostDie1.row][_ghostDie1.column] != _currentDie1 && _gridArray[_ghostDie1.row][_ghostDie1.column] != _currentDie2 && _gridArray[_ghostDie2.row][_ghostDie2.column] != _currentDie1 && _gridArray[_ghostDie2.row][_ghostDie2.column] != _currentDie2) {
+ _gridArray[_ghostDie1.row][_ghostDie1.column] = _noTile;
+ _gridArray[_ghostDie2.row][_ghostDie2.column] = _noTile;
+ }
+ 
+ CCActionEaseOut *easeOut = [CCActionEaseOut actionWithDuration:0.75f];
+ CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.75f scale:0.1f];
+ CCActionSequence *sequence = [CCActionSequence actionWithArray:@[easeOut, scaleDown]];
+ [_ghostDie1 runAction:sequence];
+ [_ghostDie2 runAction:sequence];
+ 
+ [_ghostDie1 removeFromParent];
+ [_ghostDie2 removeFromParent];
+ }
+ 
+ */
+
 @end
-
-
-
-
-
