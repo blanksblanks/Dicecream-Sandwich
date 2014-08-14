@@ -1042,27 +1042,27 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)calculateScores:(NSArray *)chains {
     for (Chain *chain in chains) {
+        BOOL perfectMatch = false;
         NSInteger face = ((Dice*) chain.dice[0]).faceValue;
-        BOOL six = (face == 6);
-        self.chains++;
+        if (face == 6) {
+            self.sixChains++;
+        }
+        
         for (Dice *die in chain.dice) {
-            BOOL perfectMatch = (die.faceValue == face);
-            if (six) {
-                self.sixChains++;
-                if (perfectMatch) {
-                    chain.score = 1000;
-                    self.perfectMatches++;
-                }
-            // Perfect match score system: x2
-            } else if (perfectMatch) {
-                chain.score = face * 20 * ([chain.dice count]) + (50 * self.combo);
-                self.perfectMatches++;
-                // Regular score system: ones = 30, twos = 80, threes = 150, fours = 240, fives = 350, sixes = 480
-            } else {
-                chain.score = face * 10 * ([chain.dice count]) + (50 * self.combo);
+            perfectMatch = (die.faceValue == face);
+            if (!perfectMatch) {
+                break;
             }
         }
-        CCLOG(@"Face match: %ld, chain score: %ld, Combo: %ld", (long)face, (long)chain.score, (long)self.combo);
+        
+        if (perfectMatch) { // double the score!
+            chain.score = face * 20 * ([chain.dice count]);
+            self.perfectMatches++;
+            self.chains++;
+        } else {
+            chain.score = face * 10 * ([chain.dice count]);
+            self.chains++;
+        }
     }
 }
 
