@@ -72,6 +72,7 @@ static const NSInteger GRID_COLUMNS = 6;
     self.sixChains = 0;
     self.perfectMatches = 0;
     self.combo = 0;
+    self.streak = 0;
     self.allClear = 0;
     
     self.paused = false;
@@ -331,7 +332,7 @@ static const NSInteger GRID_COLUMNS = 6;
     [GameState sharedInstance].currentChainsPerMin = self.chains/(self.timer/60);
     [GameState sharedInstance].current6Chains = self.sixChains;
     [GameState sharedInstance].currentPerfectMatches = self.perfectMatches;
-    [GameState sharedInstance].currentStreak = self.combo;
+    [GameState sharedInstance].currentStreak = self.streak;
     [GameState sharedInstance].currentAllClear = self.allClear;
     
     if ([GameState sharedInstance].bestScore < self.score) {
@@ -342,7 +343,7 @@ static const NSInteger GRID_COLUMNS = 6;
         [GameState sharedInstance].bestChainsPerMin = self.chains/(self.timer/60);
         [GameState sharedInstance].best6Chains = self.sixChains;
         [GameState sharedInstance].bestPerfectMatches = self.perfectMatches;
-        [GameState sharedInstance].bestStreak = self.combo;
+        [GameState sharedInstance].bestStreak = self.streak;
         [GameState sharedInstance].bestAllClear = self.allClear;
     }
 }
@@ -361,7 +362,6 @@ static const NSInteger GRID_COLUMNS = 6;
     return die;
 }
 
-//TODO: ask about alloc/dealloc necessity
 -(Dice*) randomizeNumbers {
     NSInteger randomNumber = arc4random_uniform(self.possibilities)+1;
     Dice *die;
@@ -1064,36 +1064,67 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void)animateScoreForChain:(Chain *)chain {
+    // Set string and position
     _firstDie = [chain.dice firstObject];
     _lastDie = [chain.dice lastObject];
     CGPoint centerPosition = CGPointMake(((_firstDie.position.x+_lastDie.position.x)/2), ((_firstDie.position.y+_lastDie.position.y)/2));
-    CGPoint beginPosition = CGPointMake(centerPosition.x, (centerPosition.y-15));
+    CGPoint endPosition = CGPointMake(centerPosition.x, (centerPosition.y+15));
     NSString *scoreString = [NSString stringWithFormat:@"+ %ld", (long)chain.score];
     
-    //    chainScore = (ChainScore *)[CCBReader load:@"ChainScore"];
+    // Create chain score
     CCLabelTTF *chainScore = [CCLabelTTF labelWithString:scoreString fontName:@"GillSans-Bold" fontSize:18];
     chainScore.outlineColor = [CCColor purpleColor];
     chainScore.outlineWidth = 3.0f;
-    chainScore.positionInPoints = beginPosition;
-    CCLOG(@"Chain score position: %f, %f", centerPosition.x, centerPosition.y);
+    chainScore.positionInPoints = centerPosition;
     [self addChild:chainScore];
-    
+   
+    // Remove chain score
     CCActionFadeIn *fadeIn = [CCActionFadeIn actionWithDuration:0.25f];
-    CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.75f position:centerPosition];
+    CCActionMoveTo *moveToEnd = [CCActionMoveTo actionWithDuration:0.75f position:endPosition];
     CCActionFadeOut *fadeOut = [CCActionFadeOut actionWithDuration:0.75f];
-    CCActionSequence *sequence = [CCActionSequence actionWithArray:@[fadeIn, moveTo, fadeOut]];
-    [chainScore runAction:sequence];
-    [self scheduleBlock:^(CCTimer *timer) {
-        [chainScore removeFromParent];
+    CCActionSequence *chainSequence = [CCActionSequence actionWithArray:@[fadeIn, moveToEnd, fadeOut]];
+    [chainScore runAction:chainSequence];
+    
+    if (self.combo > 0) {
         
-    } delay:1.75];
+        if (self.combo > self.streak) {
+            self.streak = self.combo;
+        }
+    
+        CGPoint beginPosition = CGPointMake(centerPosition.x, (centerPosition.y+15));
+        NSString *comboString = [NSString stringWithFormat:@"+50 x %ld", (long)self.combo];
+        
+        CCLabelTTF *comboScore = [CCLabelTTF labelWithString:comboString fontName:@"GillSans-Bold" fontSize:18];
+        comboScore.outlineColor = [CCColor purpleColor];
+        comboScore.outlineWidth = 3.0f;
+        comboScore.positionInPoints = beginPosition;
+        [self addChild:comboScore];
+        
+        CCActionMoveTo *moveToCenter = [CCActionMoveTo actionWithDuration:0.75f position:centerPosition];
+        CCActionSequence *comboSequence = [CCActionSequence actionWithArray:@[fadeIn, moveToCenter, fadeOut]];
+        [comboScore runAction:comboSequence];
+        
+        [self scheduleBlock:^(CCTimer *timer) {
+            [chainScore removeFromParent];
+        } delay:1.75];
+    } else {
+        [self scheduleBlock:^(CCTimer *timer) {
+            [chainScore removeFromParent];
+        } delay:1.75];
+    }
+
 }
 
 - (void)animateGameMessage {
-    if (self.combo > 0) {
+    if (self.combo > 10) {
+        
+        if (self.combo > self.streak) {
+            self.streak = self.combo;
+        }
+        
         CGPoint beginPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 5.5);
         CGPoint endPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 8.5);
-        NSString *scoreString = [NSString stringWithFormat:@"x%ld", (long)self.combo];
+        NSString *scoreString = [NSString stringWithFormat:@"+50x%ld", (long)self.combo];
 
         CCLabelTTF *gameMessage = [CCLabelTTF labelWithString:scoreString fontName:@"GillSans-Bold" fontSize:36];
         gameMessage.outlineColor = [CCColor purpleColor];

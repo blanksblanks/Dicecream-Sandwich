@@ -18,7 +18,6 @@
     OALSimpleAudio *audio;
     Grid *_grid;
     CCSprite *_rainbowBright;
-    BOOL rainbowPastel;
     CCAnimationManager* animationManager;
     CCLabelTTF *_scoreLabel;
     CCLabelTTF *_targetLabel;
@@ -27,8 +26,7 @@
     CCLabelTTF *_matchLabel;
 }
 
-- (id)init
-{
+- (id)init {
     if (self = [super init]) {
         
         self.userInteractionEnabled = TRUE;
@@ -44,8 +42,6 @@
 - (void)didLoadFromCCB {
     
     animationManager = self.animationManager;
-    [animationManager runAnimationsForSequenceNamed:@"rainbowPastel"];
-    rainbowPastel = true;
     
     [_grid addObserver:self forKeyPath:@"score" options:0 context:NULL];
     [_grid addObserver:self forKeyPath:@"match" options:0 context:NULL];
@@ -73,13 +69,9 @@
         _levelLabel.string = [NSString stringWithFormat:@"%li", (long) _grid.level];
         if (_grid.level > 1) {
             [animationManager runAnimationsForSequenceNamed:@"levelPulse"];
-            if (rainbowPastel) {
-                _rainbowBright.visible = true;
-                rainbowPastel = false;
-            } else {
-                [animationManager runAnimationsForSequenceNamed:@"rainbowPastel"];
-                _rainbowBright.visible = false;
-                rainbowPastel = true;
+            _rainbowBright.visible = !_rainbowBright.visible;
+            if (_grid.zOrder < _rainbowBright.zOrder) {
+                //TODO: debug why rainbow sometimes appears above grid
             }
         }
     }
@@ -93,7 +85,6 @@
 }
 
 - (void)update:(CCTime)delta {
-    
     [self convertAndUpdateTime];
     
     if (_grid.touchEnabled) {

@@ -30,7 +30,7 @@ typedef NS_ENUM(NSInteger, GridState) {
 @property (nonatomic, assign) NSInteger targetScore;
 @property (nonatomic, assign) NSInteger possibilities;
 @property (nonatomic, assign) NSInteger level;
-@property (nonatomic, assign) NSInteger combo; // streak
+@property (nonatomic, assign) NSInteger combo;
 @property (nonatomic, assign) float timer;
 @property (nonatomic, assign) float levelSpeed;
 @property (nonatomic, assign) BOOL paused;
@@ -40,6 +40,7 @@ typedef NS_ENUM(NSInteger, GridState) {
 @property (nonatomic, assign) NSInteger chainsPerMin; // in game end
 @property (nonatomic, assign) NSInteger sixChains; // in calculate score
 @property (nonatomic, assign) NSInteger perfectMatches; // in calculate score
+@property (nonatomic, assign) NSInteger streak;
 @property (nonatomic, assign) NSInteger allClear;
 
 @end
