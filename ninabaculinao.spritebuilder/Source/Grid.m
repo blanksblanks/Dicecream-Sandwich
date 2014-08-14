@@ -62,14 +62,20 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)didLoadFromCCB{
     
+    // Initialize values
     _timer = 0;
     _counter = 0;
     stabilizing = false;
-    self.paused = false;
-//    slider.visible = TRUE;
     specialsAllowed = false;
+    self.score = 0;
+    self.chains = 0;
+    self.sixChains = 0;
+    self.perfectMatches = 0;
+    self.combo = 0;
+    self.allClear = 0;
+    
+    self.paused = false;
     self.touchEnabled = TRUE;
-//    self.userInteractionEnabled = TRUE;
     
     [self setupGrid];
     
@@ -302,23 +308,46 @@ static const NSInteger GRID_COLUMNS = 6;
         _currentDie2 = [self randomizeDice];
         _currentDie2 = [self addDie:_currentDie2 atColumn:nextColumn andRow:nextRow];
     } else {
-        CCLOG(@"Game Over");
-        // Set game state values to those in game
-        [GameState sharedInstance].currentScore = self.score;
-        if ([GameState sharedInstance].bestScore < self.score) {
-            [GameState sharedInstance].bestScore = self.score;
-        }
-//        if (self.score > [GameState sharedInstance].currentScore.bestScore
-        GameEnd *gameEnd = (GameEnd*) [CCBReader load:@"GameEnd"];
-//        gameEnd.position = ccp(self.parent.contentSize.width/2, self.parent.contentSize.height/2);
-        [gameEnd setPositionType:CCPositionTypeNormalized];
-        gameEnd.position = ccp(0.5, 0.5);
-        [self.parent addChild:gameEnd];
         [self pause];
+        [self gameEnd];
     }
 }
 
-- (Dice*) addDie:(Dice*)die atColumn:(NSInteger)column andRow:(NSInteger)row {
+- (void) gameEnd {
+    CCLOG(@"Game Over");
+    [self assignStats];
+    GameEnd *gameEnd = (GameEnd*) [CCBReader load:@"GameEnd"];
+    [gameEnd setPositionType:CCPositionTypeNormalized];
+    gameEnd.position = ccp(0.5, 0.5);
+    [self.parent addChild:gameEnd];
+}
+
+-(void) assignStats {
+    // Set game state values to those in game
+    [GameState sharedInstance].currentScore = self.score;
+    [GameState sharedInstance].currentLevel = self.level;
+    [GameState sharedInstance].currentTime = self.timer;
+    [GameState sharedInstance].currentChains = self.chains;
+    [GameState sharedInstance].currentChainsPerMin = self.chains/(self.timer/60);
+    [GameState sharedInstance].current6Chains = self.sixChains;
+    [GameState sharedInstance].currentPerfectMatches = self.perfectMatches;
+    [GameState sharedInstance].currentStreak = self.combo;
+    [GameState sharedInstance].currentAllClear = self.allClear;
+    
+    if ([GameState sharedInstance].bestScore < self.score) {
+        [GameState sharedInstance].bestScore = self.score;
+        [GameState sharedInstance].bestLevel = self.level;
+        [GameState sharedInstance].bestTime = self.timer;
+        [GameState sharedInstance].bestChains = self.chains;
+        [GameState sharedInstance].bestChainsPerMin = self.chains/(self.timer/60);
+        [GameState sharedInstance].best6Chains = self.sixChains;
+        [GameState sharedInstance].bestPerfectMatches = self.perfectMatches;
+        [GameState sharedInstance].bestStreak = self.combo;
+        [GameState sharedInstance].bestAllClear = self.allClear;
+    }
+}
+
+-(Dice*) addDie:(Dice*)die atColumn:(NSInteger)column andRow:(NSInteger)row {
 	_gridArray[row][column] = die;
     die.row = row;
     die.column = column;
@@ -758,7 +787,6 @@ static const NSInteger GRID_COLUMNS = 6;
                 }
             }
         }
-//    }
     return array;
 }
 
@@ -828,6 +856,8 @@ static const NSInteger GRID_COLUMNS = 6;
     [self removeDice:specialChains];
     
     [self calculateScores:specialChains];
+    
+    [self checkIfAllClear];
     
     return specialChains;
 }
@@ -937,7 +967,27 @@ static const NSInteger GRID_COLUMNS = 6;
     [self calculateScores:horizontalChains];
     [self calculateScores:verticalChains];
     
+    [self checkIfAllClear];
+    
     return [horizontalChains arrayByAddingObjectsFromArray:verticalChains];
+}
+
+// TODO: put this method in the right place
+- (void) checkIfAllClear {
+    BOOL allClear = false;
+    for (NSInteger row = 0; row < GRID_ROWS; row++) {
+        for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
+            BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
+            if (positionFree) {
+                allClear = true;
+            } else {
+                break;
+            }
+        }
+    }
+    if (allClear) {
+        self.allClear++;
+    }
 }
 
 - (void) handleMatches {
@@ -963,7 +1013,7 @@ static const NSInteger GRID_COLUMNS = 6;
             explosion.position = die.position;
             [self addChild:explosion];
             //            }
-            // TODO: Figure out this can do a vert + horiz line at once without setting dice.sprite to nil
+            // TODO: Figure out if this can do a vert + horiz line at once without setting dice.sprite to nil
 //            CCActionEaseOut *easeOut = [CCActionEaseOut actionWithDuration:0.75f];
 //            CCActionScaleTo *scaleDown = [CCActionScaleTo actionWithDuration:0.75f scale:0.1f];
 //            CCActionSequence *sequence = [CCActionSequence actionWithArray:@[easeOut, scaleDown]];
@@ -991,13 +1041,19 @@ static const NSInteger GRID_COLUMNS = 6;
     for (Chain *chain in chains) {
         NSInteger face = ((Dice*) chain.dice[0]).faceValue;
         BOOL six = (face == 6);
+        self.chains++;
         for (Dice *die in chain.dice) {
             BOOL perfectMatch = (die.faceValue == face);
-            if (six && perfectMatch) {
-                chain.score = 1000;
-                // Perfect match score system: x2
+            if (six) {
+                self.sixChains++;
+                if (perfectMatch) {
+                    chain.score = 1000;
+                    self.perfectMatches++;
+                }
+            // Perfect match score system: x2
             } else if (perfectMatch) {
                 chain.score = face * 20 * ([chain.dice count]) + (50 * self.combo);
+                self.perfectMatches++;
                 // Regular score system: ones = 30, twos = 80, threes = 150, fours = 240, fives = 350, sixes = 480
             } else {
                 chain.score = face * 10 * ([chain.dice count]) + (50 * self.combo);
@@ -1083,14 +1139,11 @@ static const NSInteger GRID_COLUMNS = 6;
     } delay:1.75];
 }
 
-
-
 # pragma mark - Fill in holes
 
 - (void) dieFillHoles {
     matchFound = false; // reset before checking matches
     animationFinished = false;
-    
     for (NSInteger row = 1; row < GRID_ROWS; row++) { // start from second row
 		for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
             BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
@@ -1115,8 +1168,7 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (BOOL)indexValidForRow:(NSInteger)row andColumn:(NSInteger)column {
     BOOL indexValid = YES;
-    if(row < 0 || column < 0 || row >= GRID_ROWS || column >= GRID_COLUMNS)
-    {
+    if(row < 0 || column < 0 || row >= GRID_ROWS || column >= GRID_COLUMNS) {
         indexValid = NO;
     }
     return indexValid;

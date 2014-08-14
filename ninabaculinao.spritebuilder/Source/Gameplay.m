@@ -37,9 +37,7 @@
         // play background sound
         [audio playBg:@"CATchy.wav" loop:TRUE];
          _timeLabel.string = [NSString stringWithFormat:@"%li", (long)_grid.timer];
-  
     }
-    
     return self;
 }
 
