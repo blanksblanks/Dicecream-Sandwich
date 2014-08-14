@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>69</integer>
+	<integer>73</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -184,7 +184,7 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>123</real>
+											<real>107</real>
 											<real>22.5</real>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -1594,7 +1594,7 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>20</real>
+											<real>4</real>
 											<real>45</real>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -1649,6 +1649,95 @@
 								<array>
 									<dict>
 										<key>UUID</key>
+										<integer>71</integer>
+										<key>baseClass</key>
+										<string>CCSprite</string>
+										<key>children</key>
+										<array/>
+										<key>customClass</key>
+										<string></string>
+										<key>displayName</key>
+										<string>Active_Menu</string>
+										<key>memberVarAssignmentName</key>
+										<string></string>
+										<key>memberVarAssignmentType</key>
+										<integer>1</integer>
+										<key>properties</key>
+										<array>
+											<dict>
+												<key>name</key>
+												<string>name</string>
+												<key>type</key>
+												<string>StringSimple</string>
+												<key>value</key>
+												<string></string>
+											</dict>
+											<dict>
+												<key>name</key>
+												<string>position</string>
+												<key>type</key>
+												<string>Position</string>
+												<key>value</key>
+												<array>
+													<real>0.0</real>
+													<real>0.0</real>
+													<integer>0</integer>
+													<integer>0</integer>
+													<integer>0</integer>
+												</array>
+											</dict>
+											<dict>
+												<key>name</key>
+												<string>anchorPoint</string>
+												<key>type</key>
+												<string>Point</string>
+												<key>value</key>
+												<array>
+													<real>0.0</real>
+													<real>0.0</real>
+												</array>
+											</dict>
+											<dict>
+												<key>name</key>
+												<string>scale</string>
+												<key>type</key>
+												<string>ScaleLock</string>
+												<key>value</key>
+												<array>
+													<real>0.5</real>
+													<real>1</real>
+													<false/>
+													<integer>0</integer>
+												</array>
+											</dict>
+											<dict>
+												<key>name</key>
+												<string>spriteFrame</string>
+												<key>type</key>
+												<string>SpriteFrame</string>
+												<key>value</key>
+												<array>
+													<string></string>
+													<string>newAssets/forGameplay/Active_Menu.png</string>
+												</array>
+											</dict>
+											<dict>
+												<key>name</key>
+												<string>color</string>
+												<key>type</key>
+												<string>Color3</string>
+												<key>value</key>
+												<array>
+													<real>1</real>
+													<real>1</real>
+													<real>1</real>
+													<real>1</real>
+												</array>
+											</dict>
+										</array>
+									</dict>
+									<dict>
+										<key>UUID</key>
 										<integer>50</integer>
 										<key>baseClass</key>
 										<string>CCLayoutBox</string>
@@ -1664,7 +1753,7 @@
 												<key>customClass</key>
 												<string></string>
 												<key>displayName</key>
-												<string>CCButton</string>
+												<string>Home</string>
 												<key>memberVarAssignmentName</key>
 												<string></string>
 												<key>memberVarAssignmentType</key>
@@ -1686,8 +1775,8 @@
 														<string>Position</string>
 														<key>value</key>
 														<array>
-															<real>59</real>
-															<real>22.5</real>
+															<real>12</real>
+															<real>12</real>
 															<integer>0</integer>
 															<integer>0</integer>
 															<integer>0</integer>
@@ -1735,8 +1824,8 @@
 														<string>Size</string>
 														<key>value</key>
 														<array>
-															<real>118</real>
-															<real>45</real>
+															<real>0.0</real>
+															<real>0.0</real>
 															<integer>0</integer>
 															<integer>0</integer>
 														</array>
@@ -1769,7 +1858,7 @@
 														<string>String</string>
 														<key>value</key>
 														<array>
-															<string>HOME</string>
+															<string></string>
 															<false/>
 														</array>
 													</dict>
@@ -1781,7 +1870,7 @@
 														<key>value</key>
 														<array>
 															<string></string>
-															<string>workingAssets/Buttons/buttons-30.png</string>
+															<string>newAssets/forGameplay/Home_Icon.png</string>
 														</array>
 													</dict>
 													<dict>
@@ -1792,7 +1881,7 @@
 														<key>value</key>
 														<array>
 															<string></string>
-															<string>workingAssets/Buttons/buttons-31.png</string>
+															<string>newAssets/forGameplay/Home_Icon.png</string>
 														</array>
 													</dict>
 													<dict>
@@ -1816,7 +1905,7 @@
 														<key>value</key>
 														<array>
 															<string></string>
-															<string>workingAssets/Buttons/buttons-31.png</string>
+															<string>newAssets/forGameplay/Home_Icon.png</string>
 														</array>
 													</dict>
 													<dict>
@@ -1835,7 +1924,7 @@
 														<key>value</key>
 														<array>
 															<string></string>
-															<string>workingAssets/Buttons/buttons-31.png</string>
+															<string>newAssets/forGameplay/Home_Icon.png</string>
 														</array>
 													</dict>
 													<dict>
@@ -1990,7 +2079,7 @@
 												<key>customClass</key>
 												<string></string>
 												<key>displayName</key>
-												<string>CCButton</string>
+												<string>Replay</string>
 												<key>memberVarAssignmentName</key>
 												<string></string>
 												<key>memberVarAssignmentType</key>
@@ -2012,8 +2101,8 @@
 														<string>Position</string>
 														<key>value</key>
 														<array>
-															<real>187</real>
-															<real>22.5</real>
+															<real>56</real>
+															<real>12</real>
 															<integer>0</integer>
 															<integer>0</integer>
 															<integer>0</integer>
@@ -2061,8 +2150,8 @@
 														<string>Size</string>
 														<key>value</key>
 														<array>
-															<real>118</real>
-															<real>45</real>
+															<real>0.0</real>
+															<real>0.0</real>
 															<integer>0</integer>
 															<integer>0</integer>
 														</array>
@@ -2095,7 +2184,7 @@
 														<string>String</string>
 														<key>value</key>
 														<array>
-															<string>RESTART</string>
+															<string></string>
 															<false/>
 														</array>
 													</dict>
@@ -2107,7 +2196,7 @@
 														<key>value</key>
 														<array>
 															<string></string>
-															<string>workingAssets/Buttons/buttons-30.png</string>
+															<string>newAssets/forGameplay/Reset_Icon.png</string>
 														</array>
 													</dict>
 													<dict>
@@ -2118,7 +2207,7 @@
 														<key>value</key>
 														<array>
 															<string></string>
-															<string>workingAssets/Buttons/buttons-31.png</string>
+															<string>newAssets/forGameplay/Reset_Icon.png</string>
 														</array>
 													</dict>
 													<dict>
@@ -2142,7 +2231,7 @@
 														<key>value</key>
 														<array>
 															<string></string>
-															<string>workingAssets/Buttons/buttons-31.png</string>
+															<string>newAssets/forGameplay/Reset_Icon.png</string>
 														</array>
 													</dict>
 													<dict>
@@ -2161,7 +2250,7 @@
 														<key>value</key>
 														<array>
 															<string></string>
-															<string>workingAssets/Buttons/buttons-31.png</string>
+															<string>newAssets/forGameplay/Reset_Icon.png</string>
 														</array>
 													</dict>
 													<dict>
@@ -2332,11 +2421,11 @@
 												<string>Position</string>
 												<key>value</key>
 												<array>
-													<real>0.0</real>
-													<real>0.0</real>
+													<real>0.5</real>
+													<real>0.5</real>
 													<integer>0</integer>
-													<integer>0</integer>
-													<integer>0</integer>
+													<integer>2</integer>
+													<integer>2</integer>
 												</array>
 											</dict>
 											<dict>
@@ -2346,8 +2435,8 @@
 												<string>Point</string>
 												<key>value</key>
 												<array>
-													<real>0.0</real>
-													<real>0.0</real>
+													<real>0.5</real>
+													<real>0.5</real>
 												</array>
 											</dict>
 											<dict>
@@ -2378,7 +2467,7 @@
 												<string>FloatScale</string>
 												<key>value</key>
 												<array>
-													<real>10</real>
+													<real>20</real>
 													<integer>0</integer>
 												</array>
 											</dict>
@@ -2388,7 +2477,7 @@
 								<key>customClass</key>
 								<string></string>
 								<key>displayName</key>
-								<string>CCNode</string>
+								<string>Menu</string>
 								<key>memberVarAssignmentName</key>
 								<string></string>
 								<key>memberVarAssignmentType</key>
@@ -2410,7 +2499,7 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>0.0</real>
+											<real>33</real>
 											<real>231</real>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -2424,7 +2513,7 @@
 										<string>Size</string>
 										<key>value</key>
 										<array>
-											<real>246</real>
+											<real>148</real>
 											<real>46</real>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -2488,7 +2577,7 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>123</real>
+											<real>107</real>
 											<real>301.60000610351562</real>
 											<integer>0</integer>
 											<integer>0</integer>

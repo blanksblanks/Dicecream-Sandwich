@@ -285,21 +285,22 @@ static const NSInteger GRID_COLUMNS = 6;
 
 # pragma mark - Spawn random pair of dice
 
-// TODO: make dice appear so long as their spaces for it in the top
 - (void)spawnDice {
     
     specialFound = false;
     comboCondition = false;
 
+    // Commented out code for random spawn location
     NSInteger firstRow = GRID_ROWS-1;
-    NSInteger firstColumn = arc4random_uniform(GRID_COLUMNS-2); // int bt 0 and 4
-    NSInteger nextRow = firstRow - arc4random_uniform(2);
-    NSInteger nextColumn;
-    if (firstRow != nextRow) { // has to be vertical
-        nextColumn = firstColumn;
-    } else { // has to be horizontal
-        nextColumn = firstColumn+1;
-    }
+    NSInteger firstColumn = (GRID_COLUMNS/2)-1;// arc4random_uniform(GRID_COLUMNS-2); // int bt 0 and 4
+    NSInteger nextRow = firstRow;// - arc4random_uniform(2);
+    NSInteger nextColumn = firstColumn+1;
+
+//    if (firstRow != nextRow) { // has to be vertical
+//        nextColumn = firstColumn;
+//    } else { // has to be horizontal
+//        nextColumn = firstColumn+1;
+//    }
     
     BOOL positionFree = ([_gridArray[firstRow][firstColumn] isEqual: _noTile]);
     BOOL nextPositionFree = ([_gridArray[nextRow][nextColumn] isEqual: _noTile]);
