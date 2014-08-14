@@ -7,6 +7,7 @@
 //
 
 #import "MainScene.h"
+#import "GameState.h"
 
 @implementation MainScene {
 }
@@ -25,5 +26,16 @@
     [animationManager runAnimationsForSequenceNamed:@"sandwichSpinAway"];
 }
 
+- (void)reset {
+    [GameState sharedInstance].bestScore = 0;
+    [GameState sharedInstance].bestLevel = 0;
+    [GameState sharedInstance].bestTime = 0;
+    [GameState sharedInstance].bestChains = 0;
+    [GameState sharedInstance].bestChainsPerMin = 0;
+    [GameState sharedInstance].best6Chains = 0;
+    [GameState sharedInstance].bestPerfectMatches = 0;
+    [GameState sharedInstance].bestStreak = 0;
+    [GameState sharedInstance].bestAllClear = 0;
+}
 
 @end
