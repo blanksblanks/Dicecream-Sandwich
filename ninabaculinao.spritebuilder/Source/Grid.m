@@ -329,7 +329,6 @@ static const NSInteger GRID_COLUMNS = 6;
         _currentDie2 = [self randomizeDice];
         _currentDie2 = [self addDie:_currentDie2 atColumn:nextColumn andRow:nextRow];
     } else {
-        [self pause];
         [self gameEnd];
     }
 }
@@ -1125,7 +1124,8 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Game Over
 
 - (void) gameEnd {
-    CCLOG(@"Game Over");
+    [self pause];
+    [self.audio stopEverything];
     [self assignStats];
     GameEnd *gameEnd = (GameEnd*) [CCBReader load:@"GameEnd"];
     [gameEnd setPositionType:CCPositionTypeNormalized];

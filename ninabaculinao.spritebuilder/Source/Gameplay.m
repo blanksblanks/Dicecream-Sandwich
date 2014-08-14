@@ -41,6 +41,7 @@
 - (void)didLoadFromCCB {
     
     animationManager = self.animationManager;
+    _grid.audio = audio;
     
     [_grid addObserver:self forKeyPath:@"score" options:0 context:NULL];
     [_grid addObserver:self forKeyPath:@"targetScore" options:0 context:NULL];
