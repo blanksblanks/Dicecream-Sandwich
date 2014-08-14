@@ -1009,7 +1009,10 @@ static const NSInteger GRID_COLUMNS = 6;
         _lastDie = [chain.dice lastObject];
         for (Dice *die in chain.dice) {
             //TODO: Change this to a glow animation or something before the dice get cleared
-            //            if ([die isEqual: _firstDie] || [die isEqual: _lastDie]) {
+            if ([die isEqual: _firstDie] || [die isEqual: _lastDie]) {
+                CCAnimationManager* animationManager = die.animationManager;
+                [animationManager runAnimationsForSequenceNamed:@"colorFill"];
+            }
             CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
             explosion.autoRemoveOnFinish = TRUE;
             explosion.position = die.position;
