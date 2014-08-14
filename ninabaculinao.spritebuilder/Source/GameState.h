@@ -22,9 +22,6 @@ static NSString *const GAME_STATE_TIME_NOTIFICATION = @"GameState_TimeChanged";
 
 @interface GameState : NSObject
 
-//code goes here!
-//@property (nonatomic) NSInteger highScore;
-
 @property (nonatomic, assign) NSInteger currentScore;
 @property (nonatomic, assign) NSInteger currentLevel;
 @property (nonatomic, assign) NSInteger currentChains;
@@ -34,7 +31,6 @@ static NSString *const GAME_STATE_TIME_NOTIFICATION = @"GameState_TimeChanged";
 @property (nonatomic, assign) NSInteger currentStreak;
 @property (nonatomic, assign) NSInteger currentAllClear;
 @property (nonatomic, assign) NSInteger currentTime;
-
 
 @property (nonatomic, assign) NSInteger bestScore;
 @property (nonatomic, assign) NSInteger bestLevel;
