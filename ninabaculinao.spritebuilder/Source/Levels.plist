@@ -71,7 +71,7 @@
 			<key>targetScore</key>
 			<integer>520</integer>
 			<key>levelSpeed</key>
-			<real>0.3</real>
+			<real>0.26</real>
 			<key>level</key>
 			<integer>2</integer>
 		</dict>
@@ -79,9 +79,9 @@
 			<key>possibilities</key>
 			<integer>4</integer>
 			<key>targetScore</key>
-			<integer>1125</integer>
+			<real>1125</real>
 			<key>levelSpeed</key>
-			<real>0.3</real>
+			<real>0.18</real>
 			<key>level</key>
 			<integer>3</integer>
 		</dict>
@@ -89,9 +89,9 @@
 			<key>possibilities</key>
 			<integer>5</integer>
 			<key>targetScore</key>
-			<integer>2040</integer>
+			<real>2040</real>
 			<key>levelSpeed</key>
-			<real>0.2</real>
+			<real>0.14</real>
 			<key>level</key>
 			<integer>4</integer>
 		</dict>
@@ -99,9 +99,9 @@
 			<key>possibilities</key>
 			<integer>6</integer>
 			<key>targetScore</key>
-			<integer>3325</integer>
+			<real>3325</real>
 			<key>levelSpeed</key>
-			<real>0.23</real>
+			<real>0.116</real>
 			<key>level</key>
 			<integer>5</integer>
 		</dict>
@@ -109,9 +109,9 @@
 			<key>possibilities</key>
 			<integer>6</integer>
 			<key>targetScore</key>
-			<integer>4490</integer>
+			<real>4490</real>
 			<key>levelSpeed</key>
-			<real>0.2</real>
+			<real>0.106</real>
 			<key>level</key>
 			<integer>6</integer>
 		</dict>
@@ -121,7 +121,7 @@
 			<key>targetScore</key>
 			<integer>4990</integer>
 			<key>levelSpeed</key>
-			<real>0.18</real>
+			<real>0.1</real>
 			<key>level</key>
 			<integer>7</integer>
 		</dict>
@@ -131,7 +131,7 @@
 			<key>targetScore</key>
 			<integer>6650</integer>
 			<key>levelSpeed</key>
-			<real>0.16</real>
+			<real>0.089</real>
 			<key>level</key>
 			<integer>8</integer>
 		</dict>
@@ -139,9 +139,9 @@
 			<key>possibilities</key>
 			<integer>6</integer>
 			<key>targetScore</key>
-			<integer>8300</integer>
+			<real>8300</real>
 			<key>levelSpeed</key>
-			<real>0.157</real>
+			<real>0.08</real>
 			<key>level</key>
 			<integer>9</integer>
 		</dict>
@@ -149,9 +149,9 @@
 			<key>possibilities</key>
 			<integer>6</integer>
 			<key>targetScore</key>
-			<integer>9975</integer>
+			<real>9975</real>
 			<key>levelSpeed</key>
-			<real>0.15</real>
+			<real>0.068</real>
 			<key>level</key>
 			<integer>10</integer>
 		</dict>
@@ -159,9 +159,9 @@
 			<key>possibilities</key>
 			<integer>6</integer>
 			<key>targetScore</key>
-			<integer>9975</integer>
+			<real>9975</real>
 			<key>levelSpeed</key>
-			<real>0.144</real>
+			<real>0.063</real>
 			<key>level</key>
 			<integer>11</integer>
 		</dict>
@@ -169,9 +169,9 @@
 			<key>possibilities</key>
 			<integer>6</integer>
 			<key>targetScore</key>
-			<integer>11650</integer>
+			<real>11650</real>
 			<key>levelSpeed</key>
-			<real>0.136</real>
+			<real>0.06</real>
 			<key>level</key>
 			<integer>12</integer>
 		</dict>
@@ -179,9 +179,9 @@
 			<key>possibilities</key>
 			<integer>6</integer>
 			<key>targetScore</key>
-			<integer>13325</integer>
+			<real>0.064</real>
 			<key>levelSpeed</key>
-			<real>0.133</real>
+			<real>0.057</real>
 			<key>level</key>
 			<integer>13</integer>
 		</dict>
@@ -189,9 +189,9 @@
 			<key>possibilities</key>
 			<integer>6</integer>
 			<key>targetScore</key>
-			<integer>15000</integer>
+			<real>15000</real>
 			<key>levelSpeed</key>
-			<real>0.13</real>
+			<real>0.054</real>
 			<key>level</key>
 			<integer>14</integer>
 		</dict>
@@ -199,9 +199,9 @@
 			<key>possibilities</key>
 			<integer>6</integer>
 			<key>targetScore</key>
-			<integer>16675</integer>
+			<real>16675</real>
 			<key>levelSpeed</key>
-			<real>0.1285</real>
+			<real>0.05</real>
 			<key>level</key>
 			<integer>15</integer>
 		</dict>
