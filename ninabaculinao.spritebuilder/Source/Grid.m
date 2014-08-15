@@ -92,7 +92,9 @@ static const NSInteger GRID_COLUMNS = 6;
 			_gridArray[i][j] = _noTile;
 		}
 	}
-
+    
+    self.score = 4480;
+    self.level = 5;
     [self loadLevel];
     
     actionIndex = 0;
@@ -363,9 +365,19 @@ static const NSInteger GRID_COLUMNS = 6;
     return die;
 }
 
--(Dice*) randomizeNumbers {
-    NSInteger randomNumber = arc4random_uniform(self.possibilities)+1;
+-(Dice*)randomizeDice {
     Dice *die;
+    if (!specialsAllowed) {
+        die = [self randomizeNumbers];
+    } else {
+        die = [self randomizeSpecials];
+    }
+    return die;
+}
+
+-(Dice*) randomizeNumbers {
+    Dice *die;
+    NSInteger randomNumber = arc4random_uniform(self.possibilities)+1;
     switch(randomNumber)
     {
         case 1:
@@ -391,32 +403,33 @@ static const NSInteger GRID_COLUMNS = 6;
             break;
     }
     die.stable = true;
-    
     return die;
 }
 
--(Dice*) randomizeDice {
+/* Specials are only allowed in level 6 and above, and only called
+ every five dice with a 20% chance of spawning
+ */
+-(Dice*) randomizeSpecials {
     Dice *die;
-    if (specialsAllowed) {
-        NSInteger chance = arc4random_uniform(100);
-        if ((_counter%5 == 0) && (chance <= 20)) {
-            NSInteger randomSpecial = arc4random_uniform(3)+7;
-            switch(randomSpecial){
-                case 7 :
-                    die = (Dice*) [CCBReader load:@"Dice/Bomb"];
-                    break;
-                case 8:
-                    die = (Dice*) [CCBReader load:@"Dice/Laser"];
-                    break;
-                case 9:
-                    die = (Dice*) [CCBReader load:@"Dice/Mystery"];
-                    break;
-                default:
-                    die = (Dice*) [CCBReader load:@"Dice/Bomb"];
-                    break;
-            }
+    NSInteger chance = arc4random_uniform(100);
+    if ((_counter%5 == 0) && (chance <= 20)) {
+        NSInteger randomSpecial = arc4random_uniform(3)+7;
+        switch(randomSpecial){
+            case 7 :
+                die = (Dice*) [CCBReader load:@"Dice/Bomb"];
+                break;
+            case 8:
+                die = (Dice*) [CCBReader load:@"Dice/Laser"];
+                break;
+            case 9:
+                die = (Dice*) [CCBReader load:@"Dice/Mystery"];
+                break;
+            default:
+                die = (Dice*) [CCBReader load:@"Dice/Bomb"];
+                break;
         }
-    } else {
+    }
+    else {
         die = [self randomizeNumbers];
     }
     _counter++;

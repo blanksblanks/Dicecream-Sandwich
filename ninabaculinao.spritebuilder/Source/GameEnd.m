@@ -38,7 +38,6 @@
     CCLOG(@"home button pressed");
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];
-    
 }
 
 - (void) restart {
