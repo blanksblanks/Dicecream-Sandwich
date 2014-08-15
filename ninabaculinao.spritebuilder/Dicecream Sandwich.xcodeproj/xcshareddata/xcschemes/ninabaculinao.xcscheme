@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B77F1B2D17B978D7009739AE"
                BuildableName = "ninabaculinao.app"
-               BlueprintName = "ninabaculinao"
-               ReferencedContainer = "container:ninabaculinao.xcodeproj">
+               BlueprintName = "Dicecream Sandwich"
+               ReferencedContainer = "container:Dicecream Sandwich.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B77F1B2D17B978D7009739AE"
             BuildableName = "ninabaculinao.app"
-            BlueprintName = "ninabaculinao"
-            ReferencedContainer = "container:ninabaculinao.xcodeproj">
+            BlueprintName = "Dicecream Sandwich"
+            ReferencedContainer = "container:Dicecream Sandwich.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -53,8 +53,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B77F1B2D17B978D7009739AE"
             BuildableName = "ninabaculinao.app"
-            BlueprintName = "ninabaculinao"
-            ReferencedContainer = "container:ninabaculinao.xcodeproj">
+            BlueprintName = "Dicecream Sandwich"
+            ReferencedContainer = "container:Dicecream Sandwich.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -76,8 +76,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B77F1B2D17B978D7009739AE"
             BuildableName = "ninabaculinao.app"
-            BlueprintName = "ninabaculinao"
-            ReferencedContainer = "container:ninabaculinao.xcodeproj">
+            BlueprintName = "Dicecream Sandwich"
+            ReferencedContainer = "container:Dicecream Sandwich.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

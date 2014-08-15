@@ -137,8 +137,6 @@
 						<real>0.89999997615814209</real>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -1413,7 +1411,7 @@
 				<key>displayName</key>
 				<string>GoodGame</string>
 				<key>memberVarAssignmentName</key>
-				<string></string>
+				<string>_endMessage</string>
 				<key>memberVarAssignmentType</key>
 				<integer>1</integer>
 				<key>properties</key>
@@ -2821,6 +2819,8 @@
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

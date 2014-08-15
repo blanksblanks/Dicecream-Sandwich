@@ -12,6 +12,45 @@
 @implementation MainScene {
 }
 
+
+/* TODO: Calculate score system method - ended up doing it manually
+ 
+-(void)didLoadFromCCB {
+    
+    // Access score system dictionary
+    NSInteger face = 0;
+    NSInteger match;
+    NSInteger perfectMatch;
+    
+    NSString*sspath = [[NSBundle mainBundle] pathForResource:@"ScoreSystem" ofType:@"plist"];
+    NSDictionary *ssroot = [NSDictionary dictionaryWithContentsOfFile:sspath];
+    
+    NSArray *scoreSystem = [ssroot objectForKey: @"ScoreSystem"];
+    
+    NSDictionary *ssdict = scoreSystem[face-1];
+    match = [ssdict[@"score"] intValue];
+    perfectMatch = [ssdict[@"double"] intValue];
+    
+    // Access levels dictionary
+   
+    NSInteger level = 0;
+    NSInteger possibilities;
+    
+    NSString*lpath = [[NSBundle mainBundle] pathForResource:@"Levels" ofType:@"plist"];
+    NSDictionary *lroot = [NSDictionary dictionaryWithContentsOfFile:lpath];
+    
+    NSArray *levels = [lroot objectForKey: @"Levels"];
+    
+    NSDictionary *ldict = levels[level-1];
+    possibilities = [ldict[@"possibilities"] intValue];
+    
+    // Calculate target scores
+    // for each level, take all possibilities, get average, and multiply by desired moves
+ 
+}
+ 
+ */
+
 - (void)play {
     CCLOG(@"play button pressed");
     [self performSelector:@selector(sandwichSpinAway)];

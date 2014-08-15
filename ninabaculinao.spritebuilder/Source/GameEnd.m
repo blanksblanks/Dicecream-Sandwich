@@ -17,6 +17,9 @@
     CCLabelTTF *_levelLabel;
     CCLabelTTF *_chainsLabel;
     CCLabelTTF *_timeLabel;
+    CCLabelTTF *_endMessage;
+    
+    //TODO: custom game messages
 }
 
 - (void) didLoadFromCCB {

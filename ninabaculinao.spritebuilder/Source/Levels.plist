@@ -2,13 +2,64 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ScoreSystem</key>
+	<array>
+		<dict>
+			<key>Score</key>
+			<integer>30</integer>
+			<key>Double</key>
+			<integer>60</integer>
+			<key>Face</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>Score</key>
+			<integer>80</integer>
+			<key>Double</key>
+			<integer>160</integer>
+			<key>Face</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>Score</key>
+			<integer>150</integer>
+			<key>Double</key>
+			<integer>300</integer>
+			<key>Face</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>Score</key>
+			<integer>240</integer>
+			<key>Double</key>
+			<integer>480</integer>
+			<key>Face</key>
+			<integer>4</integer>
+		</dict>
+		<dict>
+			<key>Score</key>
+			<integer>350</integer>
+			<key>Double</key>
+			<integer>700</integer>
+			<key>Face</key>
+			<integer>5</integer>
+		</dict>
+		<dict>
+			<key>Score</key>
+			<integer>480</integer>
+			<key>Double</key>
+			<integer>960</integer>
+			<key>Face</key>
+			<integer>6</integer>
+		</dict>
+	</array>
 	<key>Levels</key>
 	<array>
 		<dict>
 			<key>possibilities</key>
-			<integer>3</integer>
+			<integer>2</integer>
 			<key>targetScore</key>
-			<integer>600</integer>
+			<integer>165</integer>
 			<key>levelSpeed</key>
 			<real>0.5</real>
 			<key>level</key>
@@ -16,19 +67,19 @@
 		</dict>
 		<dict>
 			<key>possibilities</key>
-			<integer>4</integer>
+			<integer>3</integer>
 			<key>targetScore</key>
-			<real>1600</real>
+			<integer>520</integer>
 			<key>levelSpeed</key>
-			<real>0.4</real>
+			<real>0.5</real>
 			<key>level</key>
 			<integer>2</integer>
 		</dict>
 		<dict>
 			<key>possibilities</key>
-			<integer>5</integer>
+			<integer>4</integer>
 			<key>targetScore</key>
-			<real>3600</real>
+			<integer>1125</integer>
 			<key>levelSpeed</key>
 			<real>0.4</real>
 			<key>level</key>
@@ -36,9 +87,9 @@
 		</dict>
 		<dict>
 			<key>possibilities</key>
-			<integer>6</integer>
+			<integer>5</integer>
 			<key>targetScore</key>
-			<real>6000</real>
+			<integer>2040</integer>
 			<key>levelSpeed</key>
 			<real>0.4</real>
 			<key>level</key>
@@ -48,9 +99,9 @@
 			<key>possibilities</key>
 			<integer>6</integer>
 			<key>targetScore</key>
-			<real>8600</real>
+			<integer>3325</integer>
 			<key>levelSpeed</key>
-			<real>0.3</real>
+			<real>0.4</real>
 			<key>level</key>
 			<integer>5</integer>
 		</dict>
@@ -58,11 +109,21 @@
 			<key>possibilities</key>
 			<integer>6</integer>
 			<key>targetScore</key>
-			<integer>0</integer>
+			<integer>4490</integer>
+			<key>levelSpeed</key>
+			<real>0.3</real>
+			<key>level</key>
+			<integer>6</integer>
+		</dict>
+		<dict>
+			<key>possibilities</key>
+			<integer>6</integer>
+			<key>targetScore</key>
+			<integer>4990</integer>
 			<key>levelSpeed</key>
 			<real>0.2</real>
 			<key>level</key>
-			<integer>6</integer>
+			<integer>7</integer>
 		</dict>
 	</array>
 </dict>
