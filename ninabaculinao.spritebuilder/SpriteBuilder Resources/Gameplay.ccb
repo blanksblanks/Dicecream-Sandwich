@@ -233,7 +233,7 @@
 									<key>type</key>
 									<integer>2</integer>
 									<key>value</key>
-									<real>360</real>
+									<real>720</real>
 								</dict>
 							</array>
 							<key>name</key>
@@ -357,7 +357,7 @@
 						<key>type</key>
 						<string>Degrees</string>
 						<key>value</key>
-						<real>360</real>
+						<real>720</real>
 					</dict>
 					<dict>
 						<key>baseValue</key>
@@ -389,6 +389,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>seqExpanded</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -1642,8 +1644,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
