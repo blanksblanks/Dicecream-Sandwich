@@ -66,7 +66,7 @@
 									<integer>7</integer>
 									<key>value</key>
 									<array>
-										<string>newAssets/forDice/BombBlueFilled.png</string>
+										<string>newAssets/forDice/Yellow_Filled_Two.png</string>
 										<string>Use regular file</string>
 									</array>
 								</dict>
@@ -85,7 +85,7 @@
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>CCSprite</string>
+				<string>Two</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -134,14 +134,14 @@
 						<array>
 							<real>1</real>
 							<real>1</real>
-							<false/>
+							<true/>
 							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
 						<key>baseValue</key>
 						<array>
-							<string>workingAssets/Dice/BombBlue.png</string>
+							<string>workingAssets/Dice/TwoYellow.png</string>
 							<string>Use regular file</string>
 						</array>
 						<key>name</key>
@@ -151,7 +151,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>newAssets/forDice/BombBlueFilled.png</string>
+							<string>newAssets/forDice/Yellow_Filled_Two.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -184,7 +184,7 @@
 				<key>type</key>
 				<integer>0</integer>
 				<key>value</key>
-				<string>7</string>
+				<string>2</string>
 			</dict>
 		</array>
 		<key>displayName</key>

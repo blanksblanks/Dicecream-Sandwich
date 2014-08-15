@@ -93,8 +93,8 @@ static const NSInteger GRID_COLUMNS = 6;
 		}
 	}
     
-    self.score = 4480;
-    self.level = 5;
+    self.score = 8190;
+    self.level = 10;
     [self loadLevel];
     
     actionIndex = 0;
@@ -259,7 +259,6 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-
 - (void)trackGridState { // aka my beautiful debugging log
     
     // copy current grid into gridstate array as 0's and 1-6's
@@ -407,12 +406,12 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 /* Specials are only allowed in level 6 and above, and only called
- every five dice with a 20% chance of spawning
+ every five dice with a 5% chance of spawning
  */
 -(Dice*) randomizeSpecials {
     Dice *die;
     NSInteger chance = arc4random_uniform(100);
-    if ((_counter%5 == 0) && (chance <= 20)) {
+    if ((_counter%5 == 0) && (chance <= 5)) {
         NSInteger randomSpecial = arc4random_uniform(3)+7;
         switch(randomSpecial){
             case 7 :
@@ -683,11 +682,9 @@ static const NSInteger GRID_COLUMNS = 6;
     }
     CCLOG(@"%f col:%ld", slider.sliderValue, (long)column);
 }
+*/
 
 # pragma mark - Detect horizontal and vertical chains
- 
- */
-
 
 - (NSArray *)detectHorizontalMatches {
     NSMutableArray *array = [NSMutableArray array];
@@ -774,7 +771,7 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void) handleSpecials{
     NSArray *chains = [self removeSpecialMatches];
-    [self animateMatchedDice:chains];
+    [self animateSpecialDice:chains];
     
     for (Chain *chain in chains) {
         self.score += chain.score;
@@ -876,6 +873,26 @@ static const NSInteger GRID_COLUMNS = 6;
         }
     }
     return array;
+}
+
+- (void)animateSpecialDice:(NSArray *)chains {
+    for (Chain *chain in chains) {
+        [self animateScoreForChain:chain];
+        [self animateGameMessage];
+        for (Dice *die in chain.dice) {
+            CCAnimationManager* animationManager = die.animationManager;
+            [animationManager runAnimationsForSequenceNamed:@"colorFill"];
+            CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
+            explosion.autoRemoveOnFinish = TRUE;
+            explosion.position = die.position;
+            [self addChild:explosion];
+            [self scheduleBlock:^(CCTimer *timer) {
+                [die removeFromParent];
+                animationFinished = true;
+                
+            } delay:1.5];
+        }
+    }
 }
 
 # pragma mark - Remove and handle matches
@@ -1131,7 +1148,7 @@ static const NSInteger GRID_COLUMNS = 6;
         [self animateLevelUp];
     }
     
-    if (self.level > 5) {
+    if (self.level > 9) {
         specialsAllowed = TRUE;
     }
     

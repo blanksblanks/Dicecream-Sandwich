@@ -44,8 +44,6 @@
 				<integer>1</integer>
 				<key>animatedProperties</key>
 				<dict>
-					<key>0</key>
-					<dict/>
 					<key>1</key>
 					<dict>
 						<key>spriteFrame</key>
@@ -66,7 +64,7 @@
 									<integer>7</integer>
 									<key>value</key>
 									<array>
-										<string>newAssets/forDice/BombBlueFilled.png</string>
+										<string>newAssets/forDice/Blue_Filled_Three.png</string>
 										<string>Use regular file</string>
 									</array>
 								</dict>
@@ -85,7 +83,7 @@
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>CCSprite</string>
+				<string>Three</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -134,14 +132,14 @@
 						<array>
 							<real>1</real>
 							<real>1</real>
-							<false/>
+							<true/>
 							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
 						<key>baseValue</key>
 						<array>
-							<string>workingAssets/Dice/BombBlue.png</string>
+							<string>workingAssets/Dice/ThreeBlue.png</string>
 							<string>Use regular file</string>
 						</array>
 						<key>name</key>
@@ -151,7 +149,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>newAssets/forDice/BombBlueFilled.png</string>
+							<string>newAssets/forDice/Blue_Filled_Three.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -184,7 +182,7 @@
 				<key>type</key>
 				<integer>0</integer>
 				<key>value</key>
-				<string>7</string>
+				<string>3</string>
 			</dict>
 		</array>
 		<key>displayName</key>
