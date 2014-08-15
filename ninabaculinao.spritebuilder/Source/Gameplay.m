@@ -97,6 +97,7 @@
     
     if (_grid.gameOver) {
         [animationManager runAnimationsForSequenceNamed:@"starsRotate"];
+        [audio stopEverything];
     }
 }
 

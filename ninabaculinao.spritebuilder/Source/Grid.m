@@ -54,6 +54,8 @@
     BOOL comboCondition; // dice spawned but match found false
     BOOL specialsAllowed;
     
+    OALSimpleAudio *audio;
+    
 //    CCSlider *slider;
 }
 
@@ -97,6 +99,7 @@ static const NSInteger GRID_COLUMNS = 6;
     self.level = 10;
     [self loadLevel];
     
+    audio = [OALSimpleAudio sharedInstance];
     actionIndex = 0;
 }
 
@@ -125,6 +128,7 @@ static const NSInteger GRID_COLUMNS = 6;
                     [self dieFallDown];
                     _timeSinceDrop = 0;
                     if (![self canBottomMove]) {
+                        [self playHitBottom];
                         CCLOG(@"Dice fell to bottom:"); [self trackGridState];
                         //                    [self removeGhost];
                         self.touchEnabled = FALSE;
@@ -476,6 +480,13 @@ static const NSInteger GRID_COLUMNS = 6;
     return bottomCanMove;
 }
 
+- (void) playHitBottom {
+    // play background sound
+    [audio preloadEffect:@"pop5.wav"];
+    // play sound effect
+    [audio playEffect:@"pop5.wav"];
+}
+
 # pragma mark - Touch handling - let player swipe left/right/down/rotate
 
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
@@ -556,8 +567,18 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 */
 
+# pragma mark - Swipe and rotate methods
+
+- (void)playMoveSound {
+    // play background sound
+    [audio preloadEffect:@"click2.wav"];
+    // play sound effect
+    [audio playEffect:@"click2.wav"];
+}
+
 - (void)swipeLeftTo:(NSInteger)column {
-    __block BOOL canMoveLeft = TRUE;
+//    __block
+    BOOL canMoveLeft = TRUE;
     while (_currentDie1.column > column && _currentDie2.column > column && canMoveLeft) {
             canMoveLeft = [self swipeLeft];
     }
@@ -569,6 +590,7 @@ static const NSInteger GRID_COLUMNS = 6;
     if (canMoveLeft) {
         [self moveDie:_currentDie1 inDirection:ccp(-1, 0)];
         [self moveDie:_currentDie2 inDirection:ccp(-1, 0)];
+        [self playMoveSound];
         //        [self moveGhostDice];
     }
     return canMoveLeft;
@@ -588,6 +610,7 @@ static const NSInteger GRID_COLUMNS = 6;
     if (canMoveRight) {
         [self moveDie:_currentDie1 inDirection:ccp(1, 0)];
         [self moveDie:_currentDie2 inDirection:ccp(1, 0)];
+        [self playMoveSound];
         //        [self moveGhostDice];
     }
     return canMoveRight;
@@ -597,6 +620,7 @@ static const NSInteger GRID_COLUMNS = 6;
     BOOL bottomCanMove = [self canBottomMove];
     
     if (bottomCanMove) {
+        [self playMoveSound];
         if (_currentDie2.column > _currentDie1.column) {
             // [1][2] --> [1]
             //            [2]
@@ -876,6 +900,11 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void)animateSpecialDice:(NSArray *)chains {
+    // play background sound
+    [audio preloadEffect:@"success.wav"];
+    // play sound effect
+    [audio playEffect:@"success.wav"];
+    
     for (Chain *chain in chains) {
         [self animateScoreForChain:chain];
         [self animateGameMessage];
@@ -938,6 +967,11 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void)animateMatchedDice:(NSArray *)chains {
+    // play background sound
+    [audio preloadEffect:@"success.wav"];
+    // play sound effect
+    [audio playEffect:@"success.wav"];
+    
     for (Chain *chain in chains) {
         [self animateScoreForChain:chain];
         [self animateGameMessage];
@@ -1165,7 +1199,7 @@ static const NSInteger GRID_COLUMNS = 6;
     [self pause];
     self.gameOver = true;
     self.touchEnabled = false;
-    [self.audio stopEverything];
+//    [self.audio stopEverything];
     [self assignStats];
     GameEnd *gameEnd = (GameEnd*) [CCBReader load:@"GameEnd"];
     [gameEnd setPositionType:CCPositionTypeNormalized];
