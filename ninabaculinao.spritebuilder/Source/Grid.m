@@ -76,6 +76,7 @@ static const NSInteger GRID_COLUMNS = 6;
     self.streak = 0;
     self.allClear = 0;
     
+    self.gameOver = false;
     self.paused = false;
     self.touchEnabled = TRUE;
     
@@ -409,7 +410,9 @@ static const NSInteger GRID_COLUMNS = 6;
                     break;
                 case 9:
                     die = (Dice*) [CCBReader load:@"Dice/Mystery"];
+                    break;
                 default:
+                    die = (Dice*) [CCBReader load:@"Dice/Bomb"];
                     break;
             }
         }
@@ -1130,6 +1133,7 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void) gameEnd {
     [self pause];
+    self.gameOver = true;
     self.touchEnabled = false;
     [self.audio stopEverything];
     [self assignStats];

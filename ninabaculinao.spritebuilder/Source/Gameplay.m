@@ -81,7 +81,7 @@
 }
 
 - (void)update:(CCTime)delta {
-    [self convertAndUpdateTime];
+    _timeLabel.string = [self convertAndUpdateTime: (long)_grid.timer];
     
     if (_grid.touchEnabled) {
         self.userInteractionEnabled = TRUE;
@@ -94,11 +94,14 @@
     } else {
         _pauseButton.visible = true;
     }
+    
+    if (_grid.gameOver) {
+        [animationManager runAnimationsForSequenceNamed:@"starsRotate"];
+    }
 }
 
-- (void)convertAndUpdateTime {
-    NSInteger seconds = (long)_grid.timer,
-    forHours = seconds / 3600,
+- (NSString*)convertAndUpdateTime:(NSInteger)seconds {
+    NSInteger forHours = seconds / 3600,
     remainder = seconds % 3600,
     forMinutes = remainder / 60,
     forSeconds = remainder % 60;
@@ -106,7 +109,8 @@
     NSString *hh = [self checkIfLeadingZeroNeeded:forHours];
     NSString *mm = [self checkIfLeadingZeroNeeded:forMinutes];
     NSString *ss = [self checkIfLeadingZeroNeeded:forSeconds];
-    _timeLabel.string = [NSString stringWithFormat:@"%@ : %@ : %@", hh, mm, ss];
+    NSString *timeString = [NSString stringWithFormat:@"%@ : %@ : %@", hh, mm, ss];
+    return timeString;
 }
 
 - (NSString*)checkIfLeadingZeroNeeded:(NSInteger)time {

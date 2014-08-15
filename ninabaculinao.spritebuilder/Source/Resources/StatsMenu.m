@@ -25,7 +25,7 @@
 }
 
 - (void) didLoadFromCCB {
-    [self performSelector:@selector(current)];
+    [self performSelector:@selector(current)];    
 }
 
 - (void) current {
