@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>47</integer>
+	<integer>51</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -1320,28 +1320,15 @@ you how many fillings you need.</string>
 						<array>
 							<dict>
 								<key>UUID</key>
-								<integer>33</integer>
+								<integer>48</integer>
 								<key>baseClass</key>
-								<string>CCBFile</string>
+								<string>CCSprite</string>
 								<key>children</key>
 								<array/>
 								<key>customClass</key>
 								<string></string>
-								<key>customProperties</key>
-								<array>
-									<dict>
-										<key>name</key>
-										<string>faceValue</string>
-										<key>optimized</key>
-										<false/>
-										<key>type</key>
-										<integer>0</integer>
-										<key>value</key>
-										<string>1</string>
-									</dict>
-								</array>
 								<key>displayName</key>
-								<string>Dice</string>
+								<string>Green_Filled_One</string>
 								<key>memberVarAssignmentName</key>
 								<string></string>
 								<key>memberVarAssignmentType</key>
@@ -1363,11 +1350,22 @@ you how many fillings you need.</string>
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>0.0</real>
-											<real>0.0</real>
+											<real>18.5</real>
+											<real>18.5</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
+										</array>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>anchorPoint</string>
+										<key>type</key>
+										<string>Point</string>
+										<key>value</key>
+										<array>
+											<real>0.5</real>
+											<real>0.5</real>
 										</array>
 									</dict>
 									<dict>
@@ -1385,38 +1383,41 @@ you how many fillings you need.</string>
 									</dict>
 									<dict>
 										<key>name</key>
-										<string>ccbFile</string>
+										<string>spriteFrame</string>
 										<key>type</key>
-										<string>CCBFile</string>
+										<string>SpriteFrame</string>
 										<key>value</key>
-										<string>Dice/One.ccb</string>
+										<array>
+											<string></string>
+											<string>newAssets/forDice/Green_Filled_One.png</string>
+										</array>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>color</string>
+										<key>type</key>
+										<string>Color3</string>
+										<key>value</key>
+										<array>
+											<real>1</real>
+											<real>1</real>
+											<real>1</real>
+											<real>1</real>
+										</array>
 									</dict>
 								</array>
 							</dict>
 							<dict>
 								<key>UUID</key>
-								<integer>37</integer>
+								<integer>49</integer>
 								<key>baseClass</key>
-								<string>CCBFile</string>
+								<string>CCSprite</string>
 								<key>children</key>
 								<array/>
 								<key>customClass</key>
 								<string></string>
-								<key>customProperties</key>
-								<array>
-									<dict>
-										<key>name</key>
-										<string>faceValue</string>
-										<key>optimized</key>
-										<false/>
-										<key>type</key>
-										<integer>0</integer>
-										<key>value</key>
-										<string>3</string>
-									</dict>
-								</array>
 								<key>displayName</key>
-								<string>Dice</string>
+								<string>Blue_Filled_Three</string>
 								<key>memberVarAssignmentName</key>
 								<string></string>
 								<key>memberVarAssignmentType</key>
@@ -1438,11 +1439,22 @@ you how many fillings you need.</string>
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>37</real>
-											<real>0.0</real>
+											<real>55.5</real>
+											<real>18.5</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
+										</array>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>anchorPoint</string>
+										<key>type</key>
+										<string>Point</string>
+										<key>value</key>
+										<array>
+											<real>0.5</real>
+											<real>0.5</real>
 										</array>
 									</dict>
 									<dict>
@@ -1460,38 +1472,41 @@ you how many fillings you need.</string>
 									</dict>
 									<dict>
 										<key>name</key>
-										<string>ccbFile</string>
+										<string>spriteFrame</string>
 										<key>type</key>
-										<string>CCBFile</string>
+										<string>SpriteFrame</string>
 										<key>value</key>
-										<string>Dice/Three.ccb</string>
+										<array>
+											<string></string>
+											<string>newAssets/forDice/Blue_Filled_Three.png</string>
+										</array>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>color</string>
+										<key>type</key>
+										<string>Color3</string>
+										<key>value</key>
+										<array>
+											<real>1</real>
+											<real>1</real>
+											<real>1</real>
+											<real>1</real>
+										</array>
 									</dict>
 								</array>
 							</dict>
 							<dict>
 								<key>UUID</key>
-								<integer>34</integer>
+								<integer>50</integer>
 								<key>baseClass</key>
-								<string>CCBFile</string>
+								<string>CCSprite</string>
 								<key>children</key>
 								<array/>
 								<key>customClass</key>
 								<string></string>
-								<key>customProperties</key>
-								<array>
-									<dict>
-										<key>name</key>
-										<string>faceValue</string>
-										<key>optimized</key>
-										<false/>
-										<key>type</key>
-										<integer>0</integer>
-										<key>value</key>
-										<string>1</string>
-									</dict>
-								</array>
 								<key>displayName</key>
-								<string>Dice</string>
+								<string>Green_Filled_One</string>
 								<key>memberVarAssignmentName</key>
 								<string></string>
 								<key>memberVarAssignmentType</key>
@@ -1513,11 +1528,22 @@ you how many fillings you need.</string>
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>74</real>
-											<real>0.0</real>
+											<real>92.5</real>
+											<real>18.5</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
+										</array>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>anchorPoint</string>
+										<key>type</key>
+										<string>Point</string>
+										<key>value</key>
+										<array>
+											<real>0.5</real>
+											<real>0.5</real>
 										</array>
 									</dict>
 									<dict>
@@ -1535,11 +1561,27 @@ you how many fillings you need.</string>
 									</dict>
 									<dict>
 										<key>name</key>
-										<string>ccbFile</string>
+										<string>spriteFrame</string>
 										<key>type</key>
-										<string>CCBFile</string>
+										<string>SpriteFrame</string>
 										<key>value</key>
-										<string>Dice/One.ccb</string>
+										<array>
+											<string></string>
+											<string>newAssets/forDice/Green_Filled_One.png</string>
+										</array>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>color</string>
+										<key>type</key>
+										<string>Color3</string>
+										<key>value</key>
+										<array>
+											<real>1</real>
+											<real>1</real>
+											<real>1</real>
+											<real>1</real>
+										</array>
 									</dict>
 								</array>
 							</dict>
@@ -1647,8 +1689,8 @@ you how many fillings you need.</string>
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
-							<real>202.00003051757812</real>
+							<real>0.43448275327682495</real>
+							<real>187.00003051757812</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>0</integer>
@@ -2435,8 +2477,6 @@ both 1</string>
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
