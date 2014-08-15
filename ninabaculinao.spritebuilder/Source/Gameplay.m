@@ -17,12 +17,13 @@
 @implementation Gameplay {
     OALSimpleAudio *audio;
     Grid *_grid;
-    CCSprite *_rainbowBright;
+//    CCSprite *_rainbowBright;
     CCAnimationManager* animationManager;
     CCLabelTTF *_scoreLabel;
     CCLabelTTF *_targetLabel;
     CCLabelTTF *_levelLabel;
     CCLabelTTF *_timeLabel;
+    CCButton *_pauseButton;
 }
 
 - (id)init {
@@ -87,6 +88,12 @@
     } else {
         self.userInteractionEnabled = FALSE;
     }
+    
+    if (_grid.paused) {
+        _pauseButton.visible = false;
+    } else {
+        _pauseButton.visible = true;
+    }
 }
 
 - (void)convertAndUpdateTime {
@@ -112,7 +119,7 @@
     return digits;
 }
 
-- (void)pause {
+- (void)pause {    
     PauseMenu *pauseMenu = (PauseMenu*) [CCBReader load:@"PauseMenu"];
     audio.paused = TRUE;
     pauseMenu.position = ccp(51, 25);

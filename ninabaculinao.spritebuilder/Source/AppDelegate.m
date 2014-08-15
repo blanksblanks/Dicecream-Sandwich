@@ -58,6 +58,9 @@
     
     [self setupCocos2dWithOptions:cocos2dSetup];
     
+    [MGWU loadMGWU:@"stewardresses"];
+    [MGWU dark];
+
 //    // Configure CocoaLumberjack and override point for customization after application launch.
 //    [DDLog addLogger:[DDASLLogger sharedInstance]];
 //    [DDLog addLogger:[DDTTYLogger sharedInstance]];

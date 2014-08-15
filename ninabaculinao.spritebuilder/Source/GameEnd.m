@@ -8,7 +8,6 @@
 
 #import "GameEnd.h"
 #import "GameState.h"
-#import "Grid.h"
 #import "StatsMenu.h"
 
 @implementation GameEnd {

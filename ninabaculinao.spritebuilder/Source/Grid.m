@@ -10,6 +10,7 @@
 #import "Dice.h"
 #import "GameState.h"
 #import "GameEnd.h"
+#import "Gameplay.h"
 
 @implementation Grid {
     
@@ -53,7 +54,7 @@
     BOOL comboCondition; // dice spawned but match found false
     BOOL specialsAllowed;
     
-    CCSlider *slider;
+//    CCSlider *slider;
 }
 
 // two constants to describe the number of rows and columns
@@ -470,7 +471,6 @@ static const NSInteger GRID_COLUMNS = 6;
         } delay:1.5];
     }
     */
-    
     
 }
 
@@ -1118,13 +1118,13 @@ static const NSInteger GRID_COLUMNS = 6;
     } else {
         return TRUE;
     }
-    
 }
 
 # pragma mark - Game Over
 
 - (void) gameEnd {
     [self pause];
+    self.touchEnabled = false;
     [self.audio stopEverything];
     [self assignStats];
     GameEnd *gameEnd = (GameEnd*) [CCBReader load:@"GameEnd"];

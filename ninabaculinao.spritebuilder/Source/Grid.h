@@ -17,6 +17,8 @@ typedef NS_ENUM(NSInteger, GridState) {
     GridStateHandlingMatches
 };
 
+//@class Gameplay;
+
 @interface Grid : CCSprite
 
 - (void)spawnDice;
@@ -35,12 +37,13 @@ typedef NS_ENUM(NSInteger, GridState) {
 @property (nonatomic, assign) BOOL paused;
 @property (nonatomic, assign) BOOL touchEnabled;
 @property (nonatomic, strong) OALSimpleAudio *audio;
-
+//@property (nonatomic, strong) Gameplay *gameplay;
 @property (nonatomic, assign) NSInteger chains; // in calculate score
 @property (nonatomic, assign) NSInteger chainsPerMin; // in game end
 @property (nonatomic, assign) NSInteger sixChains; // in calculate score
 @property (nonatomic, assign) NSInteger perfectMatches; // in calculate score
-@property (nonatomic, assign) NSInteger streak;
-@property (nonatomic, assign) NSInteger allClear;
+@property (nonatomic, assign) NSInteger streak; // not being used right now
+@property (nonatomic, assign) NSInteger allClear; // TODO: needs a score bonus
+
 
 @end

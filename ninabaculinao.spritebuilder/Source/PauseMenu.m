@@ -40,11 +40,13 @@
 }
 
 - (void) settings {
-    if (!self.audio.muted) {
-        self.audio.muted = true;
-    } else {
-        self.audio.muted = false;
-    }
+// Four lines in one
+//    if (!self.audio.muted) {
+//        self.audio.muted = true;
+//    } else {
+//        self.audio.muted = false;
+//    }
+    self.audio.muted = !self.audio.muted;
 }
 
 // TODO: "Are you sure?" pop up
