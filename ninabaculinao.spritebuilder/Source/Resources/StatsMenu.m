@@ -10,6 +10,7 @@
 #import "GameEnd.h"
 #import "GameState.h"
 #import "Grid.h"
+#import "Gameplay.h"
 
 
 @implementation StatsMenu {
@@ -37,7 +38,8 @@
     _perfectMatchLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentPerfectMatches];
 //    _streakLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentStreak];
     _allClearLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentAllClear];
-    _timeLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentTime];
+    NSString* _timeString = [Gameplay convertAndUpdateTime:[GameState sharedInstance].currentTime];
+    _timeLabel.string = _timeString;
 }
 
 - (void) best {
@@ -49,7 +51,8 @@
     _perfectMatchLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].bestPerfectMatches];
 //    _streakLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].bestStreak];
     _allClearLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].bestAllClear];
-    _timeLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].bestTime];
+    NSString* _timeString = [Gameplay convertAndUpdateTime:[GameState sharedInstance].bestTime];
+    _timeLabel.string = _timeString;
 }
 
 - (void) home {

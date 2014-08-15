@@ -81,7 +81,7 @@
 }
 
 - (void)update:(CCTime)delta {
-    _timeLabel.string = [self convertAndUpdateTime: (long)_grid.timer];
+    _timeLabel.string = [Gameplay convertAndUpdateTime:(long)_grid.timer];
     
     if (_grid.touchEnabled) {
         self.userInteractionEnabled = TRUE;
@@ -100,7 +100,7 @@
     }
 }
 
-- (NSString*)convertAndUpdateTime:(NSInteger)seconds {
++ (NSString*)convertAndUpdateTime:(NSInteger)seconds {
     NSInteger forHours = seconds / 3600,
     remainder = seconds % 3600,
     forMinutes = remainder / 60,
@@ -113,7 +113,7 @@
     return timeString;
 }
 
-- (NSString*)checkIfLeadingZeroNeeded:(NSInteger)time {
++ (NSString*)checkIfLeadingZeroNeeded:(NSInteger)time {
     NSString *digits;
     if (time < 10) {
         digits = [NSString stringWithFormat:@"0%li", (long)time];

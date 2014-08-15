@@ -8,6 +8,7 @@
 
 #import "MainScene.h"
 #import "GameState.h"
+#import "HelpMenu.h"
 
 @implementation MainScene {
 }
@@ -19,6 +20,13 @@
         CCScene *gameplayScene = [CCBReader loadAsScene:@"Gameplay"];
         [[CCDirector sharedDirector] replaceScene:gameplayScene];
     } delay:1.5];
+}
+
+-(void) help {
+    HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpStart"];
+    [helpMenu setPositionType:CCPositionTypeNormalized];
+    helpMenu.position = ccp(0.5, 0.53); // or consider .scale = 0.8f;
+    [self.parent addChild:helpMenu];
 }
 
 - (void)sandwichSpinAway {
