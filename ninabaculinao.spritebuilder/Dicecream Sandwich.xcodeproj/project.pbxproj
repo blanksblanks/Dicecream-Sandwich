@@ -11,6 +11,10 @@
 		623F5D6C196F0C7000DC3EA5 /* Gameplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 623F5D6B196F0C7000DC3EA5 /* Gameplay.m */; };
 		623F5D71196F128100DC3EA5 /* Dice.m in Sources */ = {isa = PBXBuildFile; fileRef = 623F5D70196F128100DC3EA5 /* Dice.m */; };
 		624577E619955C700017D267 /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = 624577E519955C700017D267 /* GameState.m */; };
+		6264682A199EAB8E00E4FAE2 /* click2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 62646827199EAB8E00E4FAE2 /* click2.wav */; };
+		6264682B199EAB8E00E4FAE2 /* pop5.wav in Resources */ = {isa = PBXBuildFile; fileRef = 62646828199EAB8E00E4FAE2 /* pop5.wav */; };
+		6264682C199EAB8E00E4FAE2 /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = 62646829199EAB8E00E4FAE2 /* success.wav */; };
+		62646830199EC55C00E4FAE2 /* Credits.m in Sources */ = {isa = PBXBuildFile; fileRef = 6264682F199EC55C00E4FAE2 /* Credits.m */; };
 		629019961994FA4F00ADF4DD /* PauseMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 629019951994FA4F00ADF4DD /* PauseMenu.m */; };
 		629AA3671977017C003FA512 /* CATchy.wav in Resources */ = {isa = PBXBuildFile; fileRef = 629AA3661977017C003FA512 /* CATchy.wav */; };
 		62C89899199D9327007E6CD2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62C89898199D9327007E6CD2 /* Images.xcassets */; };
@@ -152,6 +156,11 @@
 		623F5D70196F128100DC3EA5 /* Dice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dice.m; path = Source/Dice.m; sourceTree = "<group>"; };
 		624577E419955C700017D267 /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameState.h; path = Source/GameState.h; sourceTree = "<group>"; };
 		624577E519955C700017D267 /* GameState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameState.m; path = Source/GameState.m; sourceTree = "<group>"; };
+		62646827199EAB8E00E4FAE2 /* click2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click2.wav; sourceTree = "<group>"; };
+		62646828199EAB8E00E4FAE2 /* pop5.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pop5.wav; sourceTree = "<group>"; };
+		62646829199EAB8E00E4FAE2 /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
+		6264682E199EC55C00E4FAE2 /* Credits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Credits.h; path = Source/Credits.h; sourceTree = "<group>"; };
+		6264682F199EC55C00E4FAE2 /* Credits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Credits.m; path = Source/Credits.m; sourceTree = "<group>"; };
 		629019941994FA4F00ADF4DD /* PauseMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PauseMenu.h; path = Source/PauseMenu.h; sourceTree = "<group>"; };
 		629019951994FA4F00ADF4DD /* PauseMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PauseMenu.m; path = Source/PauseMenu.m; sourceTree = "<group>"; };
 		629AA3661977017C003FA512 /* CATchy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CATchy.wav; sourceTree = "<group>"; };
@@ -410,6 +419,8 @@
 				B7378993180767190076A88C /* MainScene.m */,
 				623F5D6A196F0C7000DC3EA5 /* Gameplay.h */,
 				623F5D6B196F0C7000DC3EA5 /* Gameplay.m */,
+				6264682E199EC55C00E4FAE2 /* Credits.h */,
+				6264682F199EC55C00E4FAE2 /* Credits.m */,
 				623F5D5E196EDB0400DC3EA5 /* Grid.h */,
 				623F5D5F196EDB0400DC3EA5 /* Grid.m */,
 				623F5D6F196F128100DC3EA5 /* Dice.h */,
@@ -506,6 +517,9 @@
 		B77F1B4617B978D7009739AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				62646827199EAB8E00E4FAE2 /* click2.wav */,
+				62646828199EAB8E00E4FAE2 /* pop5.wav */,
+				62646829199EAB8E00E4FAE2 /* success.wav */,
 				62C89898199D9327007E6CD2 /* Images.xcassets */,
 				629AA3661977017C003FA512 /* CATchy.wav */,
 				B73789911807667A0076A88C /* Icons */,
@@ -617,10 +631,12 @@
 				62C898F8199DAAFD007E6CD2 /* FBNoThanksButton.png in Resources */,
 				62C8991C199DAAFD007E6CD2 /* MGWUBackgroundDark-Portrait@2x~iphone.png in Resources */,
 				62C89918199DAAFD007E6CD2 /* MGWUBackgroundDark-Landscape@2x~iphone.png in Resources */,
+				6264682A199EAB8E00E4FAE2 /* click2.wav in Resources */,
 				62C89930199DAAFD007E6CD2 /* send-button-active.png in Resources */,
 				62C89916199DAAFD007E6CD2 /* MGWUBackground-Portrait~iphone.png in Resources */,
 				62C89904199DAAFD007E6CD2 /* mgwu-m.png in Resources */,
 				62C89902199DAAFD007E6CD2 /* mgwu-gk-notification.png in Resources */,
+				6264682B199EAB8E00E4FAE2 /* pop5.wav in Resources */,
 				62C8991F199DAAFD007E6CD2 /* MGWUClose.png in Resources */,
 				B71F5913188484E7003F4D28 /* iPad.png in Resources */,
 				B71F5912188484E7003F4D28 /* iPad-old@2x.png in Resources */,
@@ -641,6 +657,7 @@
 				62C89922199DAAFD007E6CD2 /* MGWUFacebookLoginLandscapeDark.nib in Resources */,
 				62C89911199DAAFD007E6CD2 /* MGWUBackground-Landscape~ipad.png in Resources */,
 				62C89925199DAAFD007E6CD2 /* mgwuLogo.png in Resources */,
+				6264682C199EAB8E00E4FAE2 /* success.wav in Resources */,
 				62C89908199DAAFD007E6CD2 /* MGWUAboutFooter-Landscape@2x~iphone.png in Resources */,
 				B737893B180761570076A88C /* Published-iOS in Resources */,
 				62C8990F199DAAFD007E6CD2 /* MGWUBackground-Landscape@2x~ipad.png in Resources */,
@@ -719,6 +736,7 @@
 			files = (
 				623F5D71196F128100DC3EA5 /* Dice.m in Sources */,
 				629019961994FA4F00ADF4DD /* PauseMenu.m in Sources */,
+				62646830199EC55C00E4FAE2 /* Credits.m in Sources */,
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
 				62C91DA919997D69008A6C9D /* GameEnd.m in Sources */,
 				62C91DAD1999F4D9008A6C9D /* StatsMenu.m in Sources */,

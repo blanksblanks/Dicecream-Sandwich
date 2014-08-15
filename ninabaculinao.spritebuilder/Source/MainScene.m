@@ -29,6 +29,11 @@
     [self.parent addChild:helpMenu];
 }
 
+-(void) credits {
+    CCScene *creditsScene = [CCBReader loadAsScene:@"Credits"];
+    [[CCDirector sharedDirector] pushScene:creditsScene];
+}
+
 - (void)sandwichSpinAway {
     CCAnimationManager* animationManager = self.animationManager;
     [animationManager runAnimationsForSequenceNamed:@"sandwichSpinAway"];

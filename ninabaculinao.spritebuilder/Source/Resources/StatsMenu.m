@@ -38,8 +38,9 @@
     _perfectMatchLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentPerfectMatches];
 //    _streakLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentStreak];
     _allClearLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentAllClear];
-    NSString* _timeString = [Gameplay convertAndUpdateTime:[GameState sharedInstance].currentTime];
-    _timeLabel.string = _timeString;
+//    NSString* _timeString = [Gameplay convertAndUpdateTime:[GameState sharedInstance].currentTime];
+//    _timeLabel.string = _timeString;
+//    _timeLabel.string = [NSString stringWithFormat:@"%f", [GameState sharedInstance].currentTime];
 }
 
 - (void) best {
@@ -51,8 +52,9 @@
     _perfectMatchLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].bestPerfectMatches];
 //    _streakLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].bestStreak];
     _allClearLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].bestAllClear];
-    NSString* _timeString = [Gameplay convertAndUpdateTime:[GameState sharedInstance].bestTime];
-    _timeLabel.string = _timeString;
+//    NSString* _timeString = [Gameplay convertAndUpdateTime:[GameState sharedInstance].bestTime];
+//    _timeLabel.string = _timeString;
+//    _timeLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].bestTime];
 }
 
 - (void) home {

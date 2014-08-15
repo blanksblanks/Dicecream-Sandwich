@@ -81,7 +81,7 @@
 }
 
 - (void)update:(CCTime)delta {
-    _timeLabel.string = [Gameplay convertAndUpdateTime:(long)_grid.timer];
+    _timeLabel.string = [Gameplay convertAndUpdateTime:_grid.timer];
     
     if (_grid.touchEnabled) {
         self.userInteractionEnabled = TRUE;
