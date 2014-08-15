@@ -97,39 +97,6 @@ static const NSInteger GRID_COLUMNS = 6;
     actionIndex = 0;
 }
 
-- (void)loadLevel {
-    NSString*path = [[NSBundle mainBundle] pathForResource:@"Levels" ofType:@"plist"];
-    NSDictionary *root = [NSDictionary dictionaryWithContentsOfFile:path];
-    
-    NSArray *levels = [root objectForKey: @"Levels"];
-    
-    if (self.score == 0) {
-        self.level = 1;
-    } else if (self.score >= self.targetScore) {
-        self.level++;
-            [self animateLevelUp];
-    }
-    
-    if (self.level > 5) {
-        specialsAllowed = TRUE;
-    }
-    
-    NSDictionary *dict = levels[self.level-1];
-    self.levelSpeed = [dict[@"levelSpeed"] floatValue];
-    self.targetScore = [dict[@"targetScore"] intValue];
-    self.possibilities = [dict[@"possibilities"] intValue];
-}
-
-- (void)pause {
-    self.paused = true;
-    self.touchEnabled = false;
-}
-
-- (void)unpause {
-    self.paused = false;
-    self.touchEnabled = true;
-}
-
 # pragma mark - Update method
 
 - (void) update:(CCTime) delta {
@@ -210,6 +177,18 @@ static const NSInteger GRID_COLUMNS = 6;
                 
         }
     }
+}
+
+# pragma mark - Pause methods
+
+- (void)pause {
+    self.paused = true;
+    self.touchEnabled = false;
+}
+
+- (void)unpause {
+    self.paused = false;
+    self.touchEnabled = true;
 }
 
 # pragma mark - Create initial grid and check grid state
@@ -301,6 +280,40 @@ static const NSInteger GRID_COLUMNS = 6;
         CCLOG(@"[%@ %@ %@ %@ %@ %@] :%ld", _gridStateArray[row][0], _gridStateArray[row][1], _gridStateArray[row][2], _gridStateArray[row][3], _gridStateArray[row][4], _gridStateArray[row][5], (long)row);
     }
     CCLOG(@"--------------");
+}
+
+# pragma mark - Check indexes
+
+- (BOOL)indexValidForRow:(NSInteger)row andColumn:(NSInteger)column {
+    BOOL indexValid = YES;
+    if(row < 0 || column < 0 || row >= GRID_ROWS || column >= GRID_COLUMNS) {
+        indexValid = NO;
+    }
+    return indexValid;
+}
+
+- (BOOL)indexValidAndUnoccupiedForRow:(NSInteger)row andColumn:(NSInteger)column {
+    BOOL indexValid = [self indexValidForRow:row andColumn:column];
+    if (!indexValid) {
+        return FALSE;
+    }
+    else {
+        BOOL unoccupied = [_gridArray[row][column] isEqual:_noTile] || [_gridArray[row][column] isEqual:_currentDie1]  || [_gridArray[row][column] isEqual:_currentDie2];
+        //        || [_gridArray[row][column] isEqual:_ghostDie1] || [_gridArray[row][column] isEqual:_ghostDie2];
+        return unoccupied;
+    }
+}
+
+- (BOOL)indexValidAndOccupiedForRow:(NSInteger)row andColumn:(NSInteger)column {
+    BOOL indexValid = [self indexValidForRow:row andColumn:column];
+    if (!indexValid) {
+        return FALSE;
+    }
+    else if ([_gridArray[row][column] isEqual: _noTile]) {
+        return FALSE;
+    } else {
+        return TRUE;
+    }
 }
 
 # pragma mark - Spawn random pair of dice
@@ -1086,41 +1099,34 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-# pragma mark - Check indexes
 
-- (BOOL)indexValidForRow:(NSInteger)row andColumn:(NSInteger)column {
-    BOOL indexValid = YES;
-    if(row < 0 || column < 0 || row >= GRID_ROWS || column >= GRID_COLUMNS) {
-        indexValid = NO;
+# pragma mark - Load levels and new parameters
+
+- (void)loadLevel {
+    NSString*path = [[NSBundle mainBundle] pathForResource:@"Levels" ofType:@"plist"];
+    NSDictionary *root = [NSDictionary dictionaryWithContentsOfFile:path];
+    
+    NSArray *levels = [root objectForKey: @"Levels"];
+    
+    if (self.score == 0) {
+        self.level = 1;
+    } else if (self.score >= self.targetScore) {
+        self.level++;
+        [self animateLevelUp];
     }
-    return indexValid;
+    
+    if (self.level > 5) {
+        specialsAllowed = TRUE;
+    }
+    
+    NSDictionary *dict = levels[self.level-1];
+    self.levelSpeed = [dict[@"levelSpeed"] floatValue];
+    self.targetScore = [dict[@"targetScore"] intValue];
+    self.possibilities = [dict[@"possibilities"] intValue];
 }
 
-- (BOOL)indexValidAndUnoccupiedForRow:(NSInteger)row andColumn:(NSInteger)column {
-    BOOL indexValid = [self indexValidForRow:row andColumn:column];
-    if (!indexValid) {
-        return FALSE;
-    }
-    else {
-        BOOL unoccupied = [_gridArray[row][column] isEqual:_noTile] || [_gridArray[row][column] isEqual:_currentDie1]  || [_gridArray[row][column] isEqual:_currentDie2];
-        //        || [_gridArray[row][column] isEqual:_ghostDie1] || [_gridArray[row][column] isEqual:_ghostDie2];
-        return unoccupied;
-    }
-}
 
-- (BOOL)indexValidAndOccupiedForRow:(NSInteger)row andColumn:(NSInteger)column {
-    BOOL indexValid = [self indexValidForRow:row andColumn:column];
-    if (!indexValid) {
-        return FALSE;
-    }
-    else if ([_gridArray[row][column] isEqual: _noTile]) {
-        return FALSE;
-    } else {
-        return TRUE;
-    }
-}
-
-# pragma mark - Game Over
+# pragma mark - Game over
 
 - (void) gameEnd {
     [self pause];
