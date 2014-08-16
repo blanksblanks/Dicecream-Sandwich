@@ -326,15 +326,15 @@ static const NSInteger GRID_COLUMNS = 6;
 
     // Commented out code for random spawn location
     NSInteger firstRow = GRID_ROWS-1;
-    NSInteger firstColumn = (GRID_COLUMNS/2)-1;// arc4random_uniform(GRID_COLUMNS-2); // int bt 0 and 4
-    NSInteger nextRow = firstRow;// - arc4random_uniform(2);
+    NSInteger firstColumn = arc4random_uniform(GRID_COLUMNS-2); // int bt 0 and 4 // GRID_COLUMNS/2)-1; for center
+    NSInteger nextRow = firstRow - arc4random_uniform(2);
     NSInteger nextColumn = firstColumn+1;
 
-//    if (firstRow != nextRow) { // has to be vertical
-//        nextColumn = firstColumn;
-//    } else { // has to be horizontal
-//        nextColumn = firstColumn+1;
-//    }
+    if (firstRow != nextRow) { // has to be vertical
+        nextColumn = firstColumn;
+    } else { // has to be horizontal
+        nextColumn = firstColumn+1;
+    }
     
     BOOL positionFree = ([_gridArray[firstRow][firstColumn] isEqual: _noTile]);
     BOOL nextPositionFree = ([_gridArray[nextRow][nextColumn] isEqual: _noTile]);
