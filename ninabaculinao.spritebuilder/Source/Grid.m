@@ -82,6 +82,8 @@ static const NSInteger GRID_COLUMNS = 6;
     self.paused = false;
     self.touchEnabled = TRUE;
     
+    audio = [OALSimpleAudio sharedInstance];
+    
     [self setupGrid];
     
     // Populate array with null tiles
@@ -95,11 +97,8 @@ static const NSInteger GRID_COLUMNS = 6;
 		}
 	}
     
-    self.score = 8190;
-    self.level = 10;
     [self loadLevel];
     
-    audio = [OALSimpleAudio sharedInstance];
     actionIndex = 0;
 }
 
@@ -1040,7 +1039,7 @@ static const NSInteger GRID_COLUMNS = 6;
     NSString *scoreString = [NSString stringWithFormat:@"+ %ld", (long)chain.score];
     
     // Create chain score
-    CCLabelTTF *chainScore = [CCLabelTTF labelWithString:scoreString fontName:@"GillSans-Bold" fontSize:18];
+    CCLabelTTF *chainScore = [CCLabelTTF labelWithString:scoreString fontName:@"Marker Felt" fontSize:18];
     chainScore.outlineColor = [CCColor purpleColor];
     chainScore.outlineWidth = 3.0f;
     chainScore.positionInPoints = centerPosition;
@@ -1097,7 +1096,7 @@ static const NSInteger GRID_COLUMNS = 6;
         CGPoint endPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 8.5);
         NSString *scoreString = [NSString stringWithFormat:@"+50x%ld", (long)self.combo];
 
-        CCLabelTTF *gameMessage = [CCLabelTTF labelWithString:scoreString fontName:@"GillSans-Bold" fontSize:36];
+        CCLabelTTF *gameMessage = [CCLabelTTF labelWithString:scoreString fontName:@"Marker Felt" fontSize:36];
         gameMessage.outlineColor = [CCColor purpleColor];
         gameMessage.outlineWidth = 3.0f;
         gameMessage.position = beginPosition;
@@ -1122,7 +1121,7 @@ static const NSInteger GRID_COLUMNS = 6;
     CGPoint endPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 5.5);
     NSString *scoreString = [NSString stringWithFormat:@"Level Up!"];
     
-    CCLabelTTF *gameMessage = [CCLabelTTF labelWithString:scoreString fontName:@"GillSans-Bold" fontSize:48];
+    CCLabelTTF *gameMessage = [CCLabelTTF labelWithString:scoreString fontName:@"Marker Felt" fontSize:48];
     gameMessage.outlineColor = [CCColor purpleColor];
     gameMessage.outlineWidth = 3.0f;
     gameMessage.position = beginPosition;

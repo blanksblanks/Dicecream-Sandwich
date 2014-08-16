@@ -13,6 +13,10 @@
 @implementation MainScene {
 }
 
+-(void)onLoadFromCCB {
+    
+}
+
 - (void)play {
     CCLOG(@"play button pressed");
     [self performSelector:@selector(sandwichSpinAway)];
