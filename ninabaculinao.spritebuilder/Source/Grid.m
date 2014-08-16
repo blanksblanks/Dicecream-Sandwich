@@ -53,8 +53,8 @@
     BOOL animationFinished;
     BOOL comboCondition; // dice spawned but match found false
     BOOL specialsAllowed;
-    
-    CCSlider *slider;
+
+//    CCSlider *slider;
 }
 
 // two constants to describe the number of rows and columns
@@ -109,7 +109,7 @@ static const NSInteger GRID_COLUMNS = 6;
         switch (actionIndex%5) {
             case 0: { // spawn dice
                 [self spawnDice];
-                [self resetValue:slider];
+//                [self resetValue:slider];
 //                [self spawnGhost];
                 self.touchEnabled = TRUE;
                 _timeSinceDrop = -0.2;
@@ -488,7 +488,7 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     oldTouchPosition = [touch locationInNode:self];
     oldTouchTime = touch.timestamp;
-
+/*
 // No longer using slider
     float x = slider.sliderValue * self.contentSize.width;
     
@@ -505,6 +505,7 @@ static const NSInteger GRID_COLUMNS = 6;
             
         } delay:1.5];
     }
+ */
     
 }
 
@@ -682,7 +683,7 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-
+/*
  
 # pragma mark - Slider controls - obsolete
 
@@ -703,6 +704,8 @@ static const NSInteger GRID_COLUMNS = 6;
     }
     CCLOG(@"%f col:%ld", slider.sliderValue, (long)column);
 }
+ 
+ */
 
 
 # pragma mark - Detect horizontal and vertical chains
