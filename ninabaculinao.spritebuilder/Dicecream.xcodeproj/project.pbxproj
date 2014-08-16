@@ -15,6 +15,10 @@
 		6264682B199EAB8E00E4FAE2 /* pop5.wav in Resources */ = {isa = PBXBuildFile; fileRef = 62646828199EAB8E00E4FAE2 /* pop5.wav */; };
 		6264682C199EAB8E00E4FAE2 /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = 62646829199EAB8E00E4FAE2 /* success.wav */; };
 		62646830199EC55C00E4FAE2 /* Credits.m in Sources */ = {isa = PBXBuildFile; fileRef = 6264682F199EC55C00E4FAE2 /* Credits.m */; };
+		62646832199F9C7300E4FAE2 /* GameOver.wav in Resources */ = {isa = PBXBuildFile; fileRef = 62646831199F9C7300E4FAE2 /* GameOver.wav */; };
+		62646834199F9C8A00E4FAE2 /* 8-bit-boing.wav in Resources */ = {isa = PBXBuildFile; fileRef = 62646833199F9C8A00E4FAE2 /* 8-bit-boing.wav */; };
+		62646836199F9C9D00E4FAE2 /* powerUp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 62646835199F9C9D00E4FAE2 /* powerUp.mp3 */; };
+		62646838199F9CB000E4FAE2 /* levelUp.wav in Resources */ = {isa = PBXBuildFile; fileRef = 62646837199F9CB000E4FAE2 /* levelUp.wav */; };
 		629019961994FA4F00ADF4DD /* PauseMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 629019951994FA4F00ADF4DD /* PauseMenu.m */; };
 		629AA3671977017C003FA512 /* CATchy.wav in Resources */ = {isa = PBXBuildFile; fileRef = 629AA3661977017C003FA512 /* CATchy.wav */; };
 		62C89899199D9327007E6CD2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62C89898199D9327007E6CD2 /* Images.xcassets */; };
@@ -161,6 +165,10 @@
 		62646829199EAB8E00E4FAE2 /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
 		6264682E199EC55C00E4FAE2 /* Credits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Credits.h; path = Source/Credits.h; sourceTree = "<group>"; };
 		6264682F199EC55C00E4FAE2 /* Credits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Credits.m; path = Source/Credits.m; sourceTree = "<group>"; };
+		62646831199F9C7300E4FAE2 /* GameOver.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = GameOver.wav; sourceTree = "<group>"; };
+		62646833199F9C8A00E4FAE2 /* 8-bit-boing.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "8-bit-boing.wav"; sourceTree = "<group>"; };
+		62646835199F9C9D00E4FAE2 /* powerUp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = powerUp.mp3; sourceTree = "<group>"; };
+		62646837199F9CB000E4FAE2 /* levelUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = levelUp.wav; sourceTree = "<group>"; };
 		629019941994FA4F00ADF4DD /* PauseMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PauseMenu.h; path = Source/PauseMenu.h; sourceTree = "<group>"; };
 		629019951994FA4F00ADF4DD /* PauseMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PauseMenu.m; path = Source/PauseMenu.m; sourceTree = "<group>"; };
 		629AA3661977017C003FA512 /* CATchy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CATchy.wav; sourceTree = "<group>"; };
@@ -273,7 +281,7 @@
 		B73789861807631A0076A88C /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = Source/Prefix.pch; sourceTree = SOURCE_ROOT; wrapsLines = 0; };
 		B7378992180767190076A88C /* MainScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainScene.h; path = Source/MainScene.h; sourceTree = "<group>"; };
 		B7378993180767190076A88C /* MainScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainScene.m; path = Source/MainScene.m; sourceTree = "<group>"; };
-		B77F1B2E17B978D7009739AE /* Dicecream Sandwich.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dicecream Sandwich.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B77F1B2E17B978D7009739AE /* Dicecream.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dicecream.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B77F1B3117B978D7009739AE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B77F1B3317B978D7009739AE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		B77F1B3517B978D7009739AE /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -484,7 +492,7 @@
 		B77F1B2F17B978D7009739AE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B77F1B2E17B978D7009739AE /* Dicecream Sandwich.app */,
+				B77F1B2E17B978D7009739AE /* Dicecream.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -517,7 +525,11 @@
 		B77F1B4617B978D7009739AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				62646831199F9C7300E4FAE2 /* GameOver.wav */,
 				62646827199EAB8E00E4FAE2 /* click2.wav */,
+				62646835199F9C9D00E4FAE2 /* powerUp.mp3 */,
+				62646833199F9C8A00E4FAE2 /* 8-bit-boing.wav */,
+				62646837199F9CB000E4FAE2 /* levelUp.wav */,
 				62646828199EAB8E00E4FAE2 /* pop5.wav */,
 				62646829199EAB8E00E4FAE2 /* success.wav */,
 				62C89898199D9327007E6CD2 /* Images.xcassets */,
@@ -541,9 +553,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B77F1B2D17B978D7009739AE /* Dicecream Sandwich */ = {
+		B77F1B2D17B978D7009739AE /* Dicecream */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B77F1CDE17B978D8009739AE /* Build configuration list for PBXNativeTarget "Dicecream Sandwich" */;
+			buildConfigurationList = B77F1CDE17B978D8009739AE /* Build configuration list for PBXNativeTarget "Dicecream" */;
 			buildPhases = (
 				D2E0167A18D782EC00927430 /* Run Script */,
 				B77F1B2A17B978D7009739AE /* Sources */,
@@ -555,9 +567,9 @@
 			dependencies = (
 				B7378989180764180076A88C /* PBXTargetDependency */,
 			);
-			name = "Dicecream Sandwich";
+			name = Dicecream;
 			productName = Example;
-			productReference = B77F1B2E17B978D7009739AE /* Dicecream Sandwich.app */;
+			productReference = B77F1B2E17B978D7009739AE /* Dicecream.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -579,7 +591,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B77F1B2917B978D7009739AE /* Build configuration list for PBXProject "Dicecream Sandwich" */;
+			buildConfigurationList = B77F1B2917B978D7009739AE /* Build configuration list for PBXProject "Dicecream" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -597,7 +609,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				B77F1B2D17B978D7009739AE /* Dicecream Sandwich */,
+				B77F1B2D17B978D7009739AE /* Dicecream */,
 			);
 		};
 /* End PBXProject section */
@@ -619,6 +631,7 @@
 			files = (
 				62C8990C199DAAFD007E6CD2 /* MGWUAboutFooter-Portrait@2x~iphone.png in Resources */,
 				B71F5919188484E7003F4D28 /* Settings.png in Resources */,
+				62646832199F9C7300E4FAE2 /* GameOver.wav in Resources */,
 				62C89931199DAAFD007E6CD2 /* send-button-inactive.png in Resources */,
 				62C898F4199DAAFD007E6CD2 /* FBLoginButton.png in Resources */,
 				B7378978180762440076A88C /* Default@2x.png in Resources */,
@@ -635,6 +648,7 @@
 				62C89930199DAAFD007E6CD2 /* send-button-active.png in Resources */,
 				62C89916199DAAFD007E6CD2 /* MGWUBackground-Portrait~iphone.png in Resources */,
 				62C89904199DAAFD007E6CD2 /* mgwu-m.png in Resources */,
+				62646834199F9C8A00E4FAE2 /* 8-bit-boing.wav in Resources */,
 				62C89902199DAAFD007E6CD2 /* mgwu-gk-notification.png in Resources */,
 				6264682B199EAB8E00E4FAE2 /* pop5.wav in Resources */,
 				62C8991F199DAAFD007E6CD2 /* MGWUClose.png in Resources */,
@@ -659,6 +673,7 @@
 				62C89925199DAAFD007E6CD2 /* mgwuLogo.png in Resources */,
 				6264682C199EAB8E00E4FAE2 /* success.wav in Resources */,
 				62C89908199DAAFD007E6CD2 /* MGWUAboutFooter-Landscape@2x~iphone.png in Resources */,
+				62646838199F9CB000E4FAE2 /* levelUp.wav in Resources */,
 				B737893B180761570076A88C /* Published-iOS in Resources */,
 				62C8990F199DAAFD007E6CD2 /* MGWUBackground-Landscape@2x~ipad.png in Resources */,
 				62C898FB199DAAFD007E6CD2 /* FBNoThanksButtonPressed@2x.png in Resources */,
@@ -695,6 +710,7 @@
 				62C8991A199DAAFD007E6CD2 /* MGWUBackgroundDark-Landscape~iphone.png in Resources */,
 				B71F5918188484E7003F4D28 /* iPhone@2x.png in Resources */,
 				62C89932199DAAFD007E6CD2 /* send-button-instate.png in Resources */,
+				62646836199F9C9D00E4FAE2 /* powerUp.mp3 in Resources */,
 				62C89901199DAAFD007E6CD2 /* hipmobsend_field@2x.png in Resources */,
 				62C8992A199DAAFD007E6CD2 /* mgwuPlaceholderIcon@2x.png in Resources */,
 				B7378977180762440076A88C /* Default.png in Resources */,
@@ -853,7 +869,7 @@
 					"-lsqlite3",
 					"-ObjC",
 				);
-				PRODUCT_NAME = "Dicecream Sandwich";
+				PRODUCT_NAME = Dicecream;
 				PROVISIONING_PROFILE = "6E1998EB-320D-4966-B4C9-853B315A4F94";
 				WRAPPER_EXTENSION = app;
 			};
@@ -890,7 +906,7 @@
 					"-lsqlite3",
 					"-ObjC",
 				);
-				PRODUCT_NAME = "Dicecream Sandwich";
+				PRODUCT_NAME = Dicecream;
 				PROVISIONING_PROFILE = "6E1998EB-320D-4966-B4C9-853B315A4F94";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -900,7 +916,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B77F1B2917B978D7009739AE /* Build configuration list for PBXProject "Dicecream Sandwich" */ = {
+		B77F1B2917B978D7009739AE /* Build configuration list for PBXProject "Dicecream" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B77F1CDC17B978D8009739AE /* Debug */,
@@ -909,7 +925,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B77F1CDE17B978D8009739AE /* Build configuration list for PBXNativeTarget "Dicecream Sandwich" */ = {
+		B77F1CDE17B978D8009739AE /* Build configuration list for PBXNativeTarget "Dicecream" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B77F1CDF17B978D8009739AE /* Debug */,

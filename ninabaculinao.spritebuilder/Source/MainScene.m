@@ -41,6 +41,12 @@
 - (void)sandwichSpinAway {
     CCAnimationManager* animationManager = self.animationManager;
     [animationManager runAnimationsForSequenceNamed:@"sandwichSpinAway"];
+    // access audio object
+    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+    // play background sound
+    [audio preloadEffect:@"8-bit-boing.wav"];
+    // play sound effect
+    [audio playEffect:@"8-bit-boing.wav"];
 }
 
 - (void)reset {

@@ -240,7 +240,6 @@ static const NSInteger GRID_COLUMNS = 6;
     return stabilizing;
 }
 
-
 - (void) checkIfAllClear {
     BOOL allClear = false;
     for (NSInteger row = 0; row < GRID_ROWS; row++) {
@@ -903,7 +902,7 @@ static const NSInteger GRID_COLUMNS = 6;
     for (Chain *chain in chains) {
         [self animateScoreForChain:chain];
         [self animateGameMessage];
-        [self playSuccessSound];
+        [self playPowerUpSound];
         for (Dice *die in chain.dice) {
             CCAnimationManager* animationManager = die.animationManager;
             [animationManager runAnimationsForSequenceNamed:@"colorFill"];
@@ -927,6 +926,15 @@ static const NSInteger GRID_COLUMNS = 6;
     [audio preloadEffect:@"success.wav"];
     // play sound effect
     [audio playEffect:@"success.wav"];
+}
+
+- (void)playPowerUpSound {
+    // access audio object
+    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+    // play background sound
+    [audio preloadEffect:@"powerUp.wav"];
+    // play sound effect
+    [audio playEffect:@"powerUp.wav"];
 }
 
 # pragma mark - Remove and handle matches
@@ -1119,6 +1127,9 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void)animateLevelUp {
+    
+    [self playLevelUpSound];
+
     CGPoint beginPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 3.5);
     CGPoint endPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 5.5);
     NSString *scoreString = [NSString stringWithFormat:@"Level Up!"];
@@ -1136,10 +1147,20 @@ static const NSInteger GRID_COLUMNS = 6;
     CCActionSequence *sequence = [CCActionSequence actionWithArray:@[fadeIn, moveTo, fadeOut]];
     [gameMessage runAction:sequence];
     
+    
     [self scheduleBlock:^(CCTimer *timer) {
         [gameMessage removeFromParent];
         
     } delay:1.75];
+}
+
+-(void) playLevelUpSound {
+    // access audio object
+    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+    // play background sound
+    [audio preloadEffect:@"levelUp.wav"];
+    // play sound effect
+    [audio playEffect:@"levelUp.wav"];
 }
 
 # pragma mark - Fill in holes
@@ -1198,6 +1219,7 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void) gameEnd {
     [self pause];
+    [self playGameOverSound];
     self.gameOver = true;
     self.touchEnabled = false;
 //    [self.audio stopEverything];
@@ -1206,6 +1228,15 @@ static const NSInteger GRID_COLUMNS = 6;
     [gameEnd setPositionType:CCPositionTypeNormalized];
     gameEnd.position = ccp(0.5, 0.5);
     [self.parent addChild:gameEnd];
+}
+
+- (void) playGameOverSound {
+    // access audio object
+    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+    // play background sound
+    [audio preloadEffect:@"GameOver.wav"];
+    // play sound effect
+    [audio playEffect:@"GameOver.wav"];
 }
 
 -(void) assignStats {

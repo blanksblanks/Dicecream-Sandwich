@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B77F1B2D17B978D7009739AE"
                BuildableName = "Dicecream Sandwich.app"
-               BlueprintName = "Dicecream Sandwich"
-               ReferencedContainer = "container:Dicecream Sandwich.xcodeproj">
+               BlueprintName = "Dicecream"
+               ReferencedContainer = "container:Dicecream.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B77F1B2D17B978D7009739AE"
             BuildableName = "Dicecream Sandwich.app"
-            BlueprintName = "Dicecream Sandwich"
-            ReferencedContainer = "container:Dicecream Sandwich.xcodeproj">
+            BlueprintName = "Dicecream"
+            ReferencedContainer = "container:Dicecream.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -53,8 +53,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B77F1B2D17B978D7009739AE"
             BuildableName = "Dicecream Sandwich.app"
-            BlueprintName = "Dicecream Sandwich"
-            ReferencedContainer = "container:Dicecream Sandwich.xcodeproj">
+            BlueprintName = "Dicecream"
+            ReferencedContainer = "container:Dicecream.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -76,8 +76,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B77F1B2D17B978D7009739AE"
             BuildableName = "Dicecream Sandwich.app"
-            BlueprintName = "Dicecream Sandwich"
-            ReferencedContainer = "container:Dicecream Sandwich.xcodeproj">
+            BlueprintName = "Dicecream"
+            ReferencedContainer = "container:Dicecream.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
