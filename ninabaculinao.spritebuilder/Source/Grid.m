@@ -54,9 +54,7 @@
     BOOL comboCondition; // dice spawned but match found false
     BOOL specialsAllowed;
     
-    OALSimpleAudio *audio;
-    
-//    CCSlider *slider;
+   //    CCSlider *slider;
 }
 
 // two constants to describe the number of rows and columns
@@ -81,8 +79,6 @@ static const NSInteger GRID_COLUMNS = 6;
     self.gameOver = false;
     self.paused = false;
     self.touchEnabled = TRUE;
-    
-    audio = [OALSimpleAudio sharedInstance];
     
     [self setupGrid];
     
@@ -480,6 +476,8 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void) playHitBottom {
+    // access audio object
+    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
     // play background sound
     [audio preloadEffect:@"pop5.wav"];
     // play sound effect
@@ -569,6 +567,8 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Swipe and rotate methods
 
 - (void)playMoveSound {
+    // access audio object
+    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
     // play background sound
     [audio preloadEffect:@"click2.wav"];
     // play sound effect
@@ -899,14 +899,11 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void)animateSpecialDice:(NSArray *)chains {
-    // play background sound
-    [audio preloadEffect:@"success.wav"];
-    // play sound effect
-    [audio playEffect:@"success.wav"];
     
     for (Chain *chain in chains) {
         [self animateScoreForChain:chain];
         [self animateGameMessage];
+        [self playSuccessSound];
         for (Dice *die in chain.dice) {
             CCAnimationManager* animationManager = die.animationManager;
             [animationManager runAnimationsForSequenceNamed:@"colorFill"];
@@ -921,6 +918,15 @@ static const NSInteger GRID_COLUMNS = 6;
             } delay:1.5];
         }
     }
+}
+
+- (void)playSuccessSound {
+    // access audio object
+    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+    // play background sound
+    [audio preloadEffect:@"success.wav"];
+    // play sound effect
+    [audio playEffect:@"success.wav"];
 }
 
 # pragma mark - Remove and handle matches
@@ -966,12 +972,8 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void)animateMatchedDice:(NSArray *)chains {
-    // play background sound
-    [audio preloadEffect:@"success.wav"];
-    // play sound effect
-    [audio playEffect:@"success.wav"];
-    
     for (Chain *chain in chains) {
+        [self playSuccessSound];
         [self animateScoreForChain:chain];
         [self animateGameMessage];
         _firstDie = [chain.dice firstObject];

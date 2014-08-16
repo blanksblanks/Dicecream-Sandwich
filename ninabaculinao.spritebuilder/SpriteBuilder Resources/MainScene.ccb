@@ -2126,7 +2126,7 @@
 								<key>baseValue</key>
 								<array>
 									<real>0.5</real>
-									<real>0.5</real>
+									<real>0.34999999403953552</real>
 								</array>
 								<key>name</key>
 								<string>position</string>
@@ -2135,7 +2135,7 @@
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>0.5</real>
+									<real>0.34999999403953552</real>
 									<integer>1</integer>
 									<integer>2</integer>
 									<integer>2</integer>
@@ -2427,6 +2427,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 						<key>seqExpanded</key>
 						<true/>
 					</dict>
