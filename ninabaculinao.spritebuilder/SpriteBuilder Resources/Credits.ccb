@@ -873,8 +873,8 @@ by Captain Icon; you can find his work at
 mariodelvalle.github.io/CaptainIconWeb/.
 
 The sound effects come from freesound:
-success.wav by grunz, Pop 5 by greenvwbeetle,
-and Click 5 by ecfike.
+- success.wav by grunz
+- level_up_3note2.wav by jivatma07
 
 The background music is CATchy (Original Mix),
 by DropThatCat.com.</string>
@@ -1013,6 +1013,8 @@ by DropThatCat.com.</string>
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -1661,8 +1663,6 @@ by DropThatCat.com.</string>
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

@@ -19,6 +19,7 @@
 
 - (void)play {
     CCLOG(@"play button pressed");
+    // TODO: prevent users from pressing buttons after pressing play
     [self performSelector:@selector(sandwichSpinAway)];
     [self scheduleBlock:^(CCTimer *timer) {
         CCScene *gameplayScene = [CCBReader loadAsScene:@"Gameplay"];
