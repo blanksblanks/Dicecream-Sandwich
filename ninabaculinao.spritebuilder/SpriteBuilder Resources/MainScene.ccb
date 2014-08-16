@@ -14,7 +14,7 @@
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>currentSequenceId</key>
 	<integer>1</integer>
 	<key>docDimensionsType</key>
@@ -622,8 +622,8 @@
 									<integer>3</integer>
 									<key>value</key>
 									<array>
-										<real>0.5</real>
-										<real>454</real>
+										<real>160</real>
+										<real>114</real>
 									</array>
 								</dict>
 								<dict>
@@ -640,8 +640,8 @@
 									<integer>3</integer>
 									<key>value</key>
 									<array>
-										<real>0.5</real>
-										<real>454</real>
+										<real>160</real>
+										<real>114</real>
 									</array>
 								</dict>
 							</array>
@@ -677,8 +677,8 @@
 					<dict>
 						<key>baseValue</key>
 						<array>
-							<real>0.5</real>
-							<real>454</real>
+							<real>160</real>
+							<real>114</real>
 						</array>
 						<key>name</key>
 						<string>position</string>
@@ -686,10 +686,10 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
-							<real>454</real>
+							<real>160</real>
+							<real>114</real>
+							<integer>1</integer>
 							<integer>0</integer>
-							<integer>2</integer>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -2427,8 +2427,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 						<key>seqExpanded</key>
 						<true/>
 					</dict>
@@ -2459,8 +2457,8 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>568</real>
-							<integer>1</integer>
+							<real>0.0</real>
+							<integer>3</integer>
 							<integer>2</integer>
 							<integer>0</integer>
 						</array>
@@ -2503,6 +2501,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
