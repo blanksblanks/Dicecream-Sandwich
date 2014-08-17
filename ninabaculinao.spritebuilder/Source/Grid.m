@@ -1211,7 +1211,7 @@ static const NSInteger GRID_COLUMNS = 6;
     }
     
     NSDictionary *dict = levels[self.level-1];
-    self.levelSpeed = [dict[@"levelSpeed"] floatValue];
+    self.levelSpeed = (0.4/self.level)+0.1;
     self.targetScore = [dict[@"targetScore"] intValue];
     self.possibilities = [dict[@"possibilities"] intValue];
 }
