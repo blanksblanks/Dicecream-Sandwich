@@ -19,6 +19,7 @@
 		62646834199F9C8A00E4FAE2 /* 8-bit-boing.wav in Resources */ = {isa = PBXBuildFile; fileRef = 62646833199F9C8A00E4FAE2 /* 8-bit-boing.wav */; };
 		62646836199F9C9D00E4FAE2 /* powerUp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 62646835199F9C9D00E4FAE2 /* powerUp.mp3 */; };
 		62646838199F9CB000E4FAE2 /* levelUp.wav in Resources */ = {isa = PBXBuildFile; fileRef = 62646837199F9CB000E4FAE2 /* levelUp.wav */; };
+		6264683A19A1450C00E4FAE2 /* oneBlastWhistle.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6264683919A1450C00E4FAE2 /* oneBlastWhistle.wav */; };
 		629019961994FA4F00ADF4DD /* PauseMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 629019951994FA4F00ADF4DD /* PauseMenu.m */; };
 		629AA3671977017C003FA512 /* CATchy.wav in Resources */ = {isa = PBXBuildFile; fileRef = 629AA3661977017C003FA512 /* CATchy.wav */; };
 		62C89899199D9327007E6CD2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62C89898199D9327007E6CD2 /* Images.xcassets */; };
@@ -169,6 +170,7 @@
 		62646833199F9C8A00E4FAE2 /* 8-bit-boing.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "8-bit-boing.wav"; sourceTree = "<group>"; };
 		62646835199F9C9D00E4FAE2 /* powerUp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = powerUp.mp3; sourceTree = "<group>"; };
 		62646837199F9CB000E4FAE2 /* levelUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = levelUp.wav; sourceTree = "<group>"; };
+		6264683919A1450C00E4FAE2 /* oneBlastWhistle.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = oneBlastWhistle.wav; sourceTree = "<group>"; };
 		629019941994FA4F00ADF4DD /* PauseMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PauseMenu.h; path = Source/PauseMenu.h; sourceTree = "<group>"; };
 		629019951994FA4F00ADF4DD /* PauseMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PauseMenu.m; path = Source/PauseMenu.m; sourceTree = "<group>"; };
 		629AA3661977017C003FA512 /* CATchy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CATchy.wav; sourceTree = "<group>"; };
@@ -525,6 +527,7 @@
 		B77F1B4617B978D7009739AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6264683919A1450C00E4FAE2 /* oneBlastWhistle.wav */,
 				62646831199F9C7300E4FAE2 /* GameOver.wav */,
 				62646827199EAB8E00E4FAE2 /* click2.wav */,
 				62646835199F9C9D00E4FAE2 /* powerUp.mp3 */,
@@ -684,6 +687,7 @@
 				62C89910199DAAFD007E6CD2 /* MGWUBackground-Landscape@2x~iphone.png in Resources */,
 				B71F591A188484E7003F4D28 /* Settings@2x.png in Resources */,
 				62C89926199DAAFD007E6CD2 /* mgwuLogo@2x.png in Resources */,
+				6264683A19A1450C00E4FAE2 /* oneBlastWhistle.wav in Resources */,
 				62C898F0199DAAFD007E6CD2 /* bluechatbubble.png in Resources */,
 				62C898F2199DAAFD007E6CD2 /* FacebookIcon.png in Resources */,
 				62C89905199DAAFD007E6CD2 /* mgwu-m@2x.png in Resources */,

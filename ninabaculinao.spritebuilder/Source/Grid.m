@@ -1222,23 +1222,25 @@ static const NSInteger GRID_COLUMNS = 6;
 - (void) gameEnd {
     [self pause];
     [self playGameOverSound];
-    self.gameOver = true;
-    self.touchEnabled = false;
-//    [self.audio stopEverything];
-    [self assignStats];
-    GameEnd *gameEnd = (GameEnd*) [CCBReader load:@"GameEnd"];
-    [gameEnd setPositionType:CCPositionTypeNormalized];
-    gameEnd.position = ccp(0.5, 0.5);
-    [self.parent addChild:gameEnd];
+    [self scheduleBlock:^(CCTimer *timer) {
+        self.gameOver = true;
+        self.touchEnabled = false;
+        //    [self.audio stopEverything];
+        [self assignStats];
+        GameEnd *gameEnd = (GameEnd*) [CCBReader load:@"GameEnd"];
+        [gameEnd setPositionType:CCPositionTypeNormalized];
+        gameEnd.position = ccp(0.5, 0.5);
+        [self.parent addChild:gameEnd];
+    } delay:1.0f];
 }
 
 - (void) playGameOverSound {
     // access audio object
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
     // play background sound
-    [audio preloadEffect:@"GameOver.wav"];
+    [audio preloadEffect:@"oneBlastWhistle.wav"];
     // play sound effect
-    [audio playEffect:@"GameOver.wav"];
+    [audio playEffect:@"oneBlastWhistle.wav"];
 }
 
 -(void) assignStats {
