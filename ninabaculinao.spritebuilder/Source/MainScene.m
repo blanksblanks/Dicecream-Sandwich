@@ -11,7 +11,9 @@
 #import "HelpMenu.h"
 
 @implementation MainScene {
-    HelpMenu *helpMenu;
+//    HelpMenu *helpMenu;
+//    HelpMenu *helpMenu2;
+//    HelpMenu *helpMenu3;
     CCButton *_playButton;
     CCButton *_helpButton;
     CCButton *_creditsButton;
@@ -21,15 +23,19 @@
     self.clickable = true;
 }
 
-- (void) update:(CCTime) delta {
-    if (helpMenu.cancelled) { // reset clickability
-        self.clickable = true;
-//        [self toggleButtons];
-    } 
-}
+//- (void) update:(CCTime) delta {
+////    if (helpMenu.cancelled || helpMenu2.cancelled || helpMenu3.cancelled) { // reset clickability
+////        self.clickable = true;
+//////        [self toggleButtons];
+//    if ([GameState sharedInstance].popUpClosed) {
+//        self.clickable = true;
+//    } else {
+//        self.clickable = false;
+//    }
+//}
 
 - (void)play {
-    if (self.clickable) {
+    if ([GameState sharedInstance].popUpClosed) {
         self.clickable = false;
     [self performSelector:@selector(sandwichSpinAway)];
         [self scheduleBlock:^(CCTimer *timer) {
@@ -40,14 +46,20 @@
 }
 
 -(void) help {
-    if (self.clickable) {
+//    if ([GameState sharedInstance].popUpClosed) {
 //    [self toggleButtons];
-        helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpStart"];
-        [helpMenu setPositionType:CCPositionTypeNormalized];
-        helpMenu.position = ccp(0.5, 0.53); // or consider .scale = 0.8f;
-        [self.parent addChild:helpMenu];
-        self.clickable = false;
-    }
+//        helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpStart"];
+//        helpMenu2 = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpCont"];
+//        helpMenu3 = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpEnd"];
+    CCScene *helpMenu = [CCBReader loadAsScene:@"HelpMenu/Help1"];
+    [[CCDirector sharedDirector] pushScene:helpMenu];
+//
+//        [helpMenu setPositionType:CCPositionTypeNormalized];
+//        helpMenu.position = ccp(0.5, 0.53); // or consider .scale = 0.8f;
+//        [self.parent addChild:helpMenu];
+//        self.clickable = false;
+//        [GameState sharedInstance].popUpClosed = false;
+//    }
 }
 
 -(void) toggleButtons {
@@ -57,10 +69,10 @@
 }
 
 -(void) credits {
-    if (self.clickable) {
+//    if ([GameState sharedInstance].popUpClosed) {
     CCScene *creditsScene = [CCBReader loadAsScene:@"Credits"];
     [[CCDirector sharedDirector] pushScene:creditsScene];
-    }
+//    }
 }
 
 - (void)sandwichSpinAway {

@@ -42,6 +42,8 @@ static NSString *const GAME_STATE_TIME_NOTIFICATION = @"GameState_TimeChanged";
 @property (nonatomic, assign) NSInteger bestAllClear;
 @property (nonatomic, assign) NSInteger bestTime;
 
+@property (nonatomic, assign) BOOL popUpClosed;
+
 + (instancetype) sharedInstance;
 
 
