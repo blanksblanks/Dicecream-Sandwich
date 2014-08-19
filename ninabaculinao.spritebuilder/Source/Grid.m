@@ -322,6 +322,7 @@ static const NSInteger GRID_COLUMNS = 6;
     
     specialFound = false;
     comboCondition = false;
+    [self resetComboMultiplier];
 
     // Commented out code for random spawn location
     NSInteger firstRow = GRID_ROWS-1;
@@ -1032,14 +1033,20 @@ static const NSInteger GRID_COLUMNS = 6;
         }
         
         if (perfectMatch) { // double the score!
-            chain.score = face * 20 * ([chain.dice count]);
+            chain.score = face * 20 * ([chain.dice count]) * self.comboMultiplier;
+            self.comboMultiplier++;
             self.perfectMatches++;
             self.chains++;
         } else {
-            chain.score = face * 10 * ([chain.dice count]);
+            chain.score = face * 10 * ([chain.dice count]) * self.comboMultiplier;
+            self.comboMultiplier++;
             self.chains++;
         }
     }
+}
+
+- (void)resetComboMultiplier {
+    self.comboMultiplier = 1;
 }
 
 - (void)animateScoreForChain:(Chain *)chain {

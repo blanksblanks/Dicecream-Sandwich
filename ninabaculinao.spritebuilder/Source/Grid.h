@@ -32,6 +32,7 @@ typedef NS_ENUM(NSInteger, GridState) {
 @property (nonatomic, assign) NSInteger possibilities;
 @property (nonatomic, assign) NSInteger level;
 @property (nonatomic, assign) NSInteger combo;
+@property (assign, nonatomic) NSInteger comboMultiplier;
 @property (nonatomic, assign) float timer;
 @property (nonatomic, assign) float levelSpeed;
 @property (nonatomic, assign) BOOL paused;
