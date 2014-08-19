@@ -11,32 +11,56 @@
 #import "HelpMenu.h"
 
 @implementation MainScene {
+    HelpMenu *helpMenu;
+    CCButton *_playButton;
+    CCButton *_helpButton;
+    CCButton *_creditsButton;
 }
 
--(void)onLoadFromCCB {
-    
+-(void)didLoadFromCCB {
+    self.clickable = true;
+}
+
+- (void) update:(CCTime) delta {
+    if (helpMenu.cancelled) { // reset clickability
+        self.clickable = true;
+//        [self toggleButtons];
+    } 
 }
 
 - (void)play {
-    CCLOG(@"play button pressed");
-    // TODO: prevent users from pressing buttons after pressing play
+    if (self.clickable) {
+        self.clickable = false;
     [self performSelector:@selector(sandwichSpinAway)];
-    [self scheduleBlock:^(CCTimer *timer) {
-        CCScene *gameplayScene = [CCBReader loadAsScene:@"Gameplay"];
-        [[CCDirector sharedDirector] replaceScene:gameplayScene];
-    } delay:1.5];
+        [self scheduleBlock:^(CCTimer *timer) {
+            CCScene *gameplayScene = [CCBReader loadAsScene:@"Gameplay"];
+            [[CCDirector sharedDirector] replaceScene:gameplayScene];
+        } delay:1.5];
+    }
 }
 
 -(void) help {
-    HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpStart"];
-    [helpMenu setPositionType:CCPositionTypeNormalized];
-    helpMenu.position = ccp(0.5, 0.53); // or consider .scale = 0.8f;
-    [self.parent addChild:helpMenu];
+    if (self.clickable) {
+//    [self toggleButtons];
+        helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpStart"];
+        [helpMenu setPositionType:CCPositionTypeNormalized];
+        helpMenu.position = ccp(0.5, 0.53); // or consider .scale = 0.8f;
+        [self.parent addChild:helpMenu];
+        self.clickable = false;
+    }
+}
+
+-(void) toggleButtons {
+    _playButton.togglesSelectedState = false;
+    _helpButton.togglesSelectedState = false;
+    _creditsButton.togglesSelectedState = false;
 }
 
 -(void) credits {
+    if (self.clickable) {
     CCScene *creditsScene = [CCBReader loadAsScene:@"Credits"];
     [[CCDirector sharedDirector] pushScene:creditsScene];
+    }
 }
 
 - (void)sandwichSpinAway {
@@ -61,43 +85,5 @@
     [GameState sharedInstance].bestStreak = 0;
     [GameState sharedInstance].bestAllClear = 0;
 }
-
-/* TODO: Calculate score system method - ended up doing it manually
- 
- -(void)didLoadFromCCB {
- 
- // Access score system dictionary
- NSInteger face = 0;
- NSInteger match;
- NSInteger perfectMatch;
- 
- NSString*sspath = [[NSBundle mainBundle] pathForResource:@"ScoreSystem" ofType:@"plist"];
- NSDictionary *ssroot = [NSDictionary dictionaryWithContentsOfFile:sspath];
- 
- NSArray *scoreSystem = [ssroot objectForKey: @"ScoreSystem"];
- 
- NSDictionary *ssdict = scoreSystem[face-1];
- match = [ssdict[@"score"] intValue];
- perfectMatch = [ssdict[@"double"] intValue];
- 
- // Access levels dictionary
- 
- NSInteger level = 0;
- NSInteger possibilities;
- 
- NSString*lpath = [[NSBundle mainBundle] pathForResource:@"Levels" ofType:@"plist"];
- NSDictionary *lroot = [NSDictionary dictionaryWithContentsOfFile:lpath];
- 
- NSArray *levels = [lroot objectForKey: @"Levels"];
- 
- NSDictionary *ldict = levels[level-1];
- possibilities = [ldict[@"possibilities"] intValue];
- 
- // Calculate target scores
- // for each level, take all possibilities, get average, and multiply by desired moves
- 
- }
- 
- */
 
 @end

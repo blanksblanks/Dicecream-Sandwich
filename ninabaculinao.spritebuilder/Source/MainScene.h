@@ -10,5 +10,6 @@
 
 @interface MainScene: CCNode
 
+@property (nonatomic, assign) BOOL clickable;
 
 @end

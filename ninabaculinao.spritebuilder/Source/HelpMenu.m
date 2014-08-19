@@ -10,12 +10,17 @@
 
 @implementation HelpMenu
 
+-(void)didLoadFromCCB {
+    self.cancelled = false;
+}
+
 -(void)next {
     switch (self.step) {
         case 0: {
             HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpCont"];
             [helpMenu setPositionType:CCPositionTypeNormalized];
             helpMenu.position = ccp(0.5, 0.53);
+            helpMenu.cancelled = false;
             [self.parent addChild:helpMenu];
             [self removeFromParent];
         }
@@ -23,6 +28,7 @@
             HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpEnd"];
             [helpMenu setPositionType:CCPositionTypeNormalized];
             helpMenu.position = ccp(0.5, 0.53);
+            helpMenu.cancelled = false;
             [self.parent addChild:helpMenu];
             [self removeFromParent];
         }
@@ -34,6 +40,7 @@
 
 -(void)cancel {
     [self removeFromParent];
+    self.cancelled = true;
 }
 
 @end

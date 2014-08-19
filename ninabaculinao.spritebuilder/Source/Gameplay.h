@@ -11,7 +11,6 @@
 @interface Gameplay : CCNode
 
 + (NSString*)convertAndUpdateTime:(NSInteger)seconds;
-
 + (NSString*)checkIfLeadingZeroNeeded:(NSInteger)time;
 
 @end
