@@ -1045,10 +1045,18 @@ static const NSInteger GRID_COLUMNS = 6;
             self.comboMultiplier++;
             self.perfectMatches++;
             self.chains++;
+//            if (self.comboMultiplier > 1) {
+//                NSString *comboString = [NSString stringWithFormat:@"Combo x%ld", (long)self.comboMultiplier];
+//                [self animateGameMessage:comboString];
+//            }
         } else {
             chain.score = face * 10 * ([chain.dice count]) * self.comboMultiplier;
             self.comboMultiplier++;
             self.chains++;
+//            if (self.comboMultiplier > 1) {
+//                NSString *comboString = [NSString stringWithFormat:@"Combo x%ld", (long)self.comboMultiplier];
+//                [self animateGameMessage:comboString];
+//            }
         }
     }
 }
