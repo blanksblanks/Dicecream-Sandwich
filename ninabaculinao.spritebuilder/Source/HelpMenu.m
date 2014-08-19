@@ -11,33 +11,23 @@
 
 @implementation HelpMenu
 
--(void)didLoadFromCCB {
-    self.cancelled = false;
-}
-
 -(void)next {
     switch (self.step) {
         case 0: {
-//            HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpCont"];
-//            [helpMenu setPositionType:CCPositionTypeNormalized];
-//            helpMenu.position = ccp(0.5, 0.53);
-//            helpMenu.cancelled = false;
-//            [self.parent addChild:helpMenu];
-//            [GameState sharedInstance].popUpClosed = false;
-//            [self removeFromParent];
-            CCScene *helpMenu = [CCBReader loadAsScene:@"HelpMenu/Help2"];
-            [[CCDirector sharedDirector] pushScene:helpMenu];
+            [GameState sharedInstance].popUp = TRUE;
+            HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpCont"];
+            [helpMenu setPositionType:CCPositionTypeNormalized];
+            helpMenu.position = ccp(0.5, 0.53);
+            [self.parent addChild:helpMenu];
+            [self removeFromParent];
         }
         case 1: {
-//            HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpEnd"];
-//            [helpMenu setPositionType:CCPositionTypeNormalized];
-//            helpMenu.position = ccp(0.5, 0.53);
-//            helpMenu.cancelled = false;
-//            [self.parent addChild:helpMenu];
-//            [GameState sharedInstance].popUpClosed = false;
-//            [self removeFromParent];
-            CCScene *helpMenu = [CCBReader loadAsScene:@"HelpMenu/Help3"];
-            [[CCDirector sharedDirector] pushScene:helpMenu];
+            [GameState sharedInstance].popUp = TRUE;
+            HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpEnd"];
+            [helpMenu setPositionType:CCPositionTypeNormalized];
+            helpMenu.position = ccp(0.5, 0.53);
+            [self.parent addChild:helpMenu];
+           [self removeFromParent];
         }
         case 2: {
             [self cancel];
@@ -46,11 +36,8 @@
 }
 
 -(void)cancel {
-//    [self removeFromParent];
-////    self.cancelled = true;
-//    [GameState sharedInstance].popUpClosed = true;
-    [[CCDirector sharedDirector] popToRootScene];
-
+    [self removeFromParent];
+    [GameState sharedInstance].popUp = false;
 }
 
 @end

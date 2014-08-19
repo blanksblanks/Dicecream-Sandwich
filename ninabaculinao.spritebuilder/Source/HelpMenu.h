@@ -20,6 +20,5 @@
 - (void) next;
 
 @property (nonatomic, assign) NSInteger step;
-@property (nonatomic, assign) BOOL cancelled;
 
 @end
