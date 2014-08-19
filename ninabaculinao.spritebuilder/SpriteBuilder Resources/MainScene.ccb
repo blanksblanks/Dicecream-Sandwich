@@ -456,7 +456,7 @@
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>dICECREAM     </string>
+							<string>DICE CREAM     </string>
 							<false/>
 						</array>
 					</dict>
@@ -2935,8 +2935,6 @@
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
