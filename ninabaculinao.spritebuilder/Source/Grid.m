@@ -154,6 +154,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 [self loadLevel];
                 if (specialFound && animationFinished) {
                     CCLOG(@"Specials activated:"); [self trackGridState];
+                    [self checkIfAllClear];
                     _timeSinceDrop = -0.2;
                     _dropInterval = 0.05;
                     actionIndex = 2; CCLOG(@"Special found. Going to case 2: filling holes");
@@ -167,6 +168,7 @@ static const NSInteger GRID_COLUMNS = 6;
                 [self loadLevel];
                 if (matchFound && animationFinished) {
                     CCLOG(@"Matches handled:"); [self trackGridState];
+                    [self checkIfAllClear];
                     _timeSinceDrop = -0.2;
                     _dropInterval = 0.05;
                     actionIndex = 2; CCLOG(@"Match found. Going to case 2: filling holes");
@@ -241,19 +243,23 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void) checkIfAllClear {
-    BOOL allClear = false;
+    BOOL allClear = true;
     for (NSInteger row = 0; row < GRID_ROWS; row++) {
         for (NSInteger column = 0; column < GRID_COLUMNS; column++) {
             BOOL positionFree = [_gridArray[row][column] isEqual: _noTile];
-            if (positionFree) {
-                allClear = true;
-            } else {
+            if (!positionFree) {
+                allClear = false;
                 break;
             }
         }
     }
     if (allClear) {
+        NSInteger allClearScore = 50 * self.level;
+        self.score += allClearScore;
+        NSString *allClearString = [NSString stringWithFormat:@"All Clear!"];
+        [self animateGameMessage:allClearString];
         self.allClear++;
+        CCLOG(@"All clear is now %li", (long)self.allClear);
     }
 }
 
@@ -711,6 +717,8 @@ static const NSInteger GRID_COLUMNS = 6;
 
 # pragma mark - Detect horizontal and vertical chains
 
+// TODO: Allow multiple matches if different faces for example '1"21'12"
+
 - (NSArray *)detectHorizontalMatches {
     NSMutableArray *array = [NSMutableArray array];
     // go through every tile in the grid
@@ -822,7 +830,7 @@ static const NSInteger GRID_COLUMNS = 6;
     
     [self calculateScores:specialChains];
     
-    [self checkIfAllClear];
+//    [self checkIfAllClear];
     
     return specialChains;
 }
@@ -904,7 +912,7 @@ static const NSInteger GRID_COLUMNS = 6;
     
     for (Chain *chain in chains) {
         [self animateScoreForChain:chain];
-        [self animateGameMessage];
+//        [self animateGameMessage];
         [self playPowerUpSound];
         for (Dice *die in chain.dice) {
             CCAnimationManager* animationManager = die.animationManager;
@@ -968,7 +976,7 @@ static const NSInteger GRID_COLUMNS = 6;
     [self calculateScores:horizontalChains];
     [self calculateScores:verticalChains];
     
-    [self checkIfAllClear];
+//    [self checkIfAllClear];
     
     return [horizontalChains arrayByAddingObjectsFromArray:verticalChains];
 }
@@ -986,7 +994,7 @@ static const NSInteger GRID_COLUMNS = 6;
     for (Chain *chain in chains) {
         [self playSuccessSound];
         [self animateScoreForChain:chain];
-        [self animateGameMessage];
+//        [self animateGameMessage];
         _firstDie = [chain.dice firstObject];
         _lastDie = [chain.dice lastObject];
         for (Dice *die in chain.dice) {
@@ -1103,7 +1111,7 @@ static const NSInteger GRID_COLUMNS = 6;
 */
 
 }
-
+/*
 - (void)animateGameMessage {
     if (self.combo > 10) {
         
@@ -1134,16 +1142,17 @@ static const NSInteger GRID_COLUMNS = 6;
         } delay:1.75];
     }
 }
+ */
 
-- (void)animateLevelUp {
+- (void)animateGameMessage:(NSString *)message{
     
     [self playLevelUpSound];
 
-    CGPoint beginPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 3.5);
-    CGPoint endPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 5.5);
-    NSString *scoreString = [NSString stringWithFormat:@"Level Up!"];
+    CGPoint beginPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 5.5);
+    CGPoint endPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 7.5);
+//    NSString *scoreString = [NSString stringWithFormat:@"Level Up!"];
     
-    CCLabelTTF *gameMessage = [CCLabelTTF labelWithString:scoreString fontName:@"Marker Felt" fontSize:48];
+    CCLabelTTF *gameMessage = [CCLabelTTF labelWithString:message fontName:@"Marker Felt" fontSize:48];
     gameMessage.outlineColor = [CCColor purpleColor];
     gameMessage.outlineWidth = 3.0f;
     gameMessage.position = beginPosition;
@@ -1210,7 +1219,8 @@ static const NSInteger GRID_COLUMNS = 6;
         self.level = 1;
     } else if (self.score >= self.targetScore) {
         self.level++;
-        [self animateLevelUp];
+        NSString *levelUpString = @"Level Up!";
+        [self animateGameMessage:levelUpString];
     }
     
     if (self.level > 9) {
