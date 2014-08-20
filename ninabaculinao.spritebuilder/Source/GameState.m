@@ -80,102 +80,78 @@ static NSString *const GAME_STATE_TIME_KEY = @"GameStateTimeKey";
 
 
 - (void)setBestLevel:(NSInteger)bestLevel {
-    //    if (_currentScore > _bestScore) {
     _bestLevel = bestLevel;
     NSNumber *levelNumber = [NSNumber numberWithInteger:bestLevel];
-    // broadcast change
     [[NSNotificationCenter defaultCenter]postNotificationName:GAME_STATE_LEVEL_NOTIFICATION object:levelNumber];
     
-    // store change
     [[NSUserDefaults standardUserDefaults]setObject:levelNumber forKey:GAME_STATE_LEVEL_KEY];
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
 
 - (void)setBestChains:(NSInteger)bestChains {
-    //    if (_currentScore > _bestScore) {
     _bestChains = bestChains;
     NSNumber *chainsNumber = [NSNumber numberWithInteger:bestChains];
-    // broadcast change
     [[NSNotificationCenter defaultCenter]postNotificationName:GAME_STATE_CHAINS_NOTIFICATION object:chainsNumber];
     
-    // store change
     [[NSUserDefaults standardUserDefaults]setObject:chainsNumber forKey:GAME_STATE_CHAINS_KEY];
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
 
 - (void)setBestChainsPerMin:(NSInteger)bestChainsPerMin {
-    //    if (_currentScore > _bestScore) {
     _bestChainsPerMin = bestChainsPerMin;
     NSNumber *chainsPerMinNumber = [NSNumber numberWithInteger:bestChainsPerMin];
-    // broadcast change
     [[NSNotificationCenter defaultCenter]postNotificationName:GAME_STATE_CHAINSPERMIN_NOTIFICATION object:chainsPerMinNumber];
     
-    // store change
     [[NSUserDefaults standardUserDefaults]setObject:chainsPerMinNumber forKey:GAME_STATE_CHAINSPERMIN_KEY];
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
 
 - (void)setBest6Chains:(NSInteger)best6Chains {
-    //    if (_currentScore > _bestScore) {
     _best6Chains = best6Chains;
     NSNumber *sixChainsNumber = [NSNumber numberWithInteger:best6Chains];
-    // broadcast change
     [[NSNotificationCenter defaultCenter]postNotificationName:GAME_STATE_6CHAINS_NOTIFICATION object:sixChainsNumber];
     
-    // store change
     [[NSUserDefaults standardUserDefaults]setObject:sixChainsNumber forKey:GAME_STATE_6CHAINS_KEY];
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
 
 - (void)setBestPerfectMatches:(NSInteger)bestPerfectMatches {
-    //    if (_currentScore > _bestScore) {
     _bestPerfectMatches = bestPerfectMatches;
     NSNumber *perfectMatchesNumber = [NSNumber numberWithInteger:bestPerfectMatches];
-    // broadcast change
     [[NSNotificationCenter defaultCenter]postNotificationName:GAME_STATE_PERFECTMATCHES_NOTIFICATION object:perfectMatchesNumber];
     
-    // store change
     [[NSUserDefaults standardUserDefaults]setObject:perfectMatchesNumber forKey:GAME_STATE_PERFECTMATCHES_KEY];
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
 
 - (void)setBestStreak:(NSInteger)bestStreak {
-    //    if (_currentScore > _bestScore) {
     _bestStreak = bestStreak;
     NSNumber *streakNumber = [NSNumber numberWithInteger:bestStreak];
-    // broadcast change
     [[NSNotificationCenter defaultCenter]postNotificationName:GAME_STATE_STREAK_NOTIFICATION object:streakNumber];
     
-    // store change
     [[NSUserDefaults standardUserDefaults]setObject:streakNumber forKey:GAME_STATE_STREAK_KEY];
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
 - (void)setBestAllClear:(NSInteger)bestAllClear {
-    //    if (_currentScore > _bestScore) {
     _bestAllClear = bestAllClear;
     NSNumber *allClearNumber = [NSNumber numberWithInteger:bestAllClear];
-    // broadcast change
     [[NSNotificationCenter defaultCenter]postNotificationName:GAME_STATE_ALLCLEAR_NOTIFICATION object:allClearNumber];
     
-    // store change
     [[NSUserDefaults standardUserDefaults]setObject:allClearNumber forKey:GAME_STATE_ALLCLEAR_KEY];
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
 - (void)setBestTime:(NSInteger)bestTime {
-    //    if (_currentScore > _bestScore) {
     _bestTime = bestTime;
     NSNumber *timeNumber = [NSNumber numberWithInteger:bestTime];
-    // broadcast change
     [[NSNotificationCenter defaultCenter]postNotificationName:GAME_STATE_TIME_NOTIFICATION object:timeNumber];
     
-    // store change
     [[NSUserDefaults standardUserDefaults]setObject:timeNumber forKey:GAME_STATE_TIME_KEY];
     [[NSUserDefaults standardUserDefaults]synchronize];
 }

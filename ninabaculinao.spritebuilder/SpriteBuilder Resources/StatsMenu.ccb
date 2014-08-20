@@ -1672,7 +1672,7 @@
 								<string>Text</string>
 								<key>value</key>
 								<array>
-									<string>PERFECT MATCH</string>
+									<string>PERFECT MATCHES</string>
 									<false/>
 								</array>
 							</dict>
@@ -1879,7 +1879,7 @@
 								<string>Text</string>
 								<key>value</key>
 								<array>
-									<string>PERFECT CLEAR</string>
+									<string>PERFECT CLEARS</string>
 									<false/>
 								</array>
 							</dict>
@@ -2015,6 +2015,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -5959,8 +5961,6 @@
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>

@@ -21,7 +21,6 @@ typedef NS_ENUM(NSInteger, GridState) {
 
 @interface Grid : CCSprite
 
-- (void)spawnDice;
 - (void)loadLevel;
 - (void)pause;
 - (void)unpause;
