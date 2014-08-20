@@ -27,6 +27,8 @@
 }
 
 - (void) stats {
+    [MGWU logEvent:@"stats_pressed_in_gameend" withParams:nil];
+    
     StatsMenu *statsMenu = (StatsMenu*) [CCBReader load:@"StatsMenu"];
     [statsMenu setPositionType:CCPositionTypeNormalized];
     statsMenu.position = ccp(0.5, 0.5);
@@ -35,12 +37,15 @@
 }
 
 - (void) home {
-    CCLOG(@"home button pressed");
+    [MGWU logEvent:@"home_pressed_in_gameend" withParams:nil];
+
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];
 }
 
 - (void) restart {
+    [MGWU logEvent:@"restart_pressed_in_gameend" withParams:nil];
+    
     CCScene *gamePlay = [CCBReader loadAsScene:@"Gameplay"];
     [[CCDirector sharedDirector] replaceScene:gamePlay];
 }

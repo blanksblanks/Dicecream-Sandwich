@@ -37,6 +37,8 @@
 }
 
 - (void)play {
+    [MGWU logEvent:@"play_pressed_in_mainscene" withParams:nil];
+    
     if (self.clickable == TRUE) {
         self.clickable = FALSE; // can only click play once / this doesn't work either, but that's okay
         [self performSelector:@selector(sandwichSpinAway)];
@@ -48,6 +50,8 @@
 }
 
 -(void) help {
+    [MGWU logEvent:@"help_pressed_in_mainscene" withParams:nil];
+    
     if (self.clickable) {
         [GameState sharedInstance].popUp = TRUE;
         helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpStart"];
@@ -72,6 +76,8 @@
 }
 
 -(void) credits {
+    [MGWU logEvent:@"credits_pressed_in_mainscene" withParams:nil];
+    
     CCScene *creditsScene = [CCBReader loadAsScene:@"Credits"];
     [[CCDirector sharedDirector] pushScene:creditsScene];
 }

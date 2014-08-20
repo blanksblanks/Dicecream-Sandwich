@@ -1250,6 +1250,9 @@ static const NSInteger GRID_COLUMNS = 6;
         self.touchEnabled = false;
         //    [self.audio stopEverything];
         [self assignStats];
+        NSDictionary *params = [self assignParams];
+        [MGWU logEvent:@"level_complete" withParams:params];
+        
         GameEnd *gameEnd = (GameEnd*) [CCBReader load:@"GameEnd"];
         [gameEnd setPositionType:CCPositionTypeNormalized];
         gameEnd.position = ccp(0.5, 0.5);
@@ -1291,8 +1294,18 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
--(void) endGame {
-    [self gameEnd];
+-(NSDictionary*) assignParams {
+    NSNumber* score = [NSNumber numberWithInt:(int)self.score];
+    NSNumber* level = [NSNumber numberWithInt:(int)self.level];
+    NSNumber* time = [NSNumber numberWithInt:(int)self.timer];
+    NSNumber* chains = [NSNumber numberWithInt:(int)self.chains];
+    NSNumber* chainsPerMin = [NSNumber numberWithInt:(int)(self.chains/(self.timer/60))];
+    NSNumber* sixChains = [NSNumber numberWithInt:(int)self.sixChains];
+    NSNumber* perfectMatches = [NSNumber numberWithInt:(int)self.perfectMatches];
+    NSNumber* allClear = [NSNumber numberWithInt:(int)self.allClear];
+    
+    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys: score, @"score", level, @"level", time, @"time", chains, @"chains", chainsPerMin, @"chainsPerMin", sixChains, @"sixChains", perfectMatches, @"perfectMatches", allClear, @"allClear", nil];
+    return params;
 }
 
 /*

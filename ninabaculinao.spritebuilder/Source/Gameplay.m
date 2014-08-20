@@ -124,7 +124,9 @@
     return digits;
 }
 
-- (void)pause {    
+- (void)pause {
+    [MGWU logEvent:@"pause_pressed_in_gameplay" withParams:nil];
+    
     PauseMenu *pauseMenu = (PauseMenu*) [CCBReader load:@"PauseMenu"];
     audio.paused = TRUE;
     pauseMenu.position = ccp(51, 25);

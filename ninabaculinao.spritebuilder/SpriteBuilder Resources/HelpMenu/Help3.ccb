@@ -137,8 +137,6 @@
 						<real>0.0</real>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -849,8 +847,9 @@
 								<string>Text</string>
 								<key>value</key>
 								<array>
-									<string>Dicecreams start and end with 6!
-Score 2x points with perfect matches!</string>
+									<string>Score 2x points with perfect matches!
+
+Dicecreams start and end with 6!</string>
 									<false/>
 								</array>
 							</dict>
