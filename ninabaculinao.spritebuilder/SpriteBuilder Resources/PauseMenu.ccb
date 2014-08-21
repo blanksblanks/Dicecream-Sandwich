@@ -65,7 +65,7 @@
 								<key>displayName</key>
 								<string>Home_Icon_CCButton</string>
 								<key>memberVarAssignmentName</key>
-								<string></string>
+								<string>_homeButton</string>
 								<key>memberVarAssignmentType</key>
 								<integer>1</integer>
 								<key>properties</key>
@@ -389,9 +389,9 @@
 								<key>customClass</key>
 								<string></string>
 								<key>displayName</key>
-								<string>Audio_Icon_CCButtonConfig</string>
+								<string>Sound_Icon_CCButtonConfig</string>
 								<key>memberVarAssignmentName</key>
-								<string></string>
+								<string>_musicButton</string>
 								<key>memberVarAssignmentType</key>
 								<integer>1</integer>
 								<key>properties</key>
@@ -449,7 +449,7 @@
 										<string>Block</string>
 										<key>value</key>
 										<array>
-											<string>settings</string>
+											<string>music</string>
 											<integer>1</integer>
 										</array>
 									</dict>
@@ -717,7 +717,7 @@
 								<key>displayName</key>
 								<string>Question_Icon_CCButtonTut</string>
 								<key>memberVarAssignmentName</key>
-								<string></string>
+								<string>_helpButton</string>
 								<key>memberVarAssignmentType</key>
 								<integer>1</integer>
 								<key>properties</key>
@@ -1074,7 +1074,7 @@
 								<key>displayName</key>
 								<string>Replay_Icon_CCButton_Restart</string>
 								<key>memberVarAssignmentName</key>
-								<string></string>
+								<string>_restartButton</string>
 								<key>memberVarAssignmentType</key>
 								<integer>1</integer>
 								<key>properties</key>
@@ -1410,7 +1410,7 @@
 								<key>displayName</key>
 								<string>Pause_Icon_CCButton</string>
 								<key>memberVarAssignmentName</key>
-								<string></string>
+								<string>_resumeButton</string>
 								<key>memberVarAssignmentType</key>
 								<integer>1</integer>
 								<key>properties</key>
@@ -1723,6 +1723,8 @@
 										</array>
 									</dict>
 								</array>
+								<key>selected</key>
+								<true/>
 							</dict>
 						</array>
 						<key>customClass</key>

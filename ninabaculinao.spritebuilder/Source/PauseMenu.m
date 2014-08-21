@@ -9,10 +9,45 @@
 #import "PauseMenu.h"
 #import "HelpMenu.h"
 #import "Grid.h"
+#import "GameState.h"
 
 @implementation PauseMenu {
-    
+    CCButton *_homeButton;
+    CCButton *_musicButton;
+    CCButton *_helpButton;
+    CCButton *_restartButton;
+    CCButton *_resumeButton;
 }
+
+- (void)didLoadFromCCB {
+    [GameState sharedInstance].popUp = FALSE;
+    [self toggleButtonsOn];
+}
+
+- (void) update:(CCTime) delta {
+    if ([GameState sharedInstance].popUp) {
+        [self toggleButtonsOff];
+    } else if (![GameState sharedInstance].popUp) {
+        [self toggleButtonsOn];
+    }
+}
+
+- (void) toggleButtonsOff {
+        _homeButton.enabled = false;
+        _musicButton.enabled = false;
+        _helpButton.enabled = false;
+        _restartButton.enabled = false;
+        _resumeButton.enabled = false;
+}
+
+- (void) toggleButtonsOn {
+        _homeButton.enabled = true;
+        _musicButton.enabled = true;
+        _helpButton.enabled = true;
+        _restartButton.enabled = true;
+        _resumeButton.enabled = true;
+}
+
 
 - (void) resume {
     [MGWU logEvent:@"resume_pressed" withParams:nil];
@@ -37,14 +72,15 @@
 
 - (void) help {
     [MGWU logEvent:@"help_pressed_in_gameplay" withParams:nil];
-    
-    HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpStart"];
+
+    [GameState sharedInstance].popUp = TRUE;
+    HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu"];
     [helpMenu setPositionType:CCPositionTypeNormalized];
     helpMenu.position = ccp(0.5, 0.53); // or consider .scale = 0.8f;
     [self.parent addChild:helpMenu];
 }
 
-- (void) settings {
+- (void) music {
     [MGWU logEvent:@"music_toggled" withParams:nil];
     
 // Four lines in one

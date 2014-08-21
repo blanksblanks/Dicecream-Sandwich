@@ -11,7 +11,6 @@
 #import "HelpMenu.h"
 
 @implementation MainScene {
-    HelpMenu *helpMenu;
     CCButton *_playButton;
     CCButton *_helpButton;
     CCButton *_creditsButton;
@@ -19,58 +18,38 @@
 
 -(void)didLoadFromCCB {
     [GameState sharedInstance].popUp = FALSE;
-    self.clickable = true;
+    [self toggleButtonsOn];
 }
 
 - (void) update:(CCTime) delta {
-    if ([GameState sharedInstance].popUp == TRUE) { // while popup is open, buttons should be disabled
-        self.clickable = false; // only works for first help popup for some reason...
-        [self toggleButtons];
-    } else if ([GameState sharedInstance].popUp == FALSE) { // reset clickability
-        self.clickable = true;
-        [self toggleButtons];
+    if ([GameState sharedInstance].popUp) {
+        [self toggleButtonsOff];
+    } else if (![GameState sharedInstance].popUp) { // reset clickability
+        [self toggleButtonsOn];
     }
+}
+
+- (void) toggleButtonsOff {
+        _playButton.enabled = false;
+        _helpButton.enabled = false;
+        _creditsButton.enabled = false;
+}
+
+- (void) toggleButtonsOn {
+        _playButton.enabled = true;
+        _helpButton.enabled = true;
+        _creditsButton.enabled = true;
 }
 
 - (void)play {
     [MGWU logEvent:@"play_pressed_in_mainscene" withParams:nil];
     
-    if (self.clickable == TRUE) {
-        self.clickable = FALSE; // can only click play once / this doesn't work either, but that's okay
-        [self performSelector:@selector(sandwichSpinAway)];
-        [self scheduleBlock:^(CCTimer *timer) {
-            CCScene *gameplayScene = [CCBReader loadAsScene:@"Gameplay"];
-            [[CCDirector sharedDirector] replaceScene:gameplayScene];
-        } delay:1.5];
-    }
-}
-
--(void) help {
-    [MGWU logEvent:@"help_pressed_in_mainscene" withParams:nil];
-        [GameState sharedInstance].popUp = TRUE;
-        helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpStart"];
-        [helpMenu setPositionType:CCPositionTypeNormalized];
-        helpMenu.position = ccp(0.5, 0.53); // or consider .scale = 0.8f;
-        [self.parent addChild:helpMenu];
-}
-
--(void) toggleButtons {
-    if (!self.clickable) {
-        _playButton.enabled = false;
-        _helpButton.enabled = false;
-        _creditsButton.enabled = false;
-    } else {
-        _playButton.enabled = true;
-        _helpButton.enabled = true;
-        _creditsButton.enabled = true;
-    }
-}
-
--(void) credits {
-    [MGWU logEvent:@"credits_pressed_in_mainscene" withParams:nil];
-    
-    CCScene *creditsScene = [CCBReader loadAsScene:@"Credits"];
-    [[CCDirector sharedDirector] pushScene:creditsScene];
+    [self toggleButtonsOff];
+    [self performSelector:@selector(sandwichSpinAway)];
+    [self scheduleBlock:^(CCTimer *timer) {
+        CCScene *gameplayScene = [CCBReader loadAsScene:@"Gameplay"];
+        [[CCDirector sharedDirector] replaceScene:gameplayScene];
+    } delay:1.5];
 }
 
 - (void)sandwichSpinAway {
@@ -82,6 +61,25 @@
     [audio preloadEffect:@"8-bit-boing.wav"];
     // play sound effect
     [audio playEffect:@"8-bit-boing.wav"];
+}
+
+
+-(void) help {
+    [MGWU logEvent:@"help_pressed_in_mainscene" withParams:nil];
+    
+    [GameState sharedInstance].popUp = TRUE;
+    HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu"];
+    [helpMenu setPositionType:CCPositionTypeNormalized];
+    helpMenu.position = ccp(0.5, 0.53); // or consider .scale = 0.8f;
+    [self addChild:helpMenu];
+}
+
+
+-(void) credits {
+    [MGWU logEvent:@"credits_pressed_in_mainscene" withParams:nil];
+    
+    CCScene *creditsScene = [CCBReader loadAsScene:@"Credits"];
+    [[CCDirector sharedDirector] pushScene:creditsScene];
 }
 
 - (void)reset {

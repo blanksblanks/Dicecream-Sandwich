@@ -12,13 +12,14 @@
 
 @interface PauseMenu : CCNode
 
-- (void) resume;
-- (void) restart;
-- (void) help;
-- (void) settings;
-- (void) home;
+//- (void) resume;
+//- (void) restart;
+//- (void) help;
+//- (void) settings;
+//- (void) home;
 
 @property (nonatomic, strong) Grid *grid;
 @property (nonatomic, strong) OALSimpleAudio *audio;
+
 
 @end
