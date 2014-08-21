@@ -170,7 +170,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.51379299163818359</real>
+							<real>0.5</real>
 							<real>395.00006103515625</real>
 							<integer>0</integer>
 							<integer>2</integer>
@@ -218,7 +218,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Fonts/RumRaisin-Regular.ttf</string>
+						<string>workingAssets/Vanilla.ttf</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -227,7 +227,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>36</real>
+							<real>24</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -289,8 +289,8 @@
 						<key>value</key>
 						<array>
 							<real>0.0</real>
-							<real>0.62965184450149536</real>
-							<real>0.62965184450149536</real>
+							<real>0.75416558980941772</real>
+							<real>0.75416558980941772</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -377,7 +377,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.475862056016922</real>
+							<real>0.5</real>
 							<real>0.099767982959747314</real>
 							<integer>0</integer>
 							<integer>2</integer>
@@ -741,7 +741,7 @@
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>Score 2x points with perfect matches!</string>
+							<string>Perfect matches give 2x points!</string>
 							<false/>
 						</array>
 					</dict>
@@ -751,7 +751,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Fonts/DimboRegular.ttf</string>
+						<string>workingAssets/Vanilla.ttf</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -760,7 +760,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>20</real>
+							<real>12</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -967,7 +967,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>12</real>
+							<real>10</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -2265,7 +2265,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>12</real>
+							<real>10</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -2631,7 +2631,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>120</real>
+							<real>104</real>
 							<integer>0</integer>
 							<integer>2</integer>
 							<integer>0</integer>
@@ -2668,8 +2668,9 @@
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>Time’s ticking! Don’t let the dice
-reach the top!</string>
+							<string>Dicecreams start &amp; end with 6.
+
+Time’s ticking...</string>
 							<false/>
 						</array>
 					</dict>
@@ -2805,8 +2806,6 @@ reach the top!</string>
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
