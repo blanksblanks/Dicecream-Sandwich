@@ -12,20 +12,17 @@
 
 @implementation MainScene {
     HelpMenu *helpMenu;
-    HelpMenu *helpMenu2;
-    HelpMenu *helpMenu3;
     CCButton *_playButton;
     CCButton *_helpButton;
     CCButton *_creditsButton;
 }
 
 -(void)didLoadFromCCB {
-    [GameState sharedInstance].popUp = false;
+    [GameState sharedInstance].popUp = FALSE;
     self.clickable = true;
 }
 
 - (void) update:(CCTime) delta {
-    CCLOG(@"%hhd", [GameState sharedInstance].popUp);
     if ([GameState sharedInstance].popUp == TRUE) { // while popup is open, buttons should be disabled
         self.clickable = false; // only works for first help popup for some reason...
         [self toggleButtons];
@@ -33,7 +30,6 @@
         self.clickable = true;
         [self toggleButtons];
     }
-
 }
 
 - (void)play {
@@ -51,16 +47,11 @@
 
 -(void) help {
     [MGWU logEvent:@"help_pressed_in_mainscene" withParams:nil];
-    
-    if (self.clickable) {
         [GameState sharedInstance].popUp = TRUE;
         helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpStart"];
-//        helpMenu2 = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpCont"];
-//        helpMenu3 = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpEnd"];
         [helpMenu setPositionType:CCPositionTypeNormalized];
         helpMenu.position = ccp(0.5, 0.53); // or consider .scale = 0.8f;
         [self.parent addChild:helpMenu];
-    }
 }
 
 -(void) toggleButtons {

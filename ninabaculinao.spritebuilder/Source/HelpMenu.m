@@ -9,35 +9,43 @@
 #import "HelpMenu.h"
 #import "GameState.h"
 
-@implementation HelpMenu
+@implementation HelpMenu {
+    NSInteger step;
+    CCNode *_help1;
+    CCNode *_help2;
+    CCNode *_help3;
+}
+
+-(void)didLoadFromCCB {
+    step = 0;
+    _help1.visible = true;
+    _help2.visible = false;
+    _help3.visible = false;
+}
 
 -(void)next {
-    switch (self.step) {
+    switch (step) {
         case 0: {
-            [GameState sharedInstance].popUp = TRUE;
-            HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpCont"];
-            [helpMenu setPositionType:CCPositionTypeNormalized];
-            helpMenu.position = ccp(0.5, 0.53);
-            [self.parent addChild:helpMenu];
-            [self removeFromParent];
+            _help1.visible = false;
+            _help2.visible = true;
+            break;
         }
         case 1: {
-            [GameState sharedInstance].popUp = TRUE;
-            HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu/HelpEnd"];
-            [helpMenu setPositionType:CCPositionTypeNormalized];
-            helpMenu.position = ccp(0.5, 0.53);
-            [self.parent addChild:helpMenu];
-           [self removeFromParent];
+            _help2.visible = false;
+            _help3.visible = true;
+            break;
         }
         case 2: {
             [self cancel];
+            break;
         }
     }
+    step++;
 }
 
 -(void)cancel {
     [self removeFromParent];
-    [GameState sharedInstance].popUp = false;
+    [GameState sharedInstance].popUp = FALSE;
 }
 
 @end

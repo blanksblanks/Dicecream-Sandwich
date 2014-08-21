@@ -19,6 +19,6 @@
 - (void) cancel;
 - (void) next;
 
-@property (nonatomic, assign) NSInteger step;
+//@property (nonatomic, assign) NSInteger step;
 
 @end
