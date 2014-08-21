@@ -1246,6 +1246,11 @@ static const NSInteger GRID_COLUMNS = 6;
 
 # pragma mark - Game over
 
+// for debugging
+- (void)endGame{
+    [self gameEnd];
+}
+
 - (void) gameEnd {
     NSDictionary *params = [self assignParams];
     [MGWU logEvent:@"gameover" withParams:params];
@@ -1257,6 +1262,7 @@ static const NSInteger GRID_COLUMNS = 6;
         self.touchEnabled = false;
         //    [self.audio stopEverything];
         [self assignStats];
+        NSLog(@"%li", (long)[GameState sharedInstance].currentAllClear);
         
         GameEnd *gameEnd = (GameEnd*) [CCBReader load:@"GameEnd"];
         [gameEnd setPositionType:CCPositionTypeNormalized];
