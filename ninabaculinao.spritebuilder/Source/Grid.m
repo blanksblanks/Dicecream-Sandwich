@@ -530,10 +530,14 @@ static const NSInteger GRID_COLUMNS = 6;
     }
     
     if ((ydifference > 0.2*(self.contentSize.height)) && (newTouchPosition.y < _currentDie1.position.y) && (newTouchPosition.y < _currentDie2.position.y)) {
-        _dropInterval = 0.03;
-    } else if ((xdifference > 0.5*(_tileWidth))) {
+        _dropInterval = 0.03; // soft drop
+    } else if ((xdifference > 0) && (xdifference <= 1.5*(_tileWidth))) {
+        [self swipeLeft];
+    } else if ((xdifference > 1.5*(_tileWidth))) {
         [self swipeLeftTo:column];
-    } else if ((xdifference < -0.5*(_tileWidth))) {
+    } else if ((xdifference < 0) && (xdifference >= -1.5*(_tileWidth))) {
+        [self swipeRightTo:column];
+    } else if ((xdifference < -1.5*(_tileWidth))) {
         [self swipeRightTo:column];
     } else {
         _dropInterval = self.levelSpeed;
@@ -549,9 +553,9 @@ static const NSInteger GRID_COLUMNS = 6;
     NSTimeInterval touchInterval = newTouchTime - oldTouchTime;
     
     if ((touchInterval > 0.2)  && (ydifference > 0.2*(self.contentSize.height))) {
-        _dropInterval = self.levelSpeed; // soft drop
+        _dropInterval = self.levelSpeed; // soft drop returns to normal speed
     } else if ((touchInterval < 0.2) && (ydifference > 0.2*(self.contentSize.height))) {
-        _dropInterval = 0.01; // hard drop
+        _dropInterval = 0.005; // hard drop
     } else if ((touchInterval < 0.2) && (xdifference < 0.5*(_tileWidth)) && (xdifference > -0.5*(_tileWidth))) {
         [self rotate];
     }
@@ -1243,6 +1247,9 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Game over
 
 - (void) gameEnd {
+    NSDictionary *params = [self assignParams];
+    [MGWU logEvent:@"gameover" withParams:params];
+    
     [self pause];
     [self playGameOverSound];
     [self scheduleBlock:^(CCTimer *timer) {
@@ -1250,8 +1257,6 @@ static const NSInteger GRID_COLUMNS = 6;
         self.touchEnabled = false;
         //    [self.audio stopEverything];
         [self assignStats];
-        NSDictionary *params = [self assignParams];
-        [MGWU logEvent:@"level_complete" withParams:params];
         
         GameEnd *gameEnd = (GameEnd*) [CCBReader load:@"GameEnd"];
         [gameEnd setPositionType:CCPositionTypeNormalized];

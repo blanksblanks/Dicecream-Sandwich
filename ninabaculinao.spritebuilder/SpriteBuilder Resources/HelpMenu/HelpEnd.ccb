@@ -218,7 +218,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>workingAssets/Vanilla.ttf</string>
+						<string>Fonts/RumRaisin-Regular.ttf</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -227,7 +227,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>24</real>
+							<real>36</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -289,9 +289,9 @@
 						<key>value</key>
 						<array>
 							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>0.62965184450149536</real>
+							<real>0.62965184450149536</real>
+							<real>1</real>
 						</array>
 					</dict>
 					<dict>
@@ -301,7 +301,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
+							<real>3</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -543,7 +543,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>GillSans-Bold</string>
+						<string>Fonts/Cloudy With a Chance of Love.ttf</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -552,7 +552,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>17</real>
+							<real>24</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -741,8 +741,7 @@
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>Dicecreams start and end with 6!
-Score 2x points with perfect matches!</string>
+							<string>Score 2x points with perfect matches!</string>
 							<false/>
 						</array>
 					</dict>
@@ -752,7 +751,7 @@ Score 2x points with perfect matches!</string>
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>workingAssets/Vanilla.ttf</string>
+						<string>Fonts/DimboRegular.ttf</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -761,7 +760,7 @@ Score 2x points with perfect matches!</string>
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>11.5</real>
+							<real>20</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -878,8 +877,6 @@ Score 2x points with perfect matches!</string>
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -951,7 +948,7 @@ Score 2x points with perfect matches!</string>
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>6 fillings</string>
+							<string>6 fillings = dicecream</string>
 							<false/>
 						</array>
 					</dict>
@@ -2249,7 +2246,7 @@ Score 2x points with perfect matches!</string>
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>all 6’s</string>
+							<string>all 6’s = perfect match</string>
 							<false/>
 						</array>
 					</dict>
@@ -2808,6 +2805,8 @@ reach the top!</string>
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>

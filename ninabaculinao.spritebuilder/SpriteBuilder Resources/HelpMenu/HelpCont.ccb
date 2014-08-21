@@ -543,7 +543,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>GillSans-Bold</string>
+						<string>Fonts/Cloudy With a Chance of Love.ttf</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -552,7 +552,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>17</real>
+							<real>22</real>
 							<integer>0</integer>
 						</array>
 					</dict>

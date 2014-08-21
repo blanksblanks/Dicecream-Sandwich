@@ -137,8 +137,6 @@
 						<real>0.0</real>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -326,7 +324,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>workingAssets/Vanilla.ttf</string>
+								<string>Fonts/DimboRegular.ttf</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -985,6 +983,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>

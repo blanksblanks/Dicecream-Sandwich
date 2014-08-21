@@ -649,7 +649,7 @@
 								<key>type</key>
 								<string>FontTTF</string>
 								<key>value</key>
-								<string>GillSans-Bold</string>
+								<string>Fonts/DimboRegular.ttf</string>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -658,7 +658,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>17</real>
+									<real>24</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -776,6 +776,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 					<dict>
 						<key>UUID</key>
