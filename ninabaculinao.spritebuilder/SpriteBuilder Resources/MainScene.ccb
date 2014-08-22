@@ -10,11 +10,11 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>219</integer>
+	<integer>231</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
-	<integer>1</integer>
+	<integer>0</integer>
 	<key>currentSequenceId</key>
 	<integer>1</integer>
 	<key>docDimensionsType</key>
@@ -1789,7 +1789,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
+							<real>5</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -2877,7 +2877,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
+									<real>5</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -3041,7 +3041,7 @@
 				<array>
 					<dict>
 						<key>UUID</key>
-						<integer>209</integer>
+						<integer>230</integer>
 						<key>baseClass</key>
 						<string>CCNodeColor</string>
 						<key>children</key>
@@ -3049,7 +3049,7 @@
 						<key>customClass</key>
 						<string></string>
 						<key>displayName</key>
-						<string>CCNodeColor</string>
+						<string>TealColor</string>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
@@ -3072,8 +3072,8 @@
 								<key>value</key>
 								<array>
 									<real>0.0</real>
-									<real>0.0</real>
-									<integer>0</integer>
+									<real>25</real>
+									<integer>3</integer>
 									<integer>0</integer>
 									<integer>0</integer>
 								</array>
@@ -3098,8 +3098,8 @@
 								<string>Point</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
-									<real>0.0</real>
+									<real>1</real>
+									<real>0.5</real>
 								</array>
 							</dict>
 							<dict>
@@ -3122,9 +3122,9 @@
 								<string>Color3</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
-									<real>0.50196081399917603</real>
-									<real>0.50196081399917603</real>
+									<real>0.35294118523597717</real>
+									<real>0.82745099067687988</real>
+									<real>0.82352942228317261</real>
 									<real>1</real>
 								</array>
 							</dict>

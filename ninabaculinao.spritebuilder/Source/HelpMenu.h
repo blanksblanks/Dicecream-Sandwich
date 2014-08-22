@@ -16,8 +16,8 @@
 //    HelpStageEnd,
 //};
 
-- (void) cancel;
-- (void) next;
+//- (void) cancel;
+//- (void) next;
 
 //@property (nonatomic, assign) NSInteger step;
 

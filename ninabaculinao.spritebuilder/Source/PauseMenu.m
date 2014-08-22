@@ -96,7 +96,6 @@
 - (void) home {
     [MGWU logEvent:@"home_pressed_in_gameplay" withParams:nil];
 
-    CCLOG(@"home button pressed");
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];
 }

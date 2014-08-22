@@ -220,7 +220,7 @@
 						<key>value</key>
 						<array>
 							<real>118</real>
-							<real>45</real>
+							<real>0.0</real>
 							<integer>0</integer>
 							<integer>0</integer>
 						</array>
@@ -336,7 +336,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Fonts/Cloudy With a Chance of Love.ttf</string>
+						<string>Fonts/DimboRegular.ttf</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -383,7 +383,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
+							<real>5</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -789,6 +789,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -6841,8 +6843,6 @@ Time’s ticking...</string>
 				</array>
 			</dict>
 		</array>
-		<key>selected</key>
-		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
