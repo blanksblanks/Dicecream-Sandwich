@@ -66,8 +66,8 @@ static const NSInteger GRID_COLUMNS = 6;
     // Initialize values
     _timer = 0;
     _counter = 0;
-    stabilizing = false;
-    specialsAllowed = false;
+    stabilizing = FALSE;
+    specialsAllowed = FALSE;
     self.score = 0;
     self.chains = 0;
     self.sixChains = 0;
@@ -76,9 +76,14 @@ static const NSInteger GRID_COLUMNS = 6;
     self.streak = 0;
     self.allClear = 0;
     
-    self.gameOver = false;
-    self.paused = false;
+    self.gameOver = FALSE;
+    self.paused = FALSE;
     self.touchEnabled = TRUE;
+
+    // Begin music by accessing audio object and playing background sound
+    self.audio = [OALSimpleAudio sharedInstance];
+    [self.audio preloadBg:@"Catchy.wav"];
+    [self.audio playBgWithLoop:TRUE];
     
     [self setupGrid];
     
@@ -482,12 +487,12 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void) playHitBottom {
-    // access audio object
-    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+//    // access audio object
+//    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
     // play background sound
-    [audio preloadEffect:@"pop5.wav"];
+    [self.audio preloadEffect:@"pop5.wav"];
     // play sound effect
-    [audio playEffect:@"pop5.wav"];
+    [self.audio playEffect:@"pop5.wav"];
 }
 
 # pragma mark - Touch handling - let player swipe left/right/down/rotate
@@ -577,12 +582,8 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Swipe and rotate methods
 
 - (void)playMoveSound {
-    // access audio object
-    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
-    // play background sound
-    [audio preloadEffect:@"click2.wav"];
-    // play sound effect
-    [audio playEffect:@"click2.wav"];
+    [self.audio preloadEffect:@"click2.wav"];
+    [self.audio playEffect:@"click2.wav"];
 }
 
 - (void)swipeLeftTo:(NSInteger)column {
@@ -935,21 +936,13 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void)playSuccessSound {
-    // access audio object
-    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
-    // play background sound
-    [audio preloadEffect:@"success.wav"];
-    // play sound effect
-    [audio playEffect:@"success.wav"];
+    [self.audio preloadEffect:@"success.wav"];
+    [self.audio playEffect:@"success.wav"];
 }
 
 - (void)playPowerUpSound {
-    // access audio object
-    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
-    // play background sound
-    [audio preloadEffect:@"powerUp.wav"];
-    // play sound effect
-    [audio playEffect:@"powerUp.wav"];
+    [self.audio preloadEffect:@"powerUp.wav"];
+    [self.audio playEffect:@"powerUp.wav"];
 }
 
 # pragma mark - Remove and handle matches
@@ -1183,12 +1176,8 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 -(void) playLevelUpSound {
-    // access audio object
-    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
-    // play background sound
-    [audio preloadEffect:@"levelUp.wav"];
-    // play sound effect
-    [audio playEffect:@"levelUp.wav"];
+    [self.audio preloadEffect:@"levelUp.wav"];
+    [self.audio playEffect:@"levelUp.wav"];
 }
 
 # pragma mark - Fill in holes
@@ -1272,12 +1261,8 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void) playGameOverSound {
-    // access audio object
-    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
-    // play background sound
-    [audio preloadEffect:@"oneBlastWhistle.wav"];
-    // play sound effect
-    [audio playEffect:@"oneBlastWhistle.wav"];
+    [self.audio preloadEffect:@"oneBlastWhistle.wav"];
+    [self.audio playEffect:@"oneBlastWhistle.wav"];
 }
 
 -(void) assignStats {

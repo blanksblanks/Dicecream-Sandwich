@@ -29,11 +29,6 @@
 - (id)init {
     if (self = [super init]) {
         self.userInteractionEnabled = TRUE;
-        // access audio object
-        audio = [OALSimpleAudio sharedInstance];
-        // play background sound
-        [audio playBg:@"CATchy.wav" loop:TRUE];
-         _timeLabel.string = [NSString stringWithFormat:@"%li", (long)_grid.timer];
     }
     return self;
 }
@@ -41,7 +36,9 @@
 - (void)didLoadFromCCB {
     
     animationManager = self.animationManager;
-//    _grid.audio = audio;
+    // _grid.audio = audio;
+    
+    _timeLabel.string = [NSString stringWithFormat:@"%li", (long)_grid.timer];
     
     [_grid addObserver:self forKeyPath:@"score" options:0 context:NULL];
     [_grid addObserver:self forKeyPath:@"targetScore" options:0 context:NULL];
@@ -96,7 +93,7 @@
     
     if (_grid.gameOver) {
         [animationManager runAnimationsForSequenceNamed:@"starsRotate"];
-        [audio stopEverything];
+        [_grid.audio stopEverything];
     }
 }
 
@@ -127,7 +124,7 @@
     [MGWU logEvent:@"pause_pressed_in_gameplay" withParams:nil];
     
     PauseMenu *pauseMenu = (PauseMenu*) [CCBReader load:@"PauseMenu"];
-    audio.paused = TRUE;
+//    audio.paused = TRUE;
     pauseMenu.position = ccp(51, 25);
     [self addChild:pauseMenu];
     [_grid pause];
@@ -138,7 +135,7 @@
     [pauseMenu runAction:sequence];
 
     pauseMenu.grid = _grid;
-    pauseMenu.audio = audio;
+    pauseMenu.audio = _grid.audio;
 }
 
 

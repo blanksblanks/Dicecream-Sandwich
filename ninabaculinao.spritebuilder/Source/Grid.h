@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, GridState) {
 @property (nonatomic, assign) BOOL paused;
 @property (nonatomic, assign) BOOL touchEnabled;
 @property (nonatomic, assign) BOOL gameOver;
-//@property (nonatomic, strong) OALSimpleAudio *audio;
+@property (nonatomic, strong) OALSimpleAudio *audio;
 //@property (nonatomic, strong) Gameplay *gameplay;
 @property (nonatomic, assign) NSInteger chains; // in calculate score
 @property (nonatomic, assign) NSInteger chainsPerMin; // in game end

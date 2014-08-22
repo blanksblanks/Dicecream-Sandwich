@@ -89,12 +89,15 @@
 //    } else {
 //        self.audio.muted = false;
 //    }
-    self.audio.bgMuted = !self.audio.bgMuted;
+    self.audio.bgPaused = !self.audio.bgPaused;
 }
 
 // TODO: "Are you sure?" pop up
 - (void) home {
     [MGWU logEvent:@"home_pressed_in_gameplay" withParams:nil];
+
+    _grid.gameOver = true;
+    _grid.touchEnabled = false;
 
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];
