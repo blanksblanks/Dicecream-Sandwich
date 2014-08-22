@@ -28,7 +28,6 @@
 
 - (id)init {
     if (self = [super init]) {
-        
         self.userInteractionEnabled = TRUE;
         // access audio object
         audio = [OALSimpleAudio sharedInstance];

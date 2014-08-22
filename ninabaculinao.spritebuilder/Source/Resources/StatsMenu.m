@@ -72,12 +72,15 @@
 }
 
 - (void) home {
-    CCLOG(@"home button pressed");
+    [MGWU logEvent:@"home_pressed_in_gameend" withParams:nil];
+    
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];
 }
 
 - (void) restart {
+    [MGWU logEvent:@"restart_pressed_in_gameend" withParams:nil];
+
     CCScene *gamePlay = [CCBReader loadAsScene:@"Gameplay"];
     [[CCDirector sharedDirector] replaceScene:gamePlay];
 }

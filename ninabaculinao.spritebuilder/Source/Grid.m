@@ -529,15 +529,15 @@ static const NSInteger GRID_COLUMNS = 6;
         column = 0;
     }
     
-    if ((ydifference > 0.2*(self.contentSize.height)) && (newTouchPosition.y < _currentDie1.position.y) && (newTouchPosition.y < _currentDie2.position.y)) {
+    if ((ydifference > 0.1*(self.contentSize.height)) && (newTouchPosition.y < _currentDie1.position.y) && (newTouchPosition.y < _currentDie2.position.y)) {
         _dropInterval = 0.03; // soft drop
-    } else if ((xdifference > 0) && (xdifference <= 1.5*(_tileWidth))) {
+    } else if ((ydifference < 0.1*(self.contentSize.height)) && (xdifference > 0) && (xdifference <= 1.5*(_tileWidth))) {
         [self swipeLeft];
-    } else if ((xdifference > 1.5*(_tileWidth))) {
+    } else if ((ydifference < 0.1*(self.contentSize.height)) && (xdifference > 1.5*(_tileWidth))) {
         [self swipeLeftTo:column];
-    } else if ((xdifference < 0) && (xdifference >= -1.5*(_tileWidth))) {
+    } else if ((ydifference < 0.1*(self.contentSize.height)) && (xdifference < 0) && (xdifference >= -1.5*(_tileWidth))) {
         [self swipeRightTo:column];
-    } else if ((xdifference < -1.5*(_tileWidth))) {
+    } else if ((ydifference < 0.1*(self.contentSize.height)) && (xdifference < -1.5*(_tileWidth))) {
         [self swipeRightTo:column];
     } else {
         _dropInterval = self.levelSpeed;
@@ -552,10 +552,10 @@ static const NSInteger GRID_COLUMNS = 6;
     newTouchTime = touch.timestamp;
     NSTimeInterval touchInterval = newTouchTime - oldTouchTime;
     
-    if ((touchInterval > 0.2)  && (ydifference > 0.2*(self.contentSize.height))) {
+    if ((touchInterval < 1.0f) && (ydifference > 0.1*(self.contentSize.height))) {
+        _dropInterval = 0.00001; // hard drop
+    } else if ((touchInterval > 1.0f)  && (ydifference > 0.1*(self.contentSize.height))) {
         _dropInterval = self.levelSpeed; // soft drop returns to normal speed
-    } else if ((touchInterval < 0.2) && (ydifference > 0.2*(self.contentSize.height))) {
-        _dropInterval = 0.005; // hard drop
     } else if ((touchInterval < 0.2) && (xdifference < 0.5*(_tileWidth)) && (xdifference > -0.5*(_tileWidth))) {
         [self rotate];
     }
