@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B77F1B2D17B978D7009739AE"
-               BuildableName = "Dicecream Sandwich.app"
-               BlueprintName = "Dice Wich"
-               ReferencedContainer = "container:Dice Wich.xcodeproj">
+               BuildableName = "Dice Wich.app"
+               BlueprintName = "Dicewich"
+               ReferencedContainer = "container:Dicewich.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B77F1B2D17B978D7009739AE"
-            BuildableName = "Dicecream Sandwich.app"
-            BlueprintName = "Dice Wich"
-            ReferencedContainer = "container:Dice Wich.xcodeproj">
+            BuildableName = "Dice Wich.app"
+            BlueprintName = "Dicewich"
+            ReferencedContainer = "container:Dicewich.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,9 +52,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B77F1B2D17B978D7009739AE"
-            BuildableName = "Dicecream Sandwich.app"
-            BlueprintName = "Dice Wich"
-            ReferencedContainer = "container:Dice Wich.xcodeproj">
+            BuildableName = "Dice Wich.app"
+            BlueprintName = "Dicewich"
+            ReferencedContainer = "container:Dicewich.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B77F1B2D17B978D7009739AE"
-            BuildableName = "Dicecream Sandwich.app"
-            BlueprintName = "Dice Wich"
-            ReferencedContainer = "container:Dice Wich.xcodeproj">
+            BuildableName = "Dice Wich.app"
+            BlueprintName = "Dicewich"
+            ReferencedContainer = "container:Dicewich.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
