@@ -421,7 +421,7 @@ static const NSInteger GRID_COLUMNS = 6;
 -(Dice*) randomizeSpecials {
     Dice *die;
     NSInteger chance = arc4random_uniform(100);
-    if ((_counter%5 == 0) && (chance <= 5)) {
+    if ((_counter%5 == 0) && (chance <= 20)) { //high chance 20% for debugging
         NSInteger randomSpecial = arc4random_uniform(3)+7;
         switch(randomSpecial){
             case 7 :
@@ -1231,7 +1231,7 @@ static const NSInteger GRID_COLUMNS = 6;
         [self animateGameMessage:levelUpString];
     }
     
-    if (self.level > 9) {
+    if (self.level > 7) {
         specialsAllowed = TRUE;
     }
     
