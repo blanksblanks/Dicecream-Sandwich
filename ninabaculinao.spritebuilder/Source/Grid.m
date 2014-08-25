@@ -604,7 +604,6 @@ static const NSInteger GRID_COLUMNS = 6;
     }
 }
 
-
 - (BOOL)swipeLeft {
     BOOL canMoveLeft = [self indexValidAndUnoccupiedForRow:_currentDie2.row andColumn:_currentDie2.column-1] && [self indexValidAndUnoccupiedForRow:_currentDie1.row andColumn:_currentDie1.column-1];
     if (canMoveLeft) {
@@ -1237,7 +1236,15 @@ static const NSInteger GRID_COLUMNS = 6;
     }
     
     NSDictionary *dict = levels[self.level-1];
-    self.levelSpeed = (0.25/self.level)+0.25;
+    if (self.level%2 == 0) {(
+        self.levelSpeed = (0.25/((self.level/2)+1)+0.25));
+    } else if (self.level == 1) {
+        self.levelSpeed = 0.5;
+    } else {
+        self.levelSpeed = self.levelSpeed; // stay the same
+    }
+//    self.levelSpeed = (0.25/self.level)+0.25;
+//    self.levelSpeed = [dict[@"levelSpeed"] intValue];
     self.targetScore = [dict[@"targetScore"] intValue];
     self.possibilities = [dict[@"possibilities"] intValue];
 }

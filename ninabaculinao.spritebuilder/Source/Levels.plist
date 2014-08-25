@@ -87,7 +87,7 @@
 		</dict>
 		<dict>
 			<key>possibilities</key>
-			<integer>5</integer>
+			<integer>4</integer>
 			<key>targetScore</key>
 			<real>2040</real>
 			<key>levelSpeed</key>
@@ -97,7 +97,7 @@
 		</dict>
 		<dict>
 			<key>possibilities</key>
-			<integer>6</integer>
+			<integer>5</integer>
 			<key>targetScore</key>
 			<real>3325</real>
 			<key>levelSpeed</key>
@@ -107,7 +107,7 @@
 		</dict>
 		<dict>
 			<key>possibilities</key>
-			<integer>6</integer>
+			<integer>5</integer>
 			<key>targetScore</key>
 			<real>4490</real>
 			<key>levelSpeed</key>
