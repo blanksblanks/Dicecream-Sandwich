@@ -937,7 +937,7 @@ static const NSInteger GRID_COLUMNS = 6;
             [self scheduleBlock:^(CCTimer *timer) {
                 [die removeFromParent];
                 animationFinished = true;
-            } delay:1.5];
+            } delay:0.25];
         }
     }
 }
@@ -1013,7 +1013,7 @@ static const NSInteger GRID_COLUMNS = 6;
             [self scheduleBlock:^(CCTimer *timer) {
                 [die removeFromParent];
                 animationFinished = true;
-            } delay:1.5];
+            } delay:0.25];
         }
     }
 }
