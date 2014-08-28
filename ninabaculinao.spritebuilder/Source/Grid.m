@@ -1032,6 +1032,7 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)calculateScores:(NSArray *)chains {
     for (Chain *chain in chains) {
+        
         BOOL perfectMatch = false;
         NSInteger face = ((Dice*) chain.dice[0]).faceValue;
         if (face == 6) {
@@ -1253,7 +1254,7 @@ static const NSInteger GRID_COLUMNS = 6;
     }
     
     // Allow special items after Level 7
-    if (self.level > 7) {
+    if (self.level > 2) {
         specialsAllowed = TRUE;
     }
     
