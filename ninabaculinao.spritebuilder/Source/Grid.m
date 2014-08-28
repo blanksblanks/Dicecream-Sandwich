@@ -1032,35 +1032,40 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)calculateScores:(NSArray *)chains {
     for (Chain *chain in chains) {
-        
-        BOOL perfectMatch = false;
-        NSInteger face = ((Dice*) chain.dice[0]).faceValue;
-        if (face == 6) {
-            self.sixChains++;
-        }
-        
-        for (Dice *die in chain.dice) {
-            perfectMatch = (die.faceValue == face);
-            if (!perfectMatch) {
-                break;
+        if (chain.chainType == ChainTypeBomb || chain.chainType == ChainTypeLaser || chain.chainType == ChainTypeMystery) {
+            for (Dice *die in chain.dice) {
+                chain.score += die.faceValue * 10;
             }
         }
-        
-        if (self.comboMultiplier > 1) {
-            NSString *comboString = [NSString stringWithFormat:@"Combo x%ld", (long)self.comboMultiplier];
-            [self animateGameMessage:comboString];
+        else {
+            BOOL perfectMatch = false;
+            NSInteger face = ((Dice*) chain.dice[0]).faceValue;
+            
+            if (face == 6) {
+                self.sixChains++;
+            }
+            
+            for (Dice *die in chain.dice) {
+                perfectMatch = (die.faceValue == face);
+                if (!perfectMatch) {
+                    break;
+                }
+            }
+            
+            if (self.comboMultiplier > 1) {
+                NSString *comboString = [NSString stringWithFormat:@"Combo x%ld", (long)self.comboMultiplier];
+                [self animateGameMessage:comboString];
+            }
+            
+            if (perfectMatch) { // double the score!
+                chain.score = face * 20 * ([chain.dice count]) * self.comboMultiplier;
+                self.perfectMatches++;
+            } else {
+                chain.score = face * 10 * ([chain.dice count]) * self.comboMultiplier;
+            }
         }
-        
-        if (perfectMatch) { // double the score!
-            chain.score = face * 20 * ([chain.dice count]) * self.comboMultiplier;
-            self.comboMultiplier++;
-            self.perfectMatches++;
-            self.chains++;
-        } else {
-            chain.score = face * 10 * ([chain.dice count]) * self.comboMultiplier;
-            self.comboMultiplier++;
-            self.chains++;
-        }
+        self.comboMultiplier++;
+        self.chains++;
     }
 }
 
@@ -1269,7 +1274,6 @@ static const NSInteger GRID_COLUMNS = 6;
         self.targetScore = self.targetScore + 1675;
     }
 }
-
 
 # pragma mark - Game over
 
