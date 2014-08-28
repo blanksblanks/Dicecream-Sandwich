@@ -82,8 +82,10 @@ static const NSInteger GRID_COLUMNS = 6;
 
     // Begin music by accessing audio object and playing background sound
     self.audio = [OALSimpleAudio sharedInstance];
-    [self.audio preloadBg:@"Catchy.wav"];
-    [self.audio playBgWithLoop:TRUE];
+//    [self.audio preloadBg:@"Catchy.wav"];
+//    [self.audio playBgWithLoop:TRUE];
+    [self.audio playBg:@"CATchy.wav" loop:TRUE];
+
     
     [self setupGrid];
     
@@ -358,7 +360,6 @@ static const NSInteger GRID_COLUMNS = 6;
         [self gameEnd];
     }
 }
-
 
 -(Dice*) addDie:(Dice*)die atColumn:(NSInteger)column andRow:(NSInteger)row {
 	_gridArray[row][column] = die;
@@ -923,7 +924,6 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void)animateSpecialDice:(NSArray *)chains {
-    
     for (Chain *chain in chains) {
         [self animateScoreForChain:chain];
 //        [self animateGameMessage];
@@ -938,7 +938,6 @@ static const NSInteger GRID_COLUMNS = 6;
             [self scheduleBlock:^(CCTimer *timer) {
                 [die removeFromParent];
                 animationFinished = true;
-                
             } delay:1.5];
         }
     }
@@ -1050,7 +1049,6 @@ static const NSInteger GRID_COLUMNS = 6;
             NSString *comboString = [NSString stringWithFormat:@"Combo x%ld", (long)self.comboMultiplier];
             [self animateGameMessage:comboString];
         }
-
         
         if (perfectMatch) { // double the score!
             chain.score = face * 20 * ([chain.dice count]) * self.comboMultiplier;
@@ -1223,6 +1221,7 @@ static const NSInteger GRID_COLUMNS = 6;
     
     NSArray *levels = [root objectForKey: @"Levels"];
     
+    // Level increases if player reaches target score
     if (self.score == 0) {
         self.level = 1;
     } else if (self.score >= self.targetScore) {
@@ -1230,12 +1229,8 @@ static const NSInteger GRID_COLUMNS = 6;
         NSString *levelUpString = @"Level Up!";
         [self animateGameMessage:levelUpString];
     }
-    
-    if (self.level > 7) {
-        specialsAllowed = TRUE;
-    }
-    
-    NSDictionary *dict = levels[self.level-1];
+
+    // Speed only incremeents on even levels
     if (self.level%2 == 0) {(
         self.levelSpeed = (0.25/((self.level/2)+1)+0.25));
     } else if (self.level == 1) {
@@ -1243,10 +1238,35 @@ static const NSInteger GRID_COLUMNS = 6;
     } else {
         self.levelSpeed = self.levelSpeed; // stay the same
     }
-//    self.levelSpeed = (0.25/self.level)+0.25;
-//    self.levelSpeed = [dict[@"levelSpeed"] intValue];
+    
+    // Levels 1-3; Possibilities: 2, 3, 4
+    // Levels 4-5; Possibilities: 4, 5
+    // Levels 6-x; Possibilities: 5, 6...
+    if (self.level < 4) {
+        self.possibilities = self.level+1;
+    } else if (self.level == 4 || self.level == 5) {
+        self.possibilities = self.level;
+    } else if (self.level == 6) {
+        self.possibilities = self.level-1;
+    } else {
+        self.possibilities = 6;
+    }
+    
+    // Allow special items after Level 7
+    if (self.level > 7) {
+        specialsAllowed = TRUE;
+    }
+    
+    NSDictionary *dict = levels[self.level-1];
     self.targetScore = [dict[@"targetScore"] intValue];
-    self.possibilities = [dict[@"possibilities"] intValue];
+    //    self.levelSpeed = (0.25/self.level)+0.25;
+    //    self.levelSpeed = [dict[@"levelSpeed"] intValue];
+    //    self.possibilities = [dict[@"possibilities"] intValue];
+    
+    // Target score system
+    if (self.level > 15) {
+        self.targetScore = self.targetScore + 1675;
+    }
 }
 
 
