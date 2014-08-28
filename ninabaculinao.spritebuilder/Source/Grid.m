@@ -82,10 +82,9 @@ static const NSInteger GRID_COLUMNS = 6;
 
     // Begin music by accessing audio object and playing background sound
     self.audio = [OALSimpleAudio sharedInstance];
-//    [self.audio preloadBg:@"Catchy.wav"];
-//    [self.audio playBgWithLoop:TRUE];
     [self.audio playBg:@"CATchy.wav" loop:TRUE];
-
+    //    [self.audio preloadBg:@"Catchy.wav"];
+    //    [self.audio playBgWithLoop:TRUE];
     
     [self setupGrid];
     
@@ -937,7 +936,7 @@ static const NSInteger GRID_COLUMNS = 6;
             [self scheduleBlock:^(CCTimer *timer) {
                 [die removeFromParent];
                 animationFinished = true;
-            } delay:0.25];
+            } delay:0.2];
         }
     }
 }
@@ -1013,7 +1012,7 @@ static const NSInteger GRID_COLUMNS = 6;
             [self scheduleBlock:^(CCTimer *timer) {
                 [die removeFromParent];
                 animationFinished = true;
-            } delay:0.25];
+            } delay:0.20];
         }
     }
 }
@@ -1257,7 +1256,7 @@ static const NSInteger GRID_COLUMNS = 6;
     }
     
     // Allow special items after Level 7
-    if (self.level > 2) {
+    if (self.level > 7) {
         specialsAllowed = TRUE;
     }
     
