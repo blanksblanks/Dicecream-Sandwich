@@ -598,7 +598,6 @@ static const NSInteger GRID_COLUMNS = 6;
 }
 
 - (void)swipeLeftTo:(NSInteger)column {
-//    __block
     BOOL canMoveLeft = TRUE;
     while (_currentDie1.column > column && _currentDie2.column > column && canMoveLeft) {
             canMoveLeft = [self swipeLeft];
@@ -1014,7 +1013,6 @@ static const NSInteger GRID_COLUMNS = 6;
             [self scheduleBlock:^(CCTimer *timer) {
                 [die removeFromParent];
                 animationFinished = true;
-                
             } delay:1.5];
         }
     }

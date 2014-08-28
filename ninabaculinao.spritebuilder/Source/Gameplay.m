@@ -87,8 +87,10 @@
     
     if (_grid.paused) {
         _pauseButton.visible = false;
+//        _grid.audio.paused = true;
     } else {
         _pauseButton.visible = true;
+//        _grid.audio.paused = false;
     }
     
     if (_grid.gameOver) {
