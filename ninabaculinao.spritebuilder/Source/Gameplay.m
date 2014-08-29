@@ -36,7 +36,15 @@
 - (void)didLoadFromCCB {
     
     animationManager = self.animationManager;
-    // _grid.audio = audio;
+    
+    // Begin music by accessing audio object and playing background sound
+    audio = [OALSimpleAudio sharedInstance];
+    [audio playBg:@"CATchy.wav" loop:TRUE];
+    //    [self.audio preloadBg:@"Catchy.wav"];
+    //    [self.audio playBgWithLoop:TRUE];
+    
+    _grid.audio = audio;
+    _grid.gameOver = false;
     
     _timeLabel.string = [NSString stringWithFormat:@"%li", (long)_grid.timer];
     

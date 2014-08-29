@@ -17,8 +17,7 @@
     NSInteger actionIndex;
     BOOL stabilizing;
     NSInteger _counter;
-    
-    
+
     CGFloat _tileWidth; //37, same as tile height
 	CGFloat _tileMarginVertical; //0.9285714285714286
 	CGFloat _tileMarginHorizontal; //0.6153846153846154 2
@@ -79,12 +78,6 @@ static const NSInteger GRID_COLUMNS = 6;
     self.gameOver = FALSE;
     self.paused = FALSE;
     self.touchEnabled = TRUE;
-
-    // Begin music by accessing audio object and playing background sound
-    self.audio = [OALSimpleAudio sharedInstance];
-    [self.audio playBg:@"CATchy.wav" loop:TRUE];
-    //    [self.audio preloadBg:@"Catchy.wav"];
-    //    [self.audio playBgWithLoop:TRUE];
     
     [self setupGrid];
     
@@ -265,7 +258,6 @@ static const NSInteger GRID_COLUMNS = 6;
         NSString *allClearString = [NSString stringWithFormat:@"All Clear!"];
         [self animateGameMessage:allClearString];
         self.allClear++;
-        CCLOG(@"All clear is now %li", (long)self.allClear);
     }
 }
 
@@ -1094,7 +1086,7 @@ static const NSInteger GRID_COLUMNS = 6;
     
     [self scheduleBlock:^(CCTimer *timer) {
         [chainScore removeFromParent];
-    } delay:1.75];
+    } delay:1.0];
     
 /* TODO: Deal with combos later
  
