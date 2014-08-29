@@ -10,7 +10,7 @@
 #import "Grid.h"
 #import "Dice.h"
 #import "PauseMenu.h"
-#import <OALSimpleAudio.h>
+#import "GameState.h"
 
 //#define convertTime(time) (time / 60)
 
@@ -92,6 +92,12 @@
     } else {
         _pauseButton.visible = true;
 //        _grid.audio.paused = false;
+    }
+    
+    if ([GameState sharedInstance].musicPaused) {
+        _grid.audio.bgPaused = TRUE;
+    } else {
+        _grid.audio.bgPaused = FALSE;
     }
     
 }

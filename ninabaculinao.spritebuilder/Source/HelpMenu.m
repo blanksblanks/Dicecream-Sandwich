@@ -40,7 +40,8 @@
             break;
         }
         case 2: {
-            [self cancel];
+            [self removeFromParent];
+            [GameState sharedInstance].popUp = FALSE;
             break;
         }
     }
@@ -51,9 +52,9 @@
     [self removeFromParent];
     [GameState sharedInstance].popUp = FALSE;
     
-    if (!_help3.visible) {
+//    if (!_help3.visible) {
         [self playPopSound];
-    }
+//    }
 }
 
 -(void)playPopSound {

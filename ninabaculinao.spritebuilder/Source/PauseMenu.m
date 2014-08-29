@@ -54,10 +54,9 @@
     
 //    [_grid.audio playEffect:@"bubble-pop1.wav"];
     [_grid playPopSound];
-
     
     [self.grid unpause];
-    self.audio.paused = FALSE;
+//    self.audio.paused = FALSE;
     CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.2f position:ccp(0, 25)];
     [self runAction:moveTo];
     
@@ -92,13 +91,22 @@
 - (void) music {
     [MGWU logEvent:@"music_toggled" withParams:nil];
     
+    [_grid.audio playEffect:@"bubble-pop1.wav"];
+    
 // Four lines in one
 //    if (!self.audio.muted) {
 //        self.audio.muted = true;
 //    } else {
 //        self.audio.muted = false;
 //    }
-    _grid.audio.bgPaused = !_grid.audio.bgPaused;
+    
+    [GameState sharedInstance].musicPaused = ![GameState sharedInstance].musicPaused;
+    
+//    if ([GameState sharedInstance].musicPaused) {
+//        _grid.audio.bgPaused = TRUE;
+//    } else {
+//        _grid.audio.bgPaused = FALSE;
+//    }
 }
 
 // TODO: "Are you sure?" pop up

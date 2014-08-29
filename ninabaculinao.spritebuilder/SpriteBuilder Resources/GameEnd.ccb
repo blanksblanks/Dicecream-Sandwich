@@ -290,7 +290,7 @@
 												<string>Position</string>
 												<key>value</key>
 												<array>
-													<real>48</real>
+													<real>45</real>
 													<real>31</real>
 													<integer>0</integer>
 													<integer>0</integer>
@@ -328,7 +328,7 @@
 												<string>Text</string>
 												<key>value</key>
 												<array>
-													<string>BEST:</string>
+													<string>BEST</string>
 													<false/>
 												</array>
 											</dict>
@@ -497,7 +497,7 @@
 												<string>Position</string>
 												<key>value</key>
 												<array>
-													<real>48</real>
+													<real>45</real>
 													<real>93</real>
 													<integer>0</integer>
 													<integer>0</integer>
@@ -535,7 +535,7 @@
 												<string>Text</string>
 												<key>value</key>
 												<array>
-													<string>SCORE:</string>
+													<string>SCORE</string>
 													<false/>
 												</array>
 											</dict>
@@ -908,7 +908,7 @@
 												<key>value</key>
 												<array>
 													<real>1</real>
-													<real>0.66666668653488159</real>
+													<real>0.43529412150382996</real>
 													<real>0.81176471710205078</real>
 													<real>1</real>
 												</array>
@@ -932,7 +932,7 @@
 												<key>value</key>
 												<array>
 													<real>1</real>
-													<real>0.43529412150382996</real>
+													<real>0.66666668653488159</real>
 													<real>0.81176471710205078</real>
 													<real>1</real>
 												</array>
@@ -1114,7 +1114,7 @@
 												<string>Color4</string>
 												<key>value</key>
 												<array>
-													<real>0.64705884456634521</real>
+													<real>0.40000000596046448</real>
 													<real>1</real>
 													<real>0.80000001192092896</real>
 													<real>1</real>
@@ -1138,7 +1138,7 @@
 												<string>Color4</string>
 												<key>value</key>
 												<array>
-													<real>0.40000000596046448</real>
+													<real>0.64705884456634521</real>
 													<real>1</real>
 													<real>0.80000001192092896</real>
 													<real>1</real>
@@ -1197,7 +1197,7 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>106</real>
+											<real>100</real>
 											<real>0.0</real>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -1605,8 +1605,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>

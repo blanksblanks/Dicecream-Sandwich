@@ -10,4 +10,10 @@
 
 @interface MainScene: CCNode
 
+//@property (nonatomic, strong) Grid *grid;
+//@property (nonatomic, strong) OALSimpleAudio *audio;
+
+-(void) playPopSound;
+
+
 @end
