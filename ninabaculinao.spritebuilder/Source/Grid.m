@@ -79,6 +79,12 @@ static const NSInteger GRID_COLUMNS = 6;
     self.paused = FALSE;
     self.touchEnabled = TRUE;
     
+    // Begin music by accessing audio object and playing background sound
+    self.audio = [OALSimpleAudio sharedInstance];
+    [self.audio playBg:@"CATchy.wav" loop:TRUE];
+    //    [self.audio preloadBg:@"Catchy.wav"];
+    //    [self.audio playBgWithLoop:TRUE];
+    
     [self setupGrid];
     
     // Populate array with null tiles
@@ -1278,11 +1284,10 @@ static const NSInteger GRID_COLUMNS = 6;
     [self pause];
     [self playGameOverSound];
     [self scheduleBlock:^(CCTimer *timer) {
-        self.gameOver = true;
+        self.gameOver = true; // TODO: remove all gameover bool properties -> no longer needed?
         self.touchEnabled = false;
-        //    [self.audio stopEverything];
+        [self.audio stopEverything];
         [self assignStats];
-        NSLog(@"%li", (long)[GameState sharedInstance].currentAllClear);
         
         GameEnd *gameEnd = (GameEnd*) [CCBReader load:@"GameEnd"];
         [gameEnd setPositionType:CCPositionTypeNormalized];

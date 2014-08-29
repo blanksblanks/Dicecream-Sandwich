@@ -14,9 +14,11 @@
     CCButton *_playButton;
     CCButton *_helpButton;
     CCButton *_creditsButton;
+    OALSimpleAudio *audio;
 }
 
 -(void)didLoadFromCCB {
+    audio = [OALSimpleAudio sharedInstance];
     [GameState sharedInstance].popUp = FALSE;
     [self toggleButtonsOn];
 }
@@ -56,7 +58,6 @@
     CCAnimationManager* animationManager = self.animationManager;
     [animationManager runAnimationsForSequenceNamed:@"sandwichSpinAway"];
 
-    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
     [audio preloadEffect:@"8-bit-boing.wav"];
     [audio playEffect:@"8-bit-boing.wav"];
 }
@@ -65,6 +66,9 @@
 -(void) help {
     [MGWU logEvent:@"help_pressed_in_mainscene" withParams:nil];
     
+    [audio preloadEffect:@"bubble-pop1.wav"];
+    [audio playEffect:@"bubble-pop1.wav"];
+
     [GameState sharedInstance].popUp = TRUE;
     HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu"];
     [helpMenu setPositionType:CCPositionTypeNormalized];
@@ -75,6 +79,9 @@
 
 -(void) credits {
     [MGWU logEvent:@"credits_pressed_in_mainscene" withParams:nil];
+    
+    [audio preloadEffect:@"bubble-pop1.wav"];
+    [audio playEffect:@"bubble-pop1.wav"];
     
     CCScene *creditsScene = [CCBReader loadAsScene:@"Credits"];
     [[CCDirector sharedDirector] pushScene:creditsScene];
