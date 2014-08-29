@@ -26,9 +26,7 @@
 
 -(void)next {
 
-    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
-    [audio preloadEffect:@"bubble-pop1.wav"];
-    [audio playEffect:@"bubble-pop1.wav"];
+    [self playPopSound];
     
     switch (step) {
         case 0: {
@@ -52,6 +50,16 @@
 -(void)cancel {
     [self removeFromParent];
     [GameState sharedInstance].popUp = FALSE;
+    
+    if (!_help3.visible) {
+        [self playPopSound];
+    }
+}
+
+-(void)playPopSound {
+    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+    [audio preloadEffect:@"bubble-pop1.wav"];
+    [audio playEffect:@"bubble-pop1.wav"];
 }
 
 @end

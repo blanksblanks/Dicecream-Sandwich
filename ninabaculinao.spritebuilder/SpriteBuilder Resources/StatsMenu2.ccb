@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>84</integer>
+	<integer>75</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -148,7 +148,7 @@
 				<key>customClass</key>
 				<string></string>
 				<key>displayName</key>
-				<string>GameStats</string>
+				<string>CCLabelTTF</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -171,7 +171,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>20</real>
+							<real>30</real>
 							<integer>2</integer>
 							<integer>2</integer>
 							<integer>0</integer>
@@ -208,7 +208,7 @@
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>{GAME STATS}</string>
+							<string>GAME STATS</string>
 							<false/>
 						</array>
 					</dict>
@@ -227,7 +227,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>48</real>
+							<real>36</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -276,8 +276,8 @@
 						<key>value</key>
 						<array>
 							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>0.50196081399917603</real>
+							<real>0.50196081399917603</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -312,10 +312,10 @@
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>0.40000000596046448</real>
-							<real>0.40000000596046448</real>
-							<real>1</real>
-							<real>1</real>
+							<real>0.0</real>
+							<real>0.0</real>
+							<real>0.0</real>
+							<real>0.0</real>
 						</array>
 					</dict>
 					<dict>
@@ -336,8 +336,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>2.5</real>
-							<real>2.5</real>
+							<real>0.0</real>
+							<real>0.0</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -347,14 +347,14 @@
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>75</integer>
+				<integer>20</integer>
 				<key>baseClass</key>
 				<string>CCNode</string>
 				<key>children</key>
 				<array>
 					<dict>
 						<key>UUID</key>
-						<integer>76</integer>
+						<integer>17</integer>
 						<key>baseClass</key>
 						<string>CCLabelTTF</string>
 						<key>children</key>
@@ -502,8 +502,8 @@
 								<string>Color4</string>
 								<key>value</key>
 								<array>
-									<real>0.80000001192092896</real>
-									<real>0.40000000596046448</real>
+									<real>0.50196081399917603</real>
+									<real>0.0</real>
 									<real>1</real>
 									<real>1</real>
 								</array>
@@ -515,7 +515,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>16</real>
+									<real>1</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -561,7 +561,7 @@
 					</dict>
 					<dict>
 						<key>UUID</key>
-						<integer>77</integer>
+						<integer>16</integer>
 						<key>baseClass</key>
 						<string>CCLabelTTF</string>
 						<key>children</key>
@@ -709,8 +709,8 @@
 								<string>Color4</string>
 								<key>value</key>
 								<array>
-									<real>0.40000000596046448</real>
-									<real>0.80000001192092896</real>
+									<real>0.0</real>
+									<real>0.0</real>
 									<real>1</real>
 									<real>1</real>
 								</array>
@@ -722,7 +722,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>8</real>
+									<real>1</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -768,7 +768,7 @@
 					</dict>
 					<dict>
 						<key>UUID</key>
-						<integer>78</integer>
+						<integer>43</integer>
 						<key>baseClass</key>
 						<string>CCLabelTTF</string>
 						<key>children</key>
@@ -983,7 +983,7 @@
 					</dict>
 					<dict>
 						<key>UUID</key>
-						<integer>79</integer>
+						<integer>15</integer>
 						<key>baseClass</key>
 						<string>CCLabelTTF</string>
 						<key>children</key>
@@ -1131,9 +1131,9 @@
 								<string>Color4</string>
 								<key>value</key>
 								<array>
-									<real>0.40000000596046448</real>
+									<real>0.0</real>
+									<real>0.50196081399917603</real>
 									<real>1</real>
-									<real>0.80000001192092896</real>
 									<real>1</real>
 								</array>
 							</dict>
@@ -1144,7 +1144,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>8</real>
+									<real>1</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -1190,7 +1190,7 @@
 					</dict>
 					<dict>
 						<key>UUID</key>
-						<integer>80</integer>
+						<integer>14</integer>
 						<key>baseClass</key>
 						<string>CCLabelTTF</string>
 						<key>children</key>
@@ -1338,9 +1338,9 @@
 								<string>Color4</string>
 								<key>value</key>
 								<array>
-									<real>0.80000001192092896</real>
-									<real>1</real>
-									<real>0.40000000596046448</real>
+									<real>0.0039215688593685627</real>
+									<real>0.75294119119644165</real>
+									<real>0.0078431377187371254</real>
 									<real>1</real>
 								</array>
 							</dict>
@@ -1351,7 +1351,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>8</real>
+									<real>1</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -1397,7 +1397,7 @@
 					</dict>
 					<dict>
 						<key>UUID</key>
-						<integer>81</integer>
+						<integer>13</integer>
 						<key>baseClass</key>
 						<string>CCLabelTTF</string>
 						<key>children</key>
@@ -1545,9 +1545,9 @@
 								<string>Color4</string>
 								<key>value</key>
 								<array>
-									<real>1</real>
-									<real>0.80000001192092896</real>
-									<real>0.40000000596046448</real>
+									<real>0.96470588445663452</real>
+									<real>0.74901962280273438</real>
+									<real>0.0</real>
 									<real>1</real>
 								</array>
 							</dict>
@@ -1558,7 +1558,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>8</real>
+									<real>1</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -1604,7 +1604,7 @@
 					</dict>
 					<dict>
 						<key>UUID</key>
-						<integer>82</integer>
+						<integer>12</integer>
 						<key>baseClass</key>
 						<string>CCLabelTTF</string>
 						<key>children</key>
@@ -1753,8 +1753,8 @@
 								<key>value</key>
 								<array>
 									<real>1</real>
-									<real>0.43529412150382996</real>
-									<real>0.81176471710205078</real>
+									<real>0.5</real>
+									<real>0.0</real>
 									<real>1</real>
 								</array>
 							</dict>
@@ -1765,7 +1765,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>8</real>
+									<real>1</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -1811,7 +1811,7 @@
 					</dict>
 					<dict>
 						<key>UUID</key>
-						<integer>83</integer>
+						<integer>19</integer>
 						<key>baseClass</key>
 						<string>CCLabelTTF</string>
 						<key>children</key>
@@ -1960,8 +1960,8 @@
 								<key>value</key>
 								<array>
 									<real>1</real>
-									<real>0.40000000596046448</real>
-									<real>0.40000000596046448</real>
+									<real>0.0</real>
+									<real>0.50196081399917603</real>
 									<real>1</real>
 								</array>
 							</dict>
@@ -1972,7 +1972,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>8</real>
+									<real>1</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -2015,6 +2015,8 @@
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -2087,8 +2089,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -2235,8 +2235,8 @@
 								<key>value</key>
 								<array>
 									<real>1</real>
-									<real>0.40000000596046448</real>
-									<real>0.40000000596046448</real>
+									<real>0.0</real>
+									<real>0.50196081399917603</real>
 									<real>1</real>
 								</array>
 							</dict>
@@ -2260,7 +2260,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
+									<real>1</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -2442,8 +2442,8 @@
 								<key>value</key>
 								<array>
 									<real>1</real>
-									<real>0.43529412150382996</real>
-									<real>0.81176471710205078</real>
+									<real>0.5</real>
+									<real>0.0</real>
 									<real>1</real>
 								</array>
 							</dict>
@@ -2467,7 +2467,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
+									<real>1</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -2648,9 +2648,9 @@
 								<string>Color4</string>
 								<key>value</key>
 								<array>
-									<real>1</real>
-									<real>0.80000001192092896</real>
-									<real>0.40000000596046448</real>
+									<real>0.96470588445663452</real>
+									<real>0.74901962280273438</real>
+									<real>0.0</real>
 									<real>1</real>
 								</array>
 							</dict>
@@ -2674,7 +2674,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
+									<real>1</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -2855,9 +2855,9 @@
 								<string>Color4</string>
 								<key>value</key>
 								<array>
-									<real>0.80000001192092896</real>
-									<real>1</real>
-									<real>0.40000000596046448</real>
+									<real>0.0039215688593685627</real>
+									<real>0.75294119119644165</real>
+									<real>0.0078431377187371254</real>
 									<real>1</real>
 								</array>
 							</dict>
@@ -2881,7 +2881,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
+									<real>1</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -3062,9 +3062,9 @@
 								<string>Color4</string>
 								<key>value</key>
 								<array>
-									<real>0.40000000596046448</real>
+									<real>0.0</real>
+									<real>0.50196081399917603</real>
 									<real>1</real>
-									<real>0.80000001192092896</real>
 									<real>1</real>
 								</array>
 							</dict>
@@ -3088,7 +3088,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
+									<real>1</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -3269,8 +3269,8 @@
 								<string>Color4</string>
 								<key>value</key>
 								<array>
-									<real>0.40000000596046448</real>
-									<real>0.80000001192092896</real>
+									<real>0.0</real>
+									<real>0.0</real>
 									<real>1</real>
 									<real>1</real>
 								</array>
@@ -3295,7 +3295,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
+									<real>1</real>
 									<integer>0</integer>
 								</array>
 							</dict>
@@ -3476,8 +3476,8 @@
 								<string>Color4</string>
 								<key>value</key>
 								<array>
-									<real>0.80000001192092896</real>
-									<real>0.40000000596046448</real>
+									<real>0.50196081399917603</real>
+									<real>0.0</real>
 									<real>1</real>
 									<real>1</real>
 								</array>
@@ -3502,7 +3502,7 @@
 								<string>FloatScale</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
+									<real>1</real>
 									<integer>0</integer>
 								</array>
 							</dict>

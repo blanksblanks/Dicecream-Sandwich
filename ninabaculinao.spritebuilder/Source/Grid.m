@@ -588,6 +588,11 @@ static const NSInteger GRID_COLUMNS = 6;
 
 # pragma mark - Swipe and rotate methods
 
+- (void)playPopSound {
+    [self.audio preloadEffect:@"bubble-pop1.wav"];
+    [self.audio playEffect:@"bubble-pop1.wav"];
+}
+
 - (void)playMoveSound {
     [self.audio preloadEffect:@"click2.wav"];
     [self.audio playEffect:@"click2.wav"];

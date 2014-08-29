@@ -8,8 +8,11 @@
 
 #import "CCNode.h"
 
+@class Grid;
+
 @interface StatsMenu : CCNode
 
+@property (nonatomic, strong) Grid *grid;
 @property (nonatomic, strong) OALSimpleAudio *audio;
 
 @end

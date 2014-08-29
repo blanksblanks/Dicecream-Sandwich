@@ -24,6 +24,10 @@ typedef NS_ENUM(NSInteger, GridState) {
 - (void)loadLevel;
 - (void)pause;
 - (void)unpause;
+- (void)playPopSound;
+
+//+ (NSString*)checkIfLeadingZeroNeeded:(NSInteger)time; doesn't belong here
+
 
 @property (nonatomic, assign) GridState currentGridState;
 @property (nonatomic, assign) NSInteger score;

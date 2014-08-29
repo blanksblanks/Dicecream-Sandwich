@@ -52,7 +52,9 @@
 - (void) resume {
     [MGWU logEvent:@"resume_pressed" withParams:nil];
     
-    [_grid.audio playEffect:@"bubble-pop1.wav"];
+//    [_grid.audio playEffect:@"bubble-pop1.wav"];
+    [_grid playPopSound];
+
     
     [self.grid unpause];
     self.audio.paused = FALSE;

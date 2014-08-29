@@ -26,6 +26,7 @@
 }
 
 - (void) didLoadFromCCB {
+    
     [self performSelector:@selector(current)];
     _scoreLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentScore];
     _levelLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentLevel];
@@ -42,6 +43,10 @@
 }
 
 - (void) current {
+
+    [_grid playPopSound];
+//    [_grid.audio playEffect:@"bubble-pop1.wav"];
+    
     _scoreLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentScore];
     _levelLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentLevel];
     _chainsLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentChains];
@@ -57,6 +62,10 @@
 }
 
 - (void) best {
+
+    [_grid playPopSound];
+//    [_grid.audio playEffect:@"bubble-pop1.wav"];
+
     _scoreLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].bestScore];
     _levelLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].bestLevel];
     _chainsLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].bestChains];
@@ -74,23 +83,34 @@
 - (void) home {
     [MGWU logEvent:@"home_pressed_in_gameend" withParams:nil];
     
+    [_grid playPopSound];
+    
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];
 }
 
 - (void) restart {
     [MGWU logEvent:@"restart_pressed_in_gameend" withParams:nil];
+    
+    [_grid playPopSound];
 
     CCScene *gamePlay = [CCBReader loadAsScene:@"Gameplay"];
     [[CCDirector sharedDirector] replaceScene:gamePlay];
 }
 
 - (void) back {
+    
+    [_grid playPopSound];
+    
     GameEnd *gameEnd = (GameEnd*) [CCBReader load:@"GameEnd"];
     [gameEnd setPositionType:CCPositionTypeNormalized];
     gameEnd.position = ccp(0.5, 0.5);
     [self.parent addChild:gameEnd];
     [self removeFromParent];
 }
+
+//- (void) popSound {
+//    [_grid.audio playEffect:@"bubble-pop1.wav"];
+//}
 
 @end

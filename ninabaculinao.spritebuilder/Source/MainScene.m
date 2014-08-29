@@ -57,20 +57,12 @@
     } delay:1.5];
 }
 
-- (void)sandwichSpinAway {
-    CCAnimationManager* animationManager = self.animationManager;
-    [animationManager runAnimationsForSequenceNamed:@"sandwichSpinAway"];
-
-    [audio preloadEffect:@"8-bit-boing.wav"];
-    [audio playEffect:@"8-bit-boing.wav"];
-}
-
+# pragma mark - Button selectors
 
 -(void) help {
     [MGWU logEvent:@"help_pressed_in_mainscene" withParams:nil];
     
-    [audio preloadEffect:@"bubble-pop1.wav"];
-    [audio playEffect:@"bubble-pop1.wav"];
+    [self playPopSound];
 
     [GameState sharedInstance].popUp = TRUE;
     HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu"];
@@ -83,8 +75,7 @@
 -(void) credits {
     [MGWU logEvent:@"credits_pressed_in_mainscene" withParams:nil];
     
-    [audio preloadEffect:@"bubble-pop1.wav"];
-    [audio playEffect:@"bubble-pop1.wav"];
+    [self playPopSound];
     
     CCScene *creditsScene = [CCBReader loadAsScene:@"Credits"];
     [[CCDirector sharedDirector] pushScene:creditsScene];
@@ -101,5 +92,21 @@
     [GameState sharedInstance].bestStreak = 0;
     [GameState sharedInstance].bestAllClear = 0;
 }
+
+# pragma mark - Sound and animation
+
+- (void)sandwichSpinAway {
+    CCAnimationManager* animationManager = self.animationManager;
+    [animationManager runAnimationsForSequenceNamed:@"sandwichSpinAway"];
+    
+    [audio preloadEffect:@"8-bit-boing.wav"];
+    [audio playEffect:@"8-bit-boing.wav"];
+}
+
+-(void)playPopSound {
+    [audio preloadEffect:@"bubble-pop1.wav"];
+    [audio playEffect:@"bubble-pop1.wav"];
+}
+
 
 @end

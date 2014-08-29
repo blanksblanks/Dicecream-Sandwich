@@ -9,6 +9,7 @@
 #import "GameEnd.h"
 #import "GameState.h"
 #import "StatsMenu.h"
+#import "Grid.h"
 
 @implementation GameEnd {
     CCLabelTTF *_scoreLabel;
@@ -29,6 +30,9 @@
 - (void) stats {
     [MGWU logEvent:@"stats_pressed_in_gameend" withParams:nil];
     
+    [_grid playPopSound];
+//    [_grid.audio playEffect:@"bubble-pop1.wav"];
+    
     StatsMenu *statsMenu = (StatsMenu*) [CCBReader load:@"StatsMenu"];
     [statsMenu setPositionType:CCPositionTypeNormalized];
     statsMenu.position = ccp(0.5, 0.5);
@@ -39,6 +43,9 @@
 - (void) home {
     [MGWU logEvent:@"home_pressed_in_gameend" withParams:nil];
     
+    [_grid playPopSound];
+//    [_grid.audio playEffect:@"bubble-pop1.wav"];
+    
     [self removeFromParent];
 
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
@@ -47,6 +54,9 @@
 
 - (void) restart {
     [MGWU logEvent:@"restart_pressed_in_gameend" withParams:nil];
+    
+    [_grid playPopSound];
+//    [_grid.audio playEffect:@"bubble-pop1.wav"];
     
     [self removeFromParent];
     

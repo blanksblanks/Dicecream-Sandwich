@@ -12,4 +12,7 @@
 
 @interface GameEnd : CCNode
 
+@property (nonatomic, strong) Grid *grid;
+@property (nonatomic, strong) OALSimpleAudio *audio;
+
 @end
