@@ -996,8 +996,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -6804,7 +6802,7 @@ Time’s ticking...</string>
 				<string>Size</string>
 				<key>value</key>
 				<array>
-					<real>300</real>
+					<real>280</real>
 					<real>450</real>
 					<integer>0</integer>
 					<integer>0</integer>
@@ -6835,6 +6833,8 @@ Time’s ticking...</string>
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
