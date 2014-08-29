@@ -873,11 +873,11 @@ by Captain Icon; you can find his work at
 mariodelvalle.github.io/CaptainIconWeb/.
 
 The sound effects come from freesound:
-- success.wav by grunz
-- level_up_3note2.wav by jivatma07
+- success by grunz
+- level_up_3note2 by jivatma07
+- water_droplet_bubble_pop1 by CGEffex
 
-The background music is CATchy (Original Mix),
-by DropThatCat.com.</string>
+The BGM is “CATchy” by DropThatCat.com.</string>
 									<false/>
 								</array>
 							</dict>

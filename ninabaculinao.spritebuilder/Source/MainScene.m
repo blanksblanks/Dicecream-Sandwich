@@ -42,7 +42,7 @@
 }
 
 - (void)play {
-    [MGWU logEvent:@"play_pressed_in_mainscene" withParams:nil];
+    [MGWU logEvent:@"playPressedInMainscene" withParams:nil];
     
     [self toggleButtonsOff];
     [self performSelector:@selector(sandwichSpinAway)];

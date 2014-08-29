@@ -58,7 +58,7 @@
     
     [self setupCocos2dWithOptions:cocos2dSetup];
     
-    [MGWU loadMGWU:@"stewardresses"];
+    [MGWU loadMGWU:@"sesserdrawets"];
     [MGWU dark];
 
 //    // Configure CocoaLumberjack and override point for customization after application launch.

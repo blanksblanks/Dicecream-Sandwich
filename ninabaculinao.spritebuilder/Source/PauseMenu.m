@@ -52,6 +52,8 @@
 - (void) resume {
     [MGWU logEvent:@"resume_pressed" withParams:nil];
     
+    [_grid.audio playEffect:@"bubble-pop1.wav"];
+    
     [self.grid unpause];
     self.audio.paused = FALSE;
     CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.2f position:ccp(0, 25)];
@@ -65,6 +67,8 @@
 // TODO: "Are you sure?" pop up
 - (void) restart {
     [MGWU logEvent:@"restart_pressed_in_gameplay" withParams:nil];
+    
+    [_grid.audio playEffect:@"bubble-pop1.wav"];
 
     CCScene *gamePlay = [CCBReader loadAsScene:@"Gameplay"];
     [[CCDirector sharedDirector] replaceScene:gamePlay];
@@ -72,12 +76,15 @@
 
 - (void) help {
     [MGWU logEvent:@"help_pressed_in_gameplay" withParams:nil];
+    
+    [_grid.audio playEffect:@"bubble-pop1.wav"];
 
     [GameState sharedInstance].popUp = TRUE;
     HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu"];
     [helpMenu setPositionType:CCPositionTypeNormalized];
     helpMenu.position = ccp(0.5, 0.53); // or consider .scale = 0.8f;
     [self.parent addChild:helpMenu];
+
 }
 
 - (void) music {
@@ -89,12 +96,14 @@
 //    } else {
 //        self.audio.muted = false;
 //    }
-    self.audio.bgPaused = !self.audio.bgPaused;
+    _grid.audio.bgPaused = !_grid.audio.bgPaused;
 }
 
 // TODO: "Are you sure?" pop up
 - (void) home {
     [MGWU logEvent:@"home_pressed_in_gameplay" withParams:nil];
+    
+    [_grid.audio playEffect:@"bubble-pop1.wav"];
 
     _grid.gameOver = true;
     _grid.touchEnabled = false;

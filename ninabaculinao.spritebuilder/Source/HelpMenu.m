@@ -9,6 +9,7 @@
 #import "HelpMenu.h"
 #import "GameState.h"
 
+
 @implementation HelpMenu {
     NSInteger step;
     CCNode *_help1;
@@ -24,6 +25,11 @@
 }
 
 -(void)next {
+
+    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+    [audio preloadEffect:@"bubble-pop1.wav"];
+    [audio playEffect:@"bubble-pop1.wav"];
+    
     switch (step) {
         case 0: {
             _help1.visible = false;

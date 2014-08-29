@@ -138,6 +138,9 @@
 
     pauseMenu.grid = _grid;
     pauseMenu.audio = _grid.audio;
+    
+    [_grid.audio preloadEffect:@"bubble-pop1.wav"];
+    [_grid.audio playEffect:@"bubble-pop1.wav"];
 }
 
 
