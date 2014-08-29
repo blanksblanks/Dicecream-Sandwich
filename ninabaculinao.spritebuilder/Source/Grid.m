@@ -1283,8 +1283,8 @@ static const NSInteger GRID_COLUMNS = 6;
     [self pause];
     [self playGameOverSound];
     
-    CCAnimationManager* animationManager = self.parent.animationManager;
-    [animationManager runAnimationsForSequenceNamed:@"starsRotate"];
+//    CCAnimationManager* animationManager = self.parent.animationManager;
+//    [animationManager runAnimationsForSequenceNamed:@"starsRotate"];
     
     [self scheduleBlock:^(CCTimer *timer) {
         self.touchEnabled = false;
@@ -1299,7 +1299,7 @@ static const NSInteger GRID_COLUMNS = 6;
     
     [self scheduleBlock:^(CCTimer *timer) {
         [self.audio stopEverything];
-    } delay:0.35f];
+    } delay:0.5f];
 
 }
 
