@@ -16,7 +16,7 @@
 	<key>currentResolution</key>
 	<integer>2</integer>
 	<key>currentSequenceId</key>
-	<integer>1</integer>
+	<integer>5</integer>
 	<key>docDimensionsType</key>
 	<integer>0</integer>
 	<key>fileType</key>
@@ -357,7 +357,7 @@
 						<key>type</key>
 						<string>Degrees</string>
 						<key>value</key>
-						<real>0.0</real>
+						<real>720</real>
 					</dict>
 					<dict>
 						<key>baseValue</key>
@@ -1318,8 +1318,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -3140,7 +3138,7 @@ LEVEL</string>
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>32</real>
+											<real>24</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -3316,7 +3314,7 @@ LEVEL</string>
 										<key>value</key>
 										<array>
 											<real>27</real>
-											<real>257</real>
+											<real>245</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>

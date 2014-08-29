@@ -38,7 +38,6 @@
     animationManager = self.animationManager;
     
 //    _grid.audio = audio;
-//    _grid.gameOver = false;
     
     _timeLabel.string = [NSString stringWithFormat:@"%li", (long)_grid.timer];
     
@@ -94,12 +93,7 @@
         _pauseButton.visible = true;
 //        _grid.audio.paused = false;
     }
-    
-//    if (_grid.gameOver) {
-//        [animationManager runAnimationsForSequenceNamed:@"starsRotate"];
-//        [_grid.audio stopEverything];
-//        CCLOG(@"stop everything for audio");
-//    }
+
 }
 
 + (NSString*)convertAndUpdateTime:(NSInteger)seconds {

@@ -75,7 +75,6 @@ static const NSInteger GRID_COLUMNS = 6;
     self.streak = 0;
     self.allClear = 0;
     
-    self.gameOver = FALSE;
     self.paused = FALSE;
     self.touchEnabled = TRUE;
     
@@ -1284,7 +1283,6 @@ static const NSInteger GRID_COLUMNS = 6;
     [self pause];
     [self playGameOverSound];
     [self scheduleBlock:^(CCTimer *timer) {
-        self.gameOver = true; // TODO: remove all gameover bool properties -> no longer needed?
         self.touchEnabled = false;
         [self.audio stopEverything];
         [self assignStats];

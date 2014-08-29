@@ -60,6 +60,9 @@
     
     [MGWU loadMGWU:@"sesserdrawets"];
     [MGWU dark];
+    
+//    [MGWU setAppiraterAppId:appid andAppName:Dicewich];
+//    [MGWU setReminderMessage:@"Come back and play this game now!"];
 
 //    // Configure CocoaLumberjack and override point for customization after application launch.
 //    [DDLog addLogger:[DDASLLogger sharedInstance]];
