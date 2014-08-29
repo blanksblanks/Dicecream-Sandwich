@@ -105,7 +105,6 @@
     
     [_grid.audio playEffect:@"bubble-pop1.wav"];
 
-    _grid.gameOver = true;
     _grid.touchEnabled = false;
 
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];

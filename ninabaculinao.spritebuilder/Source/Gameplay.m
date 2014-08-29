@@ -93,7 +93,7 @@
         _pauseButton.visible = true;
 //        _grid.audio.paused = false;
     }
-
+    
 }
 
 + (NSString*)convertAndUpdateTime:(NSInteger)seconds {

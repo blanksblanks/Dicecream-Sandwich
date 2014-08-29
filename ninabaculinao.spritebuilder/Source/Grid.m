@@ -1282,16 +1282,25 @@ static const NSInteger GRID_COLUMNS = 6;
     
     [self pause];
     [self playGameOverSound];
+    
+    CCAnimationManager* animationManager = self.parent.animationManager;
+    [animationManager runAnimationsForSequenceNamed:@"starsRotate"];
+    
     [self scheduleBlock:^(CCTimer *timer) {
         self.touchEnabled = false;
-        [self.audio stopEverything];
+        [self.audio stopBg];
         [self assignStats];
         
         GameEnd *gameEnd = (GameEnd*) [CCBReader load:@"GameEnd"];
         [gameEnd setPositionType:CCPositionTypeNormalized];
         gameEnd.position = ccp(0.5, 0.5);
         [self.parent addChild:gameEnd];
-    } delay:1.0f];
+    } delay:0.5f];
+    
+    [self scheduleBlock:^(CCTimer *timer) {
+        [self.audio stopEverything];
+    } delay:0.35f];
+
 }
 
 - (void) playGameOverSound {

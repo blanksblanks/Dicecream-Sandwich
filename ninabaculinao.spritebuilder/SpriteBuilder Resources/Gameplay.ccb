@@ -229,11 +229,11 @@
 									<key>name</key>
 									<string>rotation</string>
 									<key>time</key>
-									<real>1</real>
+									<real>0.5</real>
 									<key>type</key>
 									<integer>2</integer>
 									<key>value</key>
-									<real>720</real>
+									<real>360</real>
 								</dict>
 							</array>
 							<key>name</key>
@@ -255,24 +255,6 @@
 									<string>spriteFrame</string>
 									<key>time</key>
 									<real>0.0</real>
-									<key>type</key>
-									<integer>7</integer>
-									<key>value</key>
-									<array>
-										<string>newAssets/forGameplay/Black_Background.png</string>
-										<string>Use regular file</string>
-									</array>
-								</dict>
-								<dict>
-									<key>easing</key>
-									<dict>
-										<key>type</key>
-										<integer>0</integer>
-									</dict>
-									<key>name</key>
-									<string>spriteFrame</string>
-									<key>time</key>
-									<real>1</real>
 									<key>type</key>
 									<integer>7</integer>
 									<key>value</key>
@@ -357,7 +339,7 @@
 						<key>type</key>
 						<string>Degrees</string>
 						<key>value</key>
-						<real>720</real>
+						<real>360</real>
 					</dict>
 					<dict>
 						<key>baseValue</key>
@@ -3882,13 +3864,13 @@ LEVEL</string>
 			<key>chainedSequenceId</key>
 			<integer>-1</integer>
 			<key>length</key>
-			<real>1</real>
+			<real>0.5</real>
 			<key>name</key>
 			<string>starsRotate</string>
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
-			<real>1</real>
+			<real>0.5</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
