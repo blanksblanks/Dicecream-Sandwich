@@ -208,7 +208,7 @@
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>Sure you want to do that?</string>
+							<string>Restart game?</string>
 							<false/>
 						</array>
 					</dict>
