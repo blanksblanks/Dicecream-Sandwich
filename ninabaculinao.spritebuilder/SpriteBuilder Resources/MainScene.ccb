@@ -16,7 +16,7 @@
 	<key>currentResolution</key>
 	<integer>1</integer>
 	<key>currentSequenceId</key>
-	<integer>1</integer>
+	<integer>2</integer>
 	<key>docDimensionsType</key>
 	<integer>0</integer>
 	<key>fileType</key>
@@ -1364,7 +1364,7 @@
 									<key>value</key>
 									<array>
 										<real>0.5</real>
-										<real>355.20001220703125</real>
+										<real>300</real>
 									</array>
 								</dict>
 								<dict>
@@ -1382,7 +1382,7 @@
 									<key>value</key>
 									<array>
 										<real>0.5</real>
-										<real>336</real>
+										<real>264</real>
 									</array>
 								</dict>
 								<dict>
@@ -1400,7 +1400,7 @@
 									<key>value</key>
 									<array>
 										<real>0.5</real>
-										<real>336</real>
+										<real>300</real>
 									</array>
 								</dict>
 								<dict>
@@ -1418,7 +1418,7 @@
 									<key>value</key>
 									<array>
 										<real>0.5</real>
-										<real>355.20001220703125</real>
+										<real>264</real>
 									</array>
 								</dict>
 								<dict>
@@ -1436,7 +1436,7 @@
 									<key>value</key>
 									<array>
 										<real>0.5</real>
-										<real>336</real>
+										<real>300</real>
 									</array>
 								</dict>
 								<dict>
@@ -1454,7 +1454,7 @@
 									<key>value</key>
 									<array>
 										<real>0.5</real>
-										<real>336</real>
+										<real>264</real>
 									</array>
 								</dict>
 								<dict>
@@ -1472,7 +1472,7 @@
 									<key>value</key>
 									<array>
 										<real>0.5</real>
-										<real>355.20001220703125</real>
+										<real>300</real>
 									</array>
 								</dict>
 							</array>
@@ -1652,6 +1652,14 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>backgroundOpacity|Disabled</string>
+						<key>type</key>
+						<string>Float</string>
+						<key>value</key>
+						<real>1</real>
+					</dict>
+					<dict>
+						<key>name</key>
 						<string>labelOpacity|Disabled</string>
 						<key>type</key>
 						<string>Float</string>
@@ -1668,6 +1676,14 @@
 							<string></string>
 							<string>workingAssets/Buttons/buttons-31.png</string>
 						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>backgroundOpacity|Selected</string>
+						<key>type</key>
+						<string>Float</string>
+						<key>value</key>
+						<real>1</real>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1810,6 +1826,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>seqExpanded</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -1905,7 +1923,7 @@
 									<key>value</key>
 									<array>
 										<real>0.49999994039535522</real>
-										<real>240</real>
+										<real>290</real>
 									</array>
 								</dict>
 								<dict>
@@ -2018,8 +2036,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.49999994039535522</real>
-							<real>300</real>
+							<real>1.1843750476837158</real>
+							<real>-4.999969482421875</real>
 							<integer>1</integer>
 							<integer>2</integer>
 							<integer>0</integer>
@@ -2057,7 +2075,7 @@
 						<key>type</key>
 						<string>Degrees</string>
 						<key>value</key>
-						<real>0.0</real>
+						<real>270</real>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -2084,6 +2102,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>seqExpanded</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -2432,144 +2452,7 @@
 						<key>animatedProperties</key>
 						<dict>
 							<key>2</key>
-							<dict>
-								<key>position</key>
-								<dict>
-									<key>keyframes</key>
-									<array>
-										<dict>
-											<key>easing</key>
-											<dict>
-												<key>type</key>
-												<integer>1</integer>
-											</dict>
-											<key>name</key>
-											<string>position</string>
-											<key>time</key>
-											<real>0.0</real>
-											<key>type</key>
-											<integer>3</integer>
-											<key>value</key>
-											<array>
-												<real>0.5</real>
-												<real>2.1925926208496094</real>
-											</array>
-										</dict>
-										<dict>
-											<key>easing</key>
-											<dict>
-												<key>type</key>
-												<integer>1</integer>
-											</dict>
-											<key>name</key>
-											<string>position</string>
-											<key>time</key>
-											<real>0.1666666716337204</real>
-											<key>type</key>
-											<integer>3</integer>
-											<key>value</key>
-											<array>
-												<real>0.5</real>
-												<real>2.0740740299224854</real>
-											</array>
-										</dict>
-										<dict>
-											<key>easing</key>
-											<dict>
-												<key>type</key>
-												<integer>1</integer>
-											</dict>
-											<key>name</key>
-											<string>position</string>
-											<key>time</key>
-											<real>0.3333333432674408</real>
-											<key>type</key>
-											<integer>3</integer>
-											<key>value</key>
-											<array>
-												<real>0.5</real>
-												<real>2.0740740299224854</real>
-											</array>
-										</dict>
-										<dict>
-											<key>easing</key>
-											<dict>
-												<key>type</key>
-												<integer>1</integer>
-											</dict>
-											<key>name</key>
-											<string>position</string>
-											<key>time</key>
-											<real>0.5</real>
-											<key>type</key>
-											<integer>3</integer>
-											<key>value</key>
-											<array>
-												<real>0.5</real>
-												<real>2.1925926208496094</real>
-											</array>
-										</dict>
-										<dict>
-											<key>easing</key>
-											<dict>
-												<key>type</key>
-												<integer>1</integer>
-											</dict>
-											<key>name</key>
-											<string>position</string>
-											<key>time</key>
-											<real>0.66666668653488159</real>
-											<key>type</key>
-											<integer>3</integer>
-											<key>value</key>
-											<array>
-												<real>0.5</real>
-												<real>2.0740740299224854</real>
-											</array>
-										</dict>
-										<dict>
-											<key>easing</key>
-											<dict>
-												<key>type</key>
-												<integer>1</integer>
-											</dict>
-											<key>name</key>
-											<string>position</string>
-											<key>time</key>
-											<real>0.83333331346511841</real>
-											<key>type</key>
-											<integer>3</integer>
-											<key>value</key>
-											<array>
-												<real>0.5</real>
-												<real>2.0740740299224854</real>
-											</array>
-										</dict>
-										<dict>
-											<key>easing</key>
-											<dict>
-												<key>type</key>
-												<integer>1</integer>
-											</dict>
-											<key>name</key>
-											<string>position</string>
-											<key>time</key>
-											<real>1</real>
-											<key>type</key>
-											<integer>3</integer>
-											<key>value</key>
-											<array>
-												<real>0.5</real>
-												<real>2.1925926208496094</real>
-											</array>
-										</dict>
-									</array>
-									<key>name</key>
-									<string>position</string>
-									<key>type</key>
-									<integer>3</integer>
-								</dict>
-							</dict>
+							<dict/>
 						</dict>
 						<key>baseClass</key>
 						<string>CCButton</string>
@@ -2594,11 +2477,6 @@
 								<string></string>
 							</dict>
 							<dict>
-								<key>baseValue</key>
-								<array>
-									<real>0.5</real>
-									<real>0.34999999403953552</real>
-								</array>
 								<key>name</key>
 								<string>position</string>
 								<key>type</key>
@@ -2740,6 +2618,14 @@
 							</dict>
 							<dict>
 								<key>name</key>
+								<string>backgroundOpacity|Disabled</string>
+								<key>type</key>
+								<string>Float</string>
+								<key>value</key>
+								<real>1</real>
+							</dict>
+							<dict>
+								<key>name</key>
 								<string>labelOpacity|Disabled</string>
 								<key>type</key>
 								<string>Float</string>
@@ -2756,6 +2642,14 @@
 									<string></string>
 									<string>workingAssets/Buttons/buttons-31.png</string>
 								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>backgroundOpacity|Selected</string>
+								<key>type</key>
+								<string>Float</string>
+								<key>value</key>
+								<real>1</real>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -3063,9 +2957,9 @@
 								<string>Color3</string>
 								<key>value</key>
 								<array>
-									<real>0.35294118523597717</real>
-									<real>0.82745099067687988</real>
-									<real>0.82352942228317261</real>
+									<real>0.0</real>
+									<real>0.50196081399917603</real>
+									<real>0.50196081399917603</real>
 									<real>1</real>
 								</array>
 							</dict>
@@ -3689,7 +3583,7 @@
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
-			<real>0.0</real>
+			<real>1</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>

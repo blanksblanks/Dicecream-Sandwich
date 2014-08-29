@@ -14,19 +14,21 @@
     CCButton *_playButton;
     CCButton *_helpButton;
     CCButton *_creditsButton;
+    BOOL playPressed;
     OALSimpleAudio *audio;
 }
 
 -(void)didLoadFromCCB {
     audio = [OALSimpleAudio sharedInstance];
     [GameState sharedInstance].popUp = FALSE;
+    playPressed = FALSE;
     [self toggleButtonsOn];
 }
 
 - (void) update:(CCTime) delta {
-    if ([GameState sharedInstance].popUp) {
+    if ([GameState sharedInstance].popUp || playPressed) {
         [self toggleButtonsOff];
-    } else if (![GameState sharedInstance].popUp) { // reset clickability
+    } else if (![GameState sharedInstance].popUp && !playPressed) { // reset clickability
         [self toggleButtonsOn];
     }
 }
@@ -45,9 +47,10 @@
 
 - (void)play {
     [MGWU logEvent:@"play_pressed_in_mainscene" withParams:nil];
-    
-    [self toggleButtonsOff];
+
+    playPressed = true;
     [self performSelector:@selector(sandwichSpinAway)];
+    
     [self scheduleBlock:^(CCTimer *timer) {
         CCScene *gameplayScene = [CCBReader loadAsScene:@"Gameplay"];
         [[CCDirector sharedDirector] replaceScene:gameplayScene];

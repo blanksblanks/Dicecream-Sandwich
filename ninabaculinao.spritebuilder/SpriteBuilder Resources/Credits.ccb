@@ -432,7 +432,7 @@
 								<key>value</key>
 								<array>
 									<real>0.5</real>
-									<real>15</real>
+									<real>5</real>
 									<integer>1</integer>
 									<integer>2</integer>
 									<integer>0</integer>
@@ -477,7 +477,7 @@
 								<string>Text</string>
 								<key>value</key>
 								<array>
-									<string>ATTRIBUTIONS</string>
+									<string>ABOUT</string>
 									<false/>
 								</array>
 							</dict>
@@ -641,10 +641,10 @@
 						<key>value</key>
 						<array>
 							<real>0.0</real>
-							<real>0.0</real>
+							<real>0.5</real>
 							<integer>1</integer>
 							<integer>0</integer>
-							<integer>0</integer>
+							<integer>2</integer>
 						</array>
 					</dict>
 					<dict>
@@ -655,7 +655,7 @@
 						<key>value</key>
 						<array>
 							<real>251</real>
-							<real>387</real>
+							<real>336</real>
 							<integer>3</integer>
 							<integer>0</integer>
 						</array>
@@ -668,7 +668,7 @@
 						<key>value</key>
 						<array>
 							<real>0.0</real>
-							<real>1</real>
+							<real>0.5</real>
 						</array>
 					</dict>
 					<dict>
@@ -824,8 +824,8 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>4</real>
-									<real>0.0</real>
+									<real>8</real>
+									<real>5</real>
 									<integer>1</integer>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -862,22 +862,20 @@
 								<string>Text</string>
 								<key>value</key>
 								<array>
-									<string>The game is brought to you by Nina Baculinao, 
-at MakeGamesWithUs in New York.
+									<string>Game design + programming by Nina Baculinao
+at MakeGamesWithUs in New York
 
-The graphics are designed by Robert Lum.
-Dat Bac Do contributed the character.
+Graphics by Robert Lum
+Character by Dat Do
 
-The icons in this game are designed
-by Captain Icon; you can find his work at
-mariodelvalle.github.io/CaptainIconWeb/.
+Icons by Captain Icon
 
-The sound effects come from freesound:
-- success by grunz
-- level_up_3note2 by jivatma07
-- water_droplet_bubble_pop1 by CGEffex
+SFX from freesound.org:
+   success by grunz
+   level_up_3note2 by jivatma07
+   water_droplet_bubble_pop1 by CGEffex
 
-The BGM is “CATchy” by DropThatCat.com.</string>
+BGM “CATchy” by DropThatCat</string>
 									<false/>
 								</array>
 							</dict>
@@ -1013,8 +1011,6 @@ The BGM is “CATchy” by DropThatCat.com.</string>
 								</array>
 							</dict>
 						</array>
-						<key>selected</key>
-						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -1043,10 +1039,10 @@ The BGM is “CATchy” by DropThatCat.com.</string>
 						<key>value</key>
 						<array>
 							<real>10</real>
-							<real>10</real>
+							<real>0.5</real>
 							<integer>2</integer>
 							<integer>0</integer>
-							<integer>0</integer>
+							<integer>2</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1057,7 +1053,7 @@ The BGM is “CATchy” by DropThatCat.com.</string>
 						<key>value</key>
 						<array>
 							<real>240</real>
-							<real>380</real>
+							<real>336</real>
 							<integer>0</integer>
 							<integer>0</integer>
 						</array>
@@ -1070,7 +1066,7 @@ The BGM is “CATchy” by DropThatCat.com.</string>
 						<key>value</key>
 						<array>
 							<real>1</real>
-							<real>1</real>
+							<real>0.5</real>
 						</array>
 					</dict>
 					<dict>

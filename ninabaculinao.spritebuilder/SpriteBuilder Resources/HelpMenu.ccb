@@ -789,8 +789,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -825,8 +823,8 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>395.00006103515625</real>
-							<integer>0</integer>
+							<real>50</real>
+							<integer>1</integer>
 							<integer>2</integer>
 							<integer>0</integer>
 						</array>
@@ -998,6 +996,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -2900,14 +2900,6 @@ to clear dice!</string>
 							</dict>
 							<dict>
 								<key>name</key>
-								<string>opacity</string>
-								<key>type</key>
-								<string>Float</string>
-								<key>value</key>
-								<real>0.69999998807907104</real>
-							</dict>
-							<dict>
-								<key>name</key>
 								<string>color</string>
 								<key>type</key>
 								<string>Color3</string>
@@ -2916,7 +2908,7 @@ to clear dice!</string>
 									<real>1</real>
 									<real>1</real>
 									<real>1</real>
-									<real>0.69999998807907104</real>
+									<real>1</real>
 								</array>
 							</dict>
 						</array>
@@ -6812,8 +6804,8 @@ Time’s ticking...</string>
 				<string>Size</string>
 				<key>value</key>
 				<array>
-					<real>290</real>
-					<real>431</real>
+					<real>300</real>
+					<real>450</real>
 					<integer>0</integer>
 					<integer>0</integer>
 				</array>
