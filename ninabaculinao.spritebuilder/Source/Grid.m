@@ -340,15 +340,24 @@ static const NSInteger GRID_COLUMNS = 6;
     comboCondition = false;
     [self resetComboMultiplier];
 
-    // Commented out code for random spawn location
     NSInteger firstRow = GRID_ROWS-1;
-    NSInteger firstColumn = arc4random_uniform(GRID_COLUMNS-2); // int bt 0 and 4 // GRID_COLUMNS/2)-1; for center
-    NSInteger nextRow = firstRow - arc4random_uniform(2);
-    NSInteger nextColumn = firstColumn+1;
+    NSInteger firstColumn = arc4random_uniform(GRID_COLUMNS); // int bt 0 and 5 // GRID_COLUMNS/2)-1; for center
+    NSInteger nextRow;
+    NSInteger nextColumn;
 
-    if (firstRow != nextRow) { // has to be vertical
+    // If first die is in column (5,11), second die must be in same column (5,10)
+    // Otherwise second die can be in same or next column
+    if (firstColumn == GRID_COLUMNS-1) {
+        nextRow = firstRow-1;
+    } else {
+        nextRow = firstRow - arc4random_uniform(2);
+    }
+    
+    // If dice in different rows, pair has to be vertical
+    // If dice in same row, pair has to be horizontal
+    if (firstRow != nextRow) {
         nextColumn = firstColumn;
-    } else { // has to be horizontal
+    } else {
         nextColumn = firstColumn+1;
     }
     
