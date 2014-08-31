@@ -540,19 +540,24 @@ static const NSInteger GRID_COLUMNS = 6;
     float xdifference = oldTouchPosition.x - newTouchPosition.x;
     
     // determine to which column touch goes, cannot go past columns 0 and 5
-    NSInteger column = ((newTouchPosition.x - _tileMarginHorizontal) / (_tileWidth + _tileMarginHorizontal));
-    if (column > GRID_COLUMNS-1) {
-        column = GRID_COLUMNS-1;
-    } else if (column < 0) {
-        column = 0;
-    }
+//    NSInteger column = ((newTouchPosition.x - _tileMarginHorizontal) / (_tileWidth + _tileMarginHorizontal));
+//    if (column > GRID_COLUMNS-1) {
+//        column = GRID_COLUMNS-1;
+//    } else if (column < 0) {
+//        column = 0;
+//    }
+    
+    NSInteger columns = xdifference/_tileWidth;
     
     if ((ydifference > 0.2*(self.contentSize.height)) && (newTouchPosition.y < _currentDie1.position.y) && (newTouchPosition.y < _currentDie2.position.y)) {
         _dropInterval = 0.03;
     } else if ((xdifference > 0.5*(_tileWidth))) {
-        [self swipeLeftTo:column];
+//        [self swipeLeftTo:column];
+        [self swipeLeftBy:columns];
     } else if ((xdifference < -0.5*(_tileWidth))) {
-        [self swipeRightTo:column];
+//        [self swipeRightTo:column];
+        columns *= -1;
+        [self swipeRightBy:columns];
     } else {
         _dropInterval = self.levelSpeed;
     }
@@ -614,10 +619,25 @@ static const NSInteger GRID_COLUMNS = 6;
     [self.audio playEffect:@"click2.wav"];
 }
 
-- (void)swipeLeftTo:(NSInteger)column {
+//- (void)swipeLeftTo:(NSInteger)column {
+//    BOOL canMoveLeft = TRUE;
+//    while (_currentDie1.column > column && _currentDie2.column > column && canMoveLeft) {
+//            canMoveLeft = [self swipeLeft];
+//    }
+//}
+//
+//[self scheduleBlock:^(CCTimer *timer) {
+//    
+//} delay:0.20];
+
+
+- (void)swipeLeftBy:(NSInteger)columns {
     BOOL canMoveLeft = TRUE;
-    while (_currentDie1.column > column && _currentDie2.column > column && canMoveLeft) {
-            canMoveLeft = [self swipeLeft];
+    NSInteger times = 0;
+    
+    while (times < columns && canMoveLeft) {
+        canMoveLeft = [self swipeLeft];
+        times++;
     }
 }
 
@@ -632,12 +652,24 @@ static const NSInteger GRID_COLUMNS = 6;
     return canMoveLeft;
 }
 
-- (void)swipeRightTo:(NSInteger)column {
+//- (void)swipeRightTo:(NSInteger)column {
+//    BOOL canMoveRight = TRUE;
+//    while (_currentDie1.column < column && _currentDie2.column < column && canMoveRight) {
+//        canMoveRight = [self swipeRight];
+//    }
+//}
+
+- (void)swipeRightBy:(NSInteger)columns {
     BOOL canMoveRight = TRUE;
-    while (_currentDie1.column < column && _currentDie2.column < column && canMoveRight) {
+    NSInteger times = 0;
+    
+    while (times < columns && canMoveRight) {
         canMoveRight = [self swipeRight];
+        times++;
     }
 }
+
+
 // TODO: try to do ccaction move animation again - determine how much it can move ie 5 col and then move by in one action
 // Don't use it on rotate though, that's weird
 
