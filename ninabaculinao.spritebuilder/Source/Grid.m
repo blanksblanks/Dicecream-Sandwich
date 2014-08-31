@@ -267,8 +267,8 @@ static const NSInteger GRID_COLUMNS = 6;
     if (allClear) {
         NSInteger allClearScore = 50 * self.level;
         self.score += allClearScore;
-        NSString *allClearString = [NSString stringWithFormat:@"All Clear!"];
-        [self animateGameMessage:allClearString];
+        NSString *allClearString = [NSString stringWithFormat:@"PERFECT CLEAR"];
+        [self animateGameMessage:allClearString fromRow:6 toRow:8];
         self.allClear++;
     }
 }
@@ -1095,11 +1095,13 @@ static const NSInteger GRID_COLUMNS = 6;
             }
             
             if (self.comboMultiplier > 1) {
-                NSString *comboString = [NSString stringWithFormat:@"Combo x%ld", (long)self.comboMultiplier];
-                [self animateGameMessage:comboString];
+                NSString *comboString = [NSString stringWithFormat:@"COMBO x%ld", (long)self.comboMultiplier];
+                [self animateGameMessage:comboString fromRow:2 toRow:4];
             }
             
             if (perfectMatch) { // double the score!
+                NSString *perfectMatchString = [NSString stringWithFormat:@"PERFECT MATCH"];
+                [self animateGameMessage:perfectMatchString fromRow:4 toRow:6];
                 chain.score = face * 20 * ([chain.dice count]) * self.comboMultiplier;
                 self.perfectMatches++;
             } else {
@@ -1202,15 +1204,15 @@ static const NSInteger GRID_COLUMNS = 6;
 }
  */
 
-- (void)animateGameMessage:(NSString *)message{
+- (void)animateGameMessage:(NSString *)message fromRow:(int)beginRow toRow:(int)endRow{
     
     [self playLevelUpSound];
 
-    CGPoint beginPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 5.5);
-    CGPoint endPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 7.5);
+    CGPoint beginPosition = CGPointMake(self.contentSize.width/2, _tileWidth * beginRow);
+    CGPoint endPosition = CGPointMake(self.contentSize.width/2, _tileWidth * endRow);
 //    NSString *scoreString = [NSString stringWithFormat:@"Level Up!"];
     
-    CCLabelTTF *gameMessage = [CCLabelTTF labelWithString:message fontName:@"DimboRegular" fontSize:48];
+    CCLabelTTF *gameMessage = [CCLabelTTF labelWithString:message fontName:@"DimboRegular" fontSize:36];
     gameMessage.outlineColor = [CCColor purpleColor];
     gameMessage.outlineWidth = 3.0f;
     gameMessage.position = beginPosition;
@@ -1274,8 +1276,8 @@ static const NSInteger GRID_COLUMNS = 6;
         self.level = 1;
     } else if (self.score >= self.targetScore) {
         self.level++;
-        NSString *levelUpString = @"Level Up!";
-        [self animateGameMessage:levelUpString];
+        NSString *levelUpString = @"LEVEL UP!";
+        [self animateGameMessage:levelUpString fromRow:8 toRow:10];
     }
 
     // Speed only incremeents on even levels
