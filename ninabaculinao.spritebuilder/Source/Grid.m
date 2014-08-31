@@ -74,7 +74,7 @@ static const NSInteger GRID_COLUMNS = 6;
     self.combo = 0;
     self.streak = 0;
     self.allClear = 0;
-    
+        
     self.paused = FALSE;
     self.touchEnabled = TRUE;
     
@@ -1372,6 +1372,7 @@ static const NSInteger GRID_COLUMNS = 6;
     [GameState sharedInstance].currentAllClear = self.allClear;
     
     if ([GameState sharedInstance].bestScore < self.score) {
+        [GameState sharedInstance].newHighScore = true;
         [GameState sharedInstance].bestScore = self.score;
         [GameState sharedInstance].bestLevel = self.level;
         [GameState sharedInstance].bestTime = self.timer;

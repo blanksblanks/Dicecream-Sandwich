@@ -37,6 +37,7 @@
     
     animationManager = self.animationManager;
     
+    [GameState sharedInstance].newHighScore = false;
 //    _grid.audio = audio;
     
     _timeLabel.string = [NSString stringWithFormat:@"%li", (long)_grid.timer];

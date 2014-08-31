@@ -25,6 +25,11 @@
 - (void) didLoadFromCCB {
     _scoreLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentScore];
     _bestLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].bestScore];
+    if ([GameState sharedInstance].newHighScore) {
+        _endMessage.string = @"NEW BEST!";
+    } else {
+        _endMessage.string = @"GOOD GAME!";
+    }
 }
 
 - (void) stats {

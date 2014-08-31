@@ -50,4 +50,5 @@ typedef NS_ENUM(NSInteger, GridState) {
 @property (nonatomic, assign) NSInteger allClear; // TODO: needs a score bonus
 
 
+
 @end
