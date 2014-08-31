@@ -558,27 +558,39 @@ static const NSInteger GRID_COLUMNS = 6;
     float xdifference = oldTouchPosition.x - newTouchPosition.x;
     
     // determine to which column touch goes, cannot go past columns 0 and 5
-//    NSInteger column = ((newTouchPosition.x - _tileMarginHorizontal) / (_tileWidth + _tileMarginHorizontal));
-//    if (column > GRID_COLUMNS-1) {
-//        column = GRID_COLUMNS-1;
-//    } else if (column < 0) {
-//        column = 0;
-//    }
-    
-    NSInteger columns = xdifference/_tileWidth;
-    NSLog(@"Columns: %i", columns);
+    NSInteger column = ((newTouchPosition.x - _tileMarginHorizontal) / (_tileWidth + _tileMarginHorizontal));
+    if (column > GRID_COLUMNS-1) {
+        column = GRID_COLUMNS-1;
+    } else if (column < 0) {
+        column = 0;
+    }
     
     if ((ydifference > 0.2*(self.contentSize.height)) && (newTouchPosition.y < _currentDie1.position.y) && (newTouchPosition.y < _currentDie2.position.y)) {
         _dropInterval = 0.03;
-    } else if ((xdifference > 0.9*(_tileWidth))) {
-//        [self swipeLeftTo:column];
-        [self swipeLeftBy:columns];
-    } else if ((xdifference < -0.9*(_tileWidth))) {
-//        [self swipeRightTo:column];
-        [self swipeRightBy:columns];
+    } else if ((xdifference > 0.5*(_tileWidth))) {
+        [self swipeLeftTo:column];
+    } else if ((xdifference < -0.5*(_tileWidth))) {
+        [self swipeRightTo:column];
     } else {
         _dropInterval = self.levelSpeed;
     }
+    
+//    if (fabsf(xdifference) > 0.5*(_tileWidth)) {
+//        oldTouchPosition = newTouchPosition;
+//        NSInteger columns = xdifference/_tileWidth;
+//        NSLog(@"Columns: %i", columns);
+//        if ((xdifference > 0.5*(_tileWidth))) {
+//            //        [self swipeLeftTo:column];
+//            [self swipeLeftBy:columns];
+//        } else if ((xdifference < -0.5*(_tileWidth))) {
+//            //        [self swipeRightTo:column];
+//            [self swipeRightBy:columns];
+//        }
+//    } else if ((ydifference > 0.2*(self.contentSize.height)) && (newTouchPosition.y < _currentDie1.position.y) && (newTouchPosition.y < _currentDie2.position.y)) {
+//        _dropInterval = 0.03;
+//    } else {
+//        _dropInterval = self.levelSpeed;
+//    }
     
 //    if ((ydifference > 0.1*(self.contentSize.height)) && (newTouchPosition.y < _currentDie1.position.y) && (newTouchPosition.y < _currentDie2.position.y)) {
 //        _dropInterval = 0.03; // soft drop
@@ -637,18 +649,16 @@ static const NSInteger GRID_COLUMNS = 6;
     [self.audio playEffect:@"click2.wav"];
 }
 
-//- (void)swipeLeftTo:(NSInteger)column {
-//    BOOL canMoveLeft = TRUE;
-//    while (_currentDie1.column > column && _currentDie2.column > column && canMoveLeft) {
-//            canMoveLeft = [self swipeLeft];
-//    }
-//}
-
-
+- (void)swipeLeftTo:(NSInteger)column {
+    BOOL canMoveLeft = TRUE;
+    while (_currentDie1.column > column && _currentDie2.column > column && canMoveLeft) {
+            canMoveLeft = [self swipeLeft];
+    }
+}
 
 - (void)swipeLeftBy:(NSInteger)columns {
-    __block BOOL canMoveLeft = TRUE;
-    __block NSInteger times = 0;
+    BOOL canMoveLeft = TRUE;
+    NSInteger times = 0;
     while (times < columns && canMoveLeft) {
             canMoveLeft = [self swipeLeft];
             times++;
@@ -666,12 +676,12 @@ static const NSInteger GRID_COLUMNS = 6;
     return canMoveLeft;
 }
 
-//- (void)swipeRightTo:(NSInteger)column {
-//    BOOL canMoveRight = TRUE;
-//    while (_currentDie1.column < column && _currentDie2.column < column && canMoveRight) {
-//        canMoveRight = [self swipeRight];
-//    }
-//}
+- (void)swipeRightTo:(NSInteger)column {
+    BOOL canMoveRight = TRUE;
+    while (_currentDie1.column < column && _currentDie2.column < column && canMoveRight) {
+        canMoveRight = [self swipeRight];
+    }
+}
 
 - (void)swipeRightBy:(NSInteger)columns {
     BOOL canMoveRight = TRUE;
@@ -1338,6 +1348,8 @@ static const NSInteger GRID_COLUMNS = 6;
     } else if (self.level > 14 && self.level < 20 && (self.level%2 == 1)) {
         self.possibilities++;
     }
+    
+    //TODO: add access level options from main menu and adjust target score accordingly depending where you start
     
     // Allow special items in Level 9
     if (self.level > 8) {
