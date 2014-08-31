@@ -657,7 +657,7 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)swipeRightBy:(NSInteger)columns {
     BOOL canMoveRight = TRUE;
-    NSInteger times = 0; 
+    NSInteger times = 0;
     while (times > columns && canMoveRight) {
         canMoveRight = [self swipeRight];
         times--;
@@ -1124,7 +1124,7 @@ static const NSInteger GRID_COLUMNS = 6;
     NSString *scoreString = [NSString stringWithFormat:@"+ %ld", (long)chain.score];
     
     // Create chain score
-    CCLabelTTF *chainScore = [CCLabelTTF labelWithString:scoreString fontName:@"Marker Felt" fontSize:18];
+    CCLabelTTF *chainScore = [CCLabelTTF labelWithString:scoreString fontName:@"DimboRegular" fontSize:18];
     chainScore.outlineColor = [CCColor purpleColor];
     chainScore.outlineWidth = 3.0f;
     chainScore.positionInPoints = centerPosition;
@@ -1210,7 +1210,7 @@ static const NSInteger GRID_COLUMNS = 6;
     CGPoint endPosition = CGPointMake(self.contentSize.width/2, _tileWidth * 7.5);
 //    NSString *scoreString = [NSString stringWithFormat:@"Level Up!"];
     
-    CCLabelTTF *gameMessage = [CCLabelTTF labelWithString:message fontName:@"Marker Felt" fontSize:48];
+    CCLabelTTF *gameMessage = [CCLabelTTF labelWithString:message fontName:@"DimboRegular" fontSize:48];
     gameMessage.outlineColor = [CCColor purpleColor];
     gameMessage.outlineWidth = 3.0f;
     gameMessage.position = beginPosition;

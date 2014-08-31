@@ -176,6 +176,7 @@
 		6264683C19A6C7B800E4FAE2 /* ConfirmMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfirmMenu.m; path = Source/ConfirmMenu.m; sourceTree = "<group>"; };
 		62889D2319AFDA37005EE75F /* powerUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = powerUp.wav; sourceTree = "<group>"; };
 		62889D2519AFEACD005EE75F /* bubble-pop1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "bubble-pop1.wav"; sourceTree = "<group>"; };
+		62889D2B19B30205005EE75F /* DimboRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DimboRegular.ttf; sourceTree = "<group>"; };
 		629019941994FA4F00ADF4DD /* PauseMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PauseMenu.h; path = Source/PauseMenu.h; sourceTree = "<group>"; };
 		629019951994FA4F00ADF4DD /* PauseMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PauseMenu.m; path = Source/PauseMenu.m; sourceTree = "<group>"; };
 		629AA3661977017C003FA512 /* CATchy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CATchy.wav; sourceTree = "<group>"; };
@@ -534,6 +535,7 @@
 		B77F1B4617B978D7009739AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				62889D2B19B30205005EE75F /* DimboRegular.ttf */,
 				6264683919A1450C00E4FAE2 /* oneBlastWhistle.wav */,
 				62646831199F9C7300E4FAE2 /* GameOver.wav */,
 				62889D2519AFEACD005EE75F /* bubble-pop1.wav */,
