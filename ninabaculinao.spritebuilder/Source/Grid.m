@@ -420,6 +420,24 @@ static const NSInteger GRID_COLUMNS = 6;
         case 6:
             die = (Dice*) [CCBReader load:@"Dice/Six"];
             break;
+        case 7:
+            die = (Dice*) [CCBReader load:@"Dice/Yi"];
+            break;
+        case 8:
+            die = (Dice*) [CCBReader load:@"Dice/Er"];
+            break;
+        case 9:
+            die = (Dice*) [CCBReader load:@"Dice/San"];
+            break;
+        case 10:
+            die = (Dice*) [CCBReader load:@"Dice/Si"];
+            break;
+        case 11:
+            die = (Dice*) [CCBReader load:@"Dice/Wu"];
+            break;
+        case 12:
+            die = (Dice*) [CCBReader load:@"Dice/Liu"];
+            break;
         default:
             die = (Dice*) [CCBReader load:@"Dice/Dice"];
             break;
@@ -1283,28 +1301,35 @@ static const NSInteger GRID_COLUMNS = 6;
 
     // Speed only incremeents on even levels
     if (self.level%2 == 0) {(
-        self.levelSpeed = (0.25/((self.level/2)+1)+0.25));
+        self.levelSpeed = (0.15/((self.level/2)+1)+0.35));
     } else if (self.level == 1) {
         self.levelSpeed = 0.5;
-    } else {
-        self.levelSpeed = self.levelSpeed; // stay the same
-    }
+    } // else {
+//        self.levelSpeed = self.levelSpeed; // stay the same
+//    }
     
     // Levels 1-3; Possibilities: 2, 3, 4
     // Levels 4-5; Possibilities: 4, 5
-    // Levels 6-x; Possibilities: 5, 6...
+    // Levels 6-7; Possibilities: 5, 6...
+    // Levels 11-13; Possibilities: 7, 8, 9
+    // Level 15, 17, 19; Possibilities: 10, 11, 12
+    // Level 20; forever
     if (self.level < 4) {
         self.possibilities = self.level+1;
     } else if (self.level == 4 || self.level == 5) {
         self.possibilities = self.level;
     } else if (self.level == 6) {
         self.possibilities = self.level-1;
-    } else {
+    } else if (self.level > 6 && self.level < 11) {
         self.possibilities = 6;
+    } else if (self.level > 10 && self.level < 14) {
+        self.possibilities = self.level-4;
+    } else if (self.level > 14 && self.level < 20 && (self.level%2 == 1)) {
+        self.possibilities++;
     }
     
-    // Allow special items after Level 7
-    if (self.level > 7) {
+    // Allow special items in Level 9
+    if (self.level > 8) {
         specialsAllowed = TRUE;
     }
     
@@ -1315,8 +1340,10 @@ static const NSInteger GRID_COLUMNS = 6;
     //    self.possibilities = [dict[@"possibilities"] intValue];
     
     // Target score system
-    if (self.level > 15) {
+    if (self.level > 15 && self.level < 20) {
         self.targetScore = self.targetScore + 1675;
+    } else {
+        self.targetScore = 9999999999999999;
     }
 }
 

@@ -20,6 +20,7 @@
 //    CCSprite *_rainbowBright;
     CCAnimationManager* animationManager;
     CCLabelTTF *_scoreLabel;
+    CCLabelTTF *_target;
     CCLabelTTF *_targetLabel;
     CCLabelTTF *_levelLabel;
     CCLabelTTF *_timeLabel;
@@ -58,16 +59,17 @@
         [animationManager runAnimationsForSequenceNamed:@"scorePulse"];
     }
     if ([keyPath isEqualToString:@"targetScore"]) {
-        _targetLabel.string = [NSString stringWithFormat:@"%li", (long) _grid.targetScore];
+        if (_grid.level == 20) { // goes into endless mode
+            _target.visible = false;
+            _targetLabel.visible = false;
+        } else {
+            _targetLabel.string = [NSString stringWithFormat:@"%li", (long) _grid.targetScore];
+        }
     }
     if ([keyPath isEqualToString:@"level"]) {
         _levelLabel.string = [NSString stringWithFormat:@"%li", (long) _grid.level];
         if (_grid.level > 1) {
             [animationManager runAnimationsForSequenceNamed:@"levelPulse"];
-//            _rainbowBright.visible = !_rainbowBright.visible;
-//            if (_grid.zOrder < _rainbowBright.zOrder) {
-//                //TODO: debug why rainbow sometimes appears above grid
-//            }
         }
     }
 }
