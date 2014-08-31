@@ -820,10 +820,15 @@ static const NSInteger GRID_COLUMNS = 6;
                         if (_leftDie.faceValue == _rightDie.faceValue) {
                             Chain *chain = [[Chain alloc] init];
                             chain.chainType = ChainTypeHorizontal;
-                            // if there's a match, add each dice to the chain
-                            for (NSInteger i = column; i <= _rightColumn; i++) {
-                                Dice *die = _gridArray[row][i];
-                                [chain addDice:die];
+                            // if there's a match for both number and color, add each die to the chain
+                            if (_leftDie.colorValue == _rightDie.colorValue) {
+                                for (NSInteger i = column; i <= _rightColumn; i++) {
+                                    Dice *die = _gridArray[row][i];
+                                    [chain addDice:die];
+                                }
+                            } else { // otherwise only add the bookends to the chain for deletion
+                                [chain addDice:_leftDie];
+                                [chain addDice:_rightDie];
                             }
                             [array addObject:chain];
                             comboCondition = true;
@@ -859,9 +864,14 @@ static const NSInteger GRID_COLUMNS = 6;
                         if (_belowDie.faceValue == _aboveDie.faceValue) {
                             Chain *chain = [[Chain alloc] init];
                             chain.chainType = ChainTypeVertical;
-                            for (NSInteger i = row; i <= _aboveRow; i++) {
-                                Dice *die = _gridArray[i][column];
-                                [chain addDice:die];
+                            if (_belowDie.colorValue == _aboveDie.colorValue) {
+                                for (NSInteger i = row; i <= _aboveRow; i++) {
+                                    Dice *die = _gridArray[i][column];
+                                    [chain addDice:die];
+                                }
+                            } else {
+                                [chain addDice:_aboveDie];
+                                [chain addDice:_belowDie];
                             }
                             [array addObject:chain];
                             matchFound = true;
