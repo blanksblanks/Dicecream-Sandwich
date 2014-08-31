@@ -440,8 +440,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
@@ -1779,6 +1777,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -1844,9 +1844,9 @@
 													<integer>6</integer>
 													<key>value</key>
 													<array>
+														<real>1</real>
+														<real>1</real>
 														<real>0.0</real>
-														<real>1</real>
-														<real>1</real>
 														<real>1</real>
 													</array>
 												</dict>
@@ -2059,9 +2059,9 @@
 										<string>Color3</string>
 										<key>value</key>
 										<array>
+											<real>1</real>
+											<real>1</real>
 											<real>0.0</real>
-											<real>1</real>
-											<real>1</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -2426,9 +2426,9 @@ GOAL</string>
 													<integer>6</integer>
 													<key>value</key>
 													<array>
+														<real>1</real>
+														<real>1</real>
 														<real>0.0</real>
-														<real>1</real>
-														<real>1</real>
 														<real>1</real>
 													</array>
 												</dict>
@@ -2641,9 +2641,9 @@ GOAL</string>
 										<string>Color3</string>
 										<key>value</key>
 										<array>
+											<real>1</real>
+											<real>1</real>
 											<real>0.0</real>
-											<real>1</real>
-											<real>1</real>
 											<real>1</real>
 										</array>
 									</dict>

@@ -1213,8 +1213,9 @@ static const NSInteger GRID_COLUMNS = 6;
 //    NSString *scoreString = [NSString stringWithFormat:@"Level Up!"];
     
     CCLabelTTF *gameMessage = [CCLabelTTF labelWithString:message fontName:@"DimboRegular" fontSize:36];
-    gameMessage.outlineColor = [CCColor purpleColor];
-    gameMessage.outlineWidth = 3.0f;
+//    gameMessage.color = [CCColor purpleColor];
+    gameMessage.outlineColor = [CCColor purpleColor];//colorWithRed:0.f/255.f green:191.f/255.f blue:243.f/255.f];
+    gameMessage.outlineWidth = 2.0f;
     gameMessage.position = beginPosition;
     
     [self addChild:gameMessage];
