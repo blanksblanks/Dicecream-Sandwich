@@ -565,12 +565,12 @@ static const NSInteger GRID_COLUMNS = 6;
         column = 0;
     }
     
-    if ((ydifference > 0.2*(self.contentSize.height)) && (newTouchPosition.y < _currentDie1.position.y) && (newTouchPosition.y < _currentDie2.position.y)) {
-        _dropInterval = 0.03;
-    } else if ((xdifference > 0.5*(_tileWidth))) {
+    if ((xdifference > 0.5*(_tileWidth))) {
         [self swipeLeftTo:column];
     } else if ((xdifference < -0.5*(_tileWidth))) {
         [self swipeRightTo:column];
+    } else if ((ydifference > 0.2*(self.contentSize.height)) && (newTouchPosition.y < _currentDie1.position.y) && (newTouchPosition.y < _currentDie2.position.y)) {
+            _dropInterval = 0.03;
     } else {
         _dropInterval = self.levelSpeed;
     }
