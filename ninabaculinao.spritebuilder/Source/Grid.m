@@ -1303,10 +1303,10 @@ static const NSInteger GRID_COLUMNS = 6;
     // Level increases if player reaches target score
     if (self.score == 0) {
         self.level = 1;
-//    }  else if (self.score >= self.targetScore && self.level != 20) {
-//        self.level++; // game goes into endless mode on level 20
-//        NSString *levelUpString = @"LEVEL UP!";
-//        [self animateGameMessage:levelUpString fromRow:8 toRow:10];
+    }  else if (self.score >= self.targetScore && self.level != 20) {
+        self.level++; // game goes into endless mode on level 20
+        NSString *levelUpString = @"LEVEL UP!";
+        [self animateGameMessage:levelUpString fromRow:8 toRow:10];
     }
 
     // Speed only incremeents on even levels
@@ -1325,7 +1325,7 @@ static const NSInteger GRID_COLUMNS = 6;
     // Level 15, 17, 19; Possibilities: 10, 11, 12
     // Level 20; forever
     if (self.level < 4) {
-        self.possibilities = 8;
+        self.possibilities = self.level+1;
 //        self.possibilities = self.level+1;
     } else if (self.level == 4 || self.level == 5) {
         self.possibilities = self.level;
