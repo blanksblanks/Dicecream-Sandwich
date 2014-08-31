@@ -1293,8 +1293,8 @@ static const NSInteger GRID_COLUMNS = 6;
     // Level increases if player reaches target score
     if (self.score == 0) {
         self.level = 1;
-    } else if (self.score >= self.targetScore) {
-        self.level++;
+    } else if (self.score >= self.targetScore && self.level != 20) {
+        self.level++; // game goes into endless mode on level 20
         NSString *levelUpString = @"LEVEL UP!";
         [self animateGameMessage:levelUpString fromRow:8 toRow:10];
     }
@@ -1342,8 +1342,6 @@ static const NSInteger GRID_COLUMNS = 6;
     // Target score system
     if (self.level > 15 && self.level < 20) {
         self.targetScore = self.targetScore + 1675;
-    } else {
-        self.targetScore = 9999999999999999;
     }
 }
 
