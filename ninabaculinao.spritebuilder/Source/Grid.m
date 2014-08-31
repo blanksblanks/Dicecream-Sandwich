@@ -548,15 +548,15 @@ static const NSInteger GRID_COLUMNS = 6;
 //    }
     
     NSInteger columns = xdifference/_tileWidth;
+    NSLog(@"Columns: %i", columns);
     
     if ((ydifference > 0.2*(self.contentSize.height)) && (newTouchPosition.y < _currentDie1.position.y) && (newTouchPosition.y < _currentDie2.position.y)) {
         _dropInterval = 0.03;
-    } else if ((xdifference > 0.5*(_tileWidth))) {
+    } else if ((xdifference > 0.9*(_tileWidth))) {
 //        [self swipeLeftTo:column];
         [self swipeLeftBy:columns];
-    } else if ((xdifference < -0.5*(_tileWidth))) {
+    } else if ((xdifference < -0.9*(_tileWidth))) {
 //        [self swipeRightTo:column];
-        columns *= -1;
         [self swipeRightBy:columns];
     } else {
         _dropInterval = self.levelSpeed;
@@ -625,19 +625,15 @@ static const NSInteger GRID_COLUMNS = 6;
 //            canMoveLeft = [self swipeLeft];
 //    }
 //}
-//
-//[self scheduleBlock:^(CCTimer *timer) {
-//    
-//} delay:0.20];
+
 
 
 - (void)swipeLeftBy:(NSInteger)columns {
-    BOOL canMoveLeft = TRUE;
-    NSInteger times = 0;
-    
+    __block BOOL canMoveLeft = TRUE;
+    __block NSInteger times = 0;
     while (times < columns && canMoveLeft) {
-        canMoveLeft = [self swipeLeft];
-        times++;
+            canMoveLeft = [self swipeLeft];
+            times++;
     }
 }
 
@@ -661,11 +657,10 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)swipeRightBy:(NSInteger)columns {
     BOOL canMoveRight = TRUE;
-    NSInteger times = 0;
-    
-    while (times < columns && canMoveRight) {
+    NSInteger times = 0; 
+    while (times > columns && canMoveRight) {
         canMoveRight = [self swipeRight];
-        times++;
+        times--;
     }
 }
 
