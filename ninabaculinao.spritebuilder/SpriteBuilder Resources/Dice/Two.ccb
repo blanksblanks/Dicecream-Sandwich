@@ -186,6 +186,16 @@
 				<key>value</key>
 				<string>2</string>
 			</dict>
+			<dict>
+				<key>name</key>
+				<string>colorValue</string>
+				<key>optimized</key>
+				<false/>
+				<key>type</key>
+				<integer>0</integer>
+				<key>value</key>
+				<string>1</string>
+			</dict>
 		</array>
 		<key>displayName</key>
 		<string>CCNode</string>
@@ -255,6 +265,8 @@
 				</array>
 			</dict>
 		</array>
+		<key>selected</key>
+		<true/>
 	</dict>
 	<key>notes</key>
 	<array/>
