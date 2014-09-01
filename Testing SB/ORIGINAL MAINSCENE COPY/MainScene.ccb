@@ -14,9 +14,9 @@
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
-	<integer>0</integer>
-	<key>currentSequenceId</key>
 	<integer>1</integer>
+	<key>currentSequenceId</key>
+	<integer>2</integer>
 	<key>docDimensionsType</key>
 	<integer>0</integer>
 	<key>fileType</key>
@@ -1826,6 +1826,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
@@ -2036,8 +2038,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>0.49999994039535522</real>
-							<real>300</real>
+							<real>1.1843750476837158</real>
+							<real>-4.999969482421875</real>
 							<integer>1</integer>
 							<integer>2</integer>
 							<integer>0</integer>
@@ -2075,7 +2077,7 @@
 						<key>type</key>
 						<string>Degrees</string>
 						<key>value</key>
-						<real>0.0</real>
+						<real>270</real>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -2137,8 +2139,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>66.49908447265625</real>
-							<real>307.97003173828125</real>
+							<real>44.999996185302734</real>
+							<real>386.80001831054688</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>

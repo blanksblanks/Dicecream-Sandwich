@@ -103,6 +103,7 @@ static const NSInteger GRID_COLUMNS = 6;
 		}
 	}
     
+    self.level = 12;//[GameState sharedInstance].levelSelected;
     [self loadLevel];
     
     actionIndex = 0;
@@ -1311,28 +1312,10 @@ static const NSInteger GRID_COLUMNS = 6;
 # pragma mark - Load levels and new parameters
 
 - (void)loadLevel {
+    
     NSString*path = [[NSBundle mainBundle] pathForResource:@"Levels" ofType:@"plist"];
     NSDictionary *root = [NSDictionary dictionaryWithContentsOfFile:path];
-    
     NSArray *levels = [root objectForKey: @"Levels"];
-    
-    // Level increases if player reaches target score
-    if (self.score == 0) {
-        self.level = 1;
-    }  else if (self.score >= self.targetScore && self.level != 20) {
-        self.level++; // game goes into endless mode on level 20
-        NSString *levelUpString = @"LEVEL UP!";
-        [self animateGameMessage:levelUpString fromRow:8 toRow:10];
-    }
-
-    // Speed only incremeents on even levels
-    if (self.level%2 == 0) {(
-        self.levelSpeed = (0.15/((self.level/2)+1)+0.35));
-    } else if (self.level == 1) {
-        self.levelSpeed = 0.5;
-    } // else {
-//        self.levelSpeed = self.levelSpeed; // stay the same
-//    }
     
     // Levels 1-3; Possibilities: 2, 3, 4
     // Levels 4-5; Possibilities: 4, 5
@@ -1355,23 +1338,54 @@ static const NSInteger GRID_COLUMNS = 6;
         self.possibilities++;
     }
     
-    //TODO: add access level options from main menu and adjust target score accordingly depending where you start
-    
     // Allow special items in Level 9
     if (self.level > 8) {
         specialsAllowed = TRUE;
     }
+
+    // Level speed only increments on even levels
+    if (self.level%2 == 0) {
+        self.levelSpeed = (0.15/((self.level/2)+1)+0.35);
+    } else if (self.level == 1) {
+        self.levelSpeed = 0.5;
+    }
+    // else {
+    //        self.levelSpeed = self.levelSpeed; // stay the same
+    //    }
     
+    // Target score system
+    // If the player starts on level 12, lower target requirements by level 11's target score
     NSDictionary *dict = levels[self.level-1];
-    self.targetScore = [dict[@"targetScore"] intValue];
+    
+    if ([GameState sharedInstance].levelSelected > 1) {
+        NSDictionary *presumedPassed = levels[[GameState sharedInstance].levelSelected-2];
+        NSInteger regularScore = [dict[@"targetScore"] intValue];
+        NSInteger ppScore = [presumedPassed[@"targetScore"] intValue];
+        self.targetScore = regularScore - ppScore;
+    } else {
+        self.targetScore = [dict[@"targetScore"] intValue];
+    }
+    
+    if (self.level > 15 && self.level < 20) {
+        self.targetScore += 1675;
+    }
+    
+    // self.targetScore = [dict[@"targetScore"] intValue];
     //    self.levelSpeed = (0.25/self.level)+0.25;
     //    self.levelSpeed = [dict[@"levelSpeed"] intValue];
     //    self.possibilities = [dict[@"possibilities"] intValue];
     
-    // Target score system
-    if (self.level > 15 && self.level < 20) {
-        self.targetScore = self.targetScore + 1675;
+    // Level increases if player reaches target score
+    //    if (self.score == 0) {
+    //        self.level = 1;
+    //    }  else
+    if (self.score >= self.targetScore && self.level != 20) {
+        self.level++; // game goes into endless mode on level 20
+        NSString *levelUpString = @"LEVEL UP!";
+        [self animateGameMessage:levelUpString fromRow:8 toRow:10];
     }
+
+    
 }
 
 # pragma mark - Game over

@@ -81,6 +81,11 @@
     [[CCDirector sharedDirector] pushScene:creditsScene];
 }
 
+- (void) level {
+    CCScene *levelScene = [CCBReader loadAsScene:@"LevelMenu"];
+    [[CCDirector sharedDirector] replaceScene:levelScene];
+}
+
 - (void)reset {
     [GameState sharedInstance].bestScore = 0;
     [GameState sharedInstance].bestLevel = 0;
