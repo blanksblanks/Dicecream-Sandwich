@@ -42,6 +42,8 @@
 //    _grid.audio = audio;
     
     _timeLabel.string = [NSString stringWithFormat:@"%li", (long)_grid.timer];
+//    _targetLabel.string = [NSString stringWithFormat:@"%li", (long) _grid.targetScore];
+    _levelLabel.string = [NSString stringWithFormat:@"%li", (long) [GameState sharedInstance].levelSelected];
     
     [_grid addObserver:self forKeyPath:@"score" options:0 context:NULL];
     [_grid addObserver:self forKeyPath:@"targetScore" options:0 context:NULL];
@@ -68,7 +70,7 @@
     }
     if ([keyPath isEqualToString:@"level"]) {
         _levelLabel.string = [NSString stringWithFormat:@"%li", (long) _grid.level];
-        if (_grid.level > 1) {
+        if (_grid.timer > 1) {
             [animationManager runAnimationsForSequenceNamed:@"levelPulse"];
         }
     }

@@ -67,6 +67,9 @@ static const NSInteger GRID_COLUMNS = 6;
     _counter = 0;
     stabilizing = FALSE;
     specialsAllowed = FALSE;
+    
+    self.level = 1;
+    self.targetScore = 100;
     self.score = 0;
     self.chains = 0;
     self.sixChains = 0;
@@ -103,7 +106,7 @@ static const NSInteger GRID_COLUMNS = 6;
 		}
 	}
     
-    self.level = 12;//[GameState sharedInstance].levelSelected;
+    self.level = [GameState sharedInstance].levelSelected;
     [self loadLevel];
     
     actionIndex = 0;
@@ -1348,6 +1351,8 @@ static const NSInteger GRID_COLUMNS = 6;
         self.levelSpeed = (0.15/((self.level/2)+1)+0.35);
     } else if (self.level == 1) {
         self.levelSpeed = 0.5;
+    } else if (self.level%2 == 1) {
+        self.levelSpeed = (0.15/((self.level-1)/2+1)+0.35);
     }
     // else {
     //        self.levelSpeed = self.levelSpeed; // stay the same

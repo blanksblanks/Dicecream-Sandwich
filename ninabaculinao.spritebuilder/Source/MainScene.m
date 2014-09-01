@@ -49,6 +49,7 @@
     [MGWU logEvent:@"play_pressed_in_mainscene" withParams:nil];
 
     playPressed = true;
+    [GameState sharedInstance].levelSelected = 12;
     [self performSelector:@selector(sandwichSpinAway)];
     
     [self scheduleBlock:^(CCTimer *timer) {
