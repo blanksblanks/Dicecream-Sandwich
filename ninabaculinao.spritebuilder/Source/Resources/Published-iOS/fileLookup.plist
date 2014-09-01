@@ -3,7 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>filenames</key>
-	<dict/>
+	<dict>
+		<key>newAssets/forLevelSelect/Level_Menu.psd</key>
+		<string>newAssets/forLevelSelect/Level_Menu.png</string>
+	</dict>
 	<key>metadata</key>
 	<dict>
 		<key>version</key>

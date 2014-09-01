@@ -298,6 +298,12 @@ static const NSInteger GRID_COLUMNS = 6;
     CCLOG(@"--------------");
 }
 
+//- (void)cleanUpGrid {
+//    for (Dice *die in self) {
+//        
+//    }
+//}
+
 # pragma mark - Check indexes
 
 - (BOOL)indexValidForRow:(NSInteger)row andColumn:(NSInteger)column {
