@@ -46,6 +46,7 @@ static NSString *const GAME_STATE_TIME_NOTIFICATION = @"GameState_TimeChanged";
 @property (nonatomic, assign) BOOL musicPaused;
 @property (nonatomic, assign) BOOL newHighScore;
 @property (nonatomic, assign) NSInteger levelSelected;
+@property (nonatomic, assign) NSInteger levelsUnlocked;
 
 + (instancetype) sharedInstance;
 

@@ -1456,6 +1456,10 @@ static const NSInteger GRID_COLUMNS = 6;
         [GameState sharedInstance].bestStreak = self.streak;
         [GameState sharedInstance].bestAllClear = self.allClear;
     }
+    
+    if (self.level > [GameState sharedInstance].levelsUnlocked) {
+        [GameState sharedInstance].levelsUnlocked = self.level;
+    }
 }
 
 -(NSDictionary*) assignParams {

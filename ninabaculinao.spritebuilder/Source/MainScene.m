@@ -49,7 +49,7 @@
     [MGWU logEvent:@"play_pressed_in_mainscene" withParams:nil];
 
     playPressed = true;
-    [GameState sharedInstance].levelSelected = 12;
+    [GameState sharedInstance].levelSelected = 1;
     [self performSelector:@selector(sandwichSpinAway)];
     
     [self scheduleBlock:^(CCTimer *timer) {
@@ -88,6 +88,9 @@
 }
 
 - (void)reset {
+    [GameState sharedInstance].levelsUnlocked = 1;
+    NSLog(@"Levels unlocked: %i", [GameState sharedInstance].levelsUnlocked);
+    
     [GameState sharedInstance].bestScore = 0;
     [GameState sharedInstance].bestLevel = 0;
     [GameState sharedInstance].bestTime = 0;
