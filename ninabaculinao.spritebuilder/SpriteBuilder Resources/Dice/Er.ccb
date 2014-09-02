@@ -16,7 +16,7 @@
 	<key>currentResolution</key>
 	<integer>0</integer>
 	<key>currentSequenceId</key>
-	<integer>1</integer>
+	<integer>0</integer>
 	<key>docDimensionsType</key>
 	<integer>1</integer>
 	<key>fileType</key>
@@ -141,7 +141,7 @@
 					<dict>
 						<key>baseValue</key>
 						<array>
-							<string>newAssets/forNewDice/Two_Orange_NoFill.png</string>
+							<string>newAssets/forNewDice/Two-Orange.png</string>
 							<string>Use regular file</string>
 						</array>
 						<key>name</key>
@@ -151,7 +151,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>newAssets/forNewDice/Two_Orange_Fill.png</string>
+							<string>newAssets/forNewDice/Two-Orange.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -168,6 +168,8 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
