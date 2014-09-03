@@ -449,7 +449,8 @@ static const NSInteger GRID_COLUMNS = 6;
             die = (Dice*) [CCBReader load:@"Dice/Liu"];
             break;
         default:
-            die = (Dice*) [CCBReader load:@"Dice/Dice"];
+            die = (Dice*) [CCBReader load:@"Dice/Two"];
+            NSLog(@"WHY IS IT AT DEFAULT");
             break;
     }
     die.stable = true;
@@ -1339,6 +1340,8 @@ static const NSInteger GRID_COLUMNS = 6;
         self.possibilities = self.level-4;
     } else if (self.level > 14 && self.level < 20 && (self.level%2 == 1)) {
         self.possibilities++;
+    } else if (self.level == 20) {
+        self.possibilities = 12;
     }
     
     // Allow special items in Level 9

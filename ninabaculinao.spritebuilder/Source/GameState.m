@@ -59,6 +59,8 @@ static NSString *const GAME_STATE_TIME_KEY = @"GameStateTimeKey";
         NSNumber *bestTime = [[NSUserDefaults standardUserDefaults]objectForKey:GAME_STATE_TIME_KEY];
         self.currentTime = [bestTime integerValue];
         self.currentTime = 0;
+        
+        self.levelsUnlocked = 0;
     }
     return self;
 }
