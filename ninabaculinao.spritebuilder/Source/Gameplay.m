@@ -61,12 +61,7 @@
         [animationManager runAnimationsForSequenceNamed:@"scorePulse"];
     }
     if ([keyPath isEqualToString:@"targetScore"]) {
-        if (_grid.level == 20) { // goes into endless mode
-            _target.visible = false;
-            _targetLabel.visible = false;
-        } else {
             _targetLabel.string = [NSString stringWithFormat:@"%li", (long) _grid.targetScore];
-        }
     }
     if ([keyPath isEqualToString:@"level"]) {
         _levelLabel.string = [NSString stringWithFormat:@"%li", (long) _grid.level];
@@ -103,6 +98,11 @@
         _grid.audio.bgPaused = TRUE;
     } else {
         _grid.audio.bgPaused = FALSE;
+    }
+    
+    if (_grid.level == 20) { // goes into endless mode
+        _target.visible = false;
+        _targetLabel.visible = false; 
     }
     
 }

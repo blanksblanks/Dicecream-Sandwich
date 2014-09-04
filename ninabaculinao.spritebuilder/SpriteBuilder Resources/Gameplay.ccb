@@ -2183,7 +2183,7 @@
 								<key>displayName</key>
 								<string>Goal</string>
 								<key>memberVarAssignmentName</key>
-								<string>_goal</string>
+								<string>_target</string>
 								<key>memberVarAssignmentType</key>
 								<integer>1</integer>
 								<key>properties</key>

@@ -11,6 +11,7 @@
 		623F5D6C196F0C7000DC3EA5 /* Gameplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 623F5D6B196F0C7000DC3EA5 /* Gameplay.m */; };
 		623F5D71196F128100DC3EA5 /* Dice.m in Sources */ = {isa = PBXBuildFile; fileRef = 623F5D70196F128100DC3EA5 /* Dice.m */; };
 		624577E619955C700017D267 /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = 624577E519955C700017D267 /* GameState.m */; };
+		62626A6419B810B20092807A /* Leaderboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 62626A6319B810B20092807A /* Leaderboard.m */; };
 		6264682A199EAB8E00E4FAE2 /* click2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 62646827199EAB8E00E4FAE2 /* click2.wav */; };
 		6264682B199EAB8E00E4FAE2 /* pop5.wav in Resources */ = {isa = PBXBuildFile; fileRef = 62646828199EAB8E00E4FAE2 /* pop5.wav */; };
 		6264682C199EAB8E00E4FAE2 /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = 62646829199EAB8E00E4FAE2 /* success.wav */; };
@@ -164,6 +165,8 @@
 		623F5D70196F128100DC3EA5 /* Dice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dice.m; path = Source/Dice.m; sourceTree = "<group>"; };
 		624577E419955C700017D267 /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameState.h; path = Source/GameState.h; sourceTree = "<group>"; };
 		624577E519955C700017D267 /* GameState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameState.m; path = Source/GameState.m; sourceTree = "<group>"; };
+		62626A6219B810B20092807A /* Leaderboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Leaderboard.h; path = Source/Leaderboard.h; sourceTree = "<group>"; };
+		62626A6319B810B20092807A /* Leaderboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Leaderboard.m; path = Source/Leaderboard.m; sourceTree = "<group>"; };
 		62646827199EAB8E00E4FAE2 /* click2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click2.wav; sourceTree = "<group>"; };
 		62646828199EAB8E00E4FAE2 /* pop5.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pop5.wav; sourceTree = "<group>"; };
 		62646829199EAB8E00E4FAE2 /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
@@ -444,6 +447,8 @@
 				6264683C19A6C7B800E4FAE2 /* ConfirmMenu.m */,
 				62EE9B9119B622FA00935BA2 /* LevelMenu.h */,
 				62EE9B9219B622FA00935BA2 /* LevelMenu.m */,
+				62626A6219B810B20092807A /* Leaderboard.h */,
+				62626A6319B810B20092807A /* Leaderboard.m */,
 				623F5D5E196EDB0400DC3EA5 /* Grid.h */,
 				623F5D5F196EDB0400DC3EA5 /* Grid.m */,
 				623F5D6F196F128100DC3EA5 /* Dice.h */,
@@ -783,6 +788,7 @@
 				62C91DB4199B307B008A6C9D /* HelpMenu.m in Sources */,
 				62EF7F31198814DC001BF598 /* Chain.m in Sources */,
 				B7378994180767190076A88C /* MainScene.m in Sources */,
+				62626A6419B810B20092807A /* Leaderboard.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				623F5D60196EDB0400DC3EA5 /* Grid.m in Sources */,
 			);

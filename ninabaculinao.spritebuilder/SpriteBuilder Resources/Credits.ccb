@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>32</integer>
+	<integer>37</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -1086,14 +1086,14 @@ BGM “CATchy” by DropThatCat</string>
 			</dict>
 			<dict>
 				<key>UUID</key>
-				<integer>19</integer>
+				<integer>32</integer>
 				<key>baseClass</key>
 				<string>CCNode</string>
 				<key>children</key>
 				<array>
 					<dict>
 						<key>UUID</key>
-						<integer>30</integer>
+						<integer>33</integer>
 						<key>baseClass</key>
 						<string>CCNodeColor</string>
 						<key>children</key>
@@ -1101,7 +1101,7 @@ BGM “CATchy” by DropThatCat</string>
 						<key>customClass</key>
 						<string></string>
 						<key>displayName</key>
-						<string>CCNodeColor</string>
+						<string>TealColor</string>
 						<key>memberVarAssignmentName</key>
 						<string></string>
 						<key>memberVarAssignmentType</key>
@@ -1124,8 +1124,8 @@ BGM “CATchy” by DropThatCat</string>
 								<key>value</key>
 								<array>
 									<real>0.0</real>
-									<real>0.0</real>
-									<integer>0</integer>
+									<real>25</real>
+									<integer>3</integer>
 									<integer>0</integer>
 									<integer>0</integer>
 								</array>
@@ -1150,8 +1150,8 @@ BGM “CATchy” by DropThatCat</string>
 								<string>Point</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
-									<real>0.0</real>
+									<real>1</real>
+									<real>0.5</real>
 								</array>
 							</dict>
 							<dict>
@@ -1192,7 +1192,7 @@ BGM “CATchy” by DropThatCat</string>
 					</dict>
 					<dict>
 						<key>UUID</key>
-						<integer>27</integer>
+						<integer>34</integer>
 						<key>baseClass</key>
 						<string>CCButton</string>
 						<key>children</key>
@@ -1543,7 +1543,7 @@ BGM “CATchy” by DropThatCat</string>
 						<key>value</key>
 						<array>
 							<real>0.0</real>
-							<real>25</real>
+							<real>0.0</real>
 							<integer>3</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -1556,7 +1556,7 @@ BGM “CATchy” by DropThatCat</string>
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>100</real>
+							<real>51</real>
 							<real>46</real>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -1587,6 +1587,8 @@ BGM “CATchy” by DropThatCat</string>
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>

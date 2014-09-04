@@ -14,6 +14,11 @@
     CCButton *_playButton;
     CCButton *_helpButton;
     CCButton *_creditsButton;
+    CCButton *_levelButton;
+    CCButton *_leaderboardButton;
+//    CCButton *_buttons[5];
+//    NSArray *_buttonsArray;
+    NSInteger count;
     BOOL playPressed;
     OALSimpleAudio *audio;
 }
@@ -33,16 +38,28 @@
     }
 }
 
-- (void) toggleButtonsOff {
-        _playButton.enabled = false;
-        _helpButton.enabled = false;
-        _creditsButton.enabled = false;
+- (void) toggleButtonsOn {
+//    CCButton *_buttons[5] = {_playButton, _helpButton, _creditsButton, _levelButton, _leaderboardButton};
+//    for (NSInteger i = 0; i > 5 ; i++) {
+//        _buttons[i].enabled = true;
+//    }
+//    _buttonsArray = [NSArray arrayWithObjects:buttons count:5];
+//    count = (sizeof buttons) / (sizeof buttons[0]);
+    
+    _playButton.enabled = true;
+    _helpButton.enabled = true;
+    _creditsButton.enabled = true;
+    _levelButton.enabled = true;
+    _leaderboardButton.enabled = true;
 }
 
-- (void) toggleButtonsOn {
-        _playButton.enabled = true;
-        _helpButton.enabled = true;
-        _creditsButton.enabled = true;
+- (void) toggleButtonsOff {
+    _playButton.enabled = false;
+    _helpButton.enabled = false;
+    _creditsButton.enabled = false;
+    _levelButton.enabled = false;
+    _leaderboardButton.enabled = false;
+
 }
 
 - (void)play {
@@ -83,8 +100,21 @@
 }
 
 - (void) level {
+    [MGWU logEvent:@"level_pressed_in_mainscene" withParams:nil];
+    
+    [self playPopSound];
+    
     CCScene *levelScene = [CCBReader loadAsScene:@"LevelMenu"];
     [[CCDirector sharedDirector] replaceScene:levelScene];
+}
+
+- (void)leaderboard {
+    [MGWU logEvent:@"level_pressed_in_mainscene" withParams:nil];
+    
+    [self playPopSound];
+    
+    CCScene *leaderboardScene = [CCBReader loadAsScene:@"Leaderboard"];
+    [[CCDirector sharedDirector] replaceScene:leaderboardScene];
 }
 
 - (void)reset {
