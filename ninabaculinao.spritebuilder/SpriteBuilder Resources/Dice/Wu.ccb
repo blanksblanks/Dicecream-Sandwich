@@ -16,7 +16,7 @@
 	<key>currentResolution</key>
 	<integer>0</integer>
 	<key>currentSequenceId</key>
-	<integer>1</integer>
+	<integer>0</integer>
 	<key>docDimensionsType</key>
 	<integer>1</integer>
 	<key>fileType</key>
@@ -168,8 +168,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 				<key>seqExpanded</key>
 				<true/>
 			</dict>
@@ -354,7 +352,7 @@
 			<key>length</key>
 			<real>10</real>
 			<key>name</key>
-			<string>Untitled Timeline</string>
+			<string>colorFill</string>
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
