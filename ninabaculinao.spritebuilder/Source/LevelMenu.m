@@ -41,11 +41,11 @@
 //    for (NSInteger i = 0; i >= 20; i++) {
 //        levels[i].enabled = false;
 //    }
-    levels[19].enabled = false;
-    _level19.enabled = false;
-//    for (NSInteger j = [GameState sharedInstance].levelsUnlocked; j > 20; j++) {
-//        levels[j].enabled = false;
-//    }
+//    levels[19].enabled = false;
+//    _level19.enabled = false;
+    for (NSInteger j = [GameState sharedInstance].levelsUnlocked; j < 20; j++) {
+        levels[j].enabled = false;
+    }
 }
 
 -(void) level1 {
