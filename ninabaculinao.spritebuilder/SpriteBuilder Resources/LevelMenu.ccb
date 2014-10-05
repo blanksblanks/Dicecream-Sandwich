@@ -998,7 +998,7 @@
 												<string>Position</string>
 												<key>value</key>
 												<array>
-													<real>20</real>
+													<real>21</real>
 													<real>20</real>
 													<integer>0</integer>
 													<integer>0</integer>
@@ -1141,11 +1141,19 @@
 											</dict>
 											<dict>
 												<key>name</key>
-												<string>labelOpacity|Disabled</string>
+												<string>backgroundOpacity|Disabled</string>
 												<key>type</key>
 												<string>Float</string>
 												<key>value</key>
 												<real>1</real>
+											</dict>
+											<dict>
+												<key>name</key>
+												<string>labelOpacity|Disabled</string>
+												<key>type</key>
+												<string>Float</string>
+												<key>value</key>
+												<real>0.0</real>
 											</dict>
 											<dict>
 												<key>name</key>
@@ -1554,11 +1562,19 @@
 											</dict>
 											<dict>
 												<key>name</key>
-												<string>labelOpacity|Disabled</string>
+												<string>backgroundOpacity|Disabled</string>
 												<key>type</key>
 												<string>Float</string>
 												<key>value</key>
 												<real>1</real>
+											</dict>
+											<dict>
+												<key>name</key>
+												<string>labelOpacity|Disabled</string>
+												<key>type</key>
+												<string>Float</string>
+												<key>value</key>
+												<real>0.0</real>
 											</dict>
 											<dict>
 												<key>name</key>
@@ -1974,11 +1990,19 @@
 													</dict>
 													<dict>
 														<key>name</key>
-														<string>labelOpacity|Disabled</string>
+														<string>backgroundOpacity|Disabled</string>
 														<key>type</key>
 														<string>Float</string>
 														<key>value</key>
 														<real>1</real>
+													</dict>
+													<dict>
+														<key>name</key>
+														<string>labelOpacity|Disabled</string>
+														<key>type</key>
+														<string>Float</string>
+														<key>value</key>
+														<real>0.0</real>
 													</dict>
 													<dict>
 														<key>name</key>
@@ -2308,11 +2332,19 @@
 													</dict>
 													<dict>
 														<key>name</key>
-														<string>labelOpacity|Disabled</string>
+														<string>backgroundOpacity|Disabled</string>
 														<key>type</key>
 														<string>Float</string>
 														<key>value</key>
 														<real>1</real>
+													</dict>
+													<dict>
+														<key>name</key>
+														<string>labelOpacity|Disabled</string>
+														<key>type</key>
+														<string>Float</string>
+														<key>value</key>
+														<real>0.0</real>
 													</dict>
 													<dict>
 														<key>name</key>
@@ -2642,11 +2674,19 @@
 													</dict>
 													<dict>
 														<key>name</key>
-														<string>labelOpacity|Disabled</string>
+														<string>backgroundOpacity|Disabled</string>
 														<key>type</key>
 														<string>Float</string>
 														<key>value</key>
 														<real>1</real>
+													</dict>
+													<dict>
+														<key>name</key>
+														<string>labelOpacity|Disabled</string>
+														<key>type</key>
+														<string>Float</string>
+														<key>value</key>
+														<real>0.0</real>
 													</dict>
 													<dict>
 														<key>name</key>
@@ -3140,11 +3180,19 @@
 													</dict>
 													<dict>
 														<key>name</key>
-														<string>labelOpacity|Disabled</string>
+														<string>backgroundOpacity|Disabled</string>
 														<key>type</key>
 														<string>Float</string>
 														<key>value</key>
 														<real>1</real>
+													</dict>
+													<dict>
+														<key>name</key>
+														<string>labelOpacity|Disabled</string>
+														<key>type</key>
+														<string>Float</string>
+														<key>value</key>
+														<real>0.0</real>
 													</dict>
 													<dict>
 														<key>name</key>
@@ -3469,8 +3517,16 @@
 														<key>value</key>
 														<array>
 															<string></string>
-															<string>newAssets/forDice/Green_Filled_One.png</string>
+															<string>newAssets/forLevelSelect/Green_Ball.png</string>
 														</array>
+													</dict>
+													<dict>
+														<key>name</key>
+														<string>backgroundOpacity|Disabled</string>
+														<key>type</key>
+														<string>Float</string>
+														<key>value</key>
+														<real>1</real>
 													</dict>
 													<dict>
 														<key>name</key>
@@ -3478,7 +3534,7 @@
 														<key>type</key>
 														<string>Float</string>
 														<key>value</key>
-														<real>1</real>
+														<real>0.0</real>
 													</dict>
 													<dict>
 														<key>name</key>
@@ -3632,6 +3688,8 @@
 														</array>
 													</dict>
 												</array>
+												<key>selected</key>
+												<true/>
 											</dict>
 											<dict>
 												<key>UUID</key>
@@ -3808,11 +3866,19 @@
 													</dict>
 													<dict>
 														<key>name</key>
-														<string>labelOpacity|Disabled</string>
+														<string>backgroundOpacity|Disabled</string>
 														<key>type</key>
 														<string>Float</string>
 														<key>value</key>
 														<real>1</real>
+													</dict>
+													<dict>
+														<key>name</key>
+														<string>labelOpacity|Disabled</string>
+														<key>type</key>
+														<string>Float</string>
+														<key>value</key>
+														<real>0.0</real>
 													</dict>
 													<dict>
 														<key>name</key>
@@ -4142,11 +4208,19 @@
 													</dict>
 													<dict>
 														<key>name</key>
-														<string>labelOpacity|Disabled</string>
+														<string>backgroundOpacity|Disabled</string>
 														<key>type</key>
 														<string>Float</string>
 														<key>value</key>
 														<real>1</real>
+													</dict>
+													<dict>
+														<key>name</key>
+														<string>labelOpacity|Disabled</string>
+														<key>type</key>
+														<string>Float</string>
+														<key>value</key>
+														<real>0.0</real>
 													</dict>
 													<dict>
 														<key>name</key>
@@ -4476,11 +4550,19 @@
 													</dict>
 													<dict>
 														<key>name</key>
-														<string>labelOpacity|Disabled</string>
+														<string>backgroundOpacity|Disabled</string>
 														<key>type</key>
 														<string>Float</string>
 														<key>value</key>
 														<real>1</real>
+													</dict>
+													<dict>
+														<key>name</key>
+														<string>labelOpacity|Disabled</string>
+														<key>type</key>
+														<string>Float</string>
+														<key>value</key>
+														<real>0.0</real>
 													</dict>
 													<dict>
 														<key>name</key>
@@ -4974,11 +5056,19 @@
 													</dict>
 													<dict>
 														<key>name</key>
-														<string>labelOpacity|Disabled</string>
+														<string>backgroundOpacity|Disabled</string>
 														<key>type</key>
 														<string>Float</string>
 														<key>value</key>
 														<real>1</real>
+													</dict>
+													<dict>
+														<key>name</key>
+														<string>labelOpacity|Disabled</string>
+														<key>type</key>
+														<string>Float</string>
+														<key>value</key>
+														<real>0.0</real>
 													</dict>
 													<dict>
 														<key>name</key>
@@ -5308,11 +5398,19 @@
 													</dict>
 													<dict>
 														<key>name</key>
-														<string>labelOpacity|Disabled</string>
+														<string>backgroundOpacity|Disabled</string>
 														<key>type</key>
 														<string>Float</string>
 														<key>value</key>
 														<real>1</real>
+													</dict>
+													<dict>
+														<key>name</key>
+														<string>labelOpacity|Disabled</string>
+														<key>type</key>
+														<string>Float</string>
+														<key>value</key>
+														<real>0.0</real>
 													</dict>
 													<dict>
 														<key>name</key>
@@ -5642,11 +5740,19 @@
 													</dict>
 													<dict>
 														<key>name</key>
-														<string>labelOpacity|Disabled</string>
+														<string>backgroundOpacity|Disabled</string>
 														<key>type</key>
 														<string>Float</string>
 														<key>value</key>
 														<real>1</real>
+													</dict>
+													<dict>
+														<key>name</key>
+														<string>labelOpacity|Disabled</string>
+														<key>type</key>
+														<string>Float</string>
+														<key>value</key>
+														<real>0.0</real>
 													</dict>
 													<dict>
 														<key>name</key>
@@ -5976,11 +6082,19 @@
 													</dict>
 													<dict>
 														<key>name</key>
-														<string>labelOpacity|Disabled</string>
+														<string>backgroundOpacity|Disabled</string>
 														<key>type</key>
 														<string>Float</string>
 														<key>value</key>
 														<real>1</real>
+													</dict>
+													<dict>
+														<key>name</key>
+														<string>labelOpacity|Disabled</string>
+														<key>type</key>
+														<string>Float</string>
+														<key>value</key>
+														<real>0.0</real>
 													</dict>
 													<dict>
 														<key>name</key>
@@ -6310,11 +6424,19 @@
 													</dict>
 													<dict>
 														<key>name</key>
-														<string>labelOpacity|Disabled</string>
+														<string>backgroundOpacity|Disabled</string>
 														<key>type</key>
 														<string>Float</string>
 														<key>value</key>
 														<real>1</real>
+													</dict>
+													<dict>
+														<key>name</key>
+														<string>labelOpacity|Disabled</string>
+														<key>type</key>
+														<string>Float</string>
+														<key>value</key>
+														<real>0.0</real>
 													</dict>
 													<dict>
 														<key>name</key>
@@ -6808,11 +6930,19 @@
 													</dict>
 													<dict>
 														<key>name</key>
-														<string>labelOpacity|Disabled</string>
+														<string>backgroundOpacity|Disabled</string>
 														<key>type</key>
 														<string>Float</string>
 														<key>value</key>
 														<real>1</real>
+													</dict>
+													<dict>
+														<key>name</key>
+														<string>labelOpacity|Disabled</string>
+														<key>type</key>
+														<string>Float</string>
+														<key>value</key>
+														<real>0.0</real>
 													</dict>
 													<dict>
 														<key>name</key>
@@ -7142,11 +7272,19 @@
 													</dict>
 													<dict>
 														<key>name</key>
-														<string>labelOpacity|Disabled</string>
+														<string>backgroundOpacity|Disabled</string>
 														<key>type</key>
 														<string>Float</string>
 														<key>value</key>
 														<real>1</real>
+													</dict>
+													<dict>
+														<key>name</key>
+														<string>labelOpacity|Disabled</string>
+														<key>type</key>
+														<string>Float</string>
+														<key>value</key>
+														<real>0.0</real>
 													</dict>
 													<dict>
 														<key>name</key>
@@ -7476,11 +7614,19 @@
 													</dict>
 													<dict>
 														<key>name</key>
-														<string>labelOpacity|Disabled</string>
+														<string>backgroundOpacity|Disabled</string>
 														<key>type</key>
 														<string>Float</string>
 														<key>value</key>
 														<real>1</real>
+													</dict>
+													<dict>
+														<key>name</key>
+														<string>labelOpacity|Disabled</string>
+														<key>type</key>
+														<string>Float</string>
+														<key>value</key>
+														<real>0.0</real>
 													</dict>
 													<dict>
 														<key>name</key>
@@ -7810,11 +7956,19 @@
 													</dict>
 													<dict>
 														<key>name</key>
-														<string>labelOpacity|Disabled</string>
+														<string>backgroundOpacity|Disabled</string>
 														<key>type</key>
 														<string>Float</string>
 														<key>value</key>
 														<real>1</real>
+													</dict>
+													<dict>
+														<key>name</key>
+														<string>labelOpacity|Disabled</string>
+														<key>type</key>
+														<string>Float</string>
+														<key>value</key>
+														<real>0.0</real>
 													</dict>
 													<dict>
 														<key>name</key>
@@ -8144,11 +8298,19 @@
 													</dict>
 													<dict>
 														<key>name</key>
-														<string>labelOpacity|Disabled</string>
+														<string>backgroundOpacity|Disabled</string>
 														<key>type</key>
 														<string>Float</string>
 														<key>value</key>
 														<real>1</real>
+													</dict>
+													<dict>
+														<key>name</key>
+														<string>labelOpacity|Disabled</string>
+														<key>type</key>
+														<string>Float</string>
+														<key>value</key>
+														<real>0.0</real>
 													</dict>
 													<dict>
 														<key>name</key>

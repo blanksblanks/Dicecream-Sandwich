@@ -18,6 +18,8 @@ static NSString *const GAME_STATE_6CHAINS_NOTIFICATION = @"GameState_6ChainsChan
 static NSString *const GAME_STATE_PERFECTMATCHES_NOTIFICATION = @"GameState_PerfectMatchesChanged";
 static NSString *const GAME_STATE_STREAK_NOTIFICATION = @"GameState_StreakChanged";
 static NSString *const GAME_STATE_ALLCLEAR_NOTIFICATION = @"GameState_AllClearChanged";
+static NSString *const GAME_STATE_LEVELSUNLOCKED_NOTIFICATION = @"GameState_LevelsUnlockedChanged";
+static NSString *const GAME_STATE_TUTORIALMODE_NOTIFICATION = @"GameState_TutorialModeChanged";
 static NSString *const GAME_STATE_TIME_NOTIFICATION = @"GameState_TimeChanged";
 
 @interface GameState : NSObject

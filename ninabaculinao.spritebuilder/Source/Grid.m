@@ -109,13 +109,16 @@ static const NSInteger GRID_COLUMNS = 6;
     self.level = [GameState sharedInstance].levelSelected;
     [self loadLevel];
     
+    actionIndex = 0;
+    
     if ([GameState sharedInstance].tutorialMode) {
+//        actionIndex = 5;
         NSLog(@"Tutorial on!");
     } else {
+//        actionIndex = 0;
         NSLog(@"Tutorial off!");
     }
     
-    actionIndex = 0;
 }
 
 # pragma mark - Update method
@@ -198,6 +201,15 @@ static const NSInteger GRID_COLUMNS = 6;
                 }
                 break;
             }
+//            case 5: { // showing tutorial
+//                [self spawnDice];
+//                self.touchEnabled = TRUE;
+//                _timeSinceDrop = -0.2;
+//                _dropInterval = self.levelSpeed;
+//                CCLOG(@"Dice spawned"); [self trackGridState];
+//                actionIndex = 1; CCLOG(@"Going to case 1: dice falling down");
+//                break;
+//            }
                 
         }
     }
@@ -415,7 +427,14 @@ static const NSInteger GRID_COLUMNS = 6;
 
 -(Dice*) randomizeNumbers {
     Dice *die;
-    NSInteger randomNumber = arc4random_uniform(self.possibilities)+1;
+    NSInteger randomNumber;
+    if ([GameState sharedInstance].tutorialMode) {
+        randomNumber = 2; // only produce pairs of 2's during tutorial mode
+    } else {
+        randomNumber = arc4random_uniform(self.possibilities) + 1;
+    }
+    NSLog(@"%i", self.possibilities);
+    NSLog(@"%i", randomNumber);
     switch(randomNumber)
     {
         case 1:
@@ -1333,23 +1352,23 @@ static const NSInteger GRID_COLUMNS = 6;
     // Levels 11-13; Possibilities: 7, 8, 9
     // Level 15, 17, 19; Possibilities: 10, 11, 12
     // Level 20; forever
-    if (self.level < 4) {
-        self.possibilities = self.level+1;
+//    if (self.level < 4) {
 //        self.possibilities = self.level+1;
-    } else if (self.level == 4 || self.level == 5) {
-        self.possibilities = self.level;
-    } else if (self.level == 6) {
-        self.possibilities = self.level-1;
-    } else if (self.level > 6 && self.level < 11) {
-        self.possibilities = 6;
-    } else if (self.level > 10 && self.level < 14) {
-        self.possibilities = self.level-4;
-    } else if (self.level > 14 && self.level < 20 && (self.level%2 == 1)) {
-        self.possibilities++;
-    } else if (self.level == 20) {
-        self.possibilities = 12;
-    }
-    
+////        self.possibilities = self.level+1;
+//    } else if (self.level == 4 || self.level == 5) {
+//        self.possibilities = self.level;
+//    } else if (self.level == 6) {
+//        self.possibilities = self.level-1;
+//    } else if (self.level > 6 && self.level < 11) {
+//        self.possibilities = 6;
+//    } else if (self.level > 10 && self.level < 14) {
+//        self.possibilities = self.level-4;
+//    } else if (self.level > 14 && self.level < 20 && (self.level%2 == 1)) {
+//        self.possibilities++;
+//    } else if (self.level == 20) {
+//        self.possibilities = 12;
+//    }
+//    
     // Allow special items in Level 9
     if (self.level > 8) {
         specialsAllowed = TRUE;
@@ -1370,6 +1389,8 @@ static const NSInteger GRID_COLUMNS = 6;
     // Target score system
     // If the player starts on level 12, lower target requirements by level 11's target score
     NSDictionary *dict = levels[self.level-1];
+    
+    self.possibilities = [dict[@"possibilities"] intValue];
     
     if ([GameState sharedInstance].levelSelected > 1) {
         NSDictionary *presumedPassed = levels[[GameState sharedInstance].levelSelected-2];

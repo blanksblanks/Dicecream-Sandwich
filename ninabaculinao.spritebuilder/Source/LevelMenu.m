@@ -37,7 +37,7 @@
     // Only set icons for enabled if they unlock them
     // Create an array?
     CCButton* levels[20] = {_level1, _level2, _level3, _level4, _level5, _level6, _level7, _level8, _level9,
-        _level11, _level12, _level13, _level14, _level15, _level16, _level17, _level18, _level19, _level20};
+        _level10, _level11, _level12, _level13, _level14, _level15, _level16, _level17, _level18, _level19, _level20};
 //    for (NSInteger i = 0; i >= 20; i++) {
 //        levels[i].enabled = false;
 //    }
@@ -107,7 +107,6 @@
     [GameState sharedInstance].levelSelected = 12;
     [self loadGame];
 }
-
 
 -(void) level13 {
     [GameState sharedInstance].levelSelected = 13;

@@ -17,13 +17,15 @@ static NSString *const GAME_STATE_PERFECTMATCHES_KEY = @"GameStatePerfectMatches
 static NSString *const GAME_STATE_STREAK_KEY = @"GameStateStreakKey";
 static NSString *const GAME_STATE_ALLCLEAR_KEY = @"GameStateAllClearKey";
 static NSString *const GAME_STATE_TIME_KEY = @"GameStateTimeKey";
+static NSString *const GAME_STATE_LEVELSUNLOCKED_KEY = @"GameStateLevelsUnlockedKey";
+static NSString *const GAME_STATE_TUTORIALMODE_KEY = @"GameStateTutorialModeKey";
+
 
 static NSString *const GAME_STATE_NAMED_KEY = @"GameStateNamedKey";
 static NSString *const GAME_STATE_NAME_KEY = @"GameStateNameKey";
 static NSString *const GAME_STATE_SUBMITTED_KEY = @"GameStateSubmittedKey";
 static NSString *const GAME_STATE_USERNAME_ARRAY = @"GameStateUsernameKey";
 static NSString *const GAME_STATE_HIGHSCORE_KEY = @"GameStateHighScoreKey";
-
 
 @implementation GameState {
 }
@@ -61,17 +63,18 @@ static NSString *const GAME_STATE_HIGHSCORE_KEY = @"GameStateHighScoreKey";
         self.bestPerfectMatches = [bestPerfectMatches integerValue];
         self.currentPerfectMatches = 0;
         NSNumber *bestStreak = [[NSUserDefaults standardUserDefaults]objectForKey:GAME_STATE_STREAK_KEY];
-        self.currentStreak = [bestStreak integerValue];
+        self.bestStreak = [bestStreak integerValue];
         self.currentStreak = 0;
         NSNumber *bestAllClear = [[NSUserDefaults standardUserDefaults]objectForKey:GAME_STATE_ALLCLEAR_KEY];
-        self.currentAllClear = [bestAllClear integerValue];
+        self.bestAllClear = [bestAllClear integerValue];
         self.currentAllClear = 0;
         NSNumber *bestTime = [[NSUserDefaults standardUserDefaults]objectForKey:GAME_STATE_TIME_KEY];
-        self.currentTime = [bestTime integerValue];
+        self.bestTime = [bestTime integerValue];
         self.currentTime = 0;
-        
-        self.levelsUnlocked = 0;
-        self.tutorialMode = true;
+        NSNumber *levelsUnlocked = [[NSUserDefaults standardUserDefaults]objectForKey:GAME_STATE_LEVELSUNLOCKED_KEY];
+        self.levelsUnlocked = [levelsUnlocked integerValue];
+        NSNumber *tutorialMode= [[NSUserDefaults standardUserDefaults]objectForKey:GAME_STATE_TUTORIALMODE_KEY];
+        self.tutorialMode = [tutorialMode boolValue];
         
 //        if (![[NSUserDefaults standardUserDefaults]objectForKey:GAME_STATE_NAME_KEY]) {
 //            [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:GAME_STATE_NAME_KEY];
@@ -226,6 +229,26 @@ static NSString *const GAME_STATE_HIGHSCORE_KEY = @"GameStateHighScoreKey";
     [[NSUserDefaults standardUserDefaults]setObject:timeNumber forKey:GAME_STATE_TIME_KEY];
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
+
+
+- (void)setLevelsUnlocked:(NSInteger)levelsUnlocked {
+    _levelsUnlocked = levelsUnlocked;
+    NSNumber *levelsUnlockedNumber = [NSNumber numberWithInteger:levelsUnlocked];
+    [[NSNotificationCenter defaultCenter]postNotificationName:GAME_STATE_LEVELSUNLOCKED_NOTIFICATION object:levelsUnlockedNumber];
+    
+    [[NSUserDefaults standardUserDefaults]setObject:levelsUnlockedNumber forKey:GAME_STATE_LEVELSUNLOCKED_KEY];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+}
+
+- (void)setTutorialMode:(BOOL)tutorialMode {
+    _tutorialMode = tutorialMode;
+    NSNumber *tutorialModeNumber = [NSNumber numberWithBool:tutorialMode];
+    [[NSNotificationCenter defaultCenter]postNotificationName:GAME_STATE_TUTORIALMODE_NOTIFICATION object:tutorialModeNumber];
+    
+    [[NSUserDefaults standardUserDefaults]setObject:tutorialModeNumber forKey:GAME_STATE_TUTORIALMODE_KEY];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+}
+
 
 
 @end
