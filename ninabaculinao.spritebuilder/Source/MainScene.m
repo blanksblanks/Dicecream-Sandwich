@@ -15,7 +15,8 @@
     CCButton *_helpButton;
     CCButton *_creditsButton;
     CCButton *_levelButton;
-    CCButton *_leaderboardButton;
+    CCButton *_tutorialButton;
+//    CCButton *_leaderboardButton;
 //    CCButton *_buttons[5];
 //    NSArray *_buttonsArray;
     NSInteger count;
@@ -50,7 +51,8 @@
     _helpButton.enabled = true;
     _creditsButton.enabled = true;
     _levelButton.enabled = true;
-    _leaderboardButton.enabled = true;
+    _tutorialButton.enabled = true;
+//    _leaderboardButton.enabled = true;
 }
 
 - (void) toggleButtonsOff {
@@ -58,8 +60,8 @@
     _helpButton.enabled = false;
     _creditsButton.enabled = false;
     _levelButton.enabled = false;
-    _leaderboardButton.enabled = false;
-
+    _tutorialButton.enabled = false;
+//    _leaderboardButton.enabled = false;
 }
 
 - (void)play {
@@ -108,14 +110,21 @@
     [[CCDirector sharedDirector] replaceScene:levelScene];
 }
 
-- (void)leaderboard {
-    [MGWU logEvent:@"level_pressed_in_mainscene" withParams:nil];
+- (void) tutorial {
+    [MGWU logEvent:@"tutorial_pressed_in_mainscene" withParams: nil];
+    [GameState sharedInstance].tutorialMode = true;
     
-    [self playPopSound];
-    
-    CCScene *leaderboardScene = [CCBReader loadAsScene:@"Leaderboard"];
-    [[CCDirector sharedDirector] replaceScene:leaderboardScene];
+    [self play];
 }
+
+//- (void)leaderboard {
+//    [MGWU logEvent:@"level_pressed_in_mainscene" withParams:nil];
+//    
+//    [self playPopSound];
+//    
+//    CCScene *leaderboardScene = [CCBReader loadAsScene:@"Leaderboard"];
+//    [[CCDirector sharedDirector] replaceScene:leaderboardScene];
+//}
 
 - (void)reset {
     [GameState sharedInstance].levelsUnlocked = 1;

@@ -115,6 +115,7 @@
     
     [_grid.audio playEffect:@"bubble-pop1.wav"];
 
+    [GameState sharedInstance].tutorialMode = false;
     _grid.touchEnabled = false;
     [_grid.audio stopEverything ];
 

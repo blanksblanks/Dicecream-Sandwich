@@ -48,6 +48,8 @@ static NSString *const GAME_STATE_TIME_NOTIFICATION = @"GameState_TimeChanged";
 @property (nonatomic, assign) NSInteger levelSelected;
 @property (nonatomic, assign) NSInteger levelsUnlocked;
 
+@property (nonatomic, assign) BOOL tutorialMode;
+
 + (instancetype) sharedInstance;
 
 

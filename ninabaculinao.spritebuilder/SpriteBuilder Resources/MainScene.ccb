@@ -2811,7 +2811,7 @@
 								<key>displayName</key>
 								<string>Leaderboard</string>
 								<key>memberVarAssignmentName</key>
-								<string>_leaderboardButton</string>
+								<string>_tutorialButton</string>
 								<key>memberVarAssignmentType</key>
 								<integer>1</integer>
 								<key>properties</key>
@@ -2831,7 +2831,7 @@
 										<string>Position</string>
 										<key>value</key>
 										<array>
-											<real>240</real>
+											<real>236.5</real>
 											<real>23</real>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -2869,7 +2869,7 @@
 										<string>Block</string>
 										<key>value</key>
 										<array>
-											<string>leaderboard</string>
+											<string>tutorial</string>
 											<integer>1</integer>
 										</array>
 									</dict>
@@ -2880,7 +2880,7 @@
 										<string>Size</string>
 										<key>value</key>
 										<array>
-											<real>40</real>
+											<real>85</real>
 											<real>40</real>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -2914,7 +2914,7 @@
 										<string>String</string>
 										<key>value</key>
 										<array>
-											<string>Leaderboard</string>
+											<string>Tutorial</string>
 											<false/>
 										</array>
 									</dict>

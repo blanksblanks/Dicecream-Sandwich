@@ -109,6 +109,12 @@ static const NSInteger GRID_COLUMNS = 6;
     self.level = [GameState sharedInstance].levelSelected;
     [self loadLevel];
     
+    if ([GameState sharedInstance].tutorialMode) {
+        NSLog(@"Tutorial on!");
+    } else {
+        NSLog(@"Tutorial off!");
+    }
+    
     actionIndex = 0;
 }
 
@@ -1410,6 +1416,9 @@ static const NSInteger GRID_COLUMNS = 6;
     [self pause];
     [self playGameOverSound];
     
+    // Set tutorial mode to false after playthrough
+    [GameState sharedInstance].tutorialMode = false;
+    
 //    CCAnimationManager* animationManager = self.parent.animationManager;
 //    [animationManager runAnimationsForSequenceNamed:@"starsRotate"];
     
@@ -1478,6 +1487,11 @@ static const NSInteger GRID_COLUMNS = 6;
     NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys: score, @"score", level, @"level", time, @"time", chains, @"chains", chainsPerMin, @"chainsPerMin", sixChains, @"sixChains", perfectMatches, @"perfectMatches", allClear, @"allClear", nil];
     return params;
 }
+
+# pragma mark - Tutorial
+
+
+
 
 /*
  

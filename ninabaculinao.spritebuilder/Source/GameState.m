@@ -37,7 +37,10 @@ static NSString *const GAME_STATE_HIGHSCORE_KEY = @"GameStateHighScoreKey";
 
 
 - (instancetype)init {
+    
     self = [super init];
+    
+    // set initial values
     if (self) {
         NSNumber *bestScore = [[NSUserDefaults standardUserDefaults]objectForKey:GAME_STATE_SCORE_KEY];
         self.bestScore = [bestScore integerValue];
@@ -68,6 +71,7 @@ static NSString *const GAME_STATE_HIGHSCORE_KEY = @"GameStateHighScoreKey";
         self.currentTime = 0;
         
         self.levelsUnlocked = 0;
+        self.tutorialMode = true;
         
 //        if (![[NSUserDefaults standardUserDefaults]objectForKey:GAME_STATE_NAME_KEY]) {
 //            [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:GAME_STATE_NAME_KEY];

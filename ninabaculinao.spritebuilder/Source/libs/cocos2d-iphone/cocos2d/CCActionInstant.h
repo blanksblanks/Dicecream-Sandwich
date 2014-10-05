@@ -184,14 +184,11 @@
  *  This action allows a custom function to be called.
  */
 @interface CCActionCallFunc : CCActionInstant <NSCopying> {
-# pragma mark - Bug fix https://github.com/cocojoe/cocos2d-iphone/commit/a696415d3a93e408f423f9425ed6e4fc1e07137c
-//	id _targetCallback;
-    __weak id _targetCallBack;
+	__weak id _targetCallback;
 	SEL _selector;
 }
 
 /** Target function that will be called. */
-//@property (nonatomic, readwrite, strong) id targetCallback;
 @property (nonatomic, readwrite, weak) id targetCallback;
 
 
