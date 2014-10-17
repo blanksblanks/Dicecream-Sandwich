@@ -3544,7 +3544,7 @@
 														<key>value</key>
 														<array>
 															<string></string>
-															<string>newAssets/forDice/Green_Filled_One.png</string>
+															<string>newAssets/forLevelSelect/Green_Ball.png</string>
 														</array>
 													</dict>
 													<dict>
@@ -6925,7 +6925,7 @@
 														<key>value</key>
 														<array>
 															<string></string>
-															<string>newAssets/forDice/Green_Filled_One.png</string>
+															<string>newAssets/forLevelSelect/Green_Ball.png</string>
 														</array>
 													</dict>
 													<dict>
@@ -6952,7 +6952,7 @@
 														<key>value</key>
 														<array>
 															<string></string>
-															<string>newAssets/forDice/Green_Filled_One.png</string>
+															<string>newAssets/forLevelSelect/Green_Ball.png</string>
 														</array>
 													</dict>
 													<dict>
