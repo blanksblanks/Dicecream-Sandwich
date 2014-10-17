@@ -110,15 +110,7 @@ static const NSInteger GRID_COLUMNS = 6;
     [self loadLevel];
     
     actionIndex = 0;
-    
-    if ([GameState sharedInstance].tutorialMode) {
-//        actionIndex = 5;
-        NSLog(@"Tutorial on!");
-    } else {
-//        actionIndex = 0;
-        NSLog(@"Tutorial off!");
-    }
-    
+
 }
 
 # pragma mark - Update method

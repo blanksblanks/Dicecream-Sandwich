@@ -1734,7 +1734,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>60</real>
+									<real>76</real>
 									<real>304</real>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -1789,7 +1789,7 @@
 								<key>type</key>
 								<string>Float</string>
 								<key>value</key>
-								<real>1</real>
+								<real>0.69999998807907104</real>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1801,7 +1801,7 @@
 									<real>1</real>
 									<real>1</real>
 									<real>1</real>
-									<real>1</real>
+									<real>0.69999998807907104</real>
 								</array>
 							</dict>
 						</array>
@@ -5864,8 +5864,6 @@ both 1</string>
 												<string>Dice/Six.ccb</string>
 											</dict>
 										</array>
-										<key>selected</key>
-										<true/>
 									</dict>
 								</array>
 								<key>customClass</key>
@@ -6718,7 +6716,7 @@ Time’s ticking...</string>
 								<string>Block</string>
 								<key>value</key>
 								<array>
-									<string></string>
+									<string>next</string>
 									<integer>1</integer>
 								</array>
 							</dict>
@@ -7170,9 +7168,9 @@ Time’s ticking...</string>
 			<key>name</key>
 			<string>Default Timeline</string>
 			<key>offset</key>
-			<real>2.159224271774292</real>
+			<real>0.0</real>
 			<key>position</key>
-			<real>3.7333333492279053</real>
+			<real>0.40000000596046448</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>
