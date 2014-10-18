@@ -1734,7 +1734,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>76</real>
+									<real>60</real>
 									<real>304</real>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -1789,7 +1789,7 @@
 								<key>type</key>
 								<string>Float</string>
 								<key>value</key>
-								<real>0.69999998807907104</real>
+								<real>1</real>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1801,7 +1801,7 @@
 									<real>1</real>
 									<real>1</real>
 									<real>1</real>
-									<real>0.69999998807907104</real>
+									<real>1</real>
 								</array>
 							</dict>
 						</array>
@@ -2168,24 +2168,6 @@
 												<real>140</real>
 											</array>
 										</dict>
-										<dict>
-											<key>easing</key>
-											<dict>
-												<key>type</key>
-												<integer>1</integer>
-											</dict>
-											<key>name</key>
-											<string>position</string>
-											<key>time</key>
-											<real>3.4333333969116211</real>
-											<key>type</key>
-											<integer>3</integer>
-											<key>value</key>
-											<array>
-												<real>80</real>
-												<real>225</real>
-											</array>
-										</dict>
 									</array>
 									<key>name</key>
 									<string>position</string>
@@ -2206,42 +2188,6 @@
 											<string>spriteFrame</string>
 											<key>time</key>
 											<real>0.0</real>
-											<key>type</key>
-											<integer>7</integer>
-											<key>value</key>
-											<array>
-												<string>workingAssets/Buttons/cursor_hand.png</string>
-												<string>Use regular file</string>
-											</array>
-										</dict>
-										<dict>
-											<key>easing</key>
-											<dict>
-												<key>type</key>
-												<integer>0</integer>
-											</dict>
-											<key>name</key>
-											<string>spriteFrame</string>
-											<key>time</key>
-											<real>3.3666665554046631</real>
-											<key>type</key>
-											<integer>7</integer>
-											<key>value</key>
-											<array>
-												<string></string>
-												<string></string>
-											</array>
-										</dict>
-										<dict>
-											<key>easing</key>
-											<dict>
-												<key>type</key>
-												<integer>0</integer>
-											</dict>
-											<key>name</key>
-											<string>spriteFrame</string>
-											<key>time</key>
-											<real>3.4666666984558105</real>
 											<key>type</key>
 											<integer>7</integer>
 											<key>value</key>
@@ -2293,7 +2239,7 @@
 								<key>value</key>
 								<array>
 									<real>80</real>
-									<real>225</real>
+									<real>195.25</real>
 									<integer>0</integer>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -2347,7 +2293,7 @@
 								<key>type</key>
 								<string>Float</string>
 								<key>value</key>
-								<real>1</real>
+								<real>0.69999998807907104</real>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -2359,7 +2305,7 @@
 									<real>1</real>
 									<real>1</real>
 									<real>1</real>
-									<real>1</real>
+									<real>0.69999998807907104</real>
 								</array>
 							</dict>
 						</array>
@@ -3001,8 +2947,6 @@ to clear dice!</string>
 				<string></string>
 				<key>displayName</key>
 				<string>help1</string>
-				<key>hidden</key>
-				<true/>
 				<key>memberVarAssignmentName</key>
 				<string>_help1</string>
 				<key>memberVarAssignmentType</key>
@@ -6977,6 +6921,8 @@ Time’s ticking...</string>
 				<string></string>
 				<key>displayName</key>
 				<string>help3</string>
+				<key>hidden</key>
+				<true/>
 				<key>memberVarAssignmentName</key>
 				<string>_help3</string>
 				<key>memberVarAssignmentType</key>
@@ -7168,9 +7114,9 @@ Time’s ticking...</string>
 			<key>name</key>
 			<string>Default Timeline</string>
 			<key>offset</key>
-			<real>0.0</real>
+			<real>0.99255746603012085</real>
 			<key>position</key>
-			<real>0.40000000596046448</real>
+			<real>2.5666666030883789</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>

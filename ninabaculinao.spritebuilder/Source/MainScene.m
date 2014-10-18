@@ -22,9 +22,11 @@
     NSInteger count;
     BOOL playPressed;
     OALSimpleAudio *audio;
+    CCAnimationManager* animationManager;
 }
 
 -(void)didLoadFromCCB {
+    animationManager = self.animationManager;
     audio = [OALSimpleAudio sharedInstance];
     [GameState sharedInstance].popUp = FALSE;
     playPressed = FALSE;
@@ -51,6 +53,8 @@
     _helpButton.enabled = true;
     _creditsButton.enabled = true;
     _levelButton.enabled = true;
+    animationManager.paused = false;
+    
 //    _tutorialButton.enabled = true;
 //    _leaderboardButton.enabled = true;
 }
@@ -60,6 +64,8 @@
     _helpButton.enabled = false;
     _creditsButton.enabled = false;
     _levelButton.enabled = false;
+    animationManager.paused = true;
+    
 //    _tutorialButton.enabled = false;
 //    _leaderboardButton.enabled = false;
 }
@@ -147,7 +153,6 @@
 # pragma mark - Sound and animation
 
 - (void)sandwichSpinAway {
-    CCAnimationManager* animationManager = self.animationManager;
     [animationManager runAnimationsForSequenceNamed:@"sandwichSpinAway"];
     
     [audio preloadEffect:@"8-bit-boing.wav"];
