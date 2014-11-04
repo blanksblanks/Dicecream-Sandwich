@@ -1446,9 +1446,9 @@ static const NSInteger GRID_COLUMNS = 6;
         [self.parent addChild:gameEnd];
     } delay:0.5f];
     
-    [self scheduleBlock:^(CCTimer *timer) {
-        [self.audio stopEverything];
-    } delay:0.5f];
+//    [self scheduleBlock:^(CCTimer *timer) {
+//        [self.audio stopEverything];
+//    } delay:0.5f];
 
 }
 

@@ -33,11 +33,10 @@
 }
 
 - (void) stats {
-//    [MGWU logEvent:@"stats_pressed_in_gameend" withParams:nil];
-    
-    [_grid playPopSound];
+    [MGWU logEvent:@"stats_pressed_in_gameend" withParams:nil];
+//    [_grid playPopSound];
 //    [_grid.audio playEffect:@"bubble-pop1.wav"];
-    
+    [self playPopSound];
     StatsMenu *statsMenu = (StatsMenu*) [CCBReader load:@"StatsMenu"];
     [statsMenu setPositionType:CCPositionTypeNormalized];
     statsMenu.position = ccp(0.5, 0.5);
@@ -46,27 +45,29 @@
 }
 
 - (void) home {
-//    [MGWU logEvent:@"home_pressed_in_gameend" withParams:nil];
-    
-    [_grid playPopSound];
+    [MGWU logEvent:@"home_pressed_in_gameend" withParams:nil];
+//    [_grid playPopSound];
 //    [_grid.audio playEffect:@"bubble-pop1.wav"];
-    
+    [self playPopSound];
     [self removeFromParent];
-
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];
 }
 
 - (void) restart {
-//    [MGWU logEvent:@"restart_pressed_in_gameend" withParams:nil];
-    
-    [_grid playPopSound];
+    [MGWU logEvent:@"restart_pressed_in_gameend" withParams:nil];
+//    [_grid playPopSound];
 //    [_grid.audio playEffect:@"bubble-pop1.wav"];
-    
+    [self playPopSound];
     [self removeFromParent];
-    
     CCScene *gamePlay = [CCBReader loadAsScene:@"Gameplay"];
     [[CCDirector sharedDirector] replaceScene:gamePlay];
+}
+
+- (void)playPopSound {
+    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
+    [audio preloadEffect:@"bubble-pop1.wav"];
+    [audio playEffect:@"bubble-pop1.wav"];
 }
 
 

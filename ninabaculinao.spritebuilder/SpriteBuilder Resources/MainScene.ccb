@@ -3467,6 +3467,14 @@
 									</dict>
 									<dict>
 										<key>name</key>
+										<string>backgroundOpacity|Disabled</string>
+										<key>type</key>
+										<string>Float</string>
+										<key>value</key>
+										<real>1</real>
+									</dict>
+									<dict>
+										<key>name</key>
 										<string>labelOpacity|Disabled</string>
 										<key>type</key>
 										<string>Float</string>
@@ -3483,6 +3491,14 @@
 											<string></string>
 											<string>workingAssets/Buttons/buttons-31.png</string>
 										</array>
+									</dict>
+									<dict>
+										<key>name</key>
+										<string>backgroundOpacity|Selected</string>
+										<key>type</key>
+										<string>Float</string>
+										<key>value</key>
+										<real>1</real>
 									</dict>
 									<dict>
 										<key>name</key>
@@ -3625,6 +3641,8 @@
 										</array>
 									</dict>
 								</array>
+								<key>selected</key>
+								<true/>
 							</dict>
 						</array>
 						<key>customClass</key>
@@ -4782,7 +4800,7 @@
 				<integer>12</integer>
 			</dict>
 			<key>chainedSequenceId</key>
-			<integer>-1</integer>
+			<integer>1</integer>
 			<key>length</key>
 			<real>2.3333332538604736</real>
 			<key>name</key>
