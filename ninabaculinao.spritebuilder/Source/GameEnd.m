@@ -33,7 +33,7 @@
 }
 
 - (void) stats {
-    [MGWU logEvent:@"stats_pressed_in_gameend" withParams:nil];
+//    [MGWU logEvent:@"stats_pressed_in_gameend" withParams:nil];
     
     [_grid playPopSound];
 //    [_grid.audio playEffect:@"bubble-pop1.wav"];
@@ -46,7 +46,7 @@
 }
 
 - (void) home {
-    [MGWU logEvent:@"home_pressed_in_gameend" withParams:nil];
+//    [MGWU logEvent:@"home_pressed_in_gameend" withParams:nil];
     
     [_grid playPopSound];
 //    [_grid.audio playEffect:@"bubble-pop1.wav"];
@@ -58,7 +58,7 @@
 }
 
 - (void) restart {
-    [MGWU logEvent:@"restart_pressed_in_gameend" withParams:nil];
+//    [MGWU logEvent:@"restart_pressed_in_gameend" withParams:nil];
     
     [_grid playPopSound];
 //    [_grid.audio playEffect:@"bubble-pop1.wav"];

@@ -7,6 +7,7 @@
 //
 
 #import "HelpMenu.h"
+#import "Dice.h"
 #import "GameState.h"
 
 
