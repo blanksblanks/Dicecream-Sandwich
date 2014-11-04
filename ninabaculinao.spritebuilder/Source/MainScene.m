@@ -83,14 +83,14 @@
 //    if ([GameState sharedInstance].tutorialMode) {
 //    }
 
-//    [GameState sharedInstance].levelSelected = 1;
+    [GameState sharedInstance].levelSelected = 1;
 //    [self sandwichSpinAway];
 //    [self performSelector:@selector(sandwichSpinAway)];
     
 //    [self scheduleBlock:^(CCTimer *timer) {
         CCScene *gameplayScene = [CCBReader loadAsScene:@"Gameplay"];
         [[CCDirector sharedDirector] replaceScene:gameplayScene];
-//    } delay:1.5];
+//    } delay:0.2];
 }
 
 # pragma mark - Button selectors
