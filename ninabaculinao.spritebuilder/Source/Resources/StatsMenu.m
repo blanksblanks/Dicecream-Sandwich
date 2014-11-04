@@ -43,9 +43,9 @@
 }
 
 - (void) current {
-
-    [_grid playPopSound];
+//    [_grid playPopSound];
 //    [_grid.audio playEffect:@"bubble-pop1.wav"];
+    [self playPopSound];
     
     _scoreLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentScore];
     _levelLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentLevel];

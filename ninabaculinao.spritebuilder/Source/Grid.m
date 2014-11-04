@@ -83,7 +83,6 @@ static const NSInteger GRID_COLUMNS = 6;
     
     // Begin music by accessing audio object and playing background sound
     self.audio = [OALSimpleAudio sharedInstance];
-    
     [self.audio playBg:@"CATchy.wav" loop:TRUE];
     
 //    if ([GameState sharedInstance].musicPaused) {

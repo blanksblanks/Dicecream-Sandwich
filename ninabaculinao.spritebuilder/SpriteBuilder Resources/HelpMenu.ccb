@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>94</integer>
+	<integer>104</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -122,9 +122,9 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.20999999344348907</real>
-							<real>0.64999997615814209</real>
-							<real>0.87000000476837158</real>
+							<real>0.21176470816135406</real>
+							<real>0.65098041296005249</real>
+							<real>0.87058824300765991</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -1734,7 +1734,7 @@
 								<string>Position</string>
 								<key>value</key>
 								<array>
-									<real>132</real>
+									<real>220</real>
 									<real>304</real>
 									<integer>0</integer>
 									<integer>0</integer>
@@ -1789,7 +1789,7 @@
 								<key>type</key>
 								<string>Float</string>
 								<key>value</key>
-								<real>0.69999998807907104</real>
+								<real>1</real>
 							</dict>
 							<dict>
 								<key>name</key>
@@ -1801,7 +1801,7 @@
 									<real>1</real>
 									<real>1</real>
 									<real>1</real>
-									<real>0.69999998807907104</real>
+									<real>1</real>
 								</array>
 							</dict>
 						</array>
@@ -2947,8 +2947,6 @@ to clear dice!</string>
 				<string></string>
 				<key>displayName</key>
 				<string>help1</string>
-				<key>hidden</key>
-				<true/>
 				<key>memberVarAssignmentName</key>
 				<string>_help1</string>
 				<key>memberVarAssignmentType</key>
@@ -3672,87 +3670,40 @@ you how many fillings you need.</string>
 								<array>
 									<dict>
 										<key>UUID</key>
-										<integer>85</integer>
-										<key>animatedProperties</key>
-										<dict>
-											<key>0</key>
-											<dict>
-												<key>spriteFrame</key>
-												<dict>
-													<key>keyframes</key>
-													<array>
-														<dict>
-															<key>easing</key>
-															<dict>
-																<key>type</key>
-																<integer>0</integer>
-															</dict>
-															<key>name</key>
-															<string>spriteFrame</string>
-															<key>time</key>
-															<real>0.0</real>
-															<key>type</key>
-															<integer>7</integer>
-															<key>value</key>
-															<array>
-																<string>workingAssets/Dice/OneGreen.png</string>
-																<string>Use regular file</string>
-															</array>
-														</dict>
-														<dict>
-															<key>easing</key>
-															<dict>
-																<key>type</key>
-																<integer>0</integer>
-															</dict>
-															<key>name</key>
-															<string>spriteFrame</string>
-															<key>time</key>
-															<real>0.5</real>
-															<key>type</key>
-															<integer>7</integer>
-															<key>value</key>
-															<array>
-																<string>newAssets/forDice/Green_Filled_One.png</string>
-																<string>Use regular file</string>
-															</array>
-														</dict>
-														<dict>
-															<key>easing</key>
-															<dict>
-																<key>type</key>
-																<integer>0</integer>
-															</dict>
-															<key>name</key>
-															<string>spriteFrame</string>
-															<key>time</key>
-															<real>1</real>
-															<key>type</key>
-															<integer>7</integer>
-															<key>value</key>
-															<array>
-																<string></string>
-																<string></string>
-															</array>
-														</dict>
-													</array>
-													<key>name</key>
-													<string>spriteFrame</string>
-													<key>type</key>
-													<integer>7</integer>
-												</dict>
-											</dict>
-										</dict>
+										<integer>98</integer>
 										<key>baseClass</key>
-										<string>CCSprite</string>
+										<string>CCBFile</string>
 										<key>children</key>
 										<array/>
 										<key>customClass</key>
 										<string></string>
+										<key>customProperties</key>
+										<array>
+											<dict>
+												<key>name</key>
+												<string>faceValue</string>
+												<key>optimized</key>
+												<false/>
+												<key>type</key>
+												<integer>0</integer>
+												<key>value</key>
+												<string>1</string>
+											</dict>
+											<dict>
+												<key>name</key>
+												<string>colorValue</string>
+												<key>optimized</key>
+												<false/>
+												<key>type</key>
+												<integer>0</integer>
+												<key>value</key>
+												<string>1</string>
+											</dict>
+										</array>
 										<key>displayName</key>
-										<string>OneGreen</string>
+										<string>Dice</string>
 										<key>memberVarAssignmentName</key>
-										<string></string>
+										<string>die1a</string>
 										<key>memberVarAssignmentType</key>
 										<integer>1</integer>
 										<key>properties</key>
@@ -3772,22 +3723,11 @@ you how many fillings you need.</string>
 												<string>Position</string>
 												<key>value</key>
 												<array>
-													<real>18.5</real>
-													<real>18.5</real>
+													<real>0.0</real>
+													<real>0.0</real>
 													<integer>0</integer>
 													<integer>0</integer>
 													<integer>0</integer>
-												</array>
-											</dict>
-											<dict>
-												<key>name</key>
-												<string>anchorPoint</string>
-												<key>type</key>
-												<string>Point</string>
-												<key>value</key>
-												<array>
-													<real>0.5</real>
-													<real>0.5</real>
 												</array>
 											</dict>
 											<dict>
@@ -3804,103 +3744,51 @@ you how many fillings you need.</string>
 												</array>
 											</dict>
 											<dict>
-												<key>baseValue</key>
-												<array>
-													<string>workingAssets/Dice/OneGreen.png</string>
-													<string>Use regular file</string>
-												</array>
 												<key>name</key>
-												<string>spriteFrame</string>
+												<string>ccbFile</string>
 												<key>type</key>
-												<string>SpriteFrame</string>
+												<string>CCBFile</string>
 												<key>value</key>
-												<array>
-													<string></string>
-													<string></string>
-												</array>
-											</dict>
-											<dict>
-												<key>name</key>
-												<string>color</string>
-												<key>type</key>
-												<string>Color3</string>
-												<key>value</key>
-												<array>
-													<real>1</real>
-													<real>1</real>
-													<real>1</real>
-													<real>1</real>
-												</array>
+												<string>Dice/One.ccb</string>
 											</dict>
 										</array>
-										<key>seqExpanded</key>
-										<true/>
 									</dict>
 									<dict>
 										<key>UUID</key>
-										<integer>86</integer>
-										<key>animatedProperties</key>
-										<dict>
-											<key>0</key>
-											<dict>
-												<key>spriteFrame</key>
-												<dict>
-													<key>keyframes</key>
-													<array>
-														<dict>
-															<key>easing</key>
-															<dict>
-																<key>type</key>
-																<integer>0</integer>
-															</dict>
-															<key>name</key>
-															<string>spriteFrame</string>
-															<key>time</key>
-															<real>0.0</real>
-															<key>type</key>
-															<integer>7</integer>
-															<key>value</key>
-															<array>
-																<string>workingAssets/Dice/ThreeBlue.png</string>
-																<string>Use regular file</string>
-															</array>
-														</dict>
-														<dict>
-															<key>easing</key>
-															<dict>
-																<key>type</key>
-																<integer>0</integer>
-															</dict>
-															<key>name</key>
-															<string>spriteFrame</string>
-															<key>time</key>
-															<real>1</real>
-															<key>type</key>
-															<integer>7</integer>
-															<key>value</key>
-															<array>
-																<string></string>
-																<string></string>
-															</array>
-														</dict>
-													</array>
-													<key>name</key>
-													<string>spriteFrame</string>
-													<key>type</key>
-													<integer>7</integer>
-												</dict>
-											</dict>
-										</dict>
+										<integer>100</integer>
 										<key>baseClass</key>
-										<string>CCSprite</string>
+										<string>CCBFile</string>
 										<key>children</key>
 										<array/>
 										<key>customClass</key>
 										<string></string>
+										<key>customProperties</key>
+										<array>
+											<dict>
+												<key>name</key>
+												<string>faceValue</string>
+												<key>optimized</key>
+												<false/>
+												<key>type</key>
+												<integer>0</integer>
+												<key>value</key>
+												<string>3</string>
+											</dict>
+											<dict>
+												<key>name</key>
+												<string>colorValue</string>
+												<key>optimized</key>
+												<false/>
+												<key>type</key>
+												<integer>0</integer>
+												<key>value</key>
+												<string>1</string>
+											</dict>
+										</array>
 										<key>displayName</key>
-										<string>ThreeBlue</string>
+										<string>Dice</string>
 										<key>memberVarAssignmentName</key>
-										<string></string>
+										<string>die3</string>
 										<key>memberVarAssignmentType</key>
 										<integer>1</integer>
 										<key>properties</key>
@@ -3920,22 +3808,11 @@ you how many fillings you need.</string>
 												<string>Position</string>
 												<key>value</key>
 												<array>
-													<real>55.5</real>
-													<real>18.5</real>
+													<real>37</real>
+													<real>0.0</real>
 													<integer>0</integer>
 													<integer>0</integer>
 													<integer>0</integer>
-												</array>
-											</dict>
-											<dict>
-												<key>name</key>
-												<string>anchorPoint</string>
-												<key>type</key>
-												<string>Point</string>
-												<key>value</key>
-												<array>
-													<real>0.5</real>
-													<real>0.5</real>
 												</array>
 											</dict>
 											<dict>
@@ -3952,121 +3829,51 @@ you how many fillings you need.</string>
 												</array>
 											</dict>
 											<dict>
-												<key>baseValue</key>
-												<array>
-													<string>workingAssets/Dice/ThreeBlue.png</string>
-													<string>Use regular file</string>
-												</array>
 												<key>name</key>
-												<string>spriteFrame</string>
+												<string>ccbFile</string>
 												<key>type</key>
-												<string>SpriteFrame</string>
+												<string>CCBFile</string>
 												<key>value</key>
-												<array>
-													<string></string>
-													<string>workingAssets/Dice/ThreeBlue.png</string>
-												</array>
-											</dict>
-											<dict>
-												<key>name</key>
-												<string>color</string>
-												<key>type</key>
-												<string>Color3</string>
-												<key>value</key>
-												<array>
-													<real>1</real>
-													<real>1</real>
-													<real>1</real>
-													<real>1</real>
-												</array>
+												<string>Dice/Three.ccb</string>
 											</dict>
 										</array>
-										<key>seqExpanded</key>
-										<true/>
 									</dict>
 									<dict>
 										<key>UUID</key>
-										<integer>89</integer>
-										<key>animatedProperties</key>
-										<dict>
-											<key>0</key>
-											<dict>
-												<key>spriteFrame</key>
-												<dict>
-													<key>keyframes</key>
-													<array>
-														<dict>
-															<key>easing</key>
-															<dict>
-																<key>type</key>
-																<integer>0</integer>
-															</dict>
-															<key>name</key>
-															<string>spriteFrame</string>
-															<key>time</key>
-															<real>0.0</real>
-															<key>type</key>
-															<integer>7</integer>
-															<key>value</key>
-															<array>
-																<string>workingAssets/Dice/OneGreen.png</string>
-																<string>Use regular file</string>
-															</array>
-														</dict>
-														<dict>
-															<key>easing</key>
-															<dict>
-																<key>type</key>
-																<integer>0</integer>
-															</dict>
-															<key>name</key>
-															<string>spriteFrame</string>
-															<key>time</key>
-															<real>0.5</real>
-															<key>type</key>
-															<integer>7</integer>
-															<key>value</key>
-															<array>
-																<string>newAssets/forDice/Green_Filled_One.png</string>
-																<string>Use regular file</string>
-															</array>
-														</dict>
-														<dict>
-															<key>easing</key>
-															<dict>
-																<key>type</key>
-																<integer>0</integer>
-															</dict>
-															<key>name</key>
-															<string>spriteFrame</string>
-															<key>time</key>
-															<real>1</real>
-															<key>type</key>
-															<integer>7</integer>
-															<key>value</key>
-															<array>
-																<string></string>
-																<string></string>
-															</array>
-														</dict>
-													</array>
-													<key>name</key>
-													<string>spriteFrame</string>
-													<key>type</key>
-													<integer>7</integer>
-												</dict>
-											</dict>
-										</dict>
+										<integer>99</integer>
 										<key>baseClass</key>
-										<string>CCSprite</string>
+										<string>CCBFile</string>
 										<key>children</key>
 										<array/>
 										<key>customClass</key>
 										<string></string>
+										<key>customProperties</key>
+										<array>
+											<dict>
+												<key>name</key>
+												<string>faceValue</string>
+												<key>optimized</key>
+												<false/>
+												<key>type</key>
+												<integer>0</integer>
+												<key>value</key>
+												<string>1</string>
+											</dict>
+											<dict>
+												<key>name</key>
+												<string>colorValue</string>
+												<key>optimized</key>
+												<false/>
+												<key>type</key>
+												<integer>0</integer>
+												<key>value</key>
+												<string>1</string>
+											</dict>
+										</array>
 										<key>displayName</key>
-										<string>OneGreen</string>
+										<string>Dice</string>
 										<key>memberVarAssignmentName</key>
-										<string></string>
+										<string>die1b</string>
 										<key>memberVarAssignmentType</key>
 										<integer>1</integer>
 										<key>properties</key>
@@ -4086,22 +3893,11 @@ you how many fillings you need.</string>
 												<string>Position</string>
 												<key>value</key>
 												<array>
-													<real>92.5</real>
-													<real>18.5</real>
+													<real>74</real>
+													<real>0.0</real>
 													<integer>0</integer>
 													<integer>0</integer>
 													<integer>0</integer>
-												</array>
-											</dict>
-											<dict>
-												<key>name</key>
-												<string>anchorPoint</string>
-												<key>type</key>
-												<string>Point</string>
-												<key>value</key>
-												<array>
-													<real>0.5</real>
-													<real>0.5</real>
 												</array>
 											</dict>
 											<dict>
@@ -4118,37 +3914,14 @@ you how many fillings you need.</string>
 												</array>
 											</dict>
 											<dict>
-												<key>baseValue</key>
-												<array>
-													<string>workingAssets/Dice/OneGreen.png</string>
-													<string>Use regular file</string>
-												</array>
 												<key>name</key>
-												<string>spriteFrame</string>
+												<string>ccbFile</string>
 												<key>type</key>
-												<string>SpriteFrame</string>
+												<string>CCBFile</string>
 												<key>value</key>
-												<array>
-													<string></string>
-													<string></string>
-												</array>
-											</dict>
-											<dict>
-												<key>name</key>
-												<string>color</string>
-												<key>type</key>
-												<string>Color3</string>
-												<key>value</key>
-												<array>
-													<real>1</real>
-													<real>1</real>
-													<real>1</real>
-													<real>1</real>
-												</array>
+												<string>Dice/One.ccb</string>
 											</dict>
 										</array>
-										<key>seqExpanded</key>
-										<true/>
 									</dict>
 								</array>
 								<key>customClass</key>
@@ -4190,8 +3963,8 @@ you how many fillings you need.</string>
 										<string>Point</string>
 										<key>value</key>
 										<array>
-											<real>0.5</real>
-											<real>0.0</real>
+											<real>0.33000001311302185</real>
+											<real>-0.5</real>
 										</array>
 									</dict>
 									<dict>
@@ -4722,6 +4495,8 @@ both 1</string>
 				<string></string>
 				<key>displayName</key>
 				<string>help2</string>
+				<key>hidden</key>
+				<true/>
 				<key>memberVarAssignmentName</key>
 				<string>_help2</string>
 				<key>memberVarAssignmentType</key>
@@ -5474,7 +5249,7 @@ both 1</string>
 										<key>displayName</key>
 										<string>Dice</string>
 										<key>memberVarAssignmentName</key>
-										<string>die4</string>
+										<string>die6a</string>
 										<key>memberVarAssignmentType</key>
 										<integer>1</integer>
 										<key>properties</key>
@@ -5559,7 +5334,7 @@ both 1</string>
 										<key>displayName</key>
 										<string>Dice</string>
 										<key>memberVarAssignmentName</key>
-										<string>die5</string>
+										<string>die6b</string>
 										<key>memberVarAssignmentType</key>
 										<integer>1</integer>
 										<key>properties</key>
@@ -5644,7 +5419,7 @@ both 1</string>
 										<key>displayName</key>
 										<string>Dice</string>
 										<key>memberVarAssignmentName</key>
-										<string>die6</string>
+										<string>die6c</string>
 										<key>memberVarAssignmentType</key>
 										<integer>1</integer>
 										<key>properties</key>
@@ -5729,7 +5504,7 @@ both 1</string>
 										<key>displayName</key>
 										<string>Dice</string>
 										<key>memberVarAssignmentName</key>
-										<string>die7</string>
+										<string>die6d</string>
 										<key>memberVarAssignmentType</key>
 										<integer>1</integer>
 										<key>properties</key>
@@ -5814,7 +5589,7 @@ both 1</string>
 										<key>displayName</key>
 										<string>Dice</string>
 										<key>memberVarAssignmentName</key>
-										<string>die8</string>
+										<string>die6e</string>
 										<key>memberVarAssignmentType</key>
 										<integer>1</integer>
 										<key>properties</key>
@@ -5899,7 +5674,7 @@ both 1</string>
 										<key>displayName</key>
 										<string>Dice</string>
 										<key>memberVarAssignmentName</key>
-										<string>die9</string>
+										<string>die6f</string>
 										<key>memberVarAssignmentType</key>
 										<integer>1</integer>
 										<key>properties</key>
@@ -5984,7 +5759,7 @@ both 1</string>
 										<key>displayName</key>
 										<string>Dice</string>
 										<key>memberVarAssignmentName</key>
-										<string>die10</string>
+										<string>die6g</string>
 										<key>memberVarAssignmentType</key>
 										<integer>1</integer>
 										<key>properties</key>
@@ -6005,6 +5780,91 @@ both 1</string>
 												<key>value</key>
 												<array>
 													<real>222</real>
+													<real>0.0</real>
+													<integer>0</integer>
+													<integer>0</integer>
+													<integer>0</integer>
+												</array>
+											</dict>
+											<dict>
+												<key>name</key>
+												<string>scale</string>
+												<key>type</key>
+												<string>ScaleLock</string>
+												<key>value</key>
+												<array>
+													<real>1</real>
+													<real>1</real>
+													<false/>
+													<integer>0</integer>
+												</array>
+											</dict>
+											<dict>
+												<key>name</key>
+												<string>ccbFile</string>
+												<key>type</key>
+												<string>CCBFile</string>
+												<key>value</key>
+												<string>Dice/Six.ccb</string>
+											</dict>
+										</array>
+									</dict>
+									<dict>
+										<key>UUID</key>
+										<integer>101</integer>
+										<key>baseClass</key>
+										<string>CCBFile</string>
+										<key>children</key>
+										<array/>
+										<key>customClass</key>
+										<string></string>
+										<key>customProperties</key>
+										<array>
+											<dict>
+												<key>name</key>
+												<string>faceValue</string>
+												<key>optimized</key>
+												<false/>
+												<key>type</key>
+												<integer>0</integer>
+												<key>value</key>
+												<string>6</string>
+											</dict>
+											<dict>
+												<key>name</key>
+												<string>colorValue</string>
+												<key>optimized</key>
+												<false/>
+												<key>type</key>
+												<integer>0</integer>
+												<key>value</key>
+												<string>1</string>
+											</dict>
+										</array>
+										<key>displayName</key>
+										<string>Dice</string>
+										<key>memberVarAssignmentName</key>
+										<string>die6h</string>
+										<key>memberVarAssignmentType</key>
+										<integer>1</integer>
+										<key>properties</key>
+										<array>
+											<dict>
+												<key>name</key>
+												<string>name</string>
+												<key>type</key>
+												<string>StringSimple</string>
+												<key>value</key>
+												<string></string>
+											</dict>
+											<dict>
+												<key>name</key>
+												<string>position</string>
+												<key>type</key>
+												<string>Position</string>
+												<key>value</key>
+												<array>
+													<real>259</real>
 													<real>0.0</real>
 													<integer>0</integer>
 													<integer>0</integer>
@@ -7214,6 +7074,8 @@ Time’s ticking...</string>
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
@@ -7341,7 +7203,7 @@ Time’s ticking...</string>
 			<key>offset</key>
 			<real>0.0</real>
 			<key>position</key>
-			<real>0.63333332538604736</real>
+			<real>1</real>
 			<key>resolution</key>
 			<real>30</real>
 			<key>scale</key>

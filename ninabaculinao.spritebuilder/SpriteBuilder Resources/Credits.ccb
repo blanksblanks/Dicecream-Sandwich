@@ -862,11 +862,10 @@
 								<string>Text</string>
 								<key>value</key>
 								<array>
-									<string>Game design + programming by Nina Baculinao
-at MakeGamesWithUs in New York
+									<string>Game created by Nina Baculinao 
+with MakeGamesWithUs in New York
 
 Graphics by Robert Lum
-Character by Dat Do
 
 Icons by Captain Icon
 
@@ -874,6 +873,7 @@ SFX from freesound.org:
    success by grunz
    level_up_3note2 by jivatma07
    water_droplet_bubble_pop1 by CGEffex
+   feeeelllgood.wav by Matthus
 
 BGM “CATchy” by DropThatCat</string>
 									<false/>
@@ -1011,6 +1011,8 @@ BGM “CATchy” by DropThatCat</string>
 								</array>
 							</dict>
 						</array>
+						<key>selected</key>
+						<true/>
 					</dict>
 				</array>
 				<key>customClass</key>
@@ -1587,8 +1589,6 @@ BGM “CATchy” by DropThatCat</string>
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
