@@ -49,15 +49,13 @@
         case 0: {
             _help1.visible = false;
             _help2.visible = true;
-            [self clearDie:die1a];
-            [self clearDie:die1b];
+            [self clearDie1:die1a andDie2:die1b];
             break;
         }
         case 1: {
             _help2.visible = false;
             _help3.visible = true;
-            [self clearDie:die6a];
-            [self clearDie:die6h];
+            [self clearDie1:die6a andDie2:die6h];
             break;
         }
         case 2: {
@@ -88,20 +86,28 @@
     [audio playEffect:@"success.wav"];
 }
 
--(void)clearDie:(Dice*)die{
+-(void)clearDie1:(Dice*)die1 andDie2:(Dice*)die2{
     [self playSuccessSound];
-    CCAnimationManager* animationManager = die.animationManager;
+    CCAnimationManager* animationManager = die1.animationManager;
+    CCAnimationManager* animationManager2 = die2.animationManager;
     [animationManager runAnimationsForSequenceNamed:@"colorFill"];
-    CCParticleSystem *explosion = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
-    explosion.autoRemoveOnFinish = TRUE;
-    explosion.position = die.position;
-    [self addChild:explosion];
+    [animationManager2 runAnimationsForSequenceNamed:@"colorFill"];
+    CCParticleSystem *explosion1 = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
+    CCParticleSystem *explosion2 = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
+    explosion1.autoRemoveOnFinish = TRUE;
+    explosion2.autoRemoveOnFinish = TRUE;
+    explosion1.position = die1.position;
+    explosion2.position = die2.position;
+    [self addChild:explosion1];
+    [self addChild:explosion2];
     [self scheduleBlock:^(CCTimer *timer) {
-        die.visible = false;
+        die1.visible = false;
+        die2.visible = false;
     } delay:0.20];
     
     [self scheduleBlock:^(CCTimer *timer) {
-        die.visible = true;
+        die1.visible = true;
+        die2.visible = true;
     } delay:0.20];
 
 }
