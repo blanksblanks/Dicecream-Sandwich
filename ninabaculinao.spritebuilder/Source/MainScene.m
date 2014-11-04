@@ -74,17 +74,23 @@
     [MGWU logEvent:@"play_pressed_in_mainscene" withParams:nil];
     
     playPressed = true;
+    [self playPopSound];
+
+    
+//    [animationManager runAnimationsForSequenceNamed:@"sandwichSpinAway"];
+
     
 //    if ([GameState sharedInstance].tutorialMode) {
 //    }
 
-    [GameState sharedInstance].levelSelected = 1;
-    [self performSelector:@selector(sandwichSpinAway)];
+//    [GameState sharedInstance].levelSelected = 1;
+//    [self sandwichSpinAway];
+//    [self performSelector:@selector(sandwichSpinAway)];
     
-    [self scheduleBlock:^(CCTimer *timer) {
+//    [self scheduleBlock:^(CCTimer *timer) {
         CCScene *gameplayScene = [CCBReader loadAsScene:@"Gameplay"];
         [[CCDirector sharedDirector] replaceScene:gameplayScene];
-    } delay:1.5];
+//    } delay:1.5];
 }
 
 # pragma mark - Button selectors
