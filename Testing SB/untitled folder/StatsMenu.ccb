@@ -1523,9 +1523,9 @@
 								<string>Color4</string>
 								<key>value</key>
 								<array>
-									<real>1</real>
-									<real>1</real>
-									<real>1</real>
+									<real>0.0</real>
+									<real>0.0</real>
+									<real>0.0</real>
 									<real>1</real>
 								</array>
 							</dict>
@@ -1536,9 +1536,9 @@
 								<string>Color4</string>
 								<key>value</key>
 								<array>
-									<real>0.0</real>
-									<real>0.50196081399917603</real>
-									<real>0.50196081399917603</real>
+									<real>1</real>
+									<real>1</real>
+									<real>1</real>
 									<real>1</real>
 								</array>
 							</dict>
@@ -1737,9 +1737,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>1</real>
-											<real>1</real>
-											<real>1</real>
+											<real>0.0</real>
+											<real>0.0</real>
+											<real>0.0</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -1750,9 +1750,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
+											<real>0.80000001192092896</real>
+											<real>0.40000000596046448</real>
 											<real>1</real>
-											<real>0.50196081399917603</real>
-											<real>0.0</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -1763,7 +1763,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>3</real>
+											<real>8</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -1806,6 +1806,8 @@
 										</array>
 									</dict>
 								</array>
+								<key>selected</key>
+								<true/>
 							</dict>
 							<dict>
 								<key>UUID</key>
@@ -1944,9 +1946,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>1</real>
-											<real>1</real>
-											<real>1</real>
+											<real>0.0</real>
+											<real>0.0</real>
+											<real>0.0</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -1957,8 +1959,8 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>0.50196081399917603</real>
-											<real>0.0</real>
+											<real>0.40000000596046448</real>
+											<real>0.80000001192092896</real>
 											<real>1</real>
 											<real>1</real>
 										</array>
@@ -1970,7 +1972,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>3</real>
+											<real>8</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -2299,7 +2301,7 @@
 										<string>Text</string>
 										<key>value</key>
 										<array>
-											<string>SANDWICHES   </string>
+											<string>SANDWICHES</string>
 											<false/>
 										</array>
 									</dict>
@@ -2366,9 +2368,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>1</real>
-											<real>1</real>
-											<real>1</real>
+											<real>0.0</real>
+											<real>0.0</real>
+											<real>0.0</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -2380,8 +2382,8 @@
 										<key>value</key>
 										<array>
 											<real>0.40000000596046448</real>
-											<real>0.40000000596046448</real>
 											<real>1</real>
+											<real>0.80000001192092896</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -2392,7 +2394,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>3</real>
+											<real>8</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -2506,7 +2508,7 @@
 										<string>Text</string>
 										<key>value</key>
 										<array>
-											<string>SANDWICHES/MIN    </string>
+											<string>SANDWICHES/MIN</string>
 											<false/>
 										</array>
 									</dict>
@@ -2573,9 +2575,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>1</real>
-											<real>1</real>
-											<real>1</real>
+											<real>0.0</real>
+											<real>0.0</real>
+											<real>0.0</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -2586,9 +2588,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>0.0</real>
-											<real>0.50196081399917603</real>
+											<real>0.80000001192092896</real>
 											<real>1</real>
+											<real>0.40000000596046448</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -2599,7 +2601,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>3</real>
+											<real>8</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -2780,9 +2782,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>1</real>
-											<real>1</real>
-											<real>1</real>
+											<real>0.0</real>
+											<real>0.0</real>
+											<real>0.0</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -2793,9 +2795,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>0.0</real>
-											<real>0.50196081399917603</real>
-											<real>0.25098040699958801</real>
+											<real>1</real>
+											<real>0.80000001192092896</real>
+											<real>0.40000000596046448</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -2806,7 +2808,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>3</real>
+											<real>8</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -2987,9 +2989,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>1</real>
-											<real>1</real>
-											<real>1</real>
+											<real>0.0</real>
+											<real>0.0</real>
+											<real>0.0</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -3000,9 +3002,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>0.0</real>
-											<real>0.25098040699958801</real>
-											<real>0.50196081399917603</real>
+											<real>1</real>
+											<real>0.43529412150382996</real>
+											<real>0.81176471710205078</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -3013,7 +3015,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>3</real>
+											<real>8</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -3194,9 +3196,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>1</real>
-											<real>1</real>
-											<real>1</real>
+											<real>0.0</real>
+											<real>0.0</real>
+											<real>0.0</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -3208,8 +3210,8 @@
 										<key>value</key>
 										<array>
 											<real>1</real>
-											<real>0.0</real>
-											<real>0.50196081399917603</real>
+											<real>0.40000000596046448</real>
+											<real>0.40000000596046448</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -3220,7 +3222,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>3</real>
+											<real>8</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -3481,8 +3483,8 @@
 										<key>value</key>
 										<array>
 											<real>1</real>
-											<real>1</real>
-											<real>1</real>
+											<real>0.40000000596046448</real>
+											<real>0.40000000596046448</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -3494,8 +3496,8 @@
 										<key>value</key>
 										<array>
 											<real>1</real>
-											<real>0.0</real>
-											<real>0.50196081399917603</real>
+											<real>1</real>
+											<real>1</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -3506,7 +3508,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>3</real>
+											<real>0.0</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -3688,8 +3690,8 @@
 										<key>value</key>
 										<array>
 											<real>1</real>
-											<real>1</real>
-											<real>1</real>
+											<real>0.43529412150382996</real>
+											<real>0.81176471710205078</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -3700,9 +3702,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>0.0</real>
-											<real>0.25098040699958801</real>
-											<real>0.50196081399917603</real>
+											<real>1</real>
+											<real>1</real>
+											<real>1</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -3713,7 +3715,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>3</real>
+											<real>0.0</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -3895,8 +3897,8 @@
 										<key>value</key>
 										<array>
 											<real>1</real>
-											<real>1</real>
-											<real>1</real>
+											<real>0.80000001192092896</real>
+											<real>0.40000000596046448</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -3907,9 +3909,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>0.0</real>
-											<real>0.50196081399917603</real>
-											<real>0.25098040699958801</real>
+											<real>1</real>
+											<real>1</real>
+											<real>1</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -3920,7 +3922,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>3</real>
+											<real>0.0</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -4101,9 +4103,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
+											<real>0.80000001192092896</real>
 											<real>1</real>
-											<real>1</real>
-											<real>1</real>
+											<real>0.40000000596046448</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -4114,8 +4116,8 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>0.0</real>
-											<real>0.50196081399917603</real>
+											<real>1</real>
+											<real>1</real>
 											<real>1</real>
 											<real>1</real>
 										</array>
@@ -4127,7 +4129,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>3</real>
+											<real>0.0</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -4308,9 +4310,9 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
+											<real>0.40000000596046448</real>
 											<real>1</real>
-											<real>1</real>
-											<real>1</real>
+											<real>0.80000001192092896</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -4321,8 +4323,8 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>0.40000000596046448</real>
-											<real>0.40000000596046448</real>
+											<real>1</real>
+											<real>1</real>
 											<real>1</real>
 											<real>1</real>
 										</array>
@@ -4334,7 +4336,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>3</real>
+											<real>0.0</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -4515,8 +4517,8 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>1</real>
-											<real>1</real>
+											<real>0.40000000596046448</real>
+											<real>0.80000001192092896</real>
 											<real>1</real>
 											<real>1</real>
 										</array>
@@ -4528,8 +4530,8 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>0.50196081399917603</real>
-											<real>0.0</real>
+											<real>1</real>
+											<real>1</real>
 											<real>1</real>
 											<real>1</real>
 										</array>
@@ -4541,7 +4543,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>3</real>
+											<real>0.0</real>
 											<integer>0</integer>
 										</array>
 									</dict>
@@ -4722,8 +4724,8 @@
 										<string>Color4</string>
 										<key>value</key>
 										<array>
-											<real>1</real>
-											<real>1</real>
+											<real>0.80000001192092896</real>
+											<real>0.40000000596046448</real>
 											<real>1</real>
 											<real>1</real>
 										</array>
@@ -4736,8 +4738,8 @@
 										<key>value</key>
 										<array>
 											<real>1</real>
-											<real>0.50196081399917603</real>
-											<real>0.0</real>
+											<real>1</real>
+											<real>1</real>
 											<real>1</real>
 										</array>
 									</dict>
@@ -4748,7 +4750,7 @@
 										<string>FloatScale</string>
 										<key>value</key>
 										<array>
-											<real>3</real>
+											<real>0.0</real>
 											<integer>0</integer>
 										</array>
 									</dict>

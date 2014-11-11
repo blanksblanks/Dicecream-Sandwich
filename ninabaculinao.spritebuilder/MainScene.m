@@ -28,6 +28,7 @@
 -(void)didLoadFromCCB {
     animationManager = self.animationManager;
     audio = [OALSimpleAudio sharedInstance];
+    [audio playBg:@"beats.wav" loop:FALSE];
     [GameState sharedInstance].popUp = FALSE;
     playPressed = FALSE;
     [self toggleButtonsOn];
