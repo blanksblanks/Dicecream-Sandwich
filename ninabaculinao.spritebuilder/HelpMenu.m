@@ -17,6 +17,7 @@
     CCNode *_help2;
     CCNode *_help3;
     
+// TODO: Add _ to var names here and in SB
     Dice *die1a;
     Dice *die3;
     Dice *die1b;
@@ -49,13 +50,18 @@
         case 0: {
             _help1.visible = false;
             _help2.visible = true;
-            [self clearDie1:die1a andDie2:die1b];
+            [self scheduleBlock:^(CCTimer *timer) {
+                [self clearDie1:die1a andDie2:die1b];
+            } delay:1.00];
             break;
         }
         case 1: {
             _help2.visible = false;
             _help3.visible = true;
-            [self clearDie1:die6a andDie2:die6h];
+            [self showInnerDice];
+            [self scheduleBlock:^(CCTimer *timer) {
+                [self clearDie1:die6a andDie2:die6h];
+            } delay:1.00];
             break;
         }
         case 2: {
@@ -103,13 +109,27 @@
     [self scheduleBlock:^(CCTimer *timer) {
         die1.visible = false;
         die2.visible = false;
-    } delay:0.20];
-    
-    [self scheduleBlock:^(CCTimer *timer) {
-        die1.visible = true;
-        die2.visible = true;
-    } delay:0.20];
+        [self hideInnerDice];
+    } delay:2.00];
+}
 
+-(void)hideInnerDice{
+        die3.visible = false;
+        die6b.visible = false;
+        die6c.visible = false;
+        die6d.visible = false;
+        die6e.visible = false;
+        die6f.visible = false;
+        die6g.visible = false;
+}
+
+-(void)showInnerDice{
+    die6b.visible = true;
+    die6c.visible = true;
+    die6d.visible = true;
+    die6e.visible = true;
+    die6f.visible = true;
+    die6g.visible = true;
 }
 
 @end
