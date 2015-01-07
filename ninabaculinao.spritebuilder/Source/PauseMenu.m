@@ -33,16 +33,20 @@
     } else if (![GameState sharedInstance].popUp) {
         [self toggleButtonsOn];
     }
-    if ([GameState sharedInstance].musicPaused) {
-        _musicCross.visible = true;
-    } else {
-        _musicCross.visible = false;
-    }
+//    if ([GameState sharedInstance].musicPaused) {
+//        _musicCross.visible = true;
+//    } else {
+//        _musicCross.visible = false;
+//    }
+    _musicCross.visible = [GameState sharedInstance].musicPaused;
+    _sfxCross.visible = [GameState sharedInstance].sfxPaused;
+    self.audio.effectsMuted = [GameState sharedInstance].sfxPaused;
 }
 
 - (void) toggleButtonsOff {
         _homeButton.enabled = false;
         _musicButton.enabled = false;
+        _sfxButton.enabled = false;
         _helpButton.enabled = false;
         _restartButton.enabled = false;
         _resumeButton.enabled = false;
@@ -51,6 +55,7 @@
 - (void) toggleButtonsOn {
         _homeButton.enabled = true;
         _musicButton.enabled = true;
+        _sfxButton.enabled = true;
         _helpButton.enabled = true;
         _restartButton.enabled = true;
         _resumeButton.enabled = true;
@@ -118,13 +123,9 @@
 //    }
 }
 
-//- (void) sound {
-//    if ([GameState sharedInstance].sfxPaused) {
-//        _sfxCross.visible = false;
-//    } else {
-//        _sfxCross.visible = true;
-//    }
-//}
+- (void) sfx {
+    [GameState sharedInstance].sfxPaused = ![GameState sharedInstance].sfxPaused;
+}
 
 // TODO: "Are you sure?" pop up
 - (void) home {

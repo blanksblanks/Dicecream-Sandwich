@@ -73,9 +73,9 @@ static NSString *const GAME_STATE_HIGHSCORE_KEY = @"GameStateHighScoreKey";
         self.currentTime = 0;
         NSNumber *levelsUnlocked = [[NSUserDefaults standardUserDefaults]objectForKey:GAME_STATE_LEVELSUNLOCKED_KEY];
         self.levelsUnlocked = [levelsUnlocked integerValue];
-        NSNumber *tutorialMode= [[NSUserDefaults standardUserDefaults]objectForKey:GAME_STATE_TUTORIALMODE_KEY];
+        NSNumber *tutorialMode = [[NSUserDefaults standardUserDefaults]objectForKey:GAME_STATE_TUTORIALMODE_KEY];
         self.tutorialMode = [tutorialMode boolValue];
-        
+        self.sfxPaused = false;
 //        if (![[NSUserDefaults standardUserDefaults]objectForKey:GAME_STATE_NAME_KEY]) {
 //            [[NSUserDefaults standardUserDefaults]setObject:@"" forKey:GAME_STATE_NAME_KEY];
 //            //[[NSUserDefaults standardUserDefaults]set:@"" forKey:GAME_STATE_NAME_KEY];
