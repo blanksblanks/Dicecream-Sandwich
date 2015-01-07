@@ -94,13 +94,13 @@
 //        _grid.audio.paused = false;
     }
     
-//    if ([GameState sharedInstance].musicPaused) {
-//        _grid.audio.bgPaused = TRUE;
-//    } else {
-//        _grid.audio.bgPaused = FALSE;
-//    }
-
-    _grid.audio.bgPaused = [GameState sharedInstance].musicPaused;
+    if ([GameState sharedInstance].musicPaused || _grid.paused) {
+        _grid.audio.bgPaused = TRUE;
+    } else {
+        _grid.audio.bgPaused = FALSE;
+    }
+    
+//    _grid.audio.bgPaused = [GameState sharedInstance].musicPaused;
     _grid.audio.effectsMuted = [GameState sharedInstance].sfxPaused;
     
     if (_grid.level == 20) { // goes into endless mode
