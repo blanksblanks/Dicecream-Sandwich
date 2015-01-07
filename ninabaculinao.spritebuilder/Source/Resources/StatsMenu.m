@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Apportable. All rights reserved.
 //
 
+#import "ABGameKitHelper.h"
 #import "StatsMenu.h"
 #import "GameEnd.h"
 #import "GameState.h"
@@ -80,22 +81,6 @@
 //    _timeLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].bestTime];
 }
 
-- (void) home {
-    [MGWU logEvent:@"home_pressed_in_gameend" withParams:nil];
-//    [_grid playPopSound];
-    [self playPopSound];
-    CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
-    [[CCDirector sharedDirector] replaceScene:mainScene];
-}
-
-- (void) restart {
-    [MGWU logEvent:@"restart_pressed_in_gameend" withParams:nil];
-//    [_grid playPopSound];
-    [self playPopSound];
-    CCScene *gamePlay = [CCBReader loadAsScene:@"Gameplay"];
-    [[CCDirector sharedDirector] replaceScene:gamePlay];
-}
-
 - (void) back {
 //    [_grid playPopSound];
     [self playPopSound];
@@ -106,6 +91,26 @@
     [self removeFromParent];
 }
 
+- (void) center {
+    [self playPopSound];
+    [[ABGameKitHelper sharedHelper] showLeaderboard:@"leaderboardId"];
+}
+
+- (void) home {
+    [MGWU logEvent:@"home_pressed_in_gameend" withParams:nil];
+    //    [_grid playPopSound];
+    [self playPopSound];
+    CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
+    [[CCDirector sharedDirector] replaceScene:mainScene];
+}
+
+- (void) restart {
+    [MGWU logEvent:@"restart_pressed_in_gameend" withParams:nil];
+    //    [_grid playPopSound];
+    [self playPopSound];
+    CCScene *gamePlay = [CCBReader loadAsScene:@"Gameplay"];
+    [[CCDirector sharedDirector] replaceScene:gamePlay];
+}
 
 - (void)playPopSound {
     OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];

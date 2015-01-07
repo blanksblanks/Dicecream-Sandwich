@@ -11,6 +11,7 @@
 #import "GameState.h"
 #import "GameEnd.h"
 #import "Gameplay.h"
+#import "ABGameKitHelper.h"
 
 @implementation Grid {
     
@@ -1469,6 +1470,7 @@ static const NSInteger GRID_COLUMNS = 6;
     [GameState sharedInstance].currentAllClear = self.allClear;
     
     if ([GameState sharedInstance].bestScore < self.score) {
+        [[ABGameKitHelper sharedHelper] reportScore:self.score forLeaderboard:@"leaderboardId"];
         [GameState sharedInstance].newHighScore = true;
         [GameState sharedInstance].bestScore = self.score;
         [GameState sharedInstance].bestLevel = self.level;

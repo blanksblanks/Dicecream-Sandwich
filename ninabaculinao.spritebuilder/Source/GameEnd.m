@@ -10,6 +10,7 @@
 #import "GameState.h"
 #import "StatsMenu.h"
 #import "Grid.h"
+#import "ABGameKitHelper.h"
 
 @implementation GameEnd {
     CCLabelTTF *_scoreLabel;
@@ -42,6 +43,11 @@
     statsMenu.position = ccp(0.5, 0.5);
     [self.parent addChild:statsMenu];
     [self removeFromParent];
+}
+
+- (void) center {
+    [self playPopSound];
+    [[ABGameKitHelper sharedHelper] showLeaderboard:@"leaderboardId"];
 }
 
 - (void) home {

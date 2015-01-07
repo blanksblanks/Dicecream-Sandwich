@@ -9,12 +9,14 @@
 #import "MainScene.h"
 #import "GameState.h"
 #import "HelpMenu.h"
+#import "ABGameKitHelper.h"
 
 @implementation MainScene {
     CCButton *_playButton;
     CCButton *_helpButton;
     CCButton *_creditsButton;
     CCButton *_levelButton;
+    CCButton *_gameCenterButton;
 //    CCButton *_tutorialButton;
 //    CCButton *_leaderboardButton;
 //    CCButton *_buttons[5];
@@ -54,6 +56,7 @@
     _helpButton.enabled = true;
     _creditsButton.enabled = true;
     _levelButton.enabled = true;
+    _gameCenterButton.enabled = true;
     animationManager.paused = false;
     
 //    _tutorialButton.enabled = true;
@@ -65,6 +68,7 @@
     _helpButton.enabled = false;
     _creditsButton.enabled = false;
     _levelButton.enabled = false;
+    _gameCenterButton.enabled = false;
     animationManager.paused = true;
     
 //    _tutorialButton.enabled = false;
@@ -125,6 +129,11 @@
     
     CCScene *levelScene = [CCBReader loadAsScene:@"LevelMenu"];
     [[CCDirector sharedDirector] replaceScene:levelScene];
+}
+
+- (void) gameCenter {
+    [self playPopSound];
+    [[ABGameKitHelper sharedHelper] showLeaderboard:@"leaderboardId"];
 }
 //
 //- (void) tutorial {
