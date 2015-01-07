@@ -221,6 +221,17 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>normalMapSpriteFrame</string>
+						<key>type</key>
+						<string>SpriteFrame</string>
+						<key>value</key>
+						<array>
+							<string></string>
+							<string></string>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
 						<string>color</string>
 						<key>type</key>
 						<string>Color3</string>
@@ -231,6 +242,14 @@
 							<real>1</real>
 							<real>1</real>
 						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>effects</string>
+						<key>type</key>
+						<string>EffectControl</string>
+						<key>value</key>
+						<array/>
 					</dict>
 				</array>
 			</dict>
@@ -384,6 +403,17 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>normalMapSpriteFrame</string>
+						<key>type</key>
+						<string>SpriteFrame</string>
+						<key>value</key>
+						<array>
+							<string></string>
+							<string></string>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
 						<string>color</string>
 						<key>type</key>
 						<string>Color3</string>
@@ -394,6 +424,14 @@
 							<real>1</real>
 							<real>1</real>
 						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>effects</string>
+						<key>type</key>
+						<string>EffectControl</string>
+						<key>value</key>
+						<array/>
 					</dict>
 				</array>
 				<key>seqExpanded</key>
@@ -2922,6 +2960,17 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>normalMapSpriteFrame</string>
+						<key>type</key>
+						<string>SpriteFrame</string>
+						<key>value</key>
+						<array>
+							<string></string>
+							<string></string>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
 						<string>color</string>
 						<key>type</key>
 						<string>Color3</string>
@@ -2932,6 +2981,14 @@
 							<real>1</real>
 							<real>1</real>
 						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>effects</string>
+						<key>type</key>
+						<string>EffectControl</string>
+						<key>value</key>
+						<array/>
 					</dict>
 				</array>
 				<key>seqExpanded</key>
@@ -2989,7 +3046,7 @@
 										<key>value</key>
 										<array>
 											<real>43</real>
-											<real>23</real>
+											<real>20</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -3333,7 +3390,7 @@
 										<key>value</key>
 										<array>
 											<real>140</real>
-											<real>23</real>
+											<real>20</real>
 											<integer>0</integer>
 											<integer>0</integer>
 											<integer>0</integer>
@@ -3382,7 +3439,7 @@
 										<key>value</key>
 										<array>
 											<real>40</real>
-											<real>46</real>
+											<real>40</real>
 											<integer>0</integer>
 											<integer>0</integer>
 										</array>

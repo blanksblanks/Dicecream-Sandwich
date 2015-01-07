@@ -153,19 +153,19 @@
 }
 
 
-- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+- (void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
     if (_grid.touchEnabled) {
         [_grid touchBegan:touch withEvent:event];
     }
 }
 
-- (void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
+- (void)touchMoved:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
     if (_grid.touchEnabled) {
         [_grid touchMoved:touch withEvent:event];
     }
 }
 
-- (void)touchEnded:(UITouch*)touch withEvent:(UIEvent *)event {
+- (void)touchEnded:(CCTouch*)touch withEvent:(CCTouchEvent *)event {
     if (_grid.touchEnabled) {
         [_grid touchEnded:touch withEvent:event];
     }

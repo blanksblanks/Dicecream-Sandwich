@@ -555,7 +555,7 @@ static const NSInteger GRID_COLUMNS = 6;
 
 # pragma mark - Touch handling - let player swipe left/right/down/rotate
 
-- (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
+- (void)touchBegan:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
     oldTouchPosition = [touch locationInNode:self];
     oldTouchTime = touch.timestamp;
 /*
@@ -579,7 +579,7 @@ static const NSInteger GRID_COLUMNS = 6;
     
 }
 
-- (void)touchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
+- (void)touchMoved:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
     CGPoint newTouchPosition = [touch locationInNode:self];
     float ydifference = oldTouchPosition.y - newTouchPosition.y;
     float xdifference = oldTouchPosition.x - newTouchPosition.x;
@@ -634,7 +634,7 @@ static const NSInteger GRID_COLUMNS = 6;
 //    }
 }
 
-- (void)touchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
+- (void)touchEnded:(CCTouch *)touch withEvent:(CCTouchEvent *)event {
     CGPoint newTouchPosition = [touch locationInNode:self];
     float ydifference = oldTouchPosition.y - newTouchPosition.y;
     float xdifference = oldTouchPosition.x - newTouchPosition.x;
