@@ -15,8 +15,11 @@
     CCButton *_homeButton;
     CCButton *_musicButton;
     CCButton *_helpButton;
+    CCButton *_sfxButton;
     CCButton *_restartButton;
     CCButton *_resumeButton;
+    CCButton *_musicCross;
+    CCButton *_sfxCross;
 }
 
 - (void)didLoadFromCCB {
@@ -29,6 +32,11 @@
         [self toggleButtonsOff];
     } else if (![GameState sharedInstance].popUp) {
         [self toggleButtonsOn];
+    }
+    if ([GameState sharedInstance].musicPaused) {
+        _musicCross.visible = true;
+    } else {
+        _musicCross.visible = false;
     }
 }
 
@@ -93,21 +101,30 @@
     
     [_grid.audio playEffect:@"bubble-pop1.wav"];
     
-// Four lines in one
-//    if (!self.audio.muted) {
-//        self.audio.muted = true;
-//    } else {
-//        self.audio.muted = false;
-//    }
-    
     [GameState sharedInstance].musicPaused = ![GameState sharedInstance].musicPaused;
+
+    // Four lines in one ^
+    //    if (!self.audio.muted) {
+    //        self.audio.muted = true;
+    //    } else {
+    //        self.audio.muted = false;
+    //    }
     
+
 //    if ([GameState sharedInstance].musicPaused) {
 //        _grid.audio.bgPaused = TRUE;
 //    } else {
 //        _grid.audio.bgPaused = FALSE;
 //    }
 }
+
+//- (void) sound {
+//    if ([GameState sharedInstance].sfxPaused) {
+//        _sfxCross.visible = false;
+//    } else {
+//        _sfxCross.visible = true;
+//    }
+//}
 
 // TODO: "Are you sure?" pop up
 - (void) home {

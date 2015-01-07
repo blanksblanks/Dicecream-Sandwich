@@ -98,14 +98,14 @@
     CCAnimationManager* animationManager2 = die2.animationManager;
     [animationManager runAnimationsForSequenceNamed:@"colorFill"];
     [animationManager2 runAnimationsForSequenceNamed:@"colorFill"];
-    CCParticleSystem *explosion1 = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
-    CCParticleSystem *explosion2 = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
-    explosion1.autoRemoveOnFinish = TRUE;
-    explosion2.autoRemoveOnFinish = TRUE;
-    explosion1.position = die1.position;
-    explosion2.position = die2.position;
-    [self addChild:explosion1];
-    [self addChild:explosion2];
+//    CCParticleSystem *explosion1 = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
+//    CCParticleSystem *explosion2 = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
+//    explosion1.autoRemoveOnFinish = TRUE;
+//    explosion2.autoRemoveOnFinish = TRUE;
+//    explosion1.position = die1.position;
+//    explosion2.position = die2.position;
+//    [self addChild:explosion1];
+//    [self addChild:explosion2];
     [self scheduleBlock:^(CCTimer *timer) {
         die1.visible = false;
         die2.visible = false;
