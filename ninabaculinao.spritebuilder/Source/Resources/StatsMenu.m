@@ -55,7 +55,7 @@
     _perfectMatchLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentPerfectMatches];
 //    _streakLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentStreak];
 //    NSLog(@"Current clear: %i", [GameState sharedInstance].currentAllClear);
-    _allClearLabel.string = [NSString stringWithFormat:@"%i", [GameState sharedInstance].currentAllClear];
+    _allClearLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentAllClear];
 //    NSString* _timeString = [Gameplay convertAndUpdateTime:[GameState sharedInstance].currentTime];
 //    _timeLabel.string = _timeString;
 //    _timeLabel.string = [NSString stringWithFormat:@"%f", [GameState sharedInstance].currentTime];
@@ -73,7 +73,7 @@
     _sixChainsLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].best6Chains];
     _perfectMatchLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].bestPerfectMatches];
 //    _streakLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].bestStreak];
-    _allClearLabel.string = [NSString stringWithFormat:@"%i", [GameState sharedInstance].bestAllClear];
+    _allClearLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].bestAllClear];
 //    NSLog(@"Best clear: %i", [GameState sharedInstance].bestAllClear);
 //    NSString* _timeString = [Gameplay convertAndUpdateTime:[GameState sharedInstance].bestTime];
 //    _timeLabel.string = _timeString;

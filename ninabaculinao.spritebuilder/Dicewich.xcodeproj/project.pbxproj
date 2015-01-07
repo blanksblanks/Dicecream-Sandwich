@@ -97,11 +97,15 @@
 		628A6BA31A095C3F00A496AC /* beats.wav in Resources */ = {isa = PBXBuildFile; fileRef = 628A6BA21A095C3F00A496AC /* beats.wav */; };
 		629019961994FA4F00ADF4DD /* PauseMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 629019951994FA4F00ADF4DD /* PauseMenu.m */; };
 		629AA3671977017C003FA512 /* CATchy.wav in Resources */ = {isa = PBXBuildFile; fileRef = 629AA3661977017C003FA512 /* CATchy.wav */; };
+		62A74A461A5CBA4F00FB0D65 /* ABGameKitHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 62A74A451A5CBA4E00FB0D65 /* ABGameKitHelper.m */; };
+		62A74A481A5CBB8600FB0D65 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62A74A471A5CBB8600FB0D65 /* GameKit.framework */; };
+		62A74A4A1A5CBC4E00FB0D65 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62A74A491A5CBC4E00FB0D65 /* CFNetwork.framework */; };
+		62A74A4C1A5CBC6600FB0D65 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62A74A4B1A5CBC6600FB0D65 /* Security.framework */; };
+		62A74A4E1A5CBF0000FB0D65 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62A74A4D1A5CBF0000FB0D65 /* StoreKit.framework */; };
 		62C89899199D9327007E6CD2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62C89898199D9327007E6CD2 /* Images.xcassets */; };
 		62C8989B199DA915007E6CD2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 62C8989A199DA915007E6CD2 /* libz.dylib */; };
 		62C8989D199DA920007E6CD2 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62C8989C199DA920007E6CD2 /* MessageUI.framework */; };
 		62C8989F199DA929007E6CD2 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62C8989E199DA929007E6CD2 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		62C898A1199DA93C007E6CD2 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62C898A0199DA93C007E6CD2 /* StoreKit.framework */; };
 		62C898A3199DA973007E6CD2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62C898A2199DA973007E6CD2 /* SystemConfiguration.framework */; };
 		62C898A5199DA98D007E6CD2 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62C898A4199DA98D007E6CD2 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		62C91DA919997D69008A6C9D /* GameEnd.m in Sources */ = {isa = PBXBuildFile; fileRef = 62C91DA819997D69008A6C9D /* GameEnd.m */; };
@@ -257,11 +261,16 @@
 		629019941994FA4F00ADF4DD /* PauseMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PauseMenu.h; path = Source/PauseMenu.h; sourceTree = "<group>"; };
 		629019951994FA4F00ADF4DD /* PauseMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PauseMenu.m; path = Source/PauseMenu.m; sourceTree = "<group>"; };
 		629AA3661977017C003FA512 /* CATchy.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = CATchy.wav; sourceTree = "<group>"; };
+		62A74A441A5CBA2E00FB0D65 /* ABGameKitHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ABGameKitHelper.h; path = Source/ABGameKitHelper.h; sourceTree = "<group>"; };
+		62A74A451A5CBA4E00FB0D65 /* ABGameKitHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ABGameKitHelper.m; path = Source/ABGameKitHelper.m; sourceTree = "<group>"; };
+		62A74A471A5CBB8600FB0D65 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		62A74A491A5CBC4E00FB0D65 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		62A74A4B1A5CBC6600FB0D65 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		62A74A4D1A5CBF0000FB0D65 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		62C89898199D9327007E6CD2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "Dicecream Sandwich/Images.xcassets"; sourceTree = SOURCE_ROOT; };
 		62C8989A199DA915007E6CD2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		62C8989C199DA920007E6CD2 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		62C8989E199DA929007E6CD2 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		62C898A0199DA93C007E6CD2 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		62C898A2199DA973007E6CD2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		62C898A4199DA98D007E6CD2 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
 		62C91DA719997D69008A6C9D /* GameEnd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameEnd.h; path = Source/GameEnd.h; sourceTree = "<group>"; };
@@ -315,9 +324,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				62C898A5199DA98D007E6CD2 /* Twitter.framework in Frameworks */,
 				62C898A3199DA973007E6CD2 /* SystemConfiguration.framework in Frameworks */,
-				62C898A1199DA93C007E6CD2 /* StoreKit.framework in Frameworks */,
+				62A74A4C1A5CBC6600FB0D65 /* Security.framework in Frameworks */,
+				62A74A4A1A5CBC4E00FB0D65 /* CFNetwork.framework in Frameworks */,
+				62A74A481A5CBB8600FB0D65 /* GameKit.framework in Frameworks */,
+				62C898A5199DA98D007E6CD2 /* Twitter.framework in Frameworks */,
 				62C8989F199DA929007E6CD2 /* Social.framework in Frameworks */,
 				62C8989D199DA920007E6CD2 /* MessageUI.framework in Frameworks */,
 				6273BC291A093B58001F0C71 /* mgwuSDK.framework in Frameworks */,
@@ -328,6 +339,7 @@
 				B77F1B3417B978D7009739AE /* OpenGLES.framework in Frameworks */,
 				B77F1B3617B978D7009739AE /* OpenAL.framework in Frameworks */,
 				B77F1B3817B978D7009739AE /* AudioToolbox.framework in Frameworks */,
+				62A74A4E1A5CBF0000FB0D65 /* StoreKit.framework in Frameworks */,
 				B77F1B3A17B978D7009739AE /* AVFoundation.framework in Frameworks */,
 				B77F1B3C17B978D7009739AE /* UIKit.framework in Frameworks */,
 				B77F1B3E17B978D7009739AE /* Foundation.framework in Frameworks */,
@@ -435,6 +447,8 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				62A74A441A5CBA2E00FB0D65 /* ABGameKitHelper.h */,
+				62A74A451A5CBA4E00FB0D65 /* ABGameKitHelper.m */,
 				B737893D1807617C0076A88C /* AppDelegate.h */,
 				B737893E1807617C0076A88C /* AppDelegate.m */,
 				624577E419955C700017D267 /* GameState.h */,
@@ -522,10 +536,13 @@
 		B77F1B3017B978D7009739AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				62A74A4D1A5CBF0000FB0D65 /* StoreKit.framework */,
+				62A74A4B1A5CBC6600FB0D65 /* Security.framework */,
+				62A74A491A5CBC4E00FB0D65 /* CFNetwork.framework */,
+				62A74A471A5CBB8600FB0D65 /* GameKit.framework */,
 				6273BBE11A093B58001F0C71 /* mgwuSDK.embeddedframework */,
 				62C898A4199DA98D007E6CD2 /* Twitter.framework */,
 				62C898A2199DA973007E6CD2 /* SystemConfiguration.framework */,
-				62C898A0199DA93C007E6CD2 /* StoreKit.framework */,
 				62C8989E199DA929007E6CD2 /* Social.framework */,
 				62C8989C199DA920007E6CD2 /* MessageUI.framework */,
 				62C8989A199DA915007E6CD2 /* libz.dylib */,
@@ -608,10 +625,13 @@
 				ORGANIZATIONNAME = Apportable;
 				TargetAttributes = {
 					B77F1B2D17B978D7009739AE = {
-						DevelopmentTeam = SBVP8ED765;
+						DevelopmentTeam = ZJ2APTZC7T;
 						SystemCapabilities = {
 							com.apple.GameCenter = {
-								enabled = 0;
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
 							};
 						};
 					};
@@ -789,6 +809,7 @@
 				6264683D19A6C7B800E4FAE2 /* ConfirmMenu.m in Sources */,
 				62C91DAD1999F4D9008A6C9D /* StatsMenu.m in Sources */,
 				624577E619955C700017D267 /* GameState.m in Sources */,
+				62A74A461A5CBA4F00FB0D65 /* ABGameKitHelper.m in Sources */,
 				623F5D6C196F0C7000DC3EA5 /* Gameplay.m in Sources */,
 				62EF7F31198814DC001BF598 /* Chain.m in Sources */,
 				628A1ACA1A09688D0083A6FA /* HelpMenu.m in Sources */,
@@ -906,7 +927,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = Dicewich;
-				PROVISIONING_PROFILE = "6E1998EB-320D-4966-B4C9-853B315A4F94";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -943,7 +964,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = Dicewich;
-				PROVISIONING_PROFILE = "6E1998EB-320D-4966-B4C9-853B315A4F94";
+				PROVISIONING_PROFILE = "";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

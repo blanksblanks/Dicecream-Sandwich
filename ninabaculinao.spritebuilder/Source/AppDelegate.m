@@ -27,6 +27,7 @@
 
 #import "AppDelegate.h"
 #import "CCBuilderReader.h"
+#import "ABGameKitHelper.h"
 
 //#import "DDASLLogger.h"
 //#import "DDTTYLogger.h"
@@ -99,6 +100,7 @@
 
 - (CCScene*) startScene
 {
+    [ABGameKitHelper sharedHelper];
     return [CCBReader loadAsScene:@"MainScene"];
 }
 
