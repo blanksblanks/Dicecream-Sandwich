@@ -52,6 +52,7 @@
             _help2.visible = true;
             [self scheduleBlock:^(CCTimer *timer) {
                 [self clearDie1:die1a andDie2:die1b];
+                [self respawn1];
             } delay:1.00];
             break;
         }
@@ -61,6 +62,7 @@
             [self showInnerDice];
             [self scheduleBlock:^(CCTimer *timer) {
                 [self clearDie1:die6a andDie2:die6h];
+                [self respawn2];
             } delay:1.00];
             break;
         }
@@ -113,7 +115,7 @@
     } delay:2.00];
 }
 
--(void)hideInnerDice{
+-(void)hideInnerDice {
         die3.visible = false;
         die6b.visible = false;
         die6c.visible = false;
@@ -123,13 +125,42 @@
         die6g.visible = false;
 }
 
--(void)showInnerDice{
+-(void)showInnerDice {
     die6b.visible = true;
     die6c.visible = true;
     die6d.visible = true;
     die6e.visible = true;
     die6f.visible = true;
     die6g.visible = true;
+}
+
+-(void)respawn1 {
+    [self scheduleBlock:^(CCTimer *timer) {
+        CCAnimationManager* animationManager = die1a.animationManager;
+        CCAnimationManager* animationManager2 = die1b.animationManager;
+        [animationManager runAnimationsForSequenceNamed:@"Default Timeline"];
+        [animationManager2 runAnimationsForSequenceNamed:@"Default Timeline"];
+        die1a.visible = true;
+        die3.visible = true;
+        die1b.visible = true;
+    } delay:3.50];
+}
+
+-(void)respawn2 {
+    [self scheduleBlock:^(CCTimer *timer) {
+        CCAnimationManager* animationManager = die6a.animationManager;
+        CCAnimationManager* animationManager2 = die6h.animationManager;
+        [animationManager runAnimationsForSequenceNamed:@"Default Timeline"];
+        [animationManager2 runAnimationsForSequenceNamed:@"Default Timeline"];
+        die6a.visible = true;
+        die6b.visible = true;
+        die6c.visible = true;
+        die6d.visible = true;
+        die6e.visible = true;
+        die6f.visible = true;
+        die6g.visible = true;
+        die6h.visible = true;
+    } delay:3.50];
 }
 
 @end

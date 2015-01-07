@@ -10,7 +10,7 @@
 		<false/>
 	</dict>
 	<key>UUID</key>
-	<integer>104</integer>
+	<integer>105</integer>
 	<key>centeredOrigin</key>
 	<false/>
 	<key>currentResolution</key>
@@ -1782,6 +1782,17 @@
 								</array>
 							</dict>
 							<dict>
+								<key>name</key>
+								<string>normalMapSpriteFrame</string>
+								<key>type</key>
+								<string>SpriteFrame</string>
+								<key>value</key>
+								<array>
+									<string></string>
+									<string></string>
+								</array>
+							</dict>
+							<dict>
 								<key>baseValue</key>
 								<real>1</real>
 								<key>name</key>
@@ -1803,6 +1814,14 @@
 									<real>1</real>
 									<real>1</real>
 								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>effects</string>
+								<key>type</key>
+								<string>EffectControl</string>
+								<key>value</key>
+								<array/>
 							</dict>
 						</array>
 						<key>seqExpanded</key>
@@ -2286,6 +2305,17 @@
 								</array>
 							</dict>
 							<dict>
+								<key>name</key>
+								<string>normalMapSpriteFrame</string>
+								<key>type</key>
+								<string>SpriteFrame</string>
+								<key>value</key>
+								<array>
+									<string></string>
+									<string></string>
+								</array>
+							</dict>
+							<dict>
 								<key>baseValue</key>
 								<real>1</real>
 								<key>name</key>
@@ -2307,6 +2337,14 @@
 									<real>1</real>
 									<real>1</real>
 								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>effects</string>
+								<key>type</key>
+								<string>EffectControl</string>
+								<key>value</key>
+								<array/>
 							</dict>
 						</array>
 						<key>seqExpanded</key>
@@ -2708,6 +2746,17 @@
 								</array>
 							</dict>
 							<dict>
+								<key>name</key>
+								<string>normalMapSpriteFrame</string>
+								<key>type</key>
+								<string>SpriteFrame</string>
+								<key>value</key>
+								<array>
+									<string></string>
+									<string></string>
+								</array>
+							</dict>
+							<dict>
 								<key>baseValue</key>
 								<real>1</real>
 								<key>name</key>
@@ -2729,6 +2778,14 @@
 									<real>1</real>
 									<real>1</real>
 								</array>
+							</dict>
+							<dict>
+								<key>name</key>
+								<string>effects</string>
+								<key>type</key>
+								<string>EffectControl</string>
+								<key>value</key>
+								<array/>
 							</dict>
 						</array>
 						<key>seqExpanded</key>
@@ -2947,6 +3004,8 @@ to clear dice!</string>
 				<string></string>
 				<key>displayName</key>
 				<string>help1</string>
+				<key>hidden</key>
+				<true/>
 				<key>memberVarAssignmentName</key>
 				<string>_help1</string>
 				<key>memberVarAssignmentType</key>
@@ -4495,8 +4554,6 @@ both 1</string>
 				<string></string>
 				<key>displayName</key>
 				<string>help2</string>
-				<key>hidden</key>
-				<true/>
 				<key>memberVarAssignmentName</key>
 				<string>_help2</string>
 				<key>memberVarAssignmentType</key>
@@ -7074,8 +7131,6 @@ Time’s ticking...</string>
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
