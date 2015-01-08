@@ -111,6 +111,10 @@
 #pragma mark - Leaderboard
 -(void) reportScore:(long long)aScore forLeaderboard:(NSString*)leaderboardId
 {
+    if (self.authenticated == NO) {
+        [self authenticatePlayer];
+    }
+    
     GKScore *score = [[GKScore alloc] initWithCategory:leaderboardId];
     score.value = aScore;
     
@@ -135,6 +139,10 @@
 {
     GKLeaderboardViewController *viewController = [GKLeaderboardViewController new];
     viewController.leaderboardDelegate = self;
+    if (self.authenticated == NO) {
+        [self authenticatePlayer];
+    }
+    
     if (leaderboardId)
     {
         viewController.category = leaderboardId;

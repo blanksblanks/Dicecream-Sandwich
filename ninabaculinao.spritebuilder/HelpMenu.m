@@ -112,7 +112,7 @@
         die1.visible = false;
         die2.visible = false;
         [self hideInnerDice];
-    } delay:2.00];
+    } delay:1.00];
 }
 
 -(void)hideInnerDice {
@@ -143,7 +143,7 @@
         die1a.visible = true;
         die3.visible = true;
         die1b.visible = true;
-    } delay:3.50];
+    } delay:2.00];
 }
 
 -(void)respawn2 {
@@ -160,7 +160,7 @@
         die6f.visible = true;
         die6g.visible = true;
         die6h.visible = true;
-    } delay:3.50];
+    } delay:2.00];
 }
 
 @end
