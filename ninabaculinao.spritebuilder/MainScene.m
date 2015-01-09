@@ -34,6 +34,7 @@
     [GameState sharedInstance].popUp = FALSE;
     playPressed = FALSE;
     [self toggleButtonsOn];
+    [[ABGameKitHelper sharedHelper] reportScore:[GameState sharedInstance].bestScore forLeaderboard:@"Score"];
 }
 
 - (void) update:(CCTime) delta {
@@ -133,7 +134,7 @@
 
 - (void) gameCenter {
     [self playPopSound];
-    [[ABGameKitHelper sharedHelper] showLeaderboard:@"leaderboardId"];
+    [[ABGameKitHelper sharedHelper] showLeaderboard:@"Score"];
 }
 //
 //- (void) tutorial {

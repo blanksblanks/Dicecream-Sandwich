@@ -44,7 +44,9 @@
 //    levels[19].enabled = false;
 //    _level19.enabled = false;
     for (NSInteger j = [GameState sharedInstance].levelsUnlocked; j < 20; j++) {
-        levels[j].enabled = false;
+        if (j > 0) {
+            levels[j].enabled = false;
+        }
     }
 }
 
