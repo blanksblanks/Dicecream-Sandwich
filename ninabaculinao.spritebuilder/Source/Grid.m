@@ -84,7 +84,7 @@ static const NSInteger GRID_COLUMNS = 6;
     
     // Begin music by accessing audio object and playing background sound
     self.audio = [OALSimpleAudio sharedInstance];
-    [self.audio playBg:@"CATchy.wav" loop:TRUE];
+    [self.audio playBg:@"CATchy.wav" volume:0.8 pan:0.0 loop:TRUE];
     
 //    if ([GameState sharedInstance].musicPaused) {
 //        [self.audio bgPaused];
@@ -593,9 +593,9 @@ static const NSInteger GRID_COLUMNS = 6;
         column = 0;
     }
     
-    if ((xdifference > 0.5*(_tileWidth))) {
+    if ((xdifference > 0.5*(_tileWidth)) && (ydifference < 0.2*(self.contentSize.height))) {
         [self swipeLeftTo:column];
-    } else if ((xdifference < -0.5*(_tileWidth))) {
+    } else if ((xdifference < -0.5*(_tileWidth))&& (ydifference < 0.2*(self.contentSize.height))) {
         [self swipeRightTo:column];
     } else if ((ydifference > 0.2*(self.contentSize.height)) && (newTouchPosition.y < _currentDie1.position.y) && (newTouchPosition.y < _currentDie2.position.y)) {
             _dropInterval = 0.03;

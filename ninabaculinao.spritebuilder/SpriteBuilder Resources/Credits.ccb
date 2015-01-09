@@ -377,6 +377,17 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>normalMapSpriteFrame</string>
+						<key>type</key>
+						<string>SpriteFrame</string>
+						<key>value</key>
+						<array>
+							<string></string>
+							<string></string>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
 						<string>color</string>
 						<key>type</key>
 						<string>Color3</string>
@@ -387,6 +398,14 @@
 							<real>1</real>
 							<real>1</real>
 						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>effects</string>
+						<key>type</key>
+						<string>EffectControl</string>
+						<key>value</key>
+						<array/>
 					</dict>
 				</array>
 				<key>seqExpanded</key>
@@ -874,6 +893,7 @@ SFX from freesound.org:
    level_up_3note2 by jivatma07
    water_droplet_bubble_pop1 by CGEffex
    feeeelllgood.wav by Matthus
+   jump_1.wav by soundnimja
 
 BGM “CATchy” by DropThatCat</string>
 									<false/>
