@@ -8833,8 +8833,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>126.40000152587891</real>
-							<real>226.00001525878906</real>
+							<real>160</real>
+							<real>93</real>
 							<integer>0</integer>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -8847,7 +8847,7 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
+							<real>0.5</real>
 							<real>0.5</real>
 						</array>
 					</dict>
@@ -8871,7 +8871,7 @@
 						<string>Text</string>
 						<key>value</key>
 						<array>
-							<string>SELECT   LEVEL</string>
+							<string>SELECT LEVEL</string>
 							<false/>
 						</array>
 					</dict>
@@ -8881,7 +8881,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Fonts/DimboRegular.ttf</string>
+						<string>GillSans-Bold</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -8909,9 +8909,9 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>0.90196079015731812</real>
+							<real>0.90196079015731812</real>
+							<real>0.90196079015731812</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -8951,9 +8951,9 @@
 						<string>Color4</string>
 						<key>value</key>
 						<array>
-							<real>0.40000000596046448</real>
-							<real>1</real>
-							<real>0.80000001192092896</real>
+							<real>0.74415093660354614</real>
+							<real>0.37494739890098572</real>
+							<real>0.0066734505817294121</real>
 							<real>1</real>
 						</array>
 					</dict>
@@ -8964,10 +8964,10 @@
 						<string>Color4</string>
 						<key>value</key>
 						<array>
+							<real>0.50196081399917603</real>
+							<real>0.25098040699958801</real>
 							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
-							<real>0.0</real>
+							<real>1</real>
 						</array>
 					</dict>
 					<dict>
@@ -8977,7 +8977,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>1</real>
+							<real>0.5</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -9001,7 +9001,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
+							<real>1</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -9020,8 +9020,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
