@@ -135,7 +135,8 @@
 
     [GameState sharedInstance].tutorialMode = false;
     _grid.touchEnabled = false;
-    [_grid.audio stopEverything ];
+    [_grid.audio stopEverything];
+//    [_grid.audio playBg:@"Afterglow.wav" volume:0.8 pan:0.0 loop:TRUE];
 
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];

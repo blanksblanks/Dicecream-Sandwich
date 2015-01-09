@@ -30,6 +30,7 @@
 -(void)didLoadFromCCB {
     animationManager = self.animationManager;
     audio = [OALSimpleAudio sharedInstance];
+    [audio playBg:@"Afterglow.wav" volume:0.8 pan:0.0 loop:TRUE];
 //    [audio playBg:@"beats.wav" loop:FALSE];
     [GameState sharedInstance].popUp = FALSE;
     playPressed = FALSE;
@@ -81,7 +82,7 @@
     
     playPressed = true;
     [self playPopSound];
-
+    [audio stopBg];
     
 //    [animationManager runAnimationsForSequenceNamed:@"sandwichSpinAway"];
 
