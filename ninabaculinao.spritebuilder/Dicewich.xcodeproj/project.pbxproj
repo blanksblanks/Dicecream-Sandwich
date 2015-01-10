@@ -11,7 +11,6 @@
 		623F5D6C196F0C7000DC3EA5 /* Gameplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 623F5D6B196F0C7000DC3EA5 /* Gameplay.m */; };
 		623F5D71196F128100DC3EA5 /* Dice.m in Sources */ = {isa = PBXBuildFile; fileRef = 623F5D70196F128100DC3EA5 /* Dice.m */; };
 		624577E619955C700017D267 /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = 624577E519955C700017D267 /* GameState.m */; };
-		62626A6419B810B20092807A /* Leaderboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 62626A6319B810B20092807A /* Leaderboard.m */; };
 		6264682A199EAB8E00E4FAE2 /* click2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 62646827199EAB8E00E4FAE2 /* click2.wav */; };
 		6264682B199EAB8E00E4FAE2 /* pop5.wav in Resources */ = {isa = PBXBuildFile; fileRef = 62646828199EAB8E00E4FAE2 /* pop5.wav */; };
 		6264682C199EAB8E00E4FAE2 /* success.wav in Resources */ = {isa = PBXBuildFile; fileRef = 62646829199EAB8E00E4FAE2 /* success.wav */; };
@@ -20,7 +19,6 @@
 		62646834199F9C8A00E4FAE2 /* 8-bit-boing.wav in Resources */ = {isa = PBXBuildFile; fileRef = 62646833199F9C8A00E4FAE2 /* 8-bit-boing.wav */; };
 		62646838199F9CB000E4FAE2 /* levelUp.wav in Resources */ = {isa = PBXBuildFile; fileRef = 62646837199F9CB000E4FAE2 /* levelUp.wav */; };
 		6264683A19A1450C00E4FAE2 /* oneBlastWhistle.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6264683919A1450C00E4FAE2 /* oneBlastWhistle.wav */; };
-		6264683D19A6C7B800E4FAE2 /* ConfirmMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 6264683C19A6C7B800E4FAE2 /* ConfirmMenu.m */; };
 		6273BC291A093B58001F0C71 /* mgwuSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6273BBE21A093B58001F0C71 /* mgwuSDK.framework */; };
 		6273BC2A1A093B58001F0C71 /* aqua.png in Resources */ = {isa = PBXBuildFile; fileRef = 6273BBE41A093B58001F0C71 /* aqua.png */; };
 		6273BC2B1A093B58001F0C71 /* bluechatbubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 6273BBE51A093B58001F0C71 /* bluechatbubble.png */; };
@@ -192,8 +190,6 @@
 		623F5D70196F128100DC3EA5 /* Dice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Dice.m; path = Source/Dice.m; sourceTree = "<group>"; };
 		624577E419955C700017D267 /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameState.h; path = Source/GameState.h; sourceTree = "<group>"; };
 		624577E519955C700017D267 /* GameState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GameState.m; path = Source/GameState.m; sourceTree = "<group>"; };
-		62626A6219B810B20092807A /* Leaderboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Leaderboard.h; path = Source/Leaderboard.h; sourceTree = "<group>"; };
-		62626A6319B810B20092807A /* Leaderboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Leaderboard.m; path = Source/Leaderboard.m; sourceTree = "<group>"; };
 		62646827199EAB8E00E4FAE2 /* click2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click2.wav; sourceTree = "<group>"; };
 		62646828199EAB8E00E4FAE2 /* pop5.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pop5.wav; sourceTree = "<group>"; };
 		62646829199EAB8E00E4FAE2 /* success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = success.wav; sourceTree = "<group>"; };
@@ -203,8 +199,6 @@
 		62646833199F9C8A00E4FAE2 /* 8-bit-boing.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "8-bit-boing.wav"; sourceTree = "<group>"; };
 		62646837199F9CB000E4FAE2 /* levelUp.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = levelUp.wav; sourceTree = "<group>"; };
 		6264683919A1450C00E4FAE2 /* oneBlastWhistle.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = oneBlastWhistle.wav; sourceTree = "<group>"; };
-		6264683B19A6C7B800E4FAE2 /* ConfirmMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfirmMenu.h; path = Source/ConfirmMenu.h; sourceTree = "<group>"; };
-		6264683C19A6C7B800E4FAE2 /* ConfirmMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfirmMenu.m; path = Source/ConfirmMenu.m; sourceTree = "<group>"; };
 		6273BBE21A093B58001F0C71 /* mgwuSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = mgwuSDK.framework; sourceTree = "<group>"; };
 		6273BBE41A093B58001F0C71 /* aqua.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aqua.png; sourceTree = "<group>"; };
 		6273BBE51A093B58001F0C71 /* bluechatbubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bluechatbubble.png; sourceTree = "<group>"; };
@@ -482,12 +476,8 @@
 				623F5D6B196F0C7000DC3EA5 /* Gameplay.m */,
 				6264682E199EC55C00E4FAE2 /* Credits.h */,
 				6264682F199EC55C00E4FAE2 /* Credits.m */,
-				6264683B19A6C7B800E4FAE2 /* ConfirmMenu.h */,
-				6264683C19A6C7B800E4FAE2 /* ConfirmMenu.m */,
 				62EE9B9119B622FA00935BA2 /* LevelMenu.h */,
 				62EE9B9219B622FA00935BA2 /* LevelMenu.m */,
-				62626A6219B810B20092807A /* Leaderboard.h */,
-				62626A6319B810B20092807A /* Leaderboard.m */,
 				623F5D5E196EDB0400DC3EA5 /* Grid.h */,
 				623F5D5F196EDB0400DC3EA5 /* Grid.m */,
 				623F5D6F196F128100DC3EA5 /* Dice.h */,
@@ -855,14 +845,12 @@
 				62EE9B9319B622FA00935BA2 /* LevelMenu.m in Sources */,
 				B737893F1807617C0076A88C /* AppDelegate.m in Sources */,
 				62C91DA919997D69008A6C9D /* GameEnd.m in Sources */,
-				6264683D19A6C7B800E4FAE2 /* ConfirmMenu.m in Sources */,
 				62C91DAD1999F4D9008A6C9D /* StatsMenu.m in Sources */,
 				624577E619955C700017D267 /* GameState.m in Sources */,
 				62A74A461A5CBA4F00FB0D65 /* ABGameKitHelper.m in Sources */,
 				623F5D6C196F0C7000DC3EA5 /* Gameplay.m in Sources */,
 				62EF7F31198814DC001BF598 /* Chain.m in Sources */,
 				628A1ACA1A09688D0083A6FA /* HelpMenu.m in Sources */,
-				62626A6419B810B20092807A /* Leaderboard.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
 				623F5D60196EDB0400DC3EA5 /* Grid.m in Sources */,
 			);
