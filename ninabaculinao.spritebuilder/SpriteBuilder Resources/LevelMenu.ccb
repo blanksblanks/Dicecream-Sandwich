@@ -8823,7 +8823,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>GillSans-Bold</string>
+						<string>Fonts/RumRaisin-Regular.ttf</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -8832,7 +8832,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>25</real>
+							<real>37</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -8919,7 +8919,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
+							<real>1.5</real>
 							<integer>0</integer>
 						</array>
 					</dict>

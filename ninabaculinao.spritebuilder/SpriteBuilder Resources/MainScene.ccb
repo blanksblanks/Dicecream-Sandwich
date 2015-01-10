@@ -172,7 +172,7 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>86</real>
+							<real>88</real>
 							<real>306.284423828125</real>
 							<integer>0</integer>
 							<integer>0</integer>
@@ -201,6 +201,8 @@
 						<string>Fortune.ccb</string>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
@@ -316,128 +318,6 @@
 						<array/>
 					</dict>
 				</array>
-			</dict>
-			<dict>
-				<key>UUID</key>
-				<integer>253</integer>
-				<key>animatedProperties</key>
-				<dict>
-					<key>1</key>
-					<dict>
-						<key>visible</key>
-						<dict>
-							<key>keyframes</key>
-							<array>
-								<dict>
-									<key>easing</key>
-									<dict>
-										<key>type</key>
-										<integer>0</integer>
-									</dict>
-									<key>name</key>
-									<string>visible</string>
-									<key>time</key>
-									<real>1.5</real>
-									<key>type</key>
-									<integer>1</integer>
-									<key>value</key>
-									<true/>
-								</dict>
-								<dict>
-									<key>easing</key>
-									<dict>
-										<key>type</key>
-										<integer>0</integer>
-									</dict>
-									<key>name</key>
-									<string>visible</string>
-									<key>time</key>
-									<real>2.3333332538604736</real>
-									<key>type</key>
-									<integer>1</integer>
-									<key>value</key>
-									<true/>
-								</dict>
-							</array>
-							<key>name</key>
-							<string>visible</string>
-							<key>type</key>
-							<integer>1</integer>
-						</dict>
-					</dict>
-				</dict>
-				<key>baseClass</key>
-				<string>CCBFile</string>
-				<key>children</key>
-				<array/>
-				<key>customClass</key>
-				<string></string>
-				<key>displayName</key>
-				<string>Fortune</string>
-				<key>memberVarAssignmentName</key>
-				<string></string>
-				<key>memberVarAssignmentType</key>
-				<integer>1</integer>
-				<key>properties</key>
-				<array>
-					<dict>
-						<key>baseValue</key>
-						<integer>1</integer>
-						<key>name</key>
-						<string>visible</string>
-						<key>type</key>
-						<string>Check</string>
-						<key>value</key>
-						<false/>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>name</string>
-						<key>type</key>
-						<string>StringSimple</string>
-						<key>value</key>
-						<string></string>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>position</string>
-						<key>type</key>
-						<string>Position</string>
-						<key>value</key>
-						<array>
-							<real>63.66815185546875</real>
-							<real>366.94073486328125</real>
-							<integer>3</integer>
-							<integer>0</integer>
-							<integer>0</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>scale</string>
-						<key>type</key>
-						<string>ScaleLock</string>
-						<key>value</key>
-						<array>
-							<real>0.34999999403953552</real>
-							<real>0.34999999403953552</real>
-							<true/>
-							<integer>0</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>ccbFile</string>
-						<key>type</key>
-						<string>CCBFile</string>
-						<key>value</key>
-						<string>Fortune.ccb</string>
-					</dict>
-				</array>
-				<key>selected</key>
-				<true/>
-				<key>seqExpanded</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>UUID</key>
