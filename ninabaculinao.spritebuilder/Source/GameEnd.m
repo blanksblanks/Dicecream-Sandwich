@@ -19,7 +19,6 @@
     CCLabelTTF *_chainsLabel;
     CCLabelTTF *_timeLabel;
     CCLabelTTF *_endMessage;
-    
     //TODO: custom game messages
 }
 
@@ -35,8 +34,6 @@
 
 - (void) stats {
     [MGWU logEvent:@"stats_pressed_in_gameend" withParams:nil];
-//    [_grid playPopSound];
-//    [_grid.audio playEffect:@"bubble-pop1.wav"];
     [self playPopSound];
     StatsMenu *statsMenu = (StatsMenu*) [CCBReader load:@"StatsMenu"];
     [statsMenu setPositionType:CCPositionTypeNormalized];
@@ -52,8 +49,6 @@
 
 - (void) home {
     [MGWU logEvent:@"home_pressed_in_gameend" withParams:nil];
-//    [_grid playPopSound];
-//    [_grid.audio playEffect:@"bubble-pop1.wav"];
     [self playPopSound];
     [self removeFromParent];
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
@@ -62,8 +57,6 @@
 
 - (void) restart {
     [MGWU logEvent:@"restart_pressed_in_gameend" withParams:nil];
-//    [_grid playPopSound];
-//    [_grid.audio playEffect:@"bubble-pop1.wav"];
     [self playPopSound];
     [self removeFromParent];
     CCScene *gamePlay = [CCBReader loadAsScene:@"Gameplay"];

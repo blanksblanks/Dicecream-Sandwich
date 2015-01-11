@@ -33,11 +33,6 @@
     } else if (![GameState sharedInstance].popUp) {
         [self toggleButtonsOn];
     }
-//    if ([GameState sharedInstance].musicPaused) {
-//        _musicCross.visible = true;
-//    } else {
-//        _musicCross.visible = false;
-//    }
     _musicCross.visible = [GameState sharedInstance].musicPaused;
     _sfxCross.visible = [GameState sharedInstance].sfxPaused;
     self.audio.effectsMuted = [GameState sharedInstance].sfxPaused;
@@ -65,11 +60,9 @@
 - (void) resume {
     [MGWU logEvent:@"resume_pressed" withParams:nil];
     
-//    [_grid.audio playEffect:@"bubble-pop1.wav"];
     [_grid playPopSound];
     
     [self.grid unpause];
-//    self.audio.paused = FALSE;
     CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.2f position:ccp(0, 25)];
     [self runAction:moveTo];
     
@@ -105,22 +98,7 @@
     [MGWU logEvent:@"music_toggled" withParams:nil];
     
     [_grid.audio playEffect:@"bubble-pop1.wav"];
-    
     [GameState sharedInstance].musicPaused = ![GameState sharedInstance].musicPaused;
-
-    // Four lines in one ^
-    //    if (!self.audio.muted) {
-    //        self.audio.muted = true;
-    //    } else {
-    //        self.audio.muted = false;
-    //    }
-    
-
-//    if ([GameState sharedInstance].musicPaused) {
-//        _grid.audio.bgPaused = TRUE;
-//    } else {
-//        _grid.audio.bgPaused = FALSE;
-//    }
 }
 
 - (void) sfx {
@@ -136,8 +114,6 @@
     [GameState sharedInstance].tutorialMode = false;
     _grid.touchEnabled = false;
     [_grid.audio stopEverything];
-//    [_grid.audio playBg:@"Afterglow.wav" volume:0.8 pan:0.0 loop:TRUE];
-
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];
 }

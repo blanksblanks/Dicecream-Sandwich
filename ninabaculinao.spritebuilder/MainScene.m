@@ -70,10 +70,10 @@
 //    [self sandwichSpinAway];
     [self performSelector:@selector(sandwichSpinAway)];
     
-//    [self scheduleBlock:^(CCTimer *timer) {
+    [self scheduleBlock:^(CCTimer *timer) {
         CCScene *gameplayScene = [CCBReader loadAsScene:@"Gameplay"];
         [[CCDirector sharedDirector] replaceScene:gameplayScene];
-//    } delay:0.2];
+    } delay:1.0];
 }
 
 # pragma mark - Button selectors
@@ -131,8 +131,8 @@
 # pragma mark - Sound and animation
 
 - (void)sandwichSpinAway {
-    CCAnimationManager* sanimationManager = sandwich.animationManager;
-    [sanimationManager runAnimationsForSequenceNamed:@"spinAway"];
+    CCAnimationManager* am = sandwich.animationManager;
+    [am runAnimationsForSequenceNamed:@"spinAway"];
     [audio preloadEffect:@"8-bit-boing.wav"];
     [audio playEffect:@"8-bit-boing.wav"];
 }

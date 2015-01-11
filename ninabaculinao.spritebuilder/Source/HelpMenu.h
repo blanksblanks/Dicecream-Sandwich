@@ -10,15 +10,4 @@
 
 @interface HelpMenu : CCNode
 
-//typedef NS_ENUM(NSInteger, HelpStage) {
-//    HelpStageStart,
-//    HelpStageCont,
-//    HelpStageEnd,
-//};
-
-//- (void) cancel;
-//- (void) next;
-
-//@property (nonatomic, assign) NSInteger step;
-
 @end

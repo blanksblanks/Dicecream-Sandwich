@@ -16,7 +16,6 @@
     CCNode *_help1;
     CCNode *_help2;
     CCNode *_help3;
-    
 // TODO: Add _ to var names here and in SB
     Dice *die1a;
     Dice *die3;
@@ -78,10 +77,7 @@
 -(void)cancel {
     [self removeFromParent];
     [GameState sharedInstance].popUp = FALSE;
-    
-//    if (!_help3.visible) {
-        [self playPopSound];
-//    }
+    [self playPopSound];
 }
 
 -(void)playPopSound {
@@ -100,14 +96,6 @@
     CCAnimationManager* animationManager2 = die2.animationManager;
     [animationManager runAnimationsForSequenceNamed:@"colorFill"];
     [animationManager2 runAnimationsForSequenceNamed:@"colorFill"];
-//    CCParticleSystem *explosion1 = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
-//    CCParticleSystem *explosion2 = (CCParticleSystem *)[CCBReader load:@"Sparkle"];
-//    explosion1.autoRemoveOnFinish = TRUE;
-//    explosion2.autoRemoveOnFinish = TRUE;
-//    explosion1.position = die1.position;
-//    explosion2.position = die2.position;
-//    [self addChild:explosion1];
-//    [self addChild:explosion2];
     [self scheduleBlock:^(CCTimer *timer) {
         die1.visible = false;
         die2.visible = false;
