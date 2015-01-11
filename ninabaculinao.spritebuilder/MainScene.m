@@ -10,6 +10,7 @@
 #import "GameState.h"
 #import "HelpMenu.h"
 #import "ABGameKitHelper.h"
+#import "Icecream.h"
 
 @implementation MainScene {
     CCButton *_playButton;
@@ -17,21 +18,17 @@
     CCButton *_creditsButton;
     CCButton *_levelButton;
     CCButton *_gameCenterButton;
-//    CCButton *_tutorialButton;
-//    CCButton *_leaderboardButton;
-//    CCButton *_buttons[5];
-//    NSArray *_buttonsArray;
     NSInteger count;
     BOOL playPressed;
     OALSimpleAudio *audio;
     CCAnimationManager* animationManager;
+    Icecream* sandwich;
 }
 
 -(void)didLoadFromCCB {
     animationManager = self.animationManager;
     audio = [OALSimpleAudio sharedInstance];
     [audio playBg:@"Afterglow.wav" volume:0.8 pan:0.0 loop:TRUE];
-//    [audio playBg:@"beats.wav" loop:FALSE];
     [GameState sharedInstance].popUp = FALSE;
     playPressed = FALSE;
     [self toggleButtonsOn];
@@ -47,22 +44,12 @@
 }
 
 - (void) toggleButtonsOn {
-//    CCButton *_buttons[5] = {_playButton, _helpButton, _creditsButton, _levelButton, _leaderboardButton};
-//    for (NSInteger i = 0; i > 5 ; i++) {
-//        _buttons[i].enabled = true;
-//    }
-//    _buttonsArray = [NSArray arrayWithObjects:buttons count:5];
-//    count = (sizeof buttons) / (sizeof buttons[0]);
-    
     _playButton.enabled = true;
     _helpButton.enabled = true;
     _creditsButton.enabled = true;
     _levelButton.enabled = true;
     _gameCenterButton.enabled = true;
     animationManager.paused = false;
-    
-//    _tutorialButton.enabled = true;
-//    _leaderboardButton.enabled = true;
 }
 
 - (void) toggleButtonsOff {
@@ -72,27 +59,16 @@
     _levelButton.enabled = false;
     _gameCenterButton.enabled = false;
     animationManager.paused = true;
-    
-//    _tutorialButton.enabled = false;
-//    _leaderboardButton.enabled = false;
 }
 
 - (void)play {
     [MGWU logEvent:@"play_pressed_in_mainscene" withParams:nil];
-    
     playPressed = true;
     [self playPopSound];
     [audio stopBg];
-    
-//    [animationManager runAnimationsForSequenceNamed:@"sandwichSpinAway"];
-
-    
-//    if ([GameState sharedInstance].tutorialMode) {
-//    }
-
     [GameState sharedInstance].levelSelected = 1;
 //    [self sandwichSpinAway];
-//    [self performSelector:@selector(sandwichSpinAway)];
+    [self performSelector:@selector(sandwichSpinAway)];
     
 //    [self scheduleBlock:^(CCTimer *timer) {
         CCScene *gameplayScene = [CCBReader loadAsScene:@"Gameplay"];
@@ -137,22 +113,6 @@
     [self playPopSound];
     [[ABGameKitHelper sharedHelper] showLeaderboard:@"Score"];
 }
-//
-//- (void) tutorial {
-//    [MGWU logEvent:@"tutorial_pressed_in_mainscene" withParams: nil];
-//    [GameState sharedInstance].tutorialMode = true;
-//    
-//    [self play];
-//}
-
-//- (void)leaderboard {
-//    [MGWU logEvent:@"level_pressed_in_mainscene" withParams:nil];
-//    
-//    [self playPopSound];
-//    
-//    CCScene *leaderboardScene = [CCBReader loadAsScene:@"Leaderboard"];
-//    [[CCDirector sharedDirector] replaceScene:leaderboardScene];
-//}
 
 - (void)reset {
     [GameState sharedInstance].levelsUnlocked = 1;
@@ -171,8 +131,8 @@
 # pragma mark - Sound and animation
 
 - (void)sandwichSpinAway {
-    [animationManager runAnimationsForSequenceNamed:@"sandwichSpinAway"];
-    
+    CCAnimationManager* sanimationManager = sandwich.animationManager;
+    [sanimationManager runAnimationsForSequenceNamed:@"spinAway"];
     [audio preloadEffect:@"8-bit-boing.wav"];
     [audio playEffect:@"8-bit-boing.wav"];
 }

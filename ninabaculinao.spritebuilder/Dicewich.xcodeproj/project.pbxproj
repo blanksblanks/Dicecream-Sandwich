@@ -108,6 +108,7 @@
 		62C898A5199DA98D007E6CD2 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62C898A4199DA98D007E6CD2 /* Twitter.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		62C91DA919997D69008A6C9D /* GameEnd.m in Sources */ = {isa = PBXBuildFile; fileRef = 62C91DA819997D69008A6C9D /* GameEnd.m */; };
 		62C91DAD1999F4D9008A6C9D /* StatsMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 62C91DAC1999F4D9008A6C9D /* StatsMenu.m */; };
+		62E279C21A62178400F003F5 /* Icecream.m in Sources */ = {isa = PBXBuildFile; fileRef = 62E279C11A62178400F003F5 /* Icecream.m */; };
 		62EE9B9319B622FA00935BA2 /* LevelMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 62EE9B9219B622FA00935BA2 /* LevelMenu.m */; };
 		62EF7F31198814DC001BF598 /* Chain.m in Sources */ = {isa = PBXBuildFile; fileRef = 62EF7F30198814DC001BF598 /* Chain.m */; };
 		62FD140B198BEAD8001D87FF /* Levels.plist in Resources */ = {isa = PBXBuildFile; fileRef = 62FD140A198BEAD8001D87FF /* Levels.plist */; };
@@ -294,6 +295,8 @@
 		62C91DAB1999F4D9008A6C9D /* StatsMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatsMenu.h; path = Source/Resources/StatsMenu.h; sourceTree = "<group>"; };
 		62C91DAC1999F4D9008A6C9D /* StatsMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatsMenu.m; path = Source/Resources/StatsMenu.m; sourceTree = "<group>"; };
 		62C91DB2199B307A008A6C9D /* HelpMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HelpMenu.h; path = Source/HelpMenu.h; sourceTree = "<group>"; };
+		62E279C01A62178400F003F5 /* Icecream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Icecream.h; path = Source/Icecream.h; sourceTree = "<group>"; };
+		62E279C11A62178400F003F5 /* Icecream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Icecream.m; path = Source/Icecream.m; sourceTree = "<group>"; };
 		62EE9B9119B622FA00935BA2 /* LevelMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LevelMenu.h; path = Source/LevelMenu.h; sourceTree = "<group>"; };
 		62EE9B9219B622FA00935BA2 /* LevelMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LevelMenu.m; path = Source/LevelMenu.m; sourceTree = "<group>"; };
 		62EF7F2F198814DC001BF598 /* Chain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Chain.h; path = Source/Chain.h; sourceTree = "<group>"; };
@@ -492,6 +495,8 @@
 				62C91DA819997D69008A6C9D /* GameEnd.m */,
 				62C91DAB1999F4D9008A6C9D /* StatsMenu.h */,
 				62C91DAC1999F4D9008A6C9D /* StatsMenu.m */,
+				62E279C01A62178400F003F5 /* Icecream.h */,
+				62E279C11A62178400F003F5 /* Icecream.m */,
 				62FD140A198BEAD8001D87FF /* Levels.plist */,
 			);
 			name = Source;
@@ -852,6 +857,7 @@
 				62EF7F31198814DC001BF598 /* Chain.m in Sources */,
 				628A1ACA1A09688D0083A6FA /* HelpMenu.m in Sources */,
 				B73789871807631A0076A88C /* main.m in Sources */,
+				62E279C21A62178400F003F5 /* Icecream.m in Sources */,
 				623F5D60196EDB0400DC3EA5 /* Grid.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

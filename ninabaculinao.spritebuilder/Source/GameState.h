@@ -24,6 +24,8 @@ static NSString *const GAME_STATE_TIME_NOTIFICATION = @"GameState_TimeChanged";
 
 @interface GameState : NSObject
 
++ (instancetype) sharedInstance;
+
 @property (nonatomic, assign) NSInteger currentScore;
 @property (nonatomic, assign) NSInteger currentLevel;
 @property (nonatomic, assign) NSInteger currentChains;
@@ -52,8 +54,6 @@ static NSString *const GAME_STATE_TIME_NOTIFICATION = @"GameState_TimeChanged";
 @property (nonatomic, assign) NSInteger levelsUnlocked;
 
 @property (nonatomic, assign) BOOL tutorialMode;
-
-+ (instancetype) sharedInstance;
 
 
 @end
