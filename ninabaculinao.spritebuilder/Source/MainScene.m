@@ -25,7 +25,9 @@
 }
 
 -(void)didLoadFromCCB {
-    [[GameAudio sharedHelper] playMainTheme];
+    if (![GameState sharedInstance].musicPaused) {
+        [[GameAudio sharedHelper] playMainTheme];
+    }
     animationManager = self.animationManager;
     [GameState sharedInstance].popUp = FALSE;
     playPressed = FALSE;

@@ -106,12 +106,11 @@
 - (void) home {
     [MGWU logEvent:@"home_pressed_in_gameplay" withParams:nil];
     [[GameAudio sharedHelper] playPopSound];
-
-    [GameState sharedInstance].tutorialMode = false;
-    _grid.touchEnabled = false;
+    if (![GameState sharedInstance].musicPaused){
+        [[GameAudio sharedHelper] playMainTheme];
+    }
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];
 }
-
 
 @end

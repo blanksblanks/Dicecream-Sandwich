@@ -38,7 +38,9 @@
 - (void)didLoadFromCCB {
     
     animationManager = self.animationManager;
-    [[GameAudio sharedHelper] playGameTheme];
+    if (![GameState sharedInstance].musicPaused){
+        [[GameAudio sharedHelper] playGameTheme];
+    }
     [GameState sharedInstance].newHighScore = false;
     
     _timeLabel.string = [NSString stringWithFormat:@"%li", (long)_grid.timer];
