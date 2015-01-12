@@ -49,7 +49,7 @@
             [self scheduleBlock:^(CCTimer *timer) {
                 [self clearDie1:die1a andDie2:die1b];
                 [self respawn1];
-            } delay:1.00];
+            } delay:0.25];
             break;
         }
         case 1: {
@@ -59,7 +59,7 @@
             [self scheduleBlock:^(CCTimer *timer) {
                 [self clearDie1:die6a andDie2:die6h];
                 [self respawn2];
-            } delay:1.00];
+            } delay:0.25];
             break;
         }
         case 2: {
@@ -87,7 +87,7 @@
         die1.visible = false;
         die2.visible = false;
         [self hideInnerDice];
-    } delay:1.00];
+    } delay:0.25];
 }
 
 -(void)hideInnerDice {
@@ -118,7 +118,7 @@
         die1a.visible = true;
         die3.visible = true;
         die1b.visible = true;
-    } delay:2.00];
+    } delay:0.6];
 }
 
 -(void)respawn2 {
@@ -135,7 +135,7 @@
         die6f.visible = true;
         die6g.visible = true;
         die6h.visible = true;
-    } delay:2.00];
+    } delay:0.6];
 }
 
 @end
