@@ -11,6 +11,7 @@
 #import "StatsMenu.h"
 #import "Grid.h"
 #import "ABGameKitHelper.h"
+#import "GameAudio.h"
 
 @implementation GameEnd {
     CCLabelTTF *_scoreLabel;
@@ -34,7 +35,7 @@
 
 - (void) stats {
     [MGWU logEvent:@"stats_pressed_in_gameend" withParams:nil];
-    [self playPopSound];
+    [[GameAudio sharedHelper] playPopSound];
     StatsMenu *statsMenu = (StatsMenu*) [CCBReader load:@"StatsMenu"];
     [statsMenu setPositionType:CCPositionTypeNormalized];
     statsMenu.position = ccp(0.5, 0.5);
@@ -43,13 +44,13 @@
 }
 
 - (void) center {
-    [self playPopSound];
+    [[GameAudio sharedHelper] playPopSound];
     [[ABGameKitHelper sharedHelper] showLeaderboard:@"leaderboardId"];
 }
 
 - (void) home {
     [MGWU logEvent:@"home_pressed_in_gameend" withParams:nil];
-    [self playPopSound];
+    [[GameAudio sharedHelper] playPopSound];
     [self removeFromParent];
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];
@@ -57,18 +58,11 @@
 
 - (void) restart {
     [MGWU logEvent:@"restart_pressed_in_gameend" withParams:nil];
-    [self playPopSound];
+    [[GameAudio sharedHelper] playPopSound];
     [self removeFromParent];
     CCScene *gamePlay = [CCBReader loadAsScene:@"Gameplay"];
     [[CCDirector sharedDirector] replaceScene:gamePlay];
 }
-
-- (void)playPopSound {
-    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
-    [audio preloadEffect:@"bubble-pop1.wav"];
-    [audio playEffect:@"bubble-pop1.wav"];
-}
-
 
 
 @end

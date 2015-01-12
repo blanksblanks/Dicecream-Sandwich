@@ -9,6 +9,7 @@
 #import "HelpMenu.h"
 #import "Dice.h"
 #import "GameState.h"
+#import "GameAudio.h"
 
 
 @implementation HelpMenu {
@@ -28,8 +29,6 @@
     Dice *die6f;
     Dice *die6g;
     Dice *die6h;
-    
-    OALSimpleAudio *audio;
 }
 
 -(void)didLoadFromCCB {
@@ -37,13 +36,11 @@
     _help1.visible = true;
     _help2.visible = false;
     _help3.visible = false;
-    audio = [OALSimpleAudio sharedInstance];
-    
 }
 
 -(void)next {
 
-    [self playPopSound];
+    [[GameAudio sharedHelper] playPopSound];
     
     switch (step) {
         case 0: {
@@ -77,21 +74,11 @@
 -(void)cancel {
     [self removeFromParent];
     [GameState sharedInstance].popUp = FALSE;
-    [self playPopSound];
-}
-
--(void)playPopSound {
-    [audio preloadEffect:@"bubble-pop1.wav"];
-    [audio playEffect:@"bubble-pop1.wav"];
-}
-
--(void)playSuccessSound {
-    [audio preloadEffect:@"success.wav"];
-    [audio playEffect:@"success.wav"];
+    [[GameAudio sharedHelper] playPopSound];
 }
 
 -(void)clearDie1:(Dice*)die1 andDie2:(Dice*)die2{
-    [self playSuccessSound];
+    [[GameAudio sharedHelper] playSuccessSound];
     CCAnimationManager* animationManager = die1.animationManager;
     CCAnimationManager* animationManager2 = die2.animationManager;
     [animationManager runAnimationsForSequenceNamed:@"colorFill"];

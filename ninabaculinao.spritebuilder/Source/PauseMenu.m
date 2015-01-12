@@ -10,6 +10,7 @@
 #import "HelpMenu.h"
 #import "Grid.h"
 #import "GameState.h"
+#import "GameAudio.h"
 
 @implementation PauseMenu {
     CCButton *_homeButton;
@@ -35,7 +36,7 @@
     }
     _musicCross.visible = [GameState sharedInstance].musicPaused;
     _sfxCross.visible = [GameState sharedInstance].sfxPaused;
-    self.audio.effectsMuted = [GameState sharedInstance].sfxPaused;
+    [[GameAudio sharedHelper] pauseSFX:[GameState sharedInstance].sfxPaused];
 }
 
 - (void) toggleButtonsOff {
@@ -59,8 +60,7 @@
 
 - (void) resume {
     [MGWU logEvent:@"resume_pressed" withParams:nil];
-    
-    [_grid playPopSound];
+    [[GameAudio sharedHelper] playPopSound];
     
     [self.grid unpause];
     CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.2f position:ccp(0, 25)];
@@ -74,8 +74,7 @@
 // TODO: "Are you sure?" pop up
 - (void) restart {
     [MGWU logEvent:@"restart_pressed_in_gameplay" withParams:nil];
-    
-    [_grid.audio playEffect:@"bubble-pop1.wav"];
+    [[GameAudio sharedHelper] playPopSound];
 
     CCScene *gamePlay = [CCBReader loadAsScene:@"Gameplay"];
     [[CCDirector sharedDirector] replaceScene:gamePlay];
@@ -83,8 +82,7 @@
 
 - (void) help {
     [MGWU logEvent:@"help_pressed_in_gameplay" withParams:nil];
-    
-    [_grid.audio playEffect:@"bubble-pop1.wav"];
+    [[GameAudio sharedHelper] playPopSound];
 
     [GameState sharedInstance].popUp = TRUE;
     HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu"];
@@ -96,8 +94,7 @@
 
 - (void) music {
     [MGWU logEvent:@"music_toggled" withParams:nil];
-    
-    [_grid.audio playEffect:@"bubble-pop1.wav"];
+    [[GameAudio sharedHelper] playPopSound];
     [GameState sharedInstance].musicPaused = ![GameState sharedInstance].musicPaused;
 }
 
@@ -108,12 +105,10 @@
 // TODO: "Are you sure?" pop up
 - (void) home {
     [MGWU logEvent:@"home_pressed_in_gameplay" withParams:nil];
-    
-    [_grid.audio playEffect:@"bubble-pop1.wav"];
+    [[GameAudio sharedHelper] playPopSound];
 
     [GameState sharedInstance].tutorialMode = false;
     _grid.touchEnabled = false;
-    [_grid.audio stopEverything];
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];
 }

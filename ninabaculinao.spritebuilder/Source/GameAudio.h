@@ -39,8 +39,8 @@
  * Pause/stop
  */
 
--(void) checkSFX;
--(void) checkBGM;
--(void) stopBGM;
+-(void) pauseSFX:(BOOL)condition;
+-(void) pauseBG:(BOOL)condition;
+-(void) stopBG;
 
 @end

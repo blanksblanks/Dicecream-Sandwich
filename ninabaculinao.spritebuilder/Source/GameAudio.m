@@ -83,15 +83,15 @@
  * Pause/stop
  */
 
--(void) checkSFX {
-    audio.effectsPaused = [GameState sharedInstance].sfxPaused;
+-(void) pauseSFX:(BOOL)condition {
+    audio.effectsMuted = condition;
 }
 
--(void) checkBGM {
-    audio.bgPaused = [GameState sharedInstance].musicPaused;
+-(void) pauseBG:(BOOL)condition {
+    audio.bgPaused = condition;
 }
 
--(void) stopBGM {
+-(void) stopBG {
     [audio stopBg];
 }
 

@@ -12,6 +12,7 @@
 #import "GameEnd.h"
 #import "Gameplay.h"
 #import "ABGameKitHelper.h"
+#import "GameAudio.h"
 
 @implementation Grid {
     
@@ -82,17 +83,6 @@ static const NSInteger GRID_COLUMNS = 6;
     self.paused = FALSE;
     self.touchEnabled = TRUE;
     
-    // Begin music by accessing audio object and playing background sound
-    self.audio = [OALSimpleAudio sharedInstance];
-    [self.audio playBg:@"CATchy.wav" volume:0.8 pan:0.0 loop:TRUE];
-    
-//    if ([GameState sharedInstance].musicPaused) {
-//        [self.audio bgPaused];
-//    }
-
-    //    [self.audio preloadBg:@"Catchy.wav"];
-    //    [self.audio playBgWithLoop:TRUE];
-    
     [self setupGrid];
     
     // Populate array with null tiles
@@ -138,7 +128,7 @@ static const NSInteger GRID_COLUMNS = 6;
                     [self dieFallDown];
                     _timeSinceDrop = 0;
                     if (![self canBottomMove]) {
-                        [self playHitBottom];
+                        [[GameAudio sharedHelper] playHitBottom];
                         CCLOG(@"Dice fell to bottom:"); [self trackGridState];
                         //                    [self removeGhost];
                         self.touchEnabled = FALSE;
@@ -545,14 +535,6 @@ static const NSInteger GRID_COLUMNS = 6;
     return bottomCanMove;
 }
 
-- (void) playHitBottom {
-//    // access audio object
-//    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
-    // play background sound
-    [self.audio preloadEffect:@"pop5.wav"];
-    // play sound effect
-    [self.audio playEffect:@"pop5.wav"];
-}
 
 # pragma mark - Touch handling - let player swipe left/right/down/rotate
 
@@ -667,16 +649,6 @@ static const NSInteger GRID_COLUMNS = 6;
 
 # pragma mark - Swipe and rotate methods
 
-- (void)playPopSound {
-    [self.audio preloadEffect:@"bubble-pop1.wav"];
-    [self.audio playEffect:@"bubble-pop1.wav"];
-}
-
-- (void)playMoveSound {
-    [self.audio preloadEffect:@"click2.wav"];
-    [self.audio playEffect:@"click2.wav"];
-}
-
 - (void)swipeLeftTo:(NSInteger)column {
     BOOL canMoveLeft = TRUE;
     while (_currentDie1.column > column && _currentDie2.column > column && canMoveLeft) {
@@ -698,7 +670,7 @@ static const NSInteger GRID_COLUMNS = 6;
     if (canMoveLeft) {
         [self moveDie:_currentDie1 inDirection:ccp(-1, 0)];
         [self moveDie:_currentDie2 inDirection:ccp(-1, 0)];
-        [self playMoveSound];
+        [[GameAudio sharedHelper] playMoveSound];
         //        [self moveGhostDice];
     }
     return canMoveLeft;
@@ -729,7 +701,7 @@ static const NSInteger GRID_COLUMNS = 6;
     if (canMoveRight) {
         [self moveDie:_currentDie1 inDirection:ccp(1, 0)];
         [self moveDie:_currentDie2 inDirection:ccp(1, 0)];
-        [self playMoveSound];
+        [[GameAudio sharedHelper] playMoveSound];
         //        [self moveGhostDice];
     }
     return canMoveRight;
@@ -739,7 +711,7 @@ static const NSInteger GRID_COLUMNS = 6;
     BOOL bottomCanMove = [self canBottomMove];
     
     if (bottomCanMove) {
-        [self playMoveSound];
+        [[GameAudio sharedHelper] playMoveSound];
         if (_currentDie2.column > _currentDie1.column) {
             // [1][2] --> [1]
             //            [2]
@@ -1036,7 +1008,7 @@ static const NSInteger GRID_COLUMNS = 6;
     for (Chain *chain in chains) {
         [self animateScoreForChain:chain];
 //        [self animateGameMessage];
-        [self playPowerUpSound];
+        [[GameAudio sharedHelper] playPowerUpSound];
         for (Dice *die in chain.dice) {
             CCAnimationManager* animationManager = die.animationManager;
             [animationManager runAnimationsForSequenceNamed:@"colorFill"];
@@ -1050,16 +1022,6 @@ static const NSInteger GRID_COLUMNS = 6;
             } delay:0.2];
         }
     }
-}
-
-- (void)playSuccessSound {
-    [self.audio preloadEffect:@"success.wav"];
-    [self.audio playEffect:@"success.wav"];
-}
-
-- (void)playPowerUpSound {
-    [self.audio preloadEffect:@"powerUp.wav"];
-    [self.audio playEffect:@"powerUp.wav"];
 }
 
 # pragma mark - Remove and handle matches
@@ -1106,7 +1068,7 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)animateMatchedDice:(NSArray *)chains {
     for (Chain *chain in chains) {
-        [self playSuccessSound];
+        [[GameAudio sharedHelper] playSuccessSound];
         [self animateScoreForChain:chain];
 //        [self animateGameMessage];
         _firstDie = [chain.dice firstObject];
@@ -1272,7 +1234,7 @@ static const NSInteger GRID_COLUMNS = 6;
 
 - (void)animateGameMessage:(NSString *)message fromRow:(int)beginRow toRow:(int)endRow{
     
-    [self playLevelUpSound];
+    [[GameAudio sharedHelper] playLevelUpSound];
 
     CGPoint beginPosition = CGPointMake(self.contentSize.width/2, _tileWidth * beginRow);
     CGPoint endPosition = CGPointMake(self.contentSize.width/2, _tileWidth * endRow);
@@ -1297,11 +1259,6 @@ static const NSInteger GRID_COLUMNS = 6;
         [gameMessage removeFromParent];
         
     } delay:1.75];
-}
-
--(void) playLevelUpSound {
-    [self.audio preloadEffect:@"levelUp.wav"];
-    [self.audio playEffect:@"levelUp.wav"];
 }
 
 # pragma mark - Fill in holes
@@ -1427,7 +1384,7 @@ static const NSInteger GRID_COLUMNS = 6;
     [MGWU logEvent:@"gameover" withParams:params];
     
     [self pause];
-    [self playGameOverSound];
+    [[GameAudio sharedHelper] playGameOverSound];
     
     // Set tutorial mode to false after playthrough
     [GameState sharedInstance].tutorialMode = false;
@@ -1437,7 +1394,7 @@ static const NSInteger GRID_COLUMNS = 6;
     
     [self scheduleBlock:^(CCTimer *timer) {
         self.touchEnabled = false;
-        [self.audio stopBg];
+        [[GameAudio sharedHelper] stopBg];
         [self assignStats];
         
         GameEnd *gameEnd = (GameEnd*) [CCBReader load:@"GameEnd"];
@@ -1445,16 +1402,6 @@ static const NSInteger GRID_COLUMNS = 6;
         gameEnd.position = ccp(0.5, 0.5);
         [self.parent addChild:gameEnd];
     } delay:0.5f];
-    
-//    [self scheduleBlock:^(CCTimer *timer) {
-//        [self.audio stopEverything];
-//    } delay:0.5f];
-
-}
-
-- (void) playGameOverSound {
-    [self.audio preloadEffect:@"oneBlastWhistle.wav"];
-    [self.audio playEffect:@"oneBlastWhistle.wav"];
 }
 
 -(void) assignStats {

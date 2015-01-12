@@ -8,6 +8,7 @@
 
 #import "LevelMenu.h"
 #import "GameState.h"
+#import "GameAudio.h"
 
 @implementation LevelMenu {
     CCButton* _level1;
@@ -189,13 +190,9 @@
 }
 
 -(void) home {
+    [[GameAudio sharedHelper] playPopSound];
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];
-    
-    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
-    [audio preloadEffect:@"bubble-pop1.wav"];
-    [audio playEffect:@"bubble-pop1.wav"];
-    
 }
 
 @end

@@ -11,6 +11,7 @@
 #import "Dice.h"
 #import "PauseMenu.h"
 #import "GameState.h"
+#import "GameAudio.h"
 
 //#define convertTime(time) (time / 60)
 
@@ -37,9 +38,8 @@
 - (void)didLoadFromCCB {
     
     animationManager = self.animationManager;
-    
+    [[GameAudio sharedHelper] playGameTheme];
     [GameState sharedInstance].newHighScore = false;
-//    _grid.audio = audio;
     
     _timeLabel.string = [NSString stringWithFormat:@"%li", (long)_grid.timer];
 //    _targetLabel.string = [NSString stringWithFormat:@"%li", (long) _grid.targetScore];
@@ -89,20 +89,22 @@
     
     if (_grid.paused) {
         _pauseButton.visible = false;
-//        _grid.audio.paused = true;
     } else {
         _pauseButton.visible = true;
-//        _grid.audio.paused = false;
     }
     
-    if ([GameState sharedInstance].musicPaused || _grid.paused) {
-        _grid.audio.bgPaused = TRUE;
-    } else {
-        _grid.audio.bgPaused = FALSE;
-    }
     
-//    _grid.audio.bgPaused = [GameState sharedInstance].musicPaused;
-    _grid.audio.effectsMuted = [GameState sharedInstance].sfxPaused;
+    
+//    if ([GameState sharedInstance].musicPaused || _grid.paused) {
+//        [[GameAudio sharedHelper] pauseBG:true];
+//    } else {
+//        [[GameAudio sharedHelper] pauseBG:false];
+//    }
+    
+////    [[GameAudio sharedHelper] pauseBG:([GameState sharedInstance].musicPaused || _grid.paused)];
+    BOOL musicPaused = ([GameState sharedInstance].musicPaused || _grid.paused);
+    [[GameAudio sharedHelper] pauseBG:musicPaused];
+    [[GameAudio sharedHelper] pauseSFX:[GameState sharedInstance].sfxPaused];
     
     if (_grid.level == 20) { // goes into endless mode
         _target.visible = false;
@@ -136,9 +138,9 @@
 
 - (void)pause {
     [MGWU logEvent:@"pause_pressed_in_gameplay" withParams:nil];
+    [[GameAudio sharedHelper] playPopSound];
     
     PauseMenu *pauseMenu = (PauseMenu*) [CCBReader load:@"PauseMenu"];
-//    audio.paused = TRUE;
     pauseMenu.position = ccp(51, 25);
     [self addChild:pauseMenu];
     [_grid pause];
@@ -149,11 +151,6 @@
     [pauseMenu runAction:sequence];
 
     pauseMenu.grid = _grid;
-    pauseMenu.audio = _grid.audio;
-    
-    [_grid playPopSound];
-//    [_grid.audio preloadEffect:@"bubble-pop1.wav"];
-//    [_grid.audio playEffect:@"bubble-pop1.wav"];
 }
 
 

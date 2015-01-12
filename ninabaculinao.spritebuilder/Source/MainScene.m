@@ -14,35 +14,28 @@
 #import "Icecream.h"
 
 @implementation MainScene {
+    BOOL playPressed;
+    CCAnimationManager* animationManager;
+    Icecream* sandwich;
     CCButton *_playButton;
     CCButton *_helpButton;
     CCButton *_creditsButton;
     CCButton *_levelButton;
     CCButton *_gameCenterButton;
-    NSInteger count;
-    BOOL playPressed;
-//    OALSimpleAudio *audio;
-    CCAnimationManager* animationManager;
-    Icecream* sandwich;
 }
 
 -(void)didLoadFromCCB {
     [[GameAudio sharedHelper] playMainTheme];
-    
     animationManager = self.animationManager;
-//    audio = [OALSimpleAudio sharedInstance];
-    
-//    [audio playBg:@"Afterglow.wav" volume:0.8 pan:0.0 loop:TRUE];
     [GameState sharedInstance].popUp = FALSE;
     playPressed = FALSE;
-    [self toggleButtonsOn];
     [[ABGameKitHelper sharedHelper] reportScore:[GameState sharedInstance].bestScore forLeaderboard:@"Score"];
 }
 
 - (void) update:(CCTime) delta {
     if ([GameState sharedInstance].popUp || playPressed) {
         [self toggleButtonsOff];
-    } else if (![GameState sharedInstance].popUp && !playPressed) { // reset clickability
+    } else { // if (![GameState sharedInstance].popUp && !playPressed) { // reset clickability
         [self toggleButtonsOn];
     }
 }
@@ -69,11 +62,10 @@
     [MGWU logEvent:@"play_pressed_in_mainscene" withParams:nil];
     playPressed = true;
     [[GameAudio sharedHelper] playPopSound];
-//    [self playPopSound];
 //    [audio stopBg];
     [GameState sharedInstance].levelSelected = 1;
 //    [self sandwichSpinAway];
-    [self performSelector:@selector(sandwichSpinAway)];
+//    [self performSelector:@selector(sandwichSpinAway)];
     
     [self scheduleBlock:^(CCTimer *timer) {
         CCScene *gameplayScene = [CCBReader loadAsScene:@"Gameplay"];
@@ -86,8 +78,6 @@
 -(void) help {
     [MGWU logEvent:@"help_pressed_in_mainscene" withParams:nil];
     [[GameAudio sharedHelper] playPopSound];
-//    [self playPopSound];
-
     [GameState sharedInstance].popUp = TRUE;
     HelpMenu *helpMenu = (HelpMenu*) [CCBReader load:@"HelpMenu"];
     [helpMenu setPositionType:CCPositionTypeNormalized];
@@ -99,8 +89,6 @@
 -(void) credits {
     [MGWU logEvent:@"credits_pressed_in_mainscene" withParams:nil];
     [[GameAudio sharedHelper] playPopSound];
-//    [self playPopSound];
-    
     CCScene *creditsScene = [CCBReader loadAsScene:@"Credits"];
     [[CCDirector sharedDirector] pushScene:creditsScene];
 }
@@ -108,15 +96,12 @@
 - (void) level {
     [MGWU logEvent:@"level_pressed_in_mainscene" withParams:nil];
     [[GameAudio sharedHelper] playPopSound];
-//    [self playPopSound];
-    
     CCScene *levelScene = [CCBReader loadAsScene:@"LevelMenu"];
     [[CCDirector sharedDirector] replaceScene:levelScene];
 }
 
 - (void) gameCenter {
     [[GameAudio sharedHelper] playPopSound];
-//    [self playPopSound];
     [[ABGameKitHelper sharedHelper] showLeaderboard:@"Score"];
 }
 
@@ -143,10 +128,6 @@
 //    [audio playEffect:@"8-bit-boing.wav"];
 //}
 //
-//-(void)playPopSound {
-//    [audio preloadEffect:@"bubble-pop1.wav"];
-//    [audio playEffect:@"bubble-pop1.wav"];
-//}
 
 
 @end
