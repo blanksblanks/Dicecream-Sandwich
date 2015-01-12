@@ -28,6 +28,7 @@
 #import "AppDelegate.h"
 #import "CCBuilderReader.h"
 #import "ABGameKitHelper.h"
+#import "GameAudio.h"
 
 //#import "DDASLLogger.h"
 //#import "DDTTYLogger.h"
@@ -101,6 +102,7 @@
 - (CCScene*) startScene
 {
     [ABGameKitHelper sharedHelper];
+    [GameAudio sharedHelper];
     return [CCBReader loadAsScene:@"MainScene"];
 }
 

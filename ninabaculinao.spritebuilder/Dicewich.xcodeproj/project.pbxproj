@@ -470,10 +470,10 @@
 		B737893C1807616C0076A88C /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				62A74A441A5CBA2E00FB0D65 /* ABGameKitHelper.h */,
-				62A74A451A5CBA4E00FB0D65 /* ABGameKitHelper.m */,
 				B737893D1807617C0076A88C /* AppDelegate.h */,
 				B737893E1807617C0076A88C /* AppDelegate.m */,
+				62A74A441A5CBA2E00FB0D65 /* ABGameKitHelper.h */,
+				62A74A451A5CBA4E00FB0D65 /* ABGameKitHelper.m */,
 				6260CB7D1A6449A3007A3B46 /* GameAudio.h */,
 				6260CB7E1A6449A3007A3B46 /* GameAudio.m */,
 				624577E419955C700017D267 /* GameState.h */,

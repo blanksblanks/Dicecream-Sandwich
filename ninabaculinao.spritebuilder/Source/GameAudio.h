@@ -10,4 +10,37 @@
 
 @interface GameAudio : NSObject
 
+/**
+ * Always access class through this singleton
+ * Call it once on application start
+ */
+
++(id) sharedHelper;
+
+/**
+ * Background music
+ */
+
+-(void) playMainTheme;
+-(void) playGameTheme;
+
+/**
+ * Sound effects
+ */
+-(void) playPopSound;
+-(void) playMoveSound;
+-(void) playHitBottom;
+-(void) playSuccessSound;
+-(void) playLevelUpSound;
+-(void) playPowerUpSound;
+-(void) playGameOverSound;
+
+/**
+ * Pause/stop
+ */
+
+-(void) checkSFX;
+-(void) checkBGM;
+-(void) stopBGM;
+
 @end
