@@ -36,24 +36,9 @@
 }
 
 
-//-(void) didLoadFromCCB {
+-(void) didLoadFromCCB {
 //    // Only set icons for enabled if they unlock them
 //    // Create an array?
-//    CCButton* levels[20] = {_level1, _level2, _level3, _level4, _level5, _level6, _level7, _level8, _level9,
-//        _level10, _level11, _level12, _level13, _level14, _level15, _level16, _level17, _level18, _level19, _level20};
-////    for (NSInteger i = 0; i >= 20; i++) {
-////        levels[i].enabled = false;
-////    }
-////    levels[19].enabled = false;
-////    _level19.enabled = false;
-//    for (NSInteger j = [GameState sharedInstance].levelsUnlocked; j < 20; j++) {
-//        if (j > 0) {
-//            levels[j].enabled = false;
-//        }
-//    }
-//}
-
-- (void)update:(CCTime)delta {
     CCButton* levels[20] = {_level1, _level2, _level3, _level4, _level5, _level6, _level7, _level8, _level9,
         _level10, _level11, _level12, _level13, _level14, _level15, _level16, _level17, _level18, _level19, _level20};
     for (NSInteger j = [GameState sharedInstance].levelsUnlocked; j < 20; j++) {
@@ -61,6 +46,11 @@
             levels[j].enabled = false;
         }
     }
+}
+
+- (void)update:(CCTime)delta {
+    CCButton* levels[20] = {_level1, _level2, _level3, _level4, _level5, _level6, _level7, _level8, _level9,
+        _level10, _level11, _level12, _level13, _level14, _level15, _level16, _level17, _level18, _level19, _level20};
     
     CCActionRotateBy* spin = [CCActionRotateBy actionWithDuration:1.5f angle:360];
     CCActionJumpBy* jump = [CCActionJumpBy actionWithDuration:1.5f position:ccp(0,0) height:6 jumps:3];
