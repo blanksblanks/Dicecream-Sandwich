@@ -73,7 +73,6 @@
     [audio playEffect:@"levelUp.wav"];
 }
 
-
 - (void) playGameOverSound {
     [audio preloadEffect:@"oneBlastWhistle.wav"];
     [audio playEffect:@"oneBlastWhistle.wav"];

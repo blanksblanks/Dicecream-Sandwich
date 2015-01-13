@@ -181,8 +181,9 @@
 
 -(void) home {
     [[GameAudio sharedHelper] playPopSound];
-    CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
-    [[CCDirector sharedDirector] replaceScene:mainScene];
+    [[CCDirector sharedDirector] popScene];
+//    CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
+//    [[CCDirector sharedDirector] replaceScene:mainScene];
 }
 
 @end

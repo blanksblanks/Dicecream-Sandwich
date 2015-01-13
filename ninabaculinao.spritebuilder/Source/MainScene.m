@@ -99,7 +99,7 @@
     [MGWU logEvent:@"level_pressed_in_mainscene" withParams:nil];
     [[GameAudio sharedHelper] playPopSound];
     CCScene *levelScene = [CCBReader loadAsScene:@"LevelMenu"];
-    [[CCDirector sharedDirector] replaceScene:levelScene];
+    [[CCDirector sharedDirector] pushScene:levelScene];
 }
 
 - (void) gameCenter {

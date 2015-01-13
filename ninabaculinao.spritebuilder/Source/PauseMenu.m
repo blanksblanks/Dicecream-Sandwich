@@ -103,12 +103,11 @@
 }
 
 // TODO: "Are you sure?" pop up
+// TODO: iMPORTANT... figure out why bgm doesn't resume when you hit home
 - (void) home {
     [MGWU logEvent:@"home_pressed_in_gameplay" withParams:nil];
     [[GameAudio sharedHelper] playPopSound];
-    if (![GameState sharedInstance].musicPaused){
-        [[GameAudio sharedHelper] playMainTheme];
-    }
+    [self.grid unpause];
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];
 }
