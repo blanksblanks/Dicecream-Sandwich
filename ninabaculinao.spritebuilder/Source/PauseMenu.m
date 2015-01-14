@@ -61,11 +61,9 @@
 - (void) resume {
     [MGWU logEvent:@"resume_pressed" withParams:nil];
     [[GameAudio sharedHelper] playPopSound];
-    
     [self.grid unpause];
     CCActionMoveTo *moveTo = [CCActionMoveTo actionWithDuration:0.2f position:ccp(0, 25)];
     [self runAction:moveTo];
-    
     [self scheduleBlock:^(CCTimer *timer) {
         [self removeFromParent];
     } delay:0.2];
@@ -103,7 +101,6 @@
 }
 
 // TODO: "Are you sure?" pop up
-// TODO: iMPORTANT... figure out why bgm doesn't resume when you hit home
 - (void) home {
     [MGWU logEvent:@"home_pressed_in_gameplay" withParams:nil];
     [[GameAudio sharedHelper] playPopSound];
