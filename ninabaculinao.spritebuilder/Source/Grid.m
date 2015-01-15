@@ -1394,7 +1394,7 @@ static const NSInteger GRID_COLUMNS = 6;
     
     [self scheduleBlock:^(CCTimer *timer) {
         self.touchEnabled = false;
-        [[GameAudio sharedHelper] stopBg];
+        [[GameAudio sharedHelper] stopBG];
         [self assignStats];
         
         GameEnd *gameEnd = (GameEnd*) [CCBReader load:@"GameEnd"];

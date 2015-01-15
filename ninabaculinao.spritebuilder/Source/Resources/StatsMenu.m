@@ -12,7 +12,7 @@
 #import "GameState.h"
 #import "Grid.h"
 #import "Gameplay.h"
-
+#import "GameAudio.h"
 
 @implementation StatsMenu {
     CCLabelTTF *_scoreLabel;
@@ -27,8 +27,6 @@
 }
 
 - (void) didLoadFromCCB {
-    
-    [self performSelector:@selector(current)];
     _scoreLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentScore];
     _levelLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentLevel];
     _chainsLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentChains];
@@ -44,11 +42,8 @@
 }
 
 - (void) current {
-//    [_grid playPopSound];
-//    [_grid.audio playEffect:@"bubble-pop1.wav"];
-    [self playPopSound];
-    
-    _scoreLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentScore];
+    [[GameAudio sharedHelper] playPopSound];
+   _scoreLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentScore];
     _levelLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentLevel];
     _chainsLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentChains];
     _chainsPerMinLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].currentChainsPerMin];
@@ -63,10 +58,7 @@
 }
 
 - (void) best {
-//    [_grid playPopSound];
-//    [_grid.audio playEffect:@"bubble-pop1.wav"];
-    [self playPopSound];
-
+    [[GameAudio sharedHelper] playPopSound];
     _scoreLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].bestScore];
     _levelLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].bestLevel];
     _chainsLabel.string = [NSString stringWithFormat:@"%li", (long)[GameState sharedInstance].bestChains];
@@ -82,8 +74,7 @@
 }
 
 - (void) back {
-//    [_grid playPopSound];
-    [self playPopSound];
+    [[GameAudio sharedHelper] playPopSound];
     GameEnd *gameEnd = (GameEnd*) [CCBReader load:@"GameEnd"];
     [gameEnd setPositionType:CCPositionTypeNormalized];
     gameEnd.position = ccp(0.5, 0.5);
@@ -92,31 +83,22 @@
 }
 
 - (void) center {
-    [self playPopSound];
+    [[GameAudio sharedHelper] playPopSound];
     [[ABGameKitHelper sharedHelper] showLeaderboard:@"leaderboardId"];
 }
 
 - (void) home {
     [MGWU logEvent:@"home_pressed_in_gameend" withParams:nil];
-    //    [_grid playPopSound];
-    [self playPopSound];
+    [[GameAudio sharedHelper] playPopSound];
     CCScene *mainScene = [CCBReader loadAsScene:@"MainScene"];
     [[CCDirector sharedDirector] replaceScene:mainScene];
 }
 
 - (void) restart {
     [MGWU logEvent:@"restart_pressed_in_gameend" withParams:nil];
-    //    [_grid playPopSound];
-    [self playPopSound];
+    [[GameAudio sharedHelper] playPopSound];
     CCScene *gamePlay = [CCBReader loadAsScene:@"Gameplay"];
     [[CCDirector sharedDirector] replaceScene:gamePlay];
 }
-
-- (void)playPopSound {
-    OALSimpleAudio *audio = [OALSimpleAudio sharedInstance];
-    [audio preloadEffect:@"bubble-pop1.wav"];
-    [audio playEffect:@"bubble-pop1.wav"];
-}
-
 
 @end
