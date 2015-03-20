@@ -470,7 +470,7 @@ static const NSInteger GRID_COLUMNS = 6;
 -(Dice*) randomizeSpecials {
     Dice *die;
     NSInteger chance = arc4random_uniform(100);
-    if ((_counter%5 == 0) && (chance <= 20)) { //high chance 20% for debugging
+    if ((_counter%5 == 0) && (chance <= 5)) { // try high chance 20% for debugging
         NSInteger randomSpecial = arc4random_uniform(3)+7;
         switch(randomSpecial){
             case 7 :
@@ -1351,7 +1351,7 @@ static const NSInteger GRID_COLUMNS = 6;
     }
     
     if (self.level > 15 && self.level < 20) {
-        self.targetScore += 1675;
+        self.targetScore += self.level * 100 + 175;
     }
     
     // self.targetScore = [dict[@"targetScore"] intValue];
