@@ -1112,6 +1112,8 @@ static const NSInteger GRID_COLUMNS = 6;
             NSInteger face = ((Dice*) chain.dice[0]).faceValue;
             
             if (face == 6) {
+                NSString *dicewichString = [NSString stringWithFormat:@"DICECREAM\nSANDWICH!"];
+                [self animateGameMessage:dicewichString fromRow:6 toRow:8];
                 self.sixChains++;
             }
             
