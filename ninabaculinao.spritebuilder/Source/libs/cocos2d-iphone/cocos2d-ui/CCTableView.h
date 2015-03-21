@@ -47,7 +47,7 @@
 
 @optional
 
-- (float) tableView:(CCTableView*)tableView heightForRowAtIndex:(NSUInteger) index;
+- (float) ccTableView:(CCTableView*)tableView heightForRowAtIndex:(NSUInteger) index;
 
 @end
 
