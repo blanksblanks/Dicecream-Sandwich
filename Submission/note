@@ -1,0 +1,5 @@
+make sure project settings are correct, especially bundle identifier in general and code signing settings in build settings
+product > scheme > edit scheme > build configuration: release
+make sure target is set to ios device, not simulator
+product > archive > validate, submit (save .ipa)
+open application loader (may not be necessary if you did submit?)
