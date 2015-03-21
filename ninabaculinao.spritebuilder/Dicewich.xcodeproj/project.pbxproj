@@ -146,19 +146,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6227AB761ABD13AB00C14A0B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B7378940180761A80076A88C /* cocos2d-ios.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B7E7DE341A76DB7D004234B7;
+			remoteInfo = cocos2dMacFramework;
+		};
 		62FF76C01A5FA2D3008EB8D7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B7378940180761A80076A88C /* cocos2d-ios.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D2FEB74F194F6C9E00FC0574;
 			remoteInfo = cocos2dAndroid;
-		};
-		62FF76C21A5FA2D3008EB8D7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B7378940180761A80076A88C /* cocos2d-ios.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5BF3267A195F8D8800D9A51A;
-			remoteInfo = cocos2dJava;
 		};
 		62FF76C41A5FA2D3008EB8D7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -184,6 +184,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6227AC0B1ABD168400C14A0B /* Dicewich copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Dicewich copy-Info.plist"; path = "/Users/blanks/GitHub/nina-baculinao/ninabaculinao.spritebuilder/Dicewich copy-Info.plist"; sourceTree = "<absolute>"; };
 		623F5D5E196EDB0400DC3EA5 /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Grid.h; path = Source/Grid.h; sourceTree = "<group>"; };
 		623F5D5F196EDB0400DC3EA5 /* Grid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Grid.m; path = Source/Grid.m; sourceTree = "<group>"; };
 		623F5D6A196F0C7000DC3EA5 /* Gameplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gameplay.h; path = Source/Gameplay.h; sourceTree = "<group>"; };
@@ -512,8 +513,8 @@
 			children = (
 				B737894B180761A90076A88C /* libcocos2d.a */,
 				62FF76C11A5FA2D3008EB8D7 /* libcocos2dAndroid.a */,
-				62FF76C31A5FA2D3008EB8D7 /* cocos2dJava.jar */,
 				62FF76C51A5FA2D3008EB8D7 /* libcocos2d-mac.a */,
+				6227AB771ABD13AB00C14A0B /* cocos2dMacFramework.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -548,6 +549,7 @@
 				B77F1CCF17B978D8009739AE /* Supporting Files */,
 				B77F1B3017B978D7009739AE /* Frameworks */,
 				B77F1B2F17B978D7009739AE /* Products */,
+				6227AC0B1ABD168400C14A0B /* Dicewich copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -688,18 +690,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		6227AB771ABD13AB00C14A0B /* cocos2dMacFramework.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = cocos2dMacFramework.framework;
+			remoteRef = 6227AB761ABD13AB00C14A0B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		62FF76C11A5FA2D3008EB8D7 /* libcocos2dAndroid.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libcocos2dAndroid.a;
 			remoteRef = 62FF76C01A5FA2D3008EB8D7 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		62FF76C31A5FA2D3008EB8D7 /* cocos2dJava.jar */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.jar;
-			path = cocos2dJava.jar;
-			remoteRef = 62FF76C21A5FA2D3008EB8D7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		62FF76C51A5FA2D3008EB8D7 /* libcocos2d-mac.a */ = {
@@ -949,8 +951,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Nina Baculinao (989BQC9KYV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nina Baculinao (989BQC9KYV)";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -968,7 +970,7 @@
 					"\"Source/libs/cocos2d-iphone/external/ObjectAL\"/**",
 				);
 				INFOPLIST_FILE = Source/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-lz",
@@ -976,7 +978,8 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = Dicewich;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b69cd4cb-bb97-4044-a988-3a40bb82de7b";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -988,8 +991,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Nina Baculinao (989BQC9KYV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Nina Baculinao (989BQC9KYV)";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1006,14 +1009,15 @@
 					"\"Source/libs/cocos2d-iphone/external/ObjectAL\"/**",
 				);
 				INFOPLIST_FILE = Source/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
 					"-ObjC",
 				);
 				PRODUCT_NAME = Dicewich;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "b69cd4cb-bb97-4044-a988-3a40bb82de7b";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
